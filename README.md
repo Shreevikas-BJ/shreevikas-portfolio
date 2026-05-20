@@ -42,6 +42,7 @@ GROQ_API_KEY=your_groq_api_key_here
 ```
 
 The API key is only used in `app/api/chat/route.ts` and is never exposed to the frontend.
+Do not commit `.env.local` or paste the actual key into source code.
 
 ## Deploy To Vercel
 
@@ -49,7 +50,8 @@ The API key is only used in `app/api/chat/route.ts` and is never exposed to the 
 2. Import the repository in Vercel.
 3. Select the Next.js framework preset.
 4. Add `GROQ_API_KEY` in Vercel Project Settings > Environment Variables.
-5. Deploy.
+5. Redeploy after saving the environment variable so the chatbot API can read it at runtime.
+6. Deploy.
 
 ## Screenshots
 
