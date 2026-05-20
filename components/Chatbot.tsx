@@ -1,0 +1,280 @@
+"use client";
+
+import { AnimatePresence, motion } from "framer-motion";
+import { Bot, Loader2, Mail, Send, Sparkles, X } from "lucide-react";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { suggestedQuestions } from "@/data/portfolio";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
+
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+const welcomeMessage: Message = {
+  role: "assistant",
+  content:
+    "Hi, I am Shreevikas's AI Assistant. Share your email to ask about his projects, skills, research, experience, and fit for data engineering roles."
+};
+
+const refusalMessage =
+  "I can only answer questions about Shreevikas's professional background, projects, skills, research, and experience.";
+
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+export function Chatbot() {
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const storedEmail = window.localStorage.getItem("portfolio-chat-email") || "";
+    if (storedEmail) {
+      setEmail(storedEmail);
+      setEmailInput(storedEmail);
+      setMessages([
+        {
+          role: "assistant",
+          content:
+            "Thanks. You can now ask concise recruiter-style questions about Shreevikas's background."
+        }
+      ]);
+    }
+  }, []);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading, open]);
+
+  const submitEmail = (event: FormEvent) => {
+    event.preventDefault();
+    setEmailError("");
+
+    if (!isValidEmail(emailInput)) {
+      setEmailError("Enter a valid email to start the chat.");
+      return;
+    }
+
+    window.localStorage.setItem("portfolio-chat-email", emailInput);
+    setEmail(emailInput);
+    setMessages([
+      {
+        role: "assistant",
+        content:
+          "Thanks. Ask me about Shreevikas's data engineering projects, AWS work, RAG systems, research, certifications, or experience."
+      }
+    ]);
+  };
+
+  const sendMessage = async (messageText?: string) => {
+    const trimmed = (messageText ?? input).trim();
+    if (!trimmed || loading || !email) return;
+
+    const nextMessages: Message[] = [...messages, { role: "user", content: trimmed }];
+    setMessages(nextMessages);
+    setInput("");
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          message: trimmed,
+          history: messages.slice(-8)
+        })
+      });
+
+      const data = (await response.json()) as { answer?: string; error?: string };
+
+      if (!response.ok) {
+        throw new Error(data.error || "The assistant could not respond.");
+      }
+
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content: data.answer || refusalMessage
+        }
+      ]);
+    } catch (requestError) {
+      setError(requestError instanceof Error ? requestError.message : "Unexpected chat error.");
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content:
+            "I could not reach the assistant backend right now. Please check the Groq API key configuration and try again."
+        }
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        aria-label={open ? "Close Shreevikas AI Assistant" : "Open Shreevikas AI Assistant"}
+        onClick={() => setOpen((value) => !value)}
+        className="focus-ring fixed bottom-5 right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/60 bg-primary text-primary-foreground shadow-glow transition hover:scale-105"
+      >
+        {open ? <X className="h-6 w-6" /> : <Bot className="h-6 w-6" />}
+      </button>
+
+      <AnimatePresence>
+        {open ? (
+          <motion.aside
+            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 24, scale: 0.96 }}
+            transition={{ duration: 0.2 }}
+            className="surface fixed bottom-24 right-4 z-[70] flex h-[min(680px,calc(100vh-7.5rem))] w-[calc(100vw-2rem)] max-w-md flex-col overflow-hidden rounded-2xl shadow-2xl sm:right-5"
+          >
+            <div className="border-b border-border bg-muted/40 p-4">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Sparkles className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-sm font-black">Shreevikas&apos;s AI Assistant</h2>
+                    <p className="text-xs text-muted-foreground">
+                      Uses Shreevikas&apos;s available portfolio context.
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="focus-ring rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                  aria-label="Close assistant"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+
+            {!email ? (
+              <form onSubmit={submitEmail} className="flex flex-1 flex-col justify-center gap-4 p-5">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <Mail className="h-7 w-7" />
+                </div>
+                <div className="text-center">
+                  <h3 className="text-lg font-black">Enter your email to start</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                    This assistant answers using Shreevikas&apos;s available portfolio context.
+                  </p>
+                </div>
+                <label className="grid gap-2 text-sm font-semibold">
+                  Email address
+                  <input
+                    value={emailInput}
+                    onChange={(event) => setEmailInput(event.target.value)}
+                    placeholder="recruiter@company.com"
+                    className="focus-ring min-h-11 rounded-lg border border-border bg-background px-3 text-sm"
+                    type="email"
+                    autoComplete="email"
+                  />
+                </label>
+                {emailError ? <p className="text-sm font-medium text-red-500">{emailError}</p> : null}
+                <Button type="submit" className="w-full">
+                  Continue
+                </Button>
+              </form>
+            ) : (
+              <>
+                <div className="flex-1 space-y-4 overflow-y-auto p-4">
+                  {messages.map((message, index) => (
+                    <div
+                      key={`${message.role}-${index}`}
+                      className={cn(
+                        "flex",
+                        message.role === "user" ? "justify-end" : "justify-start"
+                      )}
+                    >
+                      <div
+                        className={cn(
+                          "max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6",
+                          message.role === "user"
+                            ? "bg-primary text-primary-foreground"
+                            : "border border-border bg-muted/60 text-foreground"
+                        )}
+                      >
+                        {message.content}
+                      </div>
+                    </div>
+                  ))}
+                  {loading ? (
+                    <div className="flex justify-start">
+                      <div className="flex items-center gap-2 rounded-2xl border border-border bg-muted/60 px-4 py-3 text-sm text-muted-foreground">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Thinking
+                      </div>
+                    </div>
+                  ) : null}
+                  <div ref={scrollRef} />
+                </div>
+
+                <div className="border-t border-border p-4">
+                  <div className="mb-3 flex gap-2 overflow-x-auto pb-1">
+                    {suggestedQuestions.map((question) => (
+                      <button
+                        key={question}
+                        type="button"
+                        onClick={() => sendMessage(question)}
+                        disabled={loading}
+                        className="focus-ring shrink-0 rounded-full border border-border bg-muted/60 px-3 py-2 text-xs font-semibold text-muted-foreground transition hover:border-primary/50 hover:text-foreground disabled:opacity-60"
+                      >
+                        {question}
+                      </button>
+                    ))}
+                  </div>
+
+                  {error ? <p className="mb-2 text-xs font-medium text-red-500">{error}</p> : null}
+
+                  <form
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                      sendMessage();
+                    }}
+                    className="flex gap-2"
+                  >
+                    <input
+                      value={input}
+                      onChange={(event) => setInput(event.target.value)}
+                      placeholder="Ask about Shreevikas..."
+                      className="focus-ring min-h-11 min-w-0 flex-1 rounded-lg border border-border bg-background px-3 text-sm"
+                      disabled={loading}
+                    />
+                    <Button
+                      type="submit"
+                      className="h-11 w-11 px-0"
+                      disabled={loading || !input.trim()}
+                      aria-label="Send message"
+                    >
+                      {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                    </Button>
+                  </form>
+                </div>
+              </>
+            )}
+          </motion.aside>
+        ) : null}
+      </AnimatePresence>
+    </>
+  );
+}
