@@ -30,6 +30,7 @@ export function Chatbot() {
   const [email, setEmail] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [emailSubmitting, setEmailSubmitting] = useState(false);
   const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -55,7 +56,7 @@ export function Chatbot() {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading, open]);
 
-  const submitEmail = (event: FormEvent) => {
+  const submitEmail = async (event: FormEvent) => {
     event.preventDefault();
     setEmailError("");
 
@@ -64,8 +65,21 @@ export function Chatbot() {
       return;
     }
 
-    window.localStorage.setItem("portfolio-chat-email", emailInput);
-    setEmail(emailInput);
+    const normalizedEmail = emailInput.trim().toLowerCase();
+    setEmailSubmitting(true);
+    try {
+      void fetch("/api/chat/access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        keepalive: true,
+        body: JSON.stringify({ email: normalizedEmail })
+      }).catch(() => undefined);
+    } catch {
+      // Do not block recruiter access if notification delivery is temporarily unavailable.
+    }
+
+    window.localStorage.setItem("portfolio-chat-email", normalizedEmail);
+    setEmail(normalizedEmail);
     setMessages([
       {
         role: "assistant",
@@ -73,6 +87,7 @@ export function Chatbot() {
           "Thanks. Ask me about Shreevikas's data engineering projects, AWS work, RAG systems, research, certifications, or experience."
       }
     ]);
+    setEmailSubmitting(false);
   };
 
   const sendMessage = async (messageText?: string) => {
@@ -177,6 +192,7 @@ export function Chatbot() {
                   <h3 className="text-lg font-black">Enter your email to start</h3>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">
                     This assistant answers using Shreevikas&apos;s available portfolio context.
+                    Your email unlocks chat and notifies Shreevikas.
                   </p>
                 </div>
                 <label className="grid gap-2 text-sm font-semibold">
@@ -191,8 +207,15 @@ export function Chatbot() {
                   />
                 </label>
                 {emailError ? <p className="text-sm font-medium text-red-500">{emailError}</p> : null}
-                <Button type="submit" className="w-full">
-                  Continue
+                <Button type="submit" className="w-full" disabled={emailSubmitting}>
+                  {emailSubmitting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Starting
+                    </>
+                  ) : (
+                    "Continue"
+                  )}
                 </Button>
               </form>
             ) : (

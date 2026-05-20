@@ -39,10 +39,16 @@ Create `.env.local`:
 
 ```bash
 GROQ_API_KEY=your_groq_api_key_here
+CHATBOT_NOTIFICATION_EMAIL=shreevikasj@gmail.com
+
+# Optional: use Resend for reliable chatbot-access email notifications.
+RESEND_API_KEY=
+RESEND_FROM_EMAIL=Portfolio Assistant <onboarding@resend.dev>
 ```
 
 The API key is only used in `app/api/chat/route.ts` and is never exposed to the frontend.
 Do not commit `.env.local` or paste the actual key into source code.
+The chatbot email gate posts visitor emails to a server route that notifies `CHATBOT_NOTIFICATION_EMAIL`.
 
 ## Deploy To Vercel
 
@@ -50,8 +56,10 @@ Do not commit `.env.local` or paste the actual key into source code.
 2. Import the repository in Vercel.
 3. Select the Next.js framework preset.
 4. Add `GROQ_API_KEY` in Vercel Project Settings > Environment Variables.
-5. Redeploy after saving the environment variable so the chatbot API can read it at runtime.
-6. Deploy.
+5. Add `CHATBOT_NOTIFICATION_EMAIL` with the address that should receive chatbot access notifications.
+6. For reliable email delivery, add `RESEND_API_KEY` and `RESEND_FROM_EMAIL`. Without Resend, the app attempts a FormSubmit fallback.
+7. Redeploy after saving the environment variables so the chatbot API can read them at runtime.
+8. Deploy.
 
 ## Screenshots
 

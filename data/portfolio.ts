@@ -22,7 +22,9 @@ export const siteConfig = {
   description:
     "Portfolio of Shreevikas Bangalore Jagadish, a Data Engineer and AI Data Engineer specializing in scalable data pipelines, cloud data platforms, RAG systems, AIOps research, and analytics engineering.",
   location: "Chicago, IL",
+  availability: "Open to relocation",
   email: "shreevikasjagadish7@gmail.com",
+  notificationEmail: "shreevikasj@gmail.com",
   github: "https://github.com/Shreevikas-BJ",
   linkedin: "https://www.linkedin.com/in/shreevikasbj/",
   resumeUrl: "/Shreevikas_Bangalore_Jagadish_Resume.pdf",
@@ -454,7 +456,7 @@ export const certifications = [
     name: "AWS Certified Data Engineer - Associate",
     issuer: "Amazon Web Services",
     status: "Certified",
-    credentialUrl: ""
+    credentialUrl: "https://www.credly.com/badges/017bc7a0-a378-4cfa-abb0-bc968c20d7da/public_url"
   },
   {
     name: "Google Data Analytics Professional Certificate",
@@ -497,7 +499,7 @@ export const contactItems = [
   },
   {
     label: "Location",
-    value: siteConfig.location,
+    value: `${siteConfig.location} - ${siteConfig.availability}`,
     href: "",
     icon: MapPin
   },

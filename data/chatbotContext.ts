@@ -17,6 +17,7 @@ export const chatbotContext = `
 Profile:
 - Name: ${siteConfig.name}
 - Location: ${siteConfig.location}
+- Availability: ${siteConfig.availability}
 - Target roles: Data Engineer, Analytics Engineer, AI Data Engineer.
 - Primary email: ${siteConfig.email}
 - GitHub: ${siteConfig.github}

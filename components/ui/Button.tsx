@@ -40,9 +40,7 @@ export function ButtonLink({
       <a
         href={href}
         className={buttonClasses(variant, className)}
-        target={external ? "_blank" : undefined}
         rel={external ? "noreferrer" : undefined}
-        download={download}
       >
         {children}
       </a>
