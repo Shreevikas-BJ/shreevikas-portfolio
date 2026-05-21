@@ -1,15 +1,13 @@
-import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { createDownloadResponse } from "@/lib/downloadFile";
 
-export async function GET() {
+export async function GET(request: Request) {
   const filePath = join(process.cwd(), "public", "research", "aiops-research-paper.pdf");
-  const file = await readFile(filePath);
 
-  return new Response(file, {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": 'attachment; filename="aiops-research-paper.pdf"',
-      "Content-Length": String(file.byteLength)
-    }
+  return createDownloadResponse(request, {
+    filePath,
+    fileName: "aiops-research-paper.pdf",
+    label: "AIOps research paper",
+    backHref: "/research/aiops"
   });
 }
