@@ -1,6 +1,6 @@
 # Shreevikas Portfolio
 
-Premium recruiter-friendly portfolio for Shreevikas Bangalore Jagadish, focused on data engineering, analytics engineering, AI data engineering, RAG systems, cloud data platforms, and production-ready ML/AI systems.
+Premium recruiter-friendly portfolio for Shreevikas Jagadish, focused on data engineering, analytics engineering, AI data engineering, RAG systems, cloud data platforms, and production-ready ML/AI systems.
 
 ## Tech Stack
 
@@ -67,7 +67,7 @@ Screenshots can be added after the first Vercel deployment.
 
 ## Author
 
-Shreevikas Bangalore Jagadish  
+Shreevikas Jagadish  
 Chicago, IL  
 Email: shreevikasjagadish7@gmail.com  
 GitHub: https://github.com/Shreevikas-BJ  

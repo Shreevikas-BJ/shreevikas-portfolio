@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: siteConfig.title,
   description: siteConfig.description,
   keywords: [
-    "Shreevikas Bangalore Jagadish",
+    "Shreevikas Jagadish",
     "Data Engineer",
     "AI Data Engineer",
     "Analytics Engineer",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: siteConfig.profileImage,
         width: 1200,
         height: 1200,
-        alt: "Professional portrait of Shreevikas Bangalore Jagadish"
+        alt: "Professional portrait of Shreevikas Jagadish"
       }
     ],
     locale: "en_US",

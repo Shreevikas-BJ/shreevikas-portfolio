@@ -48,7 +48,7 @@ export default function ResumePage() {
             <div className="surface overflow-hidden rounded-2xl p-3">
               <Image
                 src="/document-previews/resume/page-01.jpg"
-                alt="Resume preview for Shreevikas Bangalore Jagadish"
+                alt="Resume preview for Shreevikas Jagadish"
                 width={980}
                 height={1268}
                 className="w-full rounded-xl bg-white"

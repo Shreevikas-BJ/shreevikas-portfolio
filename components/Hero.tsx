@@ -104,7 +104,7 @@ export function Hero() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-muted">
               <Image
                 src={siteConfig.profileImage}
-                alt="Professional portrait of Shreevikas Bangalore Jagadish"
+                alt="Professional portrait of Shreevikas Jagadish"
                 fill
                 sizes="(max-width: 1024px) 90vw, 420px"
                 className="object-cover"

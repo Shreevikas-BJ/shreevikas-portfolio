@@ -16,11 +16,11 @@ import {
 } from "lucide-react";
 
 export const siteConfig = {
-  name: "Shreevikas Bangalore Jagadish",
+  name: "Shreevikas Jagadish",
   shortName: "Shreevikas",
-  title: "Shreevikas Bangalore Jagadish | Data Engineer & AI Data Engineer",
+  title: "Shreevikas Jagadish | Data Engineer & AI Data Engineer",
   description:
-    "Portfolio of Shreevikas Bangalore Jagadish, a Data Engineer and AI Data Engineer specializing in scalable data pipelines, cloud data platforms, RAG systems, AIOps research, and analytics engineering.",
+    "Portfolio of Shreevikas Jagadish, a Data Engineer and AI Data Engineer specializing in scalable data pipelines, cloud data platforms, RAG systems, AIOps research, and analytics engineering.",
   location: "Chicago, IL",
   availability: "Open to relocation",
   email: "shreevikasjagadish7@gmail.com",

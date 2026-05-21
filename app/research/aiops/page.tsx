@@ -13,7 +13,7 @@ const researchPreviewPages = Array.from({ length: 21 }, (_, index) => {
 export const metadata: Metadata = {
   title: `AIOps Research Paper | ${siteConfig.name}`,
   description:
-    "View and download Shreevikas Bangalore Jagadish's AIOps research paper on AI-driven process engineering for IT operations."
+    "View and download Shreevikas Jagadish's AIOps research paper on AI-driven process engineering for IT operations."
 };
 
 export default function AiopsResearchPage() {
