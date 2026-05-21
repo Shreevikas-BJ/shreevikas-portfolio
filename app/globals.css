@@ -67,6 +67,18 @@ textarea {
   background: hsl(var(--primary) / 0.25);
 }
 
+@keyframes rise-in {
+  from {
+    opacity: 0.92;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer components {
   .section-shell {
     @apply mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24;
@@ -86,5 +98,9 @@ textarea {
 
   .text-balance {
     text-wrap: balance;
+  }
+
+  .animate-rise-in {
+    animation: rise-in 520ms ease-out both;
   }
 }

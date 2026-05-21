@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   ArrowDown,
   Download,
@@ -17,14 +16,16 @@ import { ButtonLink } from "@/components/ui/Button";
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden pt-24">
-      <div className="section-shell grid min-h-[calc(100vh-6rem)] items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65 }}
-          className="max-w-3xl"
-        >
+    <section id="home" className="relative isolate overflow-hidden pt-20 lg:pt-16">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(31,193,188,0.16),transparent_36%),linear-gradient(290deg,rgba(245,176,65,0.13),transparent_38%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:72px_72px] opacity-40" />
+        <div className="absolute left-0 right-0 top-16 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-background" />
+      </div>
+
+      <div className="section-shell grid min-h-[calc(100svh-5rem)] items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
+        <div className="max-w-3xl animate-rise-in">
           <div className="flex flex-wrap items-center gap-3">
             <span className="eyebrow">
               <Sparkles className="mr-2 h-3.5 w-3.5" />
@@ -32,7 +33,7 @@ export function Hero() {
             </span>
             <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4 text-primary" />
-              {siteConfig.location} · {siteConfig.availability}
+              {siteConfig.location} | {siteConfig.availability}
             </span>
           </div>
 
@@ -83,15 +84,11 @@ export function Hero() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="relative"
-        >
-          <div className="surface relative mx-auto max-w-md overflow-hidden rounded-2xl p-3">
+        <div className="relative animate-rise-in [animation-delay:120ms]">
+          <div className="surface relative mx-auto max-w-md overflow-hidden rounded-2xl p-3 shadow-2xl shadow-primary/10">
+            <div aria-hidden="true" className="absolute inset-x-3 top-3 z-10 h-24 rounded-t-xl bg-gradient-to-b from-black/25 to-transparent" />
             <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-muted">
               <Image
                 src={siteConfig.profileImage}
@@ -119,7 +116,7 @@ export function Hero() {
               );
             })}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
