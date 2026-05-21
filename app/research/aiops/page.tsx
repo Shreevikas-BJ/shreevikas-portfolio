@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 import { research, siteConfig } from "@/data/portfolio";
+import { PdfDownloadButton } from "@/components/PdfDownloadButton";
 import { Button } from "@/components/ui/Button";
 
 const researchPreviewPages = Array.from({ length: 21 }, (_, index) => {
@@ -50,12 +51,13 @@ export default function AiopsResearchPage() {
             </div>
 
             <div className="relative z-10 mt-8 flex flex-wrap gap-3">
-              <Button asChild>
-                <a href="/api/download/aiops-research-paper">
-                  <Download className="h-4 w-4" />
-                  Download Research Paper
-                </a>
-              </Button>
+              <PdfDownloadButton
+                fileName="aiops-research-paper.pdf"
+                href="/api/download/aiops-research-paper"
+              >
+                <Download className="h-4 w-4" />
+                Download Research Paper
+              </PdfDownloadButton>
               <Button asChild variant="outline">
                 <a href="/research/aiops-research-paper.pdf">
                   <ExternalLink className="h-4 w-4" />

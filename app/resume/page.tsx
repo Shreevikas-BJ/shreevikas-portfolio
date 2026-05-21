@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
+import { PdfDownloadButton } from "@/components/PdfDownloadButton";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
@@ -34,12 +35,13 @@ export default function ResumePage() {
             </p>
 
             <div className="relative z-10 mt-8 flex flex-wrap gap-3">
-              <Button asChild>
-                <a href="/api/download/resume">
-                  <Download className="h-4 w-4" />
-                  Download PDF
-                </a>
-              </Button>
+              <PdfDownloadButton
+                fileName="Shreevikas_Bangalore_Jagadish_Resume.pdf"
+                href="/api/download/resume"
+              >
+                <Download className="h-4 w-4" />
+                Download PDF
+              </PdfDownloadButton>
               <Button asChild variant="outline">
                 <a href="/Shreevikas_Bangalore_Jagadish_Resume.pdf">
                   <ExternalLink className="h-4 w-4" />

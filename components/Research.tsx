@@ -1,5 +1,6 @@
 import { BookOpen, Download, FileText } from "lucide-react";
 import { research } from "@/data/portfolio";
+import { PdfDownloadButton } from "@/components/PdfDownloadButton";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -29,12 +30,14 @@ export function Research() {
                   View Research Paper
                 </a>
               </Button>
-              <Button asChild variant="outline">
-                <a href="/api/download/aiops-research-paper">
-                  <Download className="h-4 w-4" />
-                  Download Research Paper
-                </a>
-              </Button>
+              <PdfDownloadButton
+                fileName="aiops-research-paper.pdf"
+                href="/api/download/aiops-research-paper"
+                variant="outline"
+              >
+                <Download className="h-4 w-4" />
+                Download Research Paper
+              </PdfDownloadButton>
             </div>
           </div>
 

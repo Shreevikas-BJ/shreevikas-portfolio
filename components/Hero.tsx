@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { achievementCards, heroStats, siteConfig } from "@/data/portfolio";
+import { PdfDownloadButton } from "@/components/PdfDownloadButton";
 import { Badge } from "@/components/ui/Badge";
 import { Button, ButtonLink } from "@/components/ui/Button";
 
@@ -65,12 +66,14 @@ export function Hero() {
                 View Resume
               </a>
             </Button>
-            <Button asChild variant="secondary">
-              <a href="/api/download/resume">
-                <Download className="h-4 w-4" />
-                Download Resume
-              </a>
-            </Button>
+            <PdfDownloadButton
+              fileName="Shreevikas_Bangalore_Jagadish_Resume.pdf"
+              href="/api/download/resume"
+              variant="secondary"
+            >
+              <Download className="h-4 w-4" />
+              Download Resume
+            </PdfDownloadButton>
             <ButtonLink href={siteConfig.github} variant="outline" external>
               <Github className="h-4 w-4" />
               GitHub
