@@ -3,6 +3,7 @@
 import {
   ArrowDown,
   Download,
+  FileText,
   Github,
   Linkedin,
   Mail,
@@ -12,7 +13,7 @@ import {
 import Image from "next/image";
 import { achievementCards, heroStats, siteConfig } from "@/data/portfolio";
 import { Badge } from "@/components/ui/Badge";
-import { ButtonLink } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 
 export function Hero() {
   return (
@@ -53,15 +54,27 @@ export function Hero() {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="relative z-10 mt-8 flex flex-wrap gap-3">
             <ButtonLink href="#projects">
               <ArrowDown className="h-4 w-4" />
               View Projects
             </ButtonLink>
-            <ButtonLink href={siteConfig.resumeDownloadUrl} variant="secondary" download>
-              <Download className="h-4 w-4" />
-              Download Resume
-            </ButtonLink>
+            <Button asChild variant="outline">
+              <a
+                href="/Shreevikas_Bangalore_Jagadish_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FileText className="h-4 w-4" />
+                View Resume
+              </a>
+            </Button>
+            <Button asChild variant="secondary">
+              <a href="/Shreevikas_Bangalore_Jagadish_Resume.pdf" download>
+                <Download className="h-4 w-4" />
+                Download Resume
+              </a>
+            </Button>
             <ButtonLink href={siteConfig.github} variant="outline" external>
               <Github className="h-4 w-4" />
               GitHub

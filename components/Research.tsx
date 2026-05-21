@@ -1,7 +1,7 @@
 import { BookOpen, Download, FileText } from "lucide-react";
 import { research } from "@/data/portfolio";
 import { Badge } from "@/components/ui/Badge";
-import { ButtonLink } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 
 export function Research() {
@@ -22,15 +22,23 @@ export function Research() {
             <p className="mt-6 text-sm font-semibold text-primary">{research.course}</p>
             <p className="mt-1 text-sm text-muted-foreground">{research.institution}</p>
             <p className="mt-1 text-sm text-muted-foreground">{research.date}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink href="/research/aiops">
-                <FileText className="h-4 w-4" />
-                View Paper
-              </ButtonLink>
-              <ButtonLink href={research.downloadUrl} variant="outline" download>
-                <Download className="h-4 w-4" />
-                Download PDF
-              </ButtonLink>
+            <div className="relative z-10 mt-6 flex flex-wrap gap-3">
+              <Button asChild>
+                <a
+                  href="/research/aiops-research-paper.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FileText className="h-4 w-4" />
+                  View Research Paper
+                </a>
+              </Button>
+              <Button asChild variant="outline">
+                <a href="/research/aiops-research-paper.pdf" download>
+                  <Download className="h-4 w-4" />
+                  Download Research Paper
+                </a>
+              </Button>
             </div>
           </div>
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 import { research, siteConfig } from "@/data/portfolio";
-import { ButtonLink } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: `AIOps Research Paper | ${siteConfig.name}`,
@@ -43,15 +43,23 @@ export default function AiopsResearchPage() {
               </p>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href={research.downloadUrl} download>
-                <Download className="h-4 w-4" />
-                Download PDF
-              </ButtonLink>
-              <ButtonLink href={research.url} variant="outline" external>
-                <ExternalLink className="h-4 w-4" />
-                Open PDF File
-              </ButtonLink>
+            <div className="relative z-10 mt-8 flex flex-wrap gap-3">
+              <Button asChild>
+                <a href="/research/aiops-research-paper.pdf" download>
+                  <Download className="h-4 w-4" />
+                  Download Research Paper
+                </a>
+              </Button>
+              <Button asChild variant="outline">
+                <a
+                  href="/research/aiops-research-paper.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  View Research Paper
+                </a>
+              </Button>
             </div>
           </aside>
 

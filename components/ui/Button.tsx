@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cloneElement, isValidElement } from "react";
 import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "secondary" | "ghost" | "outline";
@@ -60,10 +61,18 @@ export function Button({
   variant = "primary",
   className,
   type = "button",
+  asChild,
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant;
+  asChild?: boolean;
 }) {
+  if (asChild && isValidElement<{ className?: string }>(children)) {
+    return cloneElement(children, {
+      className: cn(buttonClasses(variant, className), children.props.className)
+    });
+  }
+
   return (
     <button type={type} className={buttonClasses(variant, className)} {...props}>
       {children}
