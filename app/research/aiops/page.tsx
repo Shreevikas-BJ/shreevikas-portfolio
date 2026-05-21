@@ -45,17 +45,16 @@ export default function AiopsResearchPage() {
 
             <div className="relative z-10 mt-8 flex flex-wrap gap-3">
               <Button asChild>
-                <a href="/research/aiops-research-paper.pdf" download>
+                <a
+                  href="/research/aiops-research-paper.pdf"
+                  download="aiops-research-paper.pdf"
+                >
                   <Download className="h-4 w-4" />
                   Download Research Paper
                 </a>
               </Button>
               <Button asChild variant="outline">
-                <a
-                  href="/research/aiops-research-paper.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="/research/aiops-research-paper.pdf">
                   <ExternalLink className="h-4 w-4" />
                   View Research Paper
                 </a>

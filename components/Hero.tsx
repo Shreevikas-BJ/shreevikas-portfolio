@@ -60,17 +60,16 @@ export function Hero() {
               View Projects
             </ButtonLink>
             <Button asChild variant="outline">
-              <a
-                href="/Shreevikas_Bangalore_Jagadish_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="/Shreevikas_Bangalore_Jagadish_Resume.pdf">
                 <FileText className="h-4 w-4" />
                 View Resume
               </a>
             </Button>
             <Button asChild variant="secondary">
-              <a href="/Shreevikas_Bangalore_Jagadish_Resume.pdf" download>
+              <a
+                href="/Shreevikas_Bangalore_Jagadish_Resume.pdf"
+                download="Shreevikas_Bangalore_Jagadish_Resume.pdf"
+              >
                 <Download className="h-4 w-4" />
                 Download Resume
               </a>
