@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 import { research, siteConfig } from "@/data/portfolio";
 import { Button } from "@/components/ui/Button";
+
+const researchPreviewPages = Array.from({ length: 21 }, (_, index) => {
+  const page = String(index + 1).padStart(2, "0");
+  return `/document-previews/aiops/page-${page}.jpg`;
+});
 
 export const metadata: Metadata = {
   title: `AIOps Research Paper | ${siteConfig.name}`,
@@ -23,7 +29,7 @@ export default function AiopsResearchPage() {
         </Link>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
-          <aside className="surface rounded-2xl p-6 lg:p-8">
+          <aside id="download" className="surface rounded-2xl p-6 lg:p-8">
             <p className="eyebrow w-fit">Research & Publications</p>
             <h1 className="mt-5 text-3xl font-black text-balance sm:text-4xl">
               {research.title}
@@ -45,7 +51,7 @@ export default function AiopsResearchPage() {
 
             <div className="relative z-10 mt-8 flex flex-wrap gap-3">
               <Button asChild>
-                <a href="/research/aiops-research-paper.pdf">
+                <a href="/research/aiops-research-paper.pdf" download>
                   <Download className="h-4 w-4" />
                   Download Research Paper
                 </a>
@@ -59,12 +65,19 @@ export default function AiopsResearchPage() {
             </div>
           </aside>
 
-          <div className="surface min-h-[72vh] overflow-hidden rounded-2xl">
-            <iframe
-              title="AIOps research paper PDF viewer"
-              src={`${research.url}#toolbar=1&navpanes=0`}
-              className="h-[72vh] w-full bg-muted"
-            />
+          <div className="space-y-4">
+            {researchPreviewPages.map((src, index) => (
+              <div key={src} className="surface overflow-hidden rounded-2xl p-3">
+                <Image
+                  src={src}
+                  alt={`AIOps research paper preview page ${index + 1}`}
+                  width={980}
+                  height={1268}
+                  className="w-full rounded-xl bg-white"
+                  priority={index === 0}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
