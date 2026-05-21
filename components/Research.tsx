@@ -30,7 +30,7 @@ export function Research() {
                 </a>
               </Button>
               <Button asChild variant="outline">
-                <a href="/research/aiops#download">
+                <a href="/api/download/aiops-research-paper">
                   <Download className="h-4 w-4" />
                   Download Research Paper
                 </a>

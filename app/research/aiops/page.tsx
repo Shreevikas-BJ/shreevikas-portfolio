@@ -51,7 +51,7 @@ export default function AiopsResearchPage() {
 
             <div className="relative z-10 mt-8 flex flex-wrap gap-3">
               <Button asChild>
-                <a href="/research/aiops-research-paper.pdf" download>
+                <a href="/api/download/aiops-research-paper">
                   <Download className="h-4 w-4" />
                   Download Research Paper
                 </a>

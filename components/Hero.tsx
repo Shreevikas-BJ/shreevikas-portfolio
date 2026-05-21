@@ -66,7 +66,7 @@ export function Hero() {
               </a>
             </Button>
             <Button asChild variant="secondary">
-              <a href="/resume#download">
+              <a href="/api/download/resume">
                 <Download className="h-4 w-4" />
                 Download Resume
               </a>

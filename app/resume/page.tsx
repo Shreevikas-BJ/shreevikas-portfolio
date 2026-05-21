@@ -35,7 +35,7 @@ export default function ResumePage() {
 
             <div className="relative z-10 mt-8 flex flex-wrap gap-3">
               <Button asChild>
-                <a href="/Shreevikas_Bangalore_Jagadish_Resume.pdf" download>
+                <a href="/api/download/resume">
                   <Download className="h-4 w-4" />
                   Download PDF
                 </a>
