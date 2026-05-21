@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Download, ExternalLink } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
 import { PdfDownloadButton } from "@/components/PdfDownloadButton";
-import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: `Resume | ${siteConfig.name}`,
@@ -42,12 +41,6 @@ export default function ResumePage() {
                 <Download className="h-4 w-4" />
                 Download PDF
               </PdfDownloadButton>
-              <Button asChild variant="outline">
-                <a href="/Shreevikas_Bangalore_Jagadish_Resume.pdf">
-                  <ExternalLink className="h-4 w-4" />
-                  Open PDF File
-                </a>
-              </Button>
             </div>
           </aside>
 

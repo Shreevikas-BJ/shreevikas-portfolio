@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Download, ExternalLink } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { research, siteConfig } from "@/data/portfolio";
 import { PdfDownloadButton } from "@/components/PdfDownloadButton";
-import { Button } from "@/components/ui/Button";
 
 const researchPreviewPages = Array.from({ length: 21 }, (_, index) => {
   const page = String(index + 1).padStart(2, "0");
@@ -58,12 +57,6 @@ export default function AiopsResearchPage() {
                 <Download className="h-4 w-4" />
                 Download Research Paper
               </PdfDownloadButton>
-              <Button asChild variant="outline">
-                <a href="/research/aiops-research-paper.pdf">
-                  <ExternalLink className="h-4 w-4" />
-                  View Research Paper
-                </a>
-              </Button>
             </div>
           </aside>
 
