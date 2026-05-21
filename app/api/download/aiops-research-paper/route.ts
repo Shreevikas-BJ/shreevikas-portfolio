@@ -1,13 +1,11 @@
 import { join } from "node:path";
 import { createDownloadResponse } from "@/lib/downloadFile";
 
-export async function GET(request: Request) {
+export async function GET() {
   const filePath = join(process.cwd(), "public", "research", "aiops-research-paper.pdf");
 
-  return createDownloadResponse(request, {
+  return createDownloadResponse({
     filePath,
-    fileName: "aiops-research-paper.pdf",
-    label: "AIOps research paper",
-    backHref: "/research/aiops"
+    fileName: "aiops-research-paper.pdf"
   });
 }
