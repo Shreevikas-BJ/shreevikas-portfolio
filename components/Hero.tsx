@@ -58,7 +58,7 @@ export function Hero() {
               <ArrowDown className="h-4 w-4" />
               View Projects
             </ButtonLink>
-            <ButtonLink href={siteConfig.resumeUrl} variant="secondary" download>
+            <ButtonLink href={siteConfig.resumeDownloadUrl} variant="secondary" download>
               <Download className="h-4 w-4" />
               Download Resume
             </ButtonLink>

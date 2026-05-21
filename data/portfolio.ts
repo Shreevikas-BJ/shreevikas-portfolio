@@ -30,6 +30,7 @@ export const siteConfig = {
   github: "https://github.com/Shreevikas-BJ",
   linkedin: "https://www.linkedin.com/in/shreevikasbj/",
   resumeUrl: "/Shreevikas_Bangalore_Jagadish_Resume.pdf",
+  resumeDownloadUrl: "/api/download/resume",
   researchUrl: "/research/aiops-research-paper.pdf",
   profileImage: "/images/profile-picture.jpg",
   roles: ["Data Engineer", "Analytics Engineer", "AI Data Engineer"]
