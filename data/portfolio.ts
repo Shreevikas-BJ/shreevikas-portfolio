@@ -450,7 +450,8 @@ export const research = {
     "Human-centered operational integration",
     "Risk controls for agentic systems"
   ],
-  url: siteConfig.researchUrl
+  url: siteConfig.researchUrl,
+  downloadUrl: "/api/download/aiops-research-paper"
 };
 
 export const certifications = [

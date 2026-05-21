@@ -27,7 +27,7 @@ export function Research() {
                 <FileText className="h-4 w-4" />
                 View Paper
               </ButtonLink>
-              <ButtonLink href={research.url} variant="outline" download>
+              <ButtonLink href={research.downloadUrl} variant="outline" download>
                 <Download className="h-4 w-4" />
                 Download PDF
               </ButtonLink>

@@ -44,7 +44,7 @@ export default function AiopsResearchPage() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href={research.url} download>
+              <ButtonLink href={research.downloadUrl} download>
                 <Download className="h-4 w-4" />
                 Download PDF
               </ButtonLink>
