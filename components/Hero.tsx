@@ -66,10 +66,7 @@ export function Hero() {
               </a>
             </Button>
             <Button asChild variant="secondary">
-              <a
-                href="/Shreevikas_Bangalore_Jagadish_Resume.pdf"
-                download="Shreevikas_Bangalore_Jagadish_Resume.pdf"
-              >
+              <a href="/Shreevikas_Bangalore_Jagadish_Resume.pdf">
                 <Download className="h-4 w-4" />
                 Download Resume
               </a>
