@@ -43,7 +43,7 @@ export function Contact() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <ButtonLink href={`mailto:${siteConfig.email}`}>
+          <ButtonLink href={siteConfig.emailHref} external>
             <Mail className="h-4 w-4" />
             Email Me
           </ButtonLink>

@@ -23,7 +23,7 @@ export function Research() {
             <p className="mt-1 text-sm text-muted-foreground">{research.institution}</p>
             <p className="mt-1 text-sm text-muted-foreground">{research.date}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink href={research.url} external>
+              <ButtonLink href="/research/aiops">
                 <FileText className="h-4 w-4" />
                 View Paper
               </ButtonLink>

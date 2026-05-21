@@ -70,7 +70,7 @@ export function Hero() {
               <Linkedin className="h-4 w-4" />
               LinkedIn
             </ButtonLink>
-            <ButtonLink href={`mailto:${siteConfig.email}`} variant="outline">
+            <ButtonLink href="#contact" variant="outline">
               <Mail className="h-4 w-4" />
               Contact Me
             </ButtonLink>

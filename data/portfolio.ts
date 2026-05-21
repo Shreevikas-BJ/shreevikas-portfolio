@@ -24,6 +24,8 @@ export const siteConfig = {
   location: "Chicago, IL",
   availability: "Open to relocation",
   email: "shreevikasjagadish7@gmail.com",
+  emailHref:
+    "https://mail.google.com/mail/?view=cm&fs=1&to=shreevikasjagadish7%40gmail.com&su=Portfolio%20Inquiry",
   notificationEmail: "shreevikasj@gmail.com",
   github: "https://github.com/Shreevikas-BJ",
   linkedin: "https://www.linkedin.com/in/shreevikasbj/",
@@ -494,7 +496,7 @@ export const contactItems = [
   {
     label: "Email",
     value: siteConfig.email,
-    href: `mailto:${siteConfig.email}`,
+    href: siteConfig.emailHref,
     icon: Mail
   },
   {
