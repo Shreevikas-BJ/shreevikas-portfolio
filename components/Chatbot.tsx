@@ -36,13 +36,30 @@ export function Chatbot() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const messagesRef = useRef<Message[]>([welcomeMessage]);
+  const emailRef = useRef("");
+  const requestInFlightRef = useRef(false);
+
+  const replaceMessages = (nextMessages: Message[]) => {
+    messagesRef.current = nextMessages;
+    setMessages(nextMessages);
+  };
+
+  const appendMessage = (message: Message) => {
+    setMessages((currentMessages) => {
+      const nextMessages = [...currentMessages, message];
+      messagesRef.current = nextMessages;
+      return nextMessages;
+    });
+  };
 
   useEffect(() => {
     const storedEmail = window.localStorage.getItem("portfolio-chat-email") || "";
     if (storedEmail) {
+      emailRef.current = storedEmail;
       setEmail(storedEmail);
       setEmailInput(storedEmail);
-      setMessages([
+      replaceMessages([
         {
           role: "assistant",
           content:
@@ -51,6 +68,10 @@ export function Chatbot() {
       ]);
     }
   }, []);
+
+  useEffect(() => {
+    emailRef.current = email;
+  }, [email]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -74,28 +95,40 @@ export function Chatbot() {
         keepalive: true,
         body: JSON.stringify({ email: normalizedEmail })
       }).catch(() => undefined);
-    } catch {
+    } catch (notificationError) {
       // Do not block recruiter access if notification delivery is temporarily unavailable.
+      console.error("Chatbot email notification request failed.", notificationError);
+    } finally {
+      setEmailSubmitting(false);
     }
 
     window.localStorage.setItem("portfolio-chat-email", normalizedEmail);
+    emailRef.current = normalizedEmail;
     setEmail(normalizedEmail);
-    setMessages([
+    replaceMessages([
       {
         role: "assistant",
         content:
           "Thanks. Ask me about Shreevikas's data engineering projects, AWS work, RAG systems, research, certifications, or experience."
       }
     ]);
-    setEmailSubmitting(false);
   };
 
   const sendMessage = async (messageText?: string) => {
     const trimmed = (messageText ?? input).trim();
-    if (!trimmed || loading || !email) return;
+    const activeEmail = emailRef.current || email;
 
-    const nextMessages: Message[] = [...messages, { role: "user", content: trimmed }];
-    setMessages(nextMessages);
+    if (!trimmed || !activeEmail) return;
+
+    if (requestInFlightRef.current) {
+      console.warn("Ignoring chatbot message because a request is already in flight.");
+      return;
+    }
+
+    requestInFlightRef.current = true;
+    const historySnapshot = messagesRef.current.slice(-8);
+
+    appendMessage({ role: "user", content: trimmed });
     setInput("");
     setLoading(true);
     setError("");
@@ -105,9 +138,9 @@ export function Chatbot() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email,
+          email: activeEmail,
           message: trimmed,
-          history: messages.slice(-8)
+          history: historySnapshot
         })
       });
 
@@ -117,25 +150,21 @@ export function Chatbot() {
         throw new Error(data.error || "The assistant could not respond.");
       }
 
-      setMessages((current) => [
-        ...current,
-        {
-          role: "assistant",
-          content: data.answer || refusalMessage
-        }
-      ]);
+      appendMessage({
+        role: "assistant",
+        content: data.answer || refusalMessage
+      });
     } catch (requestError) {
+      console.error("Chatbot message request failed.", requestError);
       setError(requestError instanceof Error ? requestError.message : "Unexpected chat error.");
-      setMessages((current) => [
-        ...current,
-        {
-          role: "assistant",
-          content:
-            "I could not reach the assistant backend right now. Please check the Groq API key configuration and try again."
-        }
-      ]);
+      appendMessage({
+        role: "assistant",
+        content:
+          "I could not reach the assistant backend right now. Please check the Groq API key configuration and try again."
+      });
     } finally {
       setLoading(false);
+      requestInFlightRef.current = false;
     }
   };
 

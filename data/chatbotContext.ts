@@ -8,7 +8,7 @@ import {
   skills
 } from "./portfolio";
 
-const compactList = (items: string[]) => items.join(", ");
+const compactList = (items: string[], limit = items.length) => items.slice(0, limit).join(", ");
 
 export const refusalMessage =
   "I can only answer questions about Shreevikas's professional background, projects, skills, research, and experience.";
@@ -32,8 +32,8 @@ ${experiences
   .map(
     (experience) => `
 - ${experience.title}, ${experience.company}, ${experience.location}, ${experience.dates}
-  Skills: ${compactList(experience.tags)}
-  Highlights: ${experience.bullets.join(" ")}
+  Skills: ${compactList(experience.tags, 6)}
+  Highlights: ${experience.bullets.slice(0, 3).join(" ")}
 `
   )
   .join("")}
@@ -44,9 +44,8 @@ ${projects
     (project) => `
 - ${project.title}: ${project.summary}
   Category: ${project.category}
-  Tech: ${compactList(project.tech)}
-  Architecture: ${project.architecture}
-  Highlights: ${project.bullets.join(" ")}
+  Tech: ${compactList(project.tech, 7)}
+  Highlights: ${project.bullets.slice(0, 2).join(" ")}
   Repo: ${project.repoUrl}
 ${project.liveUrl ? `  Live demo: ${project.liveUrl}` : ""}
 `
@@ -78,5 +77,5 @@ ${education
   .join("\n")}
 
 Skills:
-${skills.map((group) => `- ${group.category}: ${compactList(group.items)}`).join("\n")}
+${skills.map((group) => `- ${group.category}: ${compactList(group.items, 12)}`).join("\n")}
 `.trim();
