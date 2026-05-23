@@ -21,6 +21,9 @@ const welcomeMessage: Message = {
 const refusalMessage =
   "I can only answer questions about Shreevikas's professional background, projects, skills, research, and experience.";
 
+const CHAT_REQUEST_TIMEOUT_MS = 15000;
+const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";
+
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -126,7 +129,8 @@ export function Chatbot() {
     }
 
     requestInFlightRef.current = true;
-    const historySnapshot = messagesRef.current.slice(-8);
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), CHAT_REQUEST_TIMEOUT_MS);
 
     appendMessage({ role: "user", content: trimmed });
     setInput("");
@@ -137,10 +141,10 @@ export function Chatbot() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           email: activeEmail,
-          message: trimmed,
-          history: historySnapshot
+          message: trimmed
         })
       });
 
@@ -156,13 +160,20 @@ export function Chatbot() {
       });
     } catch (requestError) {
       console.error("Chatbot message request failed.", requestError);
-      setError(requestError instanceof Error ? requestError.message : "Unexpected chat error.");
+      const errorMessage =
+        requestError instanceof DOMException && requestError.name === "AbortError"
+          ? timeoutMessage
+          : requestError instanceof Error
+            ? requestError.message
+            : "Unexpected chat error.";
+
+      setError(errorMessage);
       appendMessage({
         role: "assistant",
-        content:
-          "I could not reach the assistant backend right now. Please check the Groq API key configuration and try again."
+        content: errorMessage
       });
     } finally {
+      window.clearTimeout(timeoutId);
       setLoading(false);
       requestInFlightRef.current = false;
     }
