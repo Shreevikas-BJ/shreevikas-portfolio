@@ -25,7 +25,7 @@ Profile:
 - Open to Data Engineering, Analytics Engineering, and AI Data Engineering roles.
 
 Summary:
-AWS Certified Data Engineer and MS IT candidate with 2+ years of experience building cloud-native data pipelines, lakehouse models, streaming workflows, and AI data infrastructure. Hands-on with Python, SQL, PySpark, AWS, Snowflake, Databricks, Airflow, dbt, Kafka, Great Expectations, RAG, FAISS, FastAPI, and production-oriented data quality practices.
+AWS Certified Data Engineer and MS IT graduate from Illinois Institute of Technology with 2+ years of experience building batch, streaming, and AI-ready data pipelines across AWS, Snowflake, Databricks, Airflow, dbt Core, Kafka, and PySpark. Skilled in data ingestion, CDC, dimensional modeling, data quality, Spark optimization, RAG pipelines, FAISS, FastAPI, and analytics-ready datasets for BI and ML use cases.
 
 Experience:
 ${experiences

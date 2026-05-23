@@ -44,7 +44,7 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            I am {siteConfig.name}, an AWS Certified Data Engineer and MS IT candidate
+            I am {siteConfig.name}, an AWS Certified Data Engineer and MS IT graduate
             building lakehouse pipelines, streaming workflows, RAG systems, and analytics-ready
             datasets for business, healthcare, and AI use cases.
           </p>
@@ -67,7 +67,7 @@ export function Hero() {
               </a>
             </Button>
             <PdfDownloadButton
-              fileName="Shreevikas_Bangalore_Jagadish_Resume.pdf"
+              fileName="Shreevikas_Jagadish_DE_CV.pdf"
               href="/api/download/resume"
               variant="secondary"
             >

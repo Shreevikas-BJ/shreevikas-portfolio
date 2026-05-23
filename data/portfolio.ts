@@ -29,7 +29,7 @@ export const siteConfig = {
   notificationEmail: "shreevikasj@gmail.com",
   github: "https://github.com/Shreevikas-BJ",
   linkedin: "https://www.linkedin.com/in/shreevikasbj/",
-  resumeUrl: "/Shreevikas_Bangalore_Jagadish_Resume.pdf",
+  resumeUrl: "/Shreevikas_Jagadish_DE_CV.pdf",
   researchUrl: "/research/aiops-research-paper.pdf",
   profileImage: "/images/profile-picture.jpg",
   roles: ["Data Engineer", "Analytics Engineer", "AI Data Engineer"]
@@ -38,7 +38,7 @@ export const siteConfig = {
 export const heroStats = [
   { label: "Experience", value: "2+ yrs" },
   { label: "Cloud pipelines", value: "12+" },
-  { label: "Daily events", value: "5M+" },
+  { label: "Daily events", value: "~5M" },
   { label: "Data migrated", value: "3TB+" }
 ];
 
@@ -47,7 +47,7 @@ export const aboutHighlights = [
     icon: Database,
     title: "Cloud data platforms",
     description:
-      "Builds AWS, Snowflake, Databricks, Kafka, Airflow, and dbt pipelines that move raw data into governed analytics-ready layers."
+      "Builds AWS, Snowflake, Databricks, Kafka, Airflow, Fivetran, and dbt Core pipelines that move raw data into governed analytics-ready layers."
   },
   {
     icon: BrainCircuit,
@@ -59,7 +59,7 @@ export const aboutHighlights = [
     icon: ShieldCheck,
     title: "Reliable delivery",
     description:
-      "Focuses on data quality, CI/CD gates, observability, schema validation, reconciliation, and production maintainability."
+      "Focuses on data quality, dbt tests, SLA monitoring, schema validation, reconciliation, lineage, and production maintainability."
   }
 ];
 
@@ -73,9 +73,11 @@ export const skills = [
       "Apache Spark",
       "Spark Structured Streaming",
       "Airflow",
-      "dbt",
+      "dbt Core",
       "Kafka",
+      "Fivetran",
       "Delta Lake",
+      "Apache Iceberg",
       "ETL/ELT",
       "CDC",
       "SCD Type-2",
@@ -96,9 +98,7 @@ export const skills = [
       "Amazon Redshift",
       "DynamoDB",
       "Amazon Athena",
-      "SNS/SQS",
       "CloudWatch",
-      "IAM",
       "Snowflake",
       "Azure Databricks",
       "Unity Catalog"
@@ -112,8 +112,11 @@ export const skills = [
       "LangGraph",
       "FAISS",
       "Vector Search",
+      "Embeddings",
       "OpenAI Embeddings",
+      "OpenAI API",
       "RAG",
+      "RAG Pipelines",
       "Scikit-learn",
       "PyTorch",
       "PyTorch GPU",
@@ -130,16 +133,16 @@ export const skills = [
     items: [
       "Python",
       "SQL",
+      "Bash",
       "FastAPI",
       "Pydantic",
       "Docker",
-      "Terraform",
       "GitHub Actions",
       "Jenkins",
       "CI/CD",
       "pytest",
-      "REST APIs",
-      "Structured Logging",
+      "Logging",
+      "Error Handling",
       "Grafana"
     ]
   },
@@ -149,15 +152,13 @@ export const skills = [
     items: [
       "Power BI",
       "Tableau",
-      "PostgreSQL",
-      "MongoDB",
-      "DuckDB",
+      "Excel",
       "Great Expectations",
-      "Data Contracts",
+      "dbt Tests",
       "Schema Validation",
       "Reconciliation",
       "Data Lineage",
-      "Data Observability",
+      "SLA Monitoring",
       "Quality Gates"
     ]
   }
@@ -189,13 +190,14 @@ export const experiences = [
     title: "AI Data Engineer Intern",
     company: "NeuralSeek",
     location: "Miami, FL (Remote)",
-    dates: "Jul 2025 - Oct 2025",
-    tags: ["RAG", "LangChain", "FAISS", "AWS Lambda", "FastAPI", "Pydantic"],
+    dates: "Jul 2025 - Nov 2025",
+    tags: ["RAG", "FAISS", "AWS Lambda", "S3", "DynamoDB", "FastAPI", "Pydantic"],
     bullets: [
-      "Built RAG data pipelines using LangChain, OpenAI embeddings, and FAISS to ingest, chunk, validate, and index 10K+ real estate documents.",
-      "Supported 500+ daily queries at sub-second latency and reduced manual knowledge lookup time by 35%.",
-      "Developed serverless ingestion workflows on AWS Lambda, S3, and DynamoDB for document processing, metadata persistence, embedding refreshes, and FAISS index updates.",
-      "Productionized FastAPI services with Pydantic schema contracts, structured JSON logging, and pytest coverage for downstream AI application teams."
+      "Led a 4-member intern team at NeuralSeek, an AI knowledge automation platform, and supported 500+ daily RAG queries.",
+      "Built ingestion, chunking, embedding, and FAISS indexing pipelines for 10K+ real estate documents.",
+      "Improved upload reliability by 30% using Lambda, S3, and DynamoDB for metadata storage, embedding refreshes, vector index updates, and RAG pipeline tuning.",
+      "Reduced UI/API iteration time by 25% using Codex-assisted development to build the application interface and improve FastAPI services, Pydantic schemas, logging, tests, and error handling.",
+      "Improved debugging efficiency by 35% by automating test runs, MCP-based system-error notifications, and Excel-based user-query feedback logs for recurring issue analysis."
     ]
   },
   {
@@ -205,11 +207,23 @@ export const experiences = [
     dates: "Aug 2022 - Apr 2024",
     tags: ["AWS", "Snowflake", "Airflow", "dbt", "Kafka", "PySpark"],
     bullets: [
-      "Built 12+ cloud ELT pipelines using AWS S3, Glue, PySpark, Snowflake, and Airflow, reducing reporting latency by 40% for 200+ business stakeholders.",
-      "Re-engineered batch ingestion into event-driven streaming workflows using SNS/SQS, Lambda, Kafka, and PySpark Structured Streaming, processing 5M+ daily events.",
-      "Supported 3TB+ healthcare Oracle-to-Snowflake migration with CDC loads, SCD Type-2 history, table reconciliation, checksum validation, and rollback-ready cutover checks across 50+ tables.",
-      "Architected 40+ dbt transformations with CTEs, window functions, dimensional models, and automated tests integrated with Jenkins/GitHub Actions quality gates.",
-      "Optimized PySpark and Snowflake workloads on 100M+ row datasets using partition pruning, broadcast joins, query tuning, and incremental processing."
+      "Reduced reporting latency by 40% for 200+ users by owning 12+ AWS-to-Snowflake ELT pipelines with Fivetran ingestion, Airflow scheduling, dbt tests, Apache Iceberg tables, and failure monitoring.",
+      "Improved active dashboarding from hourly batch updates to near-real-time views by implementing Kafka-to-Spark streaming workflows across 8 Kafka topics, processing about 5M daily transaction and engagement events at about 3K events per minute.",
+      "Led a 3TB+ Oracle-to-Snowflake migration across 50+ healthcare tables by rewriting procedural logic, validating CDC/SCD Type-2 loads, and replicating Oracle user roles.",
+      "Improved metric consistency by 30%, reduced compute overhead by 20%, and maintained 99.8% pipeline SLA by developing 40+ dbt Core models, optimizing Spark/Snowflake workloads, and owning monitoring for production reporting workflows."
+    ]
+  },
+  {
+    title: "Data Engineer Intern",
+    company: "Whiterock Technologies",
+    location: "Bengaluru, India",
+    dates: "Jan 2022 - Jul 2022",
+    tags: ["Python", "SQL", "Excel", "Airflow", "CloudWatch", "Grafana"],
+    bullets: [
+      "Reduced manual reporting effort and improved pipeline reliability by automating extraction and validation tasks with Python, SQL, and Excel.",
+      "Supported Airflow retries, failure alerts, and CloudWatch/Grafana monitoring for production data workflows.",
+      "Improved query performance and reporting accuracy by writing optimized SQL using CTEs, window functions, joins, and aggregations for analyst-facing datasets.",
+      "Strengthened healthcare migration readiness by supporting schema validation, row-count reconciliation, checksum checks, mismatch investigation, and post-load validation documentation."
     ]
   }
 ];
@@ -267,8 +281,8 @@ export const projects: Project[] = [
     ],
     bullets: [
       "Processes customer, product, and fact datasets through full and incremental loading workflows.",
-      "Creates denormalized FMCG-style analytics tables for parent-company reporting.",
-      "Demonstrates governed gold-layer serving for dashboards and AI-assisted analytics."
+      "Creates governed gold-layer tables for dashboards, business queries, and Databricks Genie.",
+      "Uses S3, Delta tables, PySpark, Lakeflow Jobs, and Unity Catalog across bronze, silver, and gold layers."
     ],
     repoUrl: "https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline"
   },
@@ -318,7 +332,7 @@ export const projects: Project[] = [
     bullets: [
       "Uses similarity thresholds to refuse unsupported questions instead of guessing.",
       "Provides citation-based responses for traceability in learning environments.",
-      "Designed for reliable academic document Q&A and internal knowledge assistants."
+      "Adds an LLM Council review layer to cross-check retrieved context quality before final response generation."
     ],
     repoUrl: "https://github.com/Shreevikas-BJ/ml-course-document-rag"
   },
@@ -461,7 +475,7 @@ export const certifications = [
     credentialUrl: "https://www.credly.com/badges/017bc7a0-a378-4cfa-abb0-bc968c20d7da/public_url"
   },
   {
-    name: "Google Data Analytics Professional Certificate",
+    name: "Google Data Analytics Specialization Certificate",
     issuer: "Google / Coursera",
     status: "Certified",
     credentialUrl:
@@ -481,7 +495,7 @@ export const education = [
     school: "Illinois Institute of Technology",
     location: "Chicago, IL",
     dates: "Aug 2024 - May 2026",
-    details: ["GPA: 3.88", "Focus: cloud data engineering, analytics engineering, and AI data infrastructure"]
+    details: ["Focus: cloud data engineering, analytics engineering, and AI data infrastructure"]
   },
   {
     degree: "Bachelor of Computer Science",
