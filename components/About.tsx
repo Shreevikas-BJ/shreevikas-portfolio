@@ -7,19 +7,19 @@ export function About() {
       <SectionHeading
         eyebrow="About"
         title="Data engineer with a builder's view of cloud platforms and AI systems."
-        description="Shreevikas combines production data engineering experience with applied AI infrastructure work: ingestion, transformation, quality, retrieval, serving, and observability."
+        description="I combine production data engineering experience with applied AI infrastructure work: ingestion, transformation, quality, retrieval, serving, and observability."
       />
 
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="surface rounded-xl p-6 sm:p-8">
           <p className="text-lg leading-8 text-muted-foreground">
-            {siteConfig.name} is an AWS Certified Data Engineer and Master of Information
-            Technology graduate from Illinois Institute of Technology. His work spans AWS,
+            I am {siteConfig.name}, an AWS Certified Data Engineer and Master of Information
+            Technology graduate from Illinois Institute of Technology. My work spans AWS,
             Snowflake, Databricks, Airflow, dbt Core, Kafka, Fivetran, PySpark, and RAG
             systems built with FAISS, FastAPI, embeddings, and structured validation patterns.
           </p>
           <p className="mt-5 text-lg leading-8 text-muted-foreground">
-            He is focused on reliable cloud data platforms, analytics-ready datasets, and
+            I focus on reliable cloud data platforms, analytics-ready datasets, and
             practical AI infrastructure that helps teams answer business and operational
             questions with grounded, governed data.
           </p>

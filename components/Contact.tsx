@@ -10,7 +10,7 @@ export function Contact() {
         <SectionHeading
           eyebrow="Contact"
           title="Open to Data Engineering, Analytics Engineering, and AI Data Engineering roles."
-          description="Recruiters and hiring teams can reach Shreevikas through email, LinkedIn, or GitHub. Based in Chicago, IL and open to relocation."
+          description="Recruiters and hiring teams can reach me through email, LinkedIn, or GitHub. I am based in Chicago, IL and open to relocation."
         />
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

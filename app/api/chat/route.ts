@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { cachedChatbotAnswers, chatbotContext, refusalMessage } from "@/data/chatbotContext";
+import {
+  cachedChatbotAnswers,
+  chatbotContext,
+  contactFallback,
+  refusalMessage
+} from "@/data/chatbotContext";
 
 type GroqResponse = {
   choices?: Array<{ message?: { content?: string } }>;
@@ -83,6 +88,39 @@ const relatedTerms = [
   "llm"
 ];
 
+const privateInfoTerms = [
+  "visa",
+  "work authorization",
+  "work authorisation",
+  "authorization status",
+  "authorisation status",
+  "sponsorship",
+  "sponsor",
+  "h1b",
+  "h-1b",
+  "opt",
+  "cpt",
+  "green card",
+  "citizenship",
+  "salary",
+  "compensation",
+  "pay range",
+  "hourly rate",
+  "rate expectation",
+  "salary expectation",
+  "notice period",
+  "start date",
+  "available to start",
+  "personal details",
+  "private details",
+  "home address",
+  "current address",
+  "date of birth",
+  "age",
+  "marital",
+  "family"
+];
+
 const stopWords = new Set([
   "a",
   "an",
@@ -93,8 +131,6 @@ const stopWords = new Set([
   "for",
   "has",
   "have",
-  "he",
-  "his",
   "is",
   "me",
   "of",
@@ -129,6 +165,11 @@ function getTokens(value: string) {
 function isRelatedQuestion(message: string) {
   const normalized = normalizeText(message);
   return relatedTerms.some((term) => normalized.includes(normalizeText(term)));
+}
+
+function asksForPrivateOrMissingInfo(message: string) {
+  const normalized = normalizeText(message);
+  return privateInfoTerms.some((term) => normalized.includes(normalizeText(term)));
 }
 
 function getCachedAnswer(message: string) {
@@ -303,6 +344,11 @@ export async function POST(request: Request) {
       messageLength: trimmedMessage.length
     });
 
+    if (asksForPrivateOrMissingInfo(trimmedMessage)) {
+      logTiming(requestId, "contact fallback", startedAt, { email: maskedEmail });
+      return NextResponse.json({ answer: contactFallback });
+    }
+
     const cachedAnswer = getCachedAnswer(trimmedMessage);
 
     if (cachedAnswer) {
@@ -330,11 +376,13 @@ export async function POST(request: Request) {
         content: `You are Shreevikas's AI Assistant for a recruiter-facing portfolio website.
 
 Rules:
-- Answer only using the portfolio context below.
+- Answer in first person as Shreevikas's AI Assistant.
+- Use only the available portfolio context below.
 - Keep answers concise, professional, recruiter-friendly, and usually 3-6 sentences.
 - Do not invent employers, dates, degrees, metrics, credentials, links, or skills.
-- If the user asks outside Shreevikas's professional background, projects, skills, research, certifications, education, or experience, reply exactly: "${refusalMessage}"
-- If the portfolio context does not contain an answer, say that the detail is not available in the portfolio context.
+- If the user asks outside my professional background, projects, skills, research, certifications, education, or experience, reply exactly: "${refusalMessage}"
+- If information is missing, private, sensitive, or not available, reply exactly: "${contactFallback}"
+- Do not use internal process, sourcing, or implementation language in user-facing answers.
 - Never mention private implementation details or environment variables.
 
 Portfolio context:
@@ -357,9 +405,18 @@ ${chatbotContext}`
     logTiming(requestId, "Groq response received", startedAt, { email: maskedEmail });
 
     const answer = data.choices?.[0]?.message?.content?.trim();
+    const normalizedAnswer = normalizeText(answer || "");
+    const shouldUseContactFallback =
+      !answer ||
+      normalizedAnswer.includes("not available") ||
+      normalizedAnswer.includes("not provided") ||
+      normalizedAnswer.includes("do not have") ||
+      normalizedAnswer.includes("dont have") ||
+      normalizedAnswer.includes("does not contain") ||
+      normalizedAnswer.includes("portfolio context does not");
 
     return NextResponse.json({
-      answer: answer || "I could not generate a response from the available portfolio context."
+      answer: shouldUseContactFallback ? contactFallback : answer
     });
   } catch (error) {
     if (error instanceof GroqTimeoutError) {

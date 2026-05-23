@@ -8,7 +8,7 @@ export function Skills() {
       <SectionHeading
         eyebrow="Skills"
         title="A modern data stack across cloud, lakehouse, AI, backend, and BI workflows."
-        description="Grouped by the work recruiters care about most: shipping reliable pipelines, governed analytics layers, and production-oriented AI data systems."
+        description="Here are the technologies I use to build reliable data platforms, analytics layers, and AI-powered systems."
         align="center"
       />
 

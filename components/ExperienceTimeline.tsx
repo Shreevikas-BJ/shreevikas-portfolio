@@ -8,7 +8,7 @@ export function ExperienceTimeline() {
       <SectionHeading
         eyebrow="Experience"
         title="Experience across production data engineering, AI data pipelines, and scientific ML research."
-        description="An ATS-readable timeline with verified roles, dates, locations, technologies, and impact-focused bullets."
+        description="A snapshot of my work across data engineering, AI systems, and research."
       />
 
       <div className="relative">

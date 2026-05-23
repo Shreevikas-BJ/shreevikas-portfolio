@@ -11,7 +11,7 @@ export function Research() {
       <SectionHeading
         eyebrow="Research & Publications"
         title="AIOps research through a process-engineering lens."
-        description="A polished publication card for Shreevikas's uploaded research paper, with the exact paper title and a direct PDF link."
+        description="My research explores how AI-driven process engineering can improve automation and optimization in IT operations."
       />
 
       <article className="surface overflow-hidden rounded-2xl">

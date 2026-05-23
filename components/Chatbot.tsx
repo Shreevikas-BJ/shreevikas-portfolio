@@ -15,11 +15,11 @@ type Message = {
 const welcomeMessage: Message = {
   role: "assistant",
   content:
-    "Hi, I am Shreevikas's AI Assistant. Share your email to ask about his projects, skills, research, experience, and fit for data engineering roles."
+    "Hi, I am Shreevikas's AI Assistant. Share your email to ask about my projects, skills, research, experience, and fit for data engineering roles."
 };
 
 const refusalMessage =
-  "I can only answer questions about Shreevikas's professional background, projects, skills, research, and experience.";
+  "I can only answer questions about my professional background, projects, skills, research, and experience. For anything specific, please contact me directly at shreevikasjagadish7@gmail.com.";
 
 const CHAT_REQUEST_TIMEOUT_MS = 15000;
 const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";
@@ -66,7 +66,7 @@ export function Chatbot() {
         {
           role: "assistant",
           content:
-            "Thanks. You can now ask concise recruiter-style questions about Shreevikas's background."
+            "Thanks. You can now ask questions about my background, projects, skills, research, and experience."
         }
       ]);
     }
@@ -112,7 +112,7 @@ export function Chatbot() {
       {
         role: "assistant",
         content:
-          "Thanks. Ask me about Shreevikas's data engineering projects, AWS work, RAG systems, research, certifications, or experience."
+          "Thanks. You can now ask questions about my background, projects, skills, research, and experience."
       }
     ]);
   };
@@ -208,7 +208,7 @@ export function Chatbot() {
                   <div>
                     <h2 className="text-sm font-black">Shreevikas&apos;s AI Assistant</h2>
                     <p className="text-xs text-muted-foreground">
-                      Uses Shreevikas&apos;s available portfolio context.
+                      Answers using my available portfolio context.
                     </p>
                   </div>
                 </div>
@@ -231,8 +231,8 @@ export function Chatbot() {
                 <div className="text-center">
                   <h3 className="text-lg font-black">Enter your email to start</h3>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    This assistant answers using Shreevikas&apos;s available portfolio context.
-                    Your email unlocks chat and notifies Shreevikas.
+                    This assistant answers using my available portfolio context.
+                    Your email unlocks chat and notifies me.
                   </p>
                 </div>
                 <label className="grid gap-2 text-sm font-semibold">
@@ -319,7 +319,7 @@ export function Chatbot() {
                     <input
                       value={input}
                       onChange={(event) => setInput(event.target.value)}
-                      placeholder="Ask about Shreevikas..."
+                      placeholder="Ask about my background..."
                       className="focus-ring min-h-11 min-w-0 flex-1 rounded-lg border border-border bg-background px-3 text-sm"
                       disabled={loading}
                     />

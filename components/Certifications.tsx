@@ -8,12 +8,12 @@ export function Certifications() {
     <section id="certifications" className="section-shell">
       <SectionHeading
         eyebrow="Certifications"
-        title="Credentials aligned with data engineering, analytics, and Spark development."
-        description="Only verified or explicitly provided certifications are included."
+        title="Credentials aligned with data engineering, analytics, and cloud data platforms."
+        description="Certifications that support my foundation in analytics, cloud, and data engineering."
         align="center"
       />
 
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2">
         {certifications.map((certification) => (
           <article key={certification.name} className="surface flex h-full flex-col rounded-xl p-6">
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/20 text-accent-foreground dark:text-accent">
@@ -23,16 +23,10 @@ export function Certifications() {
             <p className="mt-2 text-sm font-semibold text-primary">{certification.issuer}</p>
             <p className="mt-2 text-sm text-muted-foreground">{certification.status}</p>
             <div className="mt-auto pt-6">
-              {certification.credentialUrl ? (
-                <ButtonLink href={certification.credentialUrl} variant="outline" external>
-                  View Credential
-                  <ExternalLink className="h-4 w-4" />
-                </ButtonLink>
-              ) : (
-                <span className="inline-flex rounded-lg border border-border px-4 py-2 text-sm font-semibold text-muted-foreground">
-                  Credential link not provided
-                </span>
-              )}
+              <ButtonLink href={certification.credentialUrl} variant="outline" external>
+                View Credential
+                <ExternalLink className="h-4 w-4" />
+              </ButtonLink>
             </div>
           </article>
         ))}

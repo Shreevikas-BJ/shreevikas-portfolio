@@ -23,8 +23,8 @@ export function Projects() {
     <section id="projects" className="section-shell">
       <SectionHeading
         eyebrow="Projects"
-        title="Portfolio projects that show the data platform, AI, and analytics work end to end."
-        description="Every card links to the exact GitHub repository and uses source-backed project details from the READMEs and resume."
+        title="Projects that show my data platform, AI, and analytics work end to end."
+        description="Selected projects that show my work across data pipelines, cloud platforms, RAG systems, and machine learning."
       />
 
       <div className="mb-12">
