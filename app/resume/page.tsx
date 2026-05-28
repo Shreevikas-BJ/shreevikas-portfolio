@@ -35,7 +35,7 @@ export default function ResumePage() {
 
             <div className="relative z-10 mt-8 flex flex-wrap gap-3">
               <PdfDownloadButton
-                fileName="Shreevikas_Jagadish_DE_CV.pdf"
+                fileName="Shreevikas_Jagadish_DataEngineer.pdf"
                 href="/api/download/resume"
               >
                 <Download className="h-4 w-4" />

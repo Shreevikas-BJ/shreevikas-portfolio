@@ -29,7 +29,7 @@ export const siteConfig = {
   notificationEmail: "shreevikasj@gmail.com",
   github: "https://github.com/Shreevikas-BJ",
   linkedin: "https://www.linkedin.com/in/shreevikasbj/",
-  resumeUrl: "/Shreevikas_Jagadish_DE_CV.pdf",
+  resumeUrl: "/Shreevikas_Jagadish_DataEngineer.pdf",
   researchUrl: "/research/aiops-research-paper.pdf",
   profileImage: "/images/profile-picture.jpg",
   roles: ["Data Engineer", "Analytics Engineer", "AI Data Engineer"]
@@ -77,7 +77,6 @@ export const skills = [
       "Kafka",
       "Fivetran",
       "Delta Lake",
-      "Apache Iceberg",
       "ETL/ELT",
       "CDC",
       "SCD Type-2",
@@ -96,6 +95,7 @@ export const skills = [
       "AWS EMR",
       "AWS Lambda",
       "Amazon Redshift",
+      "Amazon SageMaker",
       "DynamoDB",
       "Amazon Athena",
       "CloudWatch",
@@ -118,13 +118,16 @@ export const skills = [
       "RAG",
       "RAG Pipelines",
       "Scikit-learn",
+      "LightGBM",
+      "MLflow",
       "PyTorch",
       "PyTorch GPU",
       "XGBoost",
       "DistilBERT",
       "Physics-Informed Neural Networks",
       "NVIDIA PhysicsNeMo",
-      "CUDA Acceleration"
+      "CUDA Acceleration",
+      "Codex"
     ]
   },
   {
@@ -138,7 +141,6 @@ export const skills = [
       "Pydantic",
       "Docker",
       "GitHub Actions",
-      "Jenkins",
       "CI/CD",
       "pytest",
       "Logging",
@@ -179,11 +181,11 @@ export const experiences = [
       "Scientific Computing"
     ],
     bullets: [
-      "Work on Physics-Informed Neural Networks for power-system dynamics, combining data engineering, machine learning, and scientific computing.",
-      "Prepare, validate, and transform simulation and time-series datasets into model-ready inputs for PyTorch-based training pipelines.",
-      "Use CUDA acceleration and NVIDIA PhysicsNeMo to support GPU-based deep learning experiments.",
-      "Improve training efficiency, prediction accuracy, and scalability for large-scale power-system simulation workflows.",
-      "Build structured data workflows that support reproducible deep learning experiments and scientific modeling."
+      "I work on Physics-Informed Neural Networks for power-system dynamics, combining data engineering, machine learning, and scientific computing.",
+      "I prepare, validate, and transform simulation and time-series datasets into model-ready inputs for PyTorch-based training pipelines.",
+      "I use CUDA acceleration and NVIDIA PhysicsNeMo to support GPU-based deep learning experiments.",
+      "I improve training efficiency, prediction accuracy, and scalability for large-scale power-system simulation workflows.",
+      "I build structured data workflows that support reproducible deep learning experiments and scientific modeling."
     ]
   },
   {
@@ -191,13 +193,11 @@ export const experiences = [
     company: "NeuralSeek",
     location: "Miami, FL (Remote)",
     dates: "Jul 2025 - Nov 2025",
-    tags: ["RAG", "FAISS", "AWS Lambda", "S3", "DynamoDB", "FastAPI", "Pydantic"],
+    tags: ["LangChain", "RAG", "FAISS", "AWS Lambda", "DynamoDB", "Codex", "FastAPI"],
     bullets: [
-      "Led a 4-member intern team at NeuralSeek, an AI knowledge automation platform, and supported 500+ daily RAG queries.",
-      "Built ingestion, chunking, embedding, and FAISS indexing pipelines for 10K+ real estate documents.",
-      "Improved upload reliability by 30% using Lambda, S3, and DynamoDB for metadata storage, embedding refreshes, vector index updates, and RAG pipeline tuning.",
-      "Reduced UI/API iteration time by 25% using Codex-assisted development to build the application interface and improve FastAPI services, Pydantic schemas, logging, tests, and error handling.",
-      "Improved debugging efficiency by 35% by automating test runs, MCP-based system-error notifications, and Excel-based user-query feedback logs for recurring issue analysis."
+      "I led a 4-member intern team to design a LangChain-based RAG architecture and build ingestion, chunking, embedding, and FAISS indexing pipelines for 10K+ real estate documents, supporting 500+ daily RAG queries.",
+      "I improved document upload reliability by 30% by building Lambda, S3, and DynamoDB workflows for metadata tracking, embedding refreshes, vector index updates, and MCP-based system-error notifications.",
+      "I reduced UI/API iteration time by 25% using Codex-assisted development to accelerate FastAPI updates, Pydantic schema validation, structured logging, automated test runs, pytest coverage, and error handling."
     ]
   },
   {
@@ -205,25 +205,24 @@ export const experiences = [
     company: "Whiterock Technologies",
     location: "Bengaluru, India",
     dates: "Aug 2022 - Apr 2024",
-    tags: ["AWS", "Snowflake", "Airflow", "dbt", "Kafka", "PySpark"],
+    tags: ["AWS", "Snowflake", "Airflow", "dbt", "Kafka", "PySpark", "SageMaker"],
     bullets: [
-      "Reduced reporting latency by 40% for 200+ users by owning 12+ AWS-to-Snowflake ELT pipelines with Fivetran ingestion, Airflow scheduling, dbt tests, Apache Iceberg tables, and failure monitoring.",
-      "Improved active dashboarding from hourly batch updates to near-real-time views by implementing Kafka-to-Spark streaming workflows across 8 Kafka topics, processing about 5M daily transaction and engagement events at about 3K events per minute.",
-      "Led a 3TB+ Oracle-to-Snowflake migration across 50+ healthcare tables by rewriting procedural logic, validating CDC/SCD Type-2 loads, and replicating Oracle user roles.",
-      "Improved metric consistency by 30%, reduced compute overhead by 20%, and maintained 99.8% pipeline SLA by developing 40+ dbt Core models, optimizing Spark/Snowflake workloads, and owning monitoring for production reporting workflows."
+      "I reduced reporting latency by 40% for 200+ users by owning 12+ AWS-to-Snowflake ELT pipelines with Fivetran ingestion, Airflow scheduling, dbt tests, 40+ dbt Core models, and failure monitoring.",
+      "I improved active dashboarding from hourly batch updates to near-real-time views by implementing Kafka-to-Spark streaming workflows across 8 Kafka topics, processing about 5M daily transaction and engagement events.",
+      "I operationalized 2 ML pipelines using XGBoost and LightGBM with PySpark feature engineering, SageMaker batch inference, Great Expectations quality gates, Grafana monitoring, and 98.8% uptime via Airflow and CloudWatch.",
+      "I led a 3TB+ Oracle-to-Snowflake migration across 50+ healthcare tables by rewriting procedural logic, validating CDC/SCD Type-2 loads, and preserving role-based access controls."
     ]
   },
   {
     title: "Data Engineer Intern",
     company: "Whiterock Technologies",
     location: "Bengaluru, India",
-    dates: "Jan 2022 - Jul 2022",
-    tags: ["Python", "SQL", "Excel", "Airflow", "CloudWatch", "Grafana"],
+    dates: "Feb 2022 - Jul 2022",
+    tags: ["Python", "SQL", "Excel", "Airflow", "Schema Validation", "Reconciliation"],
     bullets: [
-      "Reduced manual reporting effort and improved pipeline reliability by automating extraction and validation tasks with Python, SQL, and Excel.",
-      "Supported Airflow retries, failure alerts, and CloudWatch/Grafana monitoring for production data workflows.",
-      "Improved query performance and reporting accuracy by writing optimized SQL using CTEs, window functions, joins, and aggregations for analyst-facing datasets.",
-      "Strengthened healthcare migration readiness by supporting schema validation, row-count reconciliation, checksum checks, mismatch investigation, and post-load validation documentation."
+      "I reduced manual reporting effort by automating extraction and validation tasks with Python, SQL, and Excel while supporting Airflow retries and failure alerts.",
+      "I improved reporting accuracy and query performance by writing optimized SQL with CTEs, window functions, joins, and aggregations for analyst-facing datasets.",
+      "I supported healthcare migration readiness through schema validation, row-count reconciliation, checksum checks, mismatch investigation, and post-load documentation."
     ]
   }
 ];
@@ -332,7 +331,7 @@ export const projects: Project[] = [
     bullets: [
       "I use similarity thresholds to refuse unsupported questions instead of guessing.",
       "I provide citation-based responses for traceability in learning environments.",
-      "I add an LLM Council review layer to cross-check retrieved context quality before final response generation."
+      "I add a Multi-LLM Council review layer to cross-check retrieved context quality before final response generation."
     ],
     repoUrl: "https://github.com/Shreevikas-BJ/ml-course-document-rag"
   },

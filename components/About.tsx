@@ -15,8 +15,9 @@ export function About() {
           <p className="text-lg leading-8 text-muted-foreground">
             I am {siteConfig.name}, an AWS Certified Data Engineer and Master of Information
             Technology graduate from Illinois Institute of Technology. My work spans AWS,
-            Snowflake, Databricks, Airflow, dbt Core, Kafka, Fivetran, PySpark, and RAG
-            systems built with FAISS, FastAPI, embeddings, and structured validation patterns.
+            Snowflake, Databricks, Airflow, dbt Core, Kafka, Fivetran, PySpark, SageMaker,
+            and RAG systems built with FAISS, FastAPI, embeddings, and structured validation
+            patterns.
           </p>
           <p className="mt-5 text-lg leading-8 text-muted-foreground">
             I focus on reliable cloud data platforms, analytics-ready datasets, and

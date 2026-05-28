@@ -45,8 +45,8 @@ export function Hero() {
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
             I am {siteConfig.name}, an AWS Certified Data Engineer and MS IT graduate
-            building lakehouse pipelines, streaming workflows, RAG systems, and analytics-ready
-            datasets for business, healthcare, and AI use cases.
+            building batch and streaming pipelines, RAG workflows, ML-ready datasets, and
+            cloud analytics systems across AWS, Snowflake, Databricks, Kafka, and PySpark.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -67,7 +67,7 @@ export function Hero() {
               </a>
             </Button>
             <PdfDownloadButton
-              fileName="Shreevikas_Jagadish_DE_CV.pdf"
+              fileName="Shreevikas_Jagadish_DataEngineer.pdf"
               href="/api/download/resume"
               variant="secondary"
             >
