@@ -37,7 +37,7 @@ export function ProjectModal({
       onMouseDown={onClose}
     >
       <div
-        className="surface max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-t-2xl p-6 shadow-2xl sm:rounded-2xl sm:p-8"
+        className="premium-card max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-t-3xl p-6 shadow-2xl sm:rounded-3xl sm:p-8"
         onMouseDown={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
@@ -58,12 +58,12 @@ export function ProjectModal({
           </Button>
         </div>
 
-        <div className="mt-6 rounded-xl border border-border bg-muted/40 p-5">
+        <div className="mt-6 rounded-2xl border border-border/80 bg-background/40 p-5">
           <h4 className="font-bold">Architecture and impact</h4>
           <p className="mt-2 leading-7 text-muted-foreground">{project.architecture}</p>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 rounded-2xl border border-border/70 bg-card/50 p-5">
           <h4 className="font-bold">Achievement highlights</h4>
           <ul className="mt-3 space-y-3 text-sm leading-7 text-muted-foreground">
             {project.bullets.map((bullet) => (
@@ -75,7 +75,7 @@ export function ProjectModal({
           </ul>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 rounded-2xl border border-border/70 bg-card/50 p-5">
           <h4 className="font-bold">Tech stack</h4>
           <div className="mt-3 flex flex-wrap gap-2">
             {project.tech.map((item) => (

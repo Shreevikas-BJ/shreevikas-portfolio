@@ -23,7 +23,8 @@ const config: Config = {
         "accent-foreground": "hsl(var(--accent-foreground))"
       },
       boxShadow: {
-        glow: "0 22px 70px rgba(20, 184, 166, 0.18)"
+        glow: "0 24px 80px rgba(34, 211, 238, 0.18)",
+        "gold-glow": "0 18px 52px rgba(245, 158, 11, 0.16)"
       },
       keyframes: {
         "fade-up": {

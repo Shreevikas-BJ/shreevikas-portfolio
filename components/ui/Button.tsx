@@ -6,16 +6,17 @@ type Variant = "primary" | "secondary" | "ghost" | "outline";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-primary text-primary-foreground shadow-glow hover:bg-primary/90 border border-primary/80",
+    "border border-primary/80 bg-primary text-primary-foreground shadow-glow hover:bg-primary/90 hover:shadow-[0_20px_70px_rgba(34,211,238,0.24)]",
   secondary:
-    "bg-foreground text-background hover:bg-foreground/90 border border-foreground/80",
-  ghost: "bg-transparent hover:bg-muted border border-transparent",
-  outline: "bg-transparent border border-border hover:border-primary/60 hover:bg-primary/10"
+    "border border-foreground/15 bg-foreground text-background hover:bg-foreground/90 dark:border-white/15",
+  ghost: "border border-transparent bg-transparent hover:bg-muted",
+  outline:
+    "border border-border bg-background/25 hover:border-primary/60 hover:bg-primary/10"
 };
 
 export function buttonClasses(variant: Variant = "primary", className?: string) {
   return cn(
-    "focus-ring inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition duration-200 disabled:pointer-events-none disabled:opacity-60",
+    "focus-ring inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-bold transition duration-200 disabled:pointer-events-none disabled:opacity-60",
     variants[variant],
     className
   );
@@ -41,6 +42,7 @@ export function ButtonLink({
       <a
         href={href}
         className={buttonClasses(variant, className)}
+        target={external ? "_blank" : undefined}
         rel={external ? "noreferrer" : undefined}
         download={download ? "" : undefined}
       >

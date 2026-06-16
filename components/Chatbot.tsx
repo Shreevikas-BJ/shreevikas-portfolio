@@ -84,7 +84,7 @@ export function Chatbot() {
       replaceMessages([
         {
           role: "assistant",
-            content:
+          content:
             "Thanks. You can now ask questions about my background, projects, skills, certifications, and experience."
         }
       ]);
@@ -204,7 +204,7 @@ export function Chatbot() {
         type="button"
         aria-label={open ? "Close Shreevikas AI Assistant" : "Open Shreevikas AI Assistant"}
         onClick={() => setOpen((value) => !value)}
-        className="focus-ring fixed bottom-5 right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/60 bg-primary text-primary-foreground shadow-glow transition hover:scale-105"
+        className="focus-ring fixed bottom-5 right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/60 bg-primary text-primary-foreground shadow-glow transition hover:-translate-y-0.5 hover:scale-105"
       >
         {open ? <X className="h-6 w-6" /> : <Bot className="h-6 w-6" />}
       </button>
@@ -216,12 +216,12 @@ export function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.2 }}
-            className="surface fixed bottom-24 right-4 z-[70] flex h-[min(680px,calc(100vh-7.5rem))] w-[calc(100vw-2rem)] max-w-md flex-col overflow-hidden rounded-2xl shadow-2xl sm:right-5"
+            className="premium-card fixed bottom-24 right-4 z-[70] flex h-[min(680px,calc(100vh-7.5rem))] w-[calc(100vw-2rem)] max-w-md flex-col overflow-hidden rounded-3xl p-0 shadow-2xl sm:right-5"
           >
-            <div className="border-b border-border bg-muted/40 p-4">
+            <div className="border-b border-border/70 bg-card/80 p-4">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary">
                     <Sparkles className="h-5 w-5" />
                   </div>
                   <div>
@@ -244,7 +244,7 @@ export function Chatbot() {
 
             {!email ? (
               <form onSubmit={submitEmail} className="flex flex-1 flex-col justify-center gap-4 p-5">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
                   <Mail className="h-7 w-7" />
                 </div>
                 <div className="text-center">
@@ -260,9 +260,10 @@ export function Chatbot() {
                     value={emailInput}
                     onChange={(event) => setEmailInput(event.target.value)}
                     placeholder="recruiter@company.com"
-                    className="focus-ring min-h-11 rounded-lg border border-border bg-background px-3 text-sm"
+                    className="focus-ring min-h-11 rounded-xl border border-border bg-background/80 px-3 text-sm"
                     type="email"
                     autoComplete="email"
+                    required
                   />
                 </label>
                 {emailError ? <p className="text-sm font-medium text-red-500">{emailError}</p> : null}
@@ -279,7 +280,7 @@ export function Chatbot() {
               </form>
             ) : (
               <>
-                <div className="flex-1 space-y-4 overflow-y-auto p-4">
+                <div className="flex-1 space-y-4 overflow-y-auto bg-background/20 p-4">
                   {messages.map((message, index) => (
                     <div
                       key={`${message.role}-${index}`}
@@ -292,8 +293,8 @@ export function Chatbot() {
                         className={cn(
                           "max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6",
                           message.role === "user"
-                            ? "bg-primary text-primary-foreground"
-                            : "border border-border bg-muted/60 text-foreground"
+                            ? "bg-primary text-primary-foreground shadow-glow"
+                            : "border border-border/80 bg-card/70 text-foreground"
                         )}
                       >
                         {renderMessageContent(message.content)}
@@ -311,7 +312,7 @@ export function Chatbot() {
                   <div ref={scrollRef} />
                 </div>
 
-                <div className="border-t border-border p-4">
+                <div className="border-t border-border/70 bg-card/60 p-4">
                   <div className="mb-3 flex gap-2 overflow-x-auto pb-1">
                     {suggestedQuestions.map((question) => (
                       <button
@@ -319,7 +320,7 @@ export function Chatbot() {
                         type="button"
                         onClick={() => sendMessage(question)}
                         disabled={loading}
-                        className="focus-ring shrink-0 rounded-full border border-border bg-muted/60 px-3 py-2 text-xs font-semibold text-muted-foreground transition hover:border-primary/50 hover:text-foreground disabled:opacity-60"
+                        className="focus-ring shrink-0 rounded-full border border-border/80 bg-background/50 px-3 py-2 text-xs font-semibold text-muted-foreground transition hover:border-primary/50 hover:text-foreground disabled:opacity-60"
                       >
                         {question}
                       </button>
@@ -339,7 +340,7 @@ export function Chatbot() {
                       value={input}
                       onChange={(event) => setInput(event.target.value)}
                       placeholder="Ask about my background..."
-                      className="focus-ring min-h-11 min-w-0 flex-1 rounded-lg border border-border bg-background px-3 text-sm"
+                      className="focus-ring min-h-11 min-w-0 flex-1 rounded-xl border border-border bg-background/80 px-3 text-sm"
                       disabled={loading}
                     />
                     <Button

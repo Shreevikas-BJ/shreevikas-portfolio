@@ -11,7 +11,8 @@ export function About() {
       />
 
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="surface rounded-xl p-6 sm:p-8">
+        <div className="data-panel p-6 sm:p-8">
+          <div className="relative z-10">
           <p className="text-lg leading-8 text-muted-foreground">
             I am {siteConfig.name}, an AI Data Engineer and AWS Certified Data Engineer
             with 2+ years of experience building production RAG systems, real-time data
@@ -22,15 +23,16 @@ export function About() {
             Databricks, Snowflake, Kafka, PySpark, Airflow, dbt Core, and agent guardrails
             for AI-ready data infrastructure.
           </p>
+          </div>
         </div>
 
         <div className="grid gap-4">
           {aboutHighlights.map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.title} className="surface rounded-xl p-5">
+              <div key={item.title} className="premium-card p-5">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary">
                     <Icon className="h-5 w-5" />
                   </div>
                   <div>

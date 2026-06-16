@@ -22,7 +22,8 @@ export default function ResumeRequestPage() {
         </Link>
 
         <div className="mx-auto mt-12 max-w-2xl">
-          <div className="surface rounded-2xl p-6 text-center sm:p-8 lg:p-10">
+          <div className="data-panel p-6 text-center sm:p-8 lg:p-10">
+            <div className="relative z-10">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <FileText className="h-8 w-8" />
             </div>
@@ -40,6 +41,7 @@ export default function ResumeRequestPage() {
                 <FileText className="h-4 w-4" />
                 Request Resume
               </RequestResumeButton>
+            </div>
             </div>
           </div>
         </div>

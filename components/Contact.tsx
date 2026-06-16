@@ -1,5 +1,6 @@
 import { FileText, Github, Linkedin, Mail } from "lucide-react";
 import { contactItems, siteConfig } from "@/data/portfolio";
+import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { RequestResumeButton } from "@/components/RequestResumeButton";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -7,7 +8,8 @@ import { SectionHeading } from "@/components/SectionHeading";
 export function Contact() {
   return (
     <section id="contact" className="section-shell">
-      <div className="surface rounded-2xl p-6 sm:p-8 lg:p-10">
+      <div className="data-panel p-6 sm:p-8 lg:p-10">
+        <div className="relative z-10">
         <SectionHeading
           eyebrow="Contact"
           title="Open to Data Engineering, Analytics Engineering, and AI Data Engineering roles."
@@ -18,7 +20,7 @@ export function Contact() {
           {contactItems.map((item) => {
             const Icon = item.icon;
             const content = (
-              <div className="rounded-xl border border-border bg-background/50 p-4 transition hover:border-primary/50">
+              <div className="h-full rounded-2xl border border-border/70 bg-background/50 p-4 transition hover:border-primary/50 hover:bg-primary/5">
                 <div className="flex items-center gap-2 text-sm font-semibold text-primary">
                   <Icon className="h-4 w-4" />
                   {item.label}
@@ -48,6 +50,7 @@ export function Contact() {
             <Mail className="h-4 w-4" />
             Email Me
           </ButtonLink>
+          <CopyEmailButton email={siteConfig.email} />
           <RequestResumeButton variant="secondary">
             <FileText className="h-4 w-4" />
             Request Resume
@@ -60,6 +63,7 @@ export function Contact() {
             <Github className="h-4 w-4" />
             View GitHub
           </ButtonLink>
+        </div>
         </div>
       </div>
     </section>

@@ -3,31 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --background: 200 33% 98%;
-  --foreground: 222 44% 10%;
-  --muted: 210 22% 92%;
-  --muted-foreground: 215 16% 39%;
-  --border: 214 24% 83%;
+  --background: 204 45% 98%;
+  --foreground: 222 46% 9%;
+  --muted: 205 29% 92%;
+  --muted-foreground: 215 16% 37%;
+  --border: 211 24% 82%;
   --card: 0 0% 100%;
-  --card-foreground: 222 44% 10%;
-  --primary: 181 72% 36%;
+  --card-foreground: 222 46% 9%;
+  --primary: 184 84% 35%;
   --primary-foreground: 180 100% 97%;
-  --accent: 43 92% 54%;
-  --accent-foreground: 222 44% 10%;
+  --accent: 37 92% 53%;
+  --accent-foreground: 222 46% 9%;
+  --success: 151 65% 42%;
+  --violet: 262 62% 58%;
 }
 
 .dark {
-  --background: 220 34% 7%;
-  --foreground: 210 36% 96%;
-  --muted: 216 26% 14%;
-  --muted-foreground: 215 17% 72%;
-  --border: 216 22% 22%;
-  --card: 218 30% 10%;
-  --card-foreground: 210 36% 96%;
-  --primary: 178 72% 44%;
-  --primary-foreground: 215 35% 9%;
-  --accent: 43 93% 58%;
-  --accent-foreground: 220 34% 7%;
+  --background: 222 44% 5%;
+  --foreground: 204 42% 97%;
+  --muted: 218 28% 13%;
+  --muted-foreground: 213 16% 72%;
+  --border: 215 25% 20%;
+  --card: 221 38% 8%;
+  --card-foreground: 204 42% 97%;
+  --primary: 184 82% 52%;
+  --primary-foreground: 221 44% 6%;
+  --accent: 39 93% 58%;
+  --accent-foreground: 222 44% 7%;
+  --success: 151 65% 45%;
+  --violet: 264 76% 68%;
 }
 
 * {
@@ -42,9 +46,13 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(135deg, rgba(20, 184, 166, 0.12), transparent 34%),
-    linear-gradient(315deg, rgba(245, 158, 11, 0.12), transparent 30%),
+    linear-gradient(135deg, hsl(var(--primary) / 0.12), transparent 34rem),
+    linear-gradient(225deg, hsl(var(--violet) / 0.09), transparent 32rem),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+    linear-gradient(0deg, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, hsl(var(--background)), hsl(var(--background))),
     hsl(var(--background));
+  background-size: auto, auto, 64px 64px, 64px 64px, auto, auto;
   color: hsl(var(--foreground));
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -79,13 +87,87 @@ textarea {
   }
 }
 
+@keyframes data-flow {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 96px 0;
+  }
+}
+
+@keyframes trace-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: translateX(-14%);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(14%);
+  }
+}
+
 @layer components {
   .section-shell {
     @apply mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24;
   }
 
   .surface {
-    @apply border border-border bg-card/80 text-card-foreground shadow-sm backdrop-blur-xl;
+    @apply border border-border/80 bg-card/80 text-card-foreground shadow-[0_24px_90px_rgba(2,8,23,0.08)] backdrop-blur-xl dark:shadow-[0_24px_90px_rgba(0,0,0,0.32)];
+  }
+
+  .premium-card {
+    @apply surface relative overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow;
+  }
+
+  .premium-card::before {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent opacity-60;
+  }
+
+  .section-band {
+    @apply relative overflow-hidden;
+  }
+
+  .section-band::before {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+
+  .data-panel {
+    @apply relative overflow-hidden rounded-2xl border border-border/80 bg-card/70 backdrop-blur-xl;
+  }
+
+  .data-panel::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 opacity-40;
+    background-image:
+      linear-gradient(90deg, hsl(var(--primary) / 0.12) 1px, transparent 1px),
+      linear-gradient(0deg, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(180deg, black, transparent 82%);
+  }
+
+  .data-grid {
+    background-image:
+      linear-gradient(90deg, hsl(var(--primary) / 0.12) 1px, transparent 1px),
+      linear-gradient(0deg, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  .data-flow {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--primary) / 0.14),
+      hsl(var(--accent) / 0.18),
+      transparent
+    );
+    background-size: 96px 100%;
+    animation: data-flow 8s linear infinite;
   }
 
   .focus-ring {
@@ -93,7 +175,25 @@ textarea {
   }
 
   .eyebrow {
-    @apply inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-normal text-primary;
+    @apply inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-primary;
+  }
+
+  .metric-chip {
+    @apply inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-bold text-primary;
+  }
+
+  .stat-tile {
+    @apply rounded-xl border border-border/70 bg-background/40 p-4 shadow-[inset_0_1px_0_hsl(var(--foreground)/0.05)];
+  }
+
+  .trace-line {
+    @apply absolute h-px overflow-hidden bg-gradient-to-r from-transparent via-primary/40 to-transparent;
+  }
+
+  .trace-line::after {
+    content: "";
+    @apply absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-accent to-transparent;
+    animation: trace-pulse 4.8s ease-in-out infinite;
   }
 
   .text-balance {
@@ -102,5 +202,16 @@ textarea {
 
   .animate-rise-in {
     animation: rise-in 520ms ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

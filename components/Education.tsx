@@ -12,9 +12,9 @@ export function Education() {
 
       <div className="grid gap-5 md:grid-cols-2">
         {education.map((item) => (
-          <article key={item.degree} className="surface rounded-xl p-6">
+          <article key={item.degree} className="premium-card p-6">
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
                 <GraduationCap className="h-6 w-6" />
               </div>
               <div>

@@ -74,57 +74,12 @@ export const aboutHighlights = [
 
 export const skills = [
   {
-    category: "Languages & Backend",
-    icon: BriefcaseBusiness,
-    items: ["Python", "SQL", "Spark SQL", "TypeScript", "Bash", "FastAPI", "Pydantic", "REST APIs"]
-  },
-  {
-    category: "AI Engineering",
-    icon: Bot,
-    items: [
-      "RAG",
-      "Prompt Engineering",
-      "Tool Calling",
-      "Multi-Agent Workflows",
-      "LangChain",
-      "LangGraph",
-      "CrewAI",
-      "AutoGen",
-      "MCP"
-    ]
-  },
-  {
-    category: "LLM Apps & Evals",
-    icon: BrainCircuit,
-    items: [
-      "OpenAI API",
-      "Groq",
-      "Gemini",
-      "Jina",
-      "Embeddings",
-      "FAISS",
-      "pgvector",
-      "Agent Guardrails",
-      "LLM Evaluation"
-    ]
-  },
-  {
     category: "Data Engineering",
     icon: Workflow,
-    items: [
-      "PySpark",
-      "Kafka",
-      "Airflow",
-      "dbt Core",
-      "Fivetran",
-      "ETL/ELT",
-      "CDC",
-      "SCD Type-2",
-      "Data Modeling"
-    ]
+    items: ["PySpark", "Kafka", "Airflow", "dbt Core", "Fivetran", "ETL/ELT", "CDC", "SCD Type-2"]
   },
   {
-    category: "Cloud & Lakehouse",
+    category: "Cloud & Warehouses",
     icon: Cloud,
     items: [
       "AWS S3",
@@ -135,35 +90,79 @@ export const skills = [
       "SageMaker",
       "Snowflake",
       "Redshift",
-      "Databricks",
-      "Delta Lake",
-      "Unity Catalog"
+      "Databricks"
     ]
   },
   {
-    category: "ML & Reliability",
-    icon: BarChart3,
+    category: "Lakehouse & Modeling",
+    icon: Database,
+    items: ["Delta Lake", "Unity Catalog", "Data Modeling", "Spark SQL", "Medallion Architecture"]
+  },
+  {
+    category: "AI/ML Infrastructure",
+    icon: BrainCircuit,
     items: [
+      "RAG",
+      "LangChain",
+      "LangGraph",
+      "CrewAI",
+      "AutoGen",
+      "MCP",
+      "FAISS",
+      "pgvector",
+      "Embeddings",
+      "LLM Evaluation",
+      "Agent Guardrails"
+    ]
+  },
+  {
+    category: "Data Quality & Reliability",
+    icon: ShieldCheck,
+    items: ["Great Expectations", "pytest", "Model Evaluation", "Feature Engineering", "CloudWatch"]
+  },
+  {
+    category: "DevOps & BI",
+    icon: BarChart3,
+    items: ["Docker", "GitHub Actions", "REST APIs", "FastAPI", "Pydantic"]
+  },
+  {
+    category: "Languages",
+    icon: BriefcaseBusiness,
+    items: ["Python", "SQL", "Spark SQL", "TypeScript", "Bash"]
+  },
+  {
+    category: "LLM Providers",
+    icon: Bot,
+    items: [
+      "OpenAI API",
+      "Groq",
+      "Gemini",
+      "Jina",
       "Scikit-Learn",
       "XGBoost",
-      "LightGBM",
-      "Feature Engineering",
-      "Model Evaluation",
-      "Great Expectations",
-      "pytest",
-      "Docker",
-      "GitHub Actions"
+      "LightGBM"
     ]
   }
 ];
 
-export const experiences = [
+export type Experience = {
+  title: string;
+  company: string;
+  location: string;
+  dates: string;
+  tags: string[];
+  metrics?: string[];
+  bullets: string[];
+};
+
+export const experiences: Experience[] = [
   {
     title: "AI Engineer Intern",
     company: "NeuralSeek",
     location: "Miami, FL (Remote)",
     dates: "Jul 2025 - Nov 2025",
     tags: ["LangChain", "RAG", "AWS Lambda", "S3", "DynamoDB", "MCP", "FastAPI"],
+    metrics: ["4-member team", "10K+ docs", "500+ daily queries", "30% reliability gain"],
     bullets: [
       "I led a 4-member team to build LangChain RAG pipelines for 10K+ real estate documents, supporting 500+ daily queries for non-technical teams.",
       "I improved document upload reliability by 30% by building AWS Lambda, S3, DynamoDB, vector refresh, and MCP error-alert workflows.",
@@ -177,6 +176,7 @@ export const experiences = [
     location: "Bengaluru, India",
     dates: "Aug 2022 - Apr 2024",
     tags: ["AWS", "Snowflake", "Airflow", "dbt", "Kafka", "PySpark", "SageMaker"],
+    metrics: ["40% faster reporting", "200+ users", "5M daily events", "3TB+ migration"],
     bullets: [
       "I accelerated reporting by 40% for 200+ users by owning 12 AWS-to-Snowflake ELT pipelines with Airflow, dbt, and failure monitoring.",
       "I engineered near-real-time Kafka-to-Spark pipelines across 8 topics, processing about 5M daily events for active dashboards and analytics.",
@@ -190,6 +190,7 @@ export const experiences = [
     location: "Bengaluru, India",
     dates: "Feb 2022 - Jul 2022",
     tags: ["Python", "SQL", "Healthcare Data", "Reconciliation", "Deduplication"],
+    metrics: ["Healthcare records", "Duplicate detection", "Migration accuracy"],
     bullets: [
       "I built SQL and Python reconciliation workflows to unify healthcare records, detect duplicates, and improve data quality for analysts.",
       "I improved migration accuracy through data matching, deduplication, and standardization checks before Snowflake loads."
@@ -201,6 +202,7 @@ export const experiences = [
     location: "Chicago, IL",
     dates: "Dec 2025 - May 2026",
     tags: ["PINNs", "NVIDIA PhysicsNeMo", "CUDA", "GPU Inference", "Scientific Computing"],
+    metrics: ["PhysicsNeMo", "CUDA inference", "Scientific modeling"],
     bullets: [
       "I explored Physics-Informed Neural Networks using NVIDIA PhysicsNeMo to model scientific systems with physics-based constraints.",
       "I integrated CUDA-accelerated GPU inference workflows for efficient large-scale scientific modeling and computation."
@@ -323,7 +325,7 @@ export const certifications = [
     name: "AWS Certified Data Engineer",
     issuer: "Amazon Web Services",
     status: "Certified",
-    credentialUrl: "https://www.credly.com/badges/017bc7a0-a378-4cfa-abb0-bc968c20d7da"
+    credentialUrl: "https://www.credly.com/badges/017bc7a0-a378-4cfa-abb0-bc968c20d7da/public_url"
   },
   {
     name: "Claude 101",
@@ -401,22 +403,18 @@ export const contactItems = [
 ];
 
 export const navItems = [
-  { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
-  { label: "Certifications", href: "#certifications" },
+  { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" }
 ];
 
 export const suggestedQuestions = [
-  "What is AgentShield?",
-  "Tell me about your RAG experience.",
-  "What experience do you have with AWS?",
-  "What are your strongest data engineering projects?",
-  "Are you open to full-time roles?",
-  "How can I request your resume?"
+  "What is Shreevikas's data engineering experience?",
+  "Tell me about his AI/RAG projects.",
+  "What cloud and pipeline tools has he used?",
+  "How can I request his resume?"
 ];
 
 export const achievementCards = [

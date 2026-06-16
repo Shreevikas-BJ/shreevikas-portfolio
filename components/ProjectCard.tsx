@@ -15,11 +15,12 @@ export function ProjectCard({
   large?: boolean;
 }) {
   return (
-    <article className="surface group flex h-full flex-col rounded-xl p-5 transition duration-200 hover:-translate-y-1 hover:border-primary/40">
+    <article className="premium-card group flex h-full flex-col p-5 sm:p-6">
+      <div aria-hidden="true" className="trace-line left-6 right-6 top-0" />
       <div className="flex items-start justify-between gap-4">
         <div>
           {project.highlightLabel ? (
-            <span className="mb-3 inline-flex rounded-full bg-accent/20 px-3 py-1 text-xs font-bold text-accent-foreground dark:text-accent">
+            <span className="mb-3 inline-flex rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-bold text-accent-foreground dark:text-accent">
               {project.highlightLabel}
             </span>
           ) : null}
@@ -28,7 +29,7 @@ export function ProjectCard({
           </h3>
           <p className="mt-3 leading-7 text-muted-foreground">{project.summary}</p>
         </div>
-        <div className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary sm:flex">
+        <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary transition group-hover:scale-105 sm:flex">
           {project.category === "AI/RAG" ? <Code2 className="h-5 w-5" /> : <Layers className="h-5 w-5" />}
         </div>
       </div>
@@ -48,7 +49,7 @@ export function ProjectCard({
         ))}
       </ul>
 
-      <p className="mt-5 text-sm leading-6 text-muted-foreground">
+      <p className="mt-5 rounded-xl border border-border/70 bg-background/40 p-4 text-sm leading-6 text-muted-foreground">
         <span className="font-semibold text-foreground">Architecture: </span>
         {project.architecture}
       </p>

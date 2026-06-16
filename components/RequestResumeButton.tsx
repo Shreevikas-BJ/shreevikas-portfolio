@@ -77,7 +77,7 @@ export function RequestResumeButton({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 24, scale: 0.97 }}
               transition={{ duration: 0.18 }}
-              className="surface w-full max-w-lg rounded-t-2xl p-6 shadow-2xl sm:rounded-2xl sm:p-8"
+              className="premium-card w-full max-w-lg rounded-t-3xl p-6 shadow-2xl sm:rounded-3xl sm:p-8"
               onMouseDown={(event) => event.stopPropagation()}
             >
               <div className="flex items-start justify-between gap-4">
@@ -98,7 +98,7 @@ export function RequestResumeButton({
               </div>
 
               {submitted ? (
-                <div className="mt-6 rounded-xl border border-primary/30 bg-primary/10 p-5">
+                <div className="mt-6 rounded-2xl border border-primary/30 bg-primary/10 p-5">
                   <div className="flex items-start gap-3">
                     <div className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                       <Mail className="h-4 w-4" />
@@ -124,9 +124,10 @@ export function RequestResumeButton({
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
                       placeholder="recruiter@company.com"
-                      className="focus-ring min-h-11 rounded-lg border border-border bg-background px-3 text-sm"
+                      className="focus-ring min-h-11 rounded-xl border border-border bg-background/80 px-3 text-sm"
                       type="email"
                       autoComplete="email"
+                      required
                     />
                   </label>
                   {error ? <p className="text-sm font-semibold text-red-500">{error}</p> : null}

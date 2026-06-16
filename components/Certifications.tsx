@@ -15,8 +15,8 @@ export function Certifications() {
 
       <div className="grid gap-5 md:grid-cols-2">
         {certifications.map((certification) => (
-          <article key={certification.name} className="surface flex h-full flex-col rounded-xl p-6">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/20 text-accent-foreground dark:text-accent">
+          <article key={certification.name} className="premium-card flex h-full flex-col p-6">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/25 bg-accent/15 text-accent-foreground dark:text-accent">
               <Award className="h-6 w-6" />
             </div>
             <h3 className="mt-5 text-xl font-black">{certification.name}</h3>

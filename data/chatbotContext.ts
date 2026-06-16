@@ -74,6 +74,7 @@ export const cachedChatbotAnswers = [
     questions: [
       "Tell me about your RAG experience.",
       "Tell me about Shreevikas RAG experience.",
+      "Tell me about his AI/RAG projects.",
       "RAG experience",
       "retrieval augmented generation experience"
     ],
@@ -84,6 +85,7 @@ export const cachedChatbotAnswers = [
     questions: [
       "What are your strongest data engineering projects?",
       "What are Shreevikas strongest data engineering projects?",
+      "What is Shreevikas's data engineering experience?",
       "strongest data engineering projects",
       "best data engineering projects"
     ],
@@ -104,6 +106,7 @@ export const cachedChatbotAnswers = [
     questions: [
       "What technologies have you used?",
       "What technologies has Shreevikas used?",
+      "What cloud and pipeline tools has he used?",
       "technologies",
       "tech stack",
       "skills"
@@ -114,6 +117,7 @@ export const cachedChatbotAnswers = [
   {
     questions: [
       "How can I request your resume?",
+      "How can I request his resume?",
       "Can I download your resume?",
       "resume",
       "download resume",
