@@ -6,23 +6,21 @@ export function About() {
     <section id="about" className="section-shell">
       <SectionHeading
         eyebrow="About"
-        title="Data engineer with a builder's view of cloud platforms and AI systems."
-        description="I combine production data engineering experience with applied AI infrastructure work: ingestion, transformation, quality, retrieval, serving, and observability."
+        title="AI data engineer with a builder's view of cloud platforms, RAG systems, and agentic workflows."
+        description="I combine production data engineering experience with applied AI infrastructure work: ingestion, transformation, retrieval, evaluation, observability, and launch readiness."
       />
 
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="surface rounded-xl p-6 sm:p-8">
           <p className="text-lg leading-8 text-muted-foreground">
-            I am {siteConfig.name}, an AWS Certified Data Engineer and Master of Information
-            Technology graduate from Illinois Institute of Technology. My work spans AWS,
-            Snowflake, Databricks, Airflow, dbt Core, Kafka, Fivetran, PySpark, SageMaker,
-            and RAG systems built with FAISS, FastAPI, embeddings, and structured validation
-            patterns.
+            I am {siteConfig.name}, an AI Data Engineer and AWS Certified Data Engineer
+            with 2+ years of experience building production RAG systems, real-time data
+            pipelines, cloud migrations, and analytics-ready datasets for business users.
           </p>
           <p className="mt-5 text-lg leading-8 text-muted-foreground">
-            I focus on reliable cloud data platforms, analytics-ready datasets, and
-            practical AI infrastructure that helps teams answer business and operational
-            questions with grounded, governed data.
+            My work spans LangChain, LangGraph, LLM evaluation, data modeling, AWS,
+            Databricks, Snowflake, Kafka, PySpark, Airflow, dbt Core, and agent guardrails
+            for AI-ready data infrastructure.
           </p>
         </div>
 

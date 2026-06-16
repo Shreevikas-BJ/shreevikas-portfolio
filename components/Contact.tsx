@@ -1,5 +1,6 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { FileText, Github, Linkedin, Mail } from "lucide-react";
 import { contactItems, siteConfig } from "@/data/portfolio";
+import { RequestResumeButton } from "@/components/RequestResumeButton";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 
@@ -10,10 +11,10 @@ export function Contact() {
         <SectionHeading
           eyebrow="Contact"
           title="Open to Data Engineering, Analytics Engineering, and AI Data Engineering roles."
-          description="Recruiters and hiring teams can reach me through email, LinkedIn, or GitHub. I am based in Chicago, IL and open to relocation."
+          description="Recruiters and hiring teams can reach me through email, phone, LinkedIn, or GitHub. I am based in Chicago, IL and open to relocation."
         />
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {contactItems.map((item) => {
             const Icon = item.icon;
             const content = (
@@ -47,6 +48,10 @@ export function Contact() {
             <Mail className="h-4 w-4" />
             Email Me
           </ButtonLink>
+          <RequestResumeButton variant="secondary">
+            <FileText className="h-4 w-4" />
+            Request Resume
+          </RequestResumeButton>
           <ButtonLink href={siteConfig.linkedin} variant="outline" external>
             <Linkedin className="h-4 w-4" />
             Connect on LinkedIn

@@ -3,7 +3,8 @@ import {
   cachedChatbotAnswers,
   chatbotContext,
   contactFallback,
-  refusalMessage
+  refusalMessage,
+  resumeRequestMessage
 } from "@/data/chatbotContext";
 
 type GroqResponse = {
@@ -38,19 +39,28 @@ const MAX_COMPLETION_TOKENS = 180;
 const relatedTerms = [
   "shreevikas",
   "resume",
+  "cv",
   "project",
   "projects",
+  "agentshield",
+  "agent shield",
+  "agent",
+  "guardrail",
+  "guardrails",
+  "llm evaluation",
+  "red team",
+  "red-team",
   "skill",
   "skills",
   "experience",
   "education",
   "certification",
   "research",
-  "aiops",
   "aws",
   "data",
   "engineering",
   "engineer",
+  "infrastructure",
   "analytics",
   "rag",
   "cloud",
@@ -61,6 +71,12 @@ const relatedTerms = [
   "pyspark",
   "dbt",
   "airflow",
+  "langchain",
+  "langgraph",
+  "groq",
+  "gemini",
+  "openai",
+  "pgvector",
   "neutralseek",
   "whiterock",
   "iit",
@@ -169,7 +185,25 @@ function isRelatedQuestion(message: string) {
 
 function asksForPrivateOrMissingInfo(message: string) {
   const normalized = normalizeText(message);
-  return privateInfoTerms.some((term) => normalized.includes(normalizeText(term)));
+  const tokens = new Set(normalized.split(/\s+/).filter(Boolean));
+
+  return privateInfoTerms.some((term) => {
+    const normalizedTerm = normalizeText(term);
+    if (normalizedTerm.includes(" ")) {
+      return normalized.includes(normalizedTerm);
+    }
+
+    return tokens.has(normalizedTerm);
+  });
+}
+
+function asksForResume(message: string) {
+  const normalized = normalizeText(message);
+  return (
+    normalized.includes("resume") ||
+    normalized.includes("cv") ||
+    normalized.includes("curriculum vitae")
+  );
 }
 
 function getCachedAnswer(message: string) {
@@ -349,6 +383,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ answer: contactFallback });
     }
 
+    if (asksForResume(trimmedMessage)) {
+      logTiming(requestId, "resume request", startedAt, { email: maskedEmail });
+      return NextResponse.json({ answer: resumeRequestMessage, cached: true });
+    }
+
     const cachedAnswer = getCachedAnswer(trimmedMessage);
 
     if (cachedAnswer) {
@@ -380,6 +419,8 @@ Rules:
 - Use only the available portfolio context below.
 - Keep answers concise, professional, recruiter-friendly, and usually 3-6 sentences.
 - Do not invent employers, dates, degrees, metrics, credentials, links, or skills.
+- Do not provide a resume download link or direct resume URL.
+- If the user asks for my resume, reply exactly: "${resumeRequestMessage}"
 - If the user asks outside my professional background, projects, skills, research, certifications, education, or experience, reply exactly: "${refusalMessage}"
 - If information is missing, private, sensitive, or not available, reply exactly: "${contactFallback}"
 - Do not use internal process, sourcing, or implementation language in user-facing answers.

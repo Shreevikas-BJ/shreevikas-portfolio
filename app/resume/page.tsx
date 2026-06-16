@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft, FileText } from "lucide-react";
+import { RequestResumeButton } from "@/components/RequestResumeButton";
 import { siteConfig } from "@/data/portfolio";
-import { PdfDownloadButton } from "@/components/PdfDownloadButton";
 
 export const metadata: Metadata = {
-  title: `Resume | ${siteConfig.name}`,
-  description: `View and download the resume of ${siteConfig.name}.`
+  title: `Request Resume | ${siteConfig.name}`,
+  description: `Request the latest resume for ${siteConfig.name}.`
 };
 
-export default function ResumePage() {
+export default function ResumeRequestPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <section className="section-shell">
@@ -22,38 +21,25 @@ export default function ResumePage() {
           Back to portfolio
         </Link>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
-          <aside id="download" className="surface rounded-2xl p-6 lg:p-8">
-            <p className="eyebrow w-fit">Resume</p>
-            <h1 className="mt-5 text-3xl font-black text-balance sm:text-4xl">
-              {siteConfig.name}
-            </h1>
-            <p className="mt-5 leading-8 text-muted-foreground">
-              Data Engineer and AI Data Engineer focused on scalable cloud data platforms,
-              analytics engineering, RAG systems, and production-ready AI workflows.
-            </p>
-
-            <div className="relative z-10 mt-8 flex flex-wrap gap-3">
-              <PdfDownloadButton
-                fileName="Shreevikas_Jagadish_DataEngineer.pdf"
-                href="/api/download/resume"
-              >
-                <Download className="h-4 w-4" />
-                Download PDF
-              </PdfDownloadButton>
+        <div className="mx-auto mt-12 max-w-2xl">
+          <div className="surface rounded-2xl p-6 text-center sm:p-8 lg:p-10">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <FileText className="h-8 w-8" />
             </div>
-          </aside>
-
-          <div className="space-y-4">
-            <div className="surface overflow-hidden rounded-2xl p-3">
-              <Image
-                src="/document-previews/resume/page-01.jpg"
-                alt="Resume preview for Shreevikas Jagadish"
-                width={980}
-                height={1268}
-                className="w-full rounded-xl bg-white"
-                priority
-              />
+            <p className="eyebrow mx-auto mt-6 w-fit">Request Resume</p>
+            <h1 className="mt-5 text-3xl font-black text-balance sm:text-4xl">
+              Contact me for my latest resume.
+            </h1>
+            <p className="mx-auto mt-5 max-w-xl leading-8 text-muted-foreground">
+              I do not publish a direct resume download on this portfolio. Recruiters and
+              hiring teams can request my latest resume through the form below or email me
+              directly.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <RequestResumeButton>
+                <FileText className="h-4 w-4" />
+                Request Resume
+              </RequestResumeButton>
             </div>
           </div>
         </div>

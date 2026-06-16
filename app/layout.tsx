@@ -10,13 +10,21 @@ export const metadata: Metadata = {
     "Shreevikas Jagadish",
     "Data Engineer",
     "AI Data Engineer",
+    "Data Infrastructure",
     "Analytics Engineer",
+    "AgentShield",
+    "LLM Evaluation",
+    "Agent Guardrails",
     "RAG",
-    "AIOps",
+    "LangChain",
+    "LangGraph",
     "Databricks",
     "Snowflake",
     "AWS",
-    "PySpark"
+    "PySpark",
+    "Kafka",
+    "Airflow",
+    "dbt"
   ],
   authors: [{ name: siteConfig.name }],
   openGraph: {

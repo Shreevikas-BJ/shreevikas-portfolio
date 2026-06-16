@@ -15,7 +15,7 @@ type Message = {
 const welcomeMessage: Message = {
   role: "assistant",
   content:
-    "Hi, I am Shreevikas's AI Assistant. Share your email to ask about my projects, skills, research, experience, and fit for data engineering roles."
+    "Hi, I am Shreevikas's AI Assistant. Share your email to ask about my projects, skills, experience, certifications, and fit for data engineering or AI data engineering roles."
 };
 
 const refusalMessage =
@@ -26,6 +26,25 @@ const timeoutMessage = "The assistant is taking longer than expected. Please try
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function renderMessageContent(content: string) {
+  const linkMatch = content.match(/\[([^\]]+)\]\((mailto:[^)]+)\)/);
+  if (!linkMatch || linkMatch.index === undefined) return content;
+
+  const [markdownLink, label, href] = linkMatch;
+  const before = content.slice(0, linkMatch.index);
+  const after = content.slice(linkMatch.index + markdownLink.length);
+
+  return (
+    <>
+      {before}
+      <a className="font-semibold underline-offset-4 hover:underline" href={href}>
+        {label}
+      </a>
+      {after}
+    </>
+  );
 }
 
 export function Chatbot() {
@@ -65,8 +84,8 @@ export function Chatbot() {
       replaceMessages([
         {
           role: "assistant",
-          content:
-            "Thanks. You can now ask questions about my background, projects, skills, research, and experience."
+            content:
+            "Thanks. You can now ask questions about my background, projects, skills, certifications, and experience."
         }
       ]);
     }
@@ -112,7 +131,7 @@ export function Chatbot() {
       {
         role: "assistant",
         content:
-          "Thanks. You can now ask questions about my background, projects, skills, research, and experience."
+          "Thanks. You can now ask questions about my background, projects, skills, certifications, and experience."
       }
     ]);
   };
@@ -277,7 +296,7 @@ export function Chatbot() {
                             : "border border-border bg-muted/60 text-foreground"
                         )}
                       >
-                        {message.content}
+                        {renderMessageContent(message.content)}
                       </div>
                     </div>
                   ))}

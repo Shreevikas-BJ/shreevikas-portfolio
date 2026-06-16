@@ -2,19 +2,17 @@
 
 import {
   ArrowDown,
-  Download,
   FileText,
   Github,
-  Linkedin,
   Mail,
   MapPin,
   Sparkles
 } from "lucide-react";
 import Image from "next/image";
 import { achievementCards, heroStats, siteConfig } from "@/data/portfolio";
-import { PdfDownloadButton } from "@/components/PdfDownloadButton";
+import { RequestResumeButton } from "@/components/RequestResumeButton";
 import { Badge } from "@/components/ui/Badge";
-import { Button, ButtonLink } from "@/components/ui/Button";
+import { ButtonLink } from "@/components/ui/Button";
 
 export function Hero() {
   return (
@@ -40,13 +38,13 @@ export function Hero() {
           </div>
 
           <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-normal text-balance sm:text-5xl lg:text-6xl">
-            Data Engineer building scalable cloud data platforms and AI-powered retrieval systems.
+            AI Data Engineer building scalable pipelines, cloud platforms, and AI-ready data infrastructure.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            I am {siteConfig.name}, an AWS Certified Data Engineer and MS IT graduate
-            building batch and streaming pipelines, RAG workflows, ML-ready datasets, and
-            cloud analytics systems across AWS, Snowflake, Databricks, Kafka, and PySpark.
+            I am {siteConfig.name}, an AI Data Engineer with 2+ years of experience
+            building production RAG systems, real-time data pipelines, agentic workflows,
+            and cloud migrations across AWS, Databricks, and Snowflake.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -60,31 +58,17 @@ export function Hero() {
               <ArrowDown className="h-4 w-4" />
               View Projects
             </ButtonLink>
-            <Button asChild variant="outline">
-              <a href="/resume">
-                <FileText className="h-4 w-4" />
-                View Resume
-              </a>
-            </Button>
-            <PdfDownloadButton
-              fileName="Shreevikas_Jagadish_DataEngineer.pdf"
-              href="/api/download/resume"
-              variant="secondary"
-            >
-              <Download className="h-4 w-4" />
-              Download Resume
-            </PdfDownloadButton>
-            <ButtonLink href={siteConfig.github} variant="outline" external>
-              <Github className="h-4 w-4" />
-              GitHub
-            </ButtonLink>
-            <ButtonLink href={siteConfig.linkedin} variant="outline" external>
-              <Linkedin className="h-4 w-4" />
-              LinkedIn
-            </ButtonLink>
             <ButtonLink href="#contact" variant="outline">
               <Mail className="h-4 w-4" />
               Contact Me
+            </ButtonLink>
+            <RequestResumeButton variant="secondary">
+              <FileText className="h-4 w-4" />
+              Request Resume
+            </RequestResumeButton>
+            <ButtonLink href={siteConfig.github} variant="outline" external>
+              <Github className="h-4 w-4" />
+              GitHub
             </ButtonLink>
           </div>
 
