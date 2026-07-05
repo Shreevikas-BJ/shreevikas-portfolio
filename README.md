@@ -4,7 +4,7 @@ Recruiter-friendly portfolio for Shreevikas Jagadish, focused on Data Science, M
 
 ## Overview
 
-This portfolio highlights production-ready machine learning systems, demand forecasting, manufacturing quality intelligence, semantic enterprise search, statistical validation, model deployment, and decision-ready analytics workflows.
+This portfolio highlights production-ready machine learning systems, demand forecasting, MLOps, data engineering platforms, RAG applications, AI agent evaluation, statistical validation, cloud analytics, and decision-ready dashboards.
 
 ## Tech Stack
 
@@ -21,16 +21,20 @@ This portfolio highlights production-ready machine learning systems, demand fore
 
 - Responsive light and dark theme
 - Recruiter-friendly hero, about, skills, experience, projects, education, and contact sections
-- Featured projects for predictive modeling, decision intelligence, and generative AI search
+- Rich project filters for Featured, Data Science / ML, Data Engineering, GenAI / RAG / Agents, and Analytics / Dashboards
+- GitHub project cards with recruiter-friendly summaries, tech tags, highlights, and repo links
 - Request Resume flow without public resume PDF exposure
 - Bottom-right AI assistant gated by visitor email
 - Server-side Groq API integration using `GROQ_API_KEY`
 
 ## Featured Projects
 
-- Intelligent Inventory Demand Forecasting Platform: enterprise demand forecasting platform for inventory optimization across multi-regional distribution networks.
-- Manufacturing Process Quality Intelligence System: predictive quality monitoring solution for manufacturing process performance and defect prevention.
-- Enterprise Knowledge Search Platform: semantic retrieval and vector-indexed enterprise document search solution.
+- [Sales Forecasting MLOps Pipeline](https://github.com/Shreevikas-BJ/sales-forecasting-mlops-pipeline): production-style forecasting pipeline using PySpark, Snowflake, XGBoost, monitoring, and Streamlit.
+- [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): governed lakehouse pipeline with AWS S3, Lakeflow, Unity Catalog, and gold-layer analytics.
+- [Airbnb Snowflake dbt Pipeline](https://github.com/Shreevikas-BJ/airbnb-snowflake-dbt-pipeline): Snowflake and dbt ELT pipeline with incremental models and SCD Type 2 snapshots.
+- [AI FinOps Copilot](https://github.com/Shreevikas-BJ/ai-finops-copilot): AI-powered FinOps copilot for cloud cost analysis, waste detection, and reporting.
+- [ML Course Document RAG](https://github.com/Shreevikas-BJ/ml-course-document-rag): trust-first RAG system with citation grounding, similarity gating, refusal handling, and judge fallback.
+- [Subscription Value Brain](https://github.com/Shreevikas-BJ/subscription-value-brain): customer value engine combining churn prediction, CLV, and uplift modeling.
 
 ## Resume Availability
 

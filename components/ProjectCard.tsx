@@ -24,13 +24,16 @@ export function ProjectCard({
               {project.highlightLabel}
             </span>
           ) : null}
+          <span className="mb-3 ml-0 inline-flex max-w-full whitespace-normal rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-left text-xs font-bold text-primary sm:ml-2">
+            {project.category}
+          </span>
           <h3 className={large ? "text-2xl font-black" : "text-xl font-black"}>
             {project.title}
           </h3>
           <p className="mt-3 leading-7 text-muted-foreground">{project.summary}</p>
         </div>
         <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary transition group-hover:scale-105 sm:flex">
-          {project.category === "Generative AI" ? <Code2 className="h-5 w-5" /> : <Layers className="h-5 w-5" />}
+          {project.filters.includes("GenAI / RAG / Agents") ? <Code2 className="h-5 w-5" /> : <Layers className="h-5 w-5" />}
         </div>
       </div>
 

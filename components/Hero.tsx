@@ -57,13 +57,14 @@ export function Hero() {
           </div>
 
           <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-normal text-balance sm:text-5xl lg:text-6xl">
-            I build production-ready machine learning systems, predictive models, and cloud-based analytics platforms.
+            I build production-ready ML, forecasting, data engineering, RAG, and analytics systems.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
             I am {siteConfig.name}, a Data Scientist focused on turning complex
-            business problems into scalable analytical solutions using machine learning,
-            statistical learning, MLOps, and decision intelligence.
+            business problems into scalable analytical solutions using predictive modeling,
+            PySpark, Snowflake, Databricks, cloud data platforms, RAG applications, MLOps,
+            and decision intelligence.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
