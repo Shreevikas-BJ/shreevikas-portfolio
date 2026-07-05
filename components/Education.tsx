@@ -7,7 +7,7 @@ export function Education() {
     <section id="education" className="section-shell">
       <SectionHeading
         eyebrow="Education"
-        title="Academic foundation in information technology, computer science, and applied data systems."
+        title="Academic foundation in information technology management, computer science, and applied analytics."
       />
 
       <div className="grid gap-5 md:grid-cols-2">

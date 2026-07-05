@@ -30,7 +30,7 @@ export function ProjectCard({
           <p className="mt-3 leading-7 text-muted-foreground">{project.summary}</p>
         </div>
         <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary transition group-hover:scale-105 sm:flex">
-          {project.category === "AI/RAG" ? <Code2 className="h-5 w-5" /> : <Layers className="h-5 w-5" />}
+          {project.category === "Generative AI" ? <Code2 className="h-5 w-5" /> : <Layers className="h-5 w-5" />}
         </div>
       </div>
 
@@ -55,10 +55,12 @@ export function ProjectCard({
       </p>
 
       <div className="mt-auto flex flex-wrap gap-3 pt-6">
-        <ButtonLink href={project.repoUrl} variant="primary" external>
-          View GitHub Repo
-          <ArrowUpRight className="h-4 w-4" />
-        </ButtonLink>
+        {project.repoUrl ? (
+          <ButtonLink href={project.repoUrl} variant="primary" external>
+            View GitHub Repo
+            <ArrowUpRight className="h-4 w-4" />
+          </ButtonLink>
+        ) : null}
         <Button variant="outline" onClick={() => onDetails(project)}>
           View Details
         </Button>

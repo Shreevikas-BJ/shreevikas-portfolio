@@ -20,16 +20,16 @@ import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 
 const pipelineNodes = [
-  { icon: Workflow, label: "Ingest", value: "Kafka / Fivetran" },
-  { icon: Database, label: "Model", value: "dbt / Spark SQL" },
-  { icon: Layers3, label: "Serve", value: "Snowflake / Databricks" },
-  { icon: BrainCircuit, label: "Ground", value: "RAG / Vector Search" }
+  { icon: Database, label: "Prepare", value: "SQL / PySpark" },
+  { icon: Workflow, label: "Engineer", value: "Spark / Pandas" },
+  { icon: BrainCircuit, label: "Model", value: "XGBoost / Scikit-learn" },
+  { icon: Layers3, label: "Deploy", value: "MLflow / FastAPI" }
 ];
 
 const reliabilitySignals = [
-  "CDC + SCD Type-2 validation",
-  "LLM evaluation and guardrails",
-  "CloudWatch and failure monitoring"
+  "Statistical validation",
+  "Drift monitoring and A/B testing",
+  "Production model serving"
 ];
 
 export function Hero() {
@@ -48,7 +48,7 @@ export function Hero() {
           <div className="flex flex-wrap items-center gap-3">
             <span className="eyebrow">
               <Sparkles className="mr-2 h-3.5 w-3.5" />
-              Data Engineering + AI Infrastructure
+              Data Science + AI-ML Systems
             </span>
             <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4 text-primary" />
@@ -57,13 +57,13 @@ export function Hero() {
           </div>
 
           <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-normal text-balance sm:text-5xl lg:text-6xl">
-            Building scalable data pipelines and AI-ready infrastructure for production teams.
+            I build production-ready machine learning systems, predictive models, and cloud-based analytics platforms.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            I am {siteConfig.name}, an AI Data Engineer with 2+ years of experience
-            building production RAG systems, real-time pipelines, agentic evaluation
-            workflows, and cloud data platforms across AWS, Databricks, and Snowflake.
+            I am {siteConfig.name}, a Data Scientist focused on turning complex
+            business problems into scalable analytical solutions using machine learning,
+            statistical learning, MLOps, and decision intelligence.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -123,9 +123,9 @@ export function Hero() {
                   <div className="flex items-center justify-between gap-3">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
-                        Platform Focus
+                        ML System Focus
                       </p>
-                      <h2 className="mt-2 text-xl font-black">Data to AI systems</h2>
+                      <h2 className="mt-2 text-xl font-black">Analytics to decisions</h2>
                     </div>
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                       <ShieldCheck className="h-5 w-5" />
@@ -164,7 +164,7 @@ export function Hero() {
 
                 <div className="rounded-2xl border border-border/70 bg-background/50 p-4">
                   <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
-                    Reliability Signals
+                    Production Signals
                   </p>
                   <div className="mt-3 grid gap-2">
                     {reliabilitySignals.map((signal) => (

@@ -15,11 +15,11 @@ type Message = {
 const welcomeMessage: Message = {
   role: "assistant",
   content:
-    "Hi, I am Shreevikas's AI Assistant. Share your email to ask about my projects, skills, experience, certifications, and fit for data engineering or AI data engineering roles."
+    "Hi, I am Shreevikas's AI Assistant. Share your email to ask about my machine learning work, projects, skills, experience, education, and fit for Data Scientist or AI-ML roles."
 };
 
 const refusalMessage =
-  "I can only answer questions about my professional background, projects, skills, research, and experience. For anything specific, please contact me directly at shreevikasjagadish7@gmail.com.";
+  "I can only answer questions about my professional background, projects, skills, education, and experience. For anything specific, please contact me directly at shreevikasjagadish7@gmail.com.";
 
 const CHAT_REQUEST_TIMEOUT_MS = 15000;
 const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";
@@ -85,7 +85,7 @@ export function Chatbot() {
         {
           role: "assistant",
           content:
-            "Thanks. You can now ask questions about my background, projects, skills, certifications, and experience."
+            "Thanks. You can now ask questions about my background, projects, skills, education, and experience."
         }
       ]);
     }
@@ -131,7 +131,7 @@ export function Chatbot() {
       {
         role: "assistant",
         content:
-          "Thanks. You can now ask questions about my background, projects, skills, certifications, and experience."
+          "Thanks. You can now ask questions about my background, projects, skills, education, and experience."
       }
     ]);
   };

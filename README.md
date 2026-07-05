@@ -1,10 +1,10 @@
 # Shreevikas Portfolio
 
-Recruiter-friendly portfolio for Shreevikas Jagadish, focused on Data Engineering, AI Data Engineering, Data Infrastructure, Analytics Engineering, and RAG/AI Infrastructure roles.
+Recruiter-friendly portfolio for Shreevikas Jagadish, focused on Data Science, Machine Learning, Predictive Modeling, Statistical Learning, Decision Intelligence, MLOps, and cloud-based analytics roles.
 
 ## Overview
 
-This portfolio highlights production RAG systems, real-time data pipelines, agentic workflows, cloud data platforms, analytics-ready datasets, and AI agent evaluation work from the latest resume.
+This portfolio highlights production-ready machine learning systems, demand forecasting, manufacturing quality intelligence, semantic enterprise search, statistical validation, model deployment, and decision-ready analytics workflows.
 
 ## Tech Stack
 
@@ -20,18 +20,17 @@ This portfolio highlights production RAG systems, real-time data pipelines, agen
 ## Features
 
 - Responsive light and dark theme
-- Recruiter-friendly hero, about, skills, experience, projects, certifications, education, and contact sections
-- Featured projects for AI infrastructure, RAG, and data engineering
-- AgentShield featured as the lead project
+- Recruiter-friendly hero, about, skills, experience, projects, education, and contact sections
+- Featured projects for predictive modeling, decision intelligence, and generative AI search
 - Request Resume flow without public resume PDF exposure
 - Bottom-right AI assistant gated by visitor email
 - Server-side Groq API integration using `GROQ_API_KEY`
 
 ## Featured Projects
 
-- [AgentShield](https://github.com/Shreevikas-BJ/agentshield): multi-LLM QA and red-team platform for AI agent security, safety, compliance, and launch-readiness evaluation.
-- [AI/ML Knowledge RAG Assistant](https://github.com/Shreevikas-BJ/ml-course-document-rag): production-ready RAG system using Next.js, Supabase pgvector, Jina embeddings, and Groq.
-- [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): S3-to-Databricks Medallion pipeline with Lakeflow Jobs, PySpark, Unity Catalog, and Delta tables.
+- Intelligent Inventory Demand Forecasting Platform: enterprise demand forecasting platform for inventory optimization across multi-regional distribution networks.
+- Manufacturing Process Quality Intelligence System: predictive quality monitoring solution for manufacturing process performance and defect prevention.
+- Enterprise Knowledge Search Platform: semantic retrieval and vector-indexed enterprise document search solution.
 
 ## Resume Availability
 
@@ -73,8 +72,8 @@ The Groq API key is only used in `app/api/chat/route.ts` and is never exposed to
 
 ## Author
 
-Shreevikas Jagadish  
-Chicago, IL  
-Email: [shreevikasjagadish7@gmail.com](mailto:shreevikasjagadish7@gmail.com)  
-GitHub: [Shreevikas-BJ](https://github.com/Shreevikas-BJ)  
+Shreevikas Jagadish<br>
+United States<br>
+Email: [shreevikasjagadish7@gmail.com](mailto:shreevikasjagadish7@gmail.com)<br>
+GitHub: [Shreevikas-BJ](https://github.com/Shreevikas-BJ)<br>
 LinkedIn: [shreevikasbj](https://www.linkedin.com/in/shreevikasbj/)

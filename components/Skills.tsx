@@ -7,8 +7,8 @@ export function Skills() {
     <section id="skills" className="section-shell">
       <SectionHeading
         eyebrow="Skills"
-        title="A modern stack across cloud data platforms, RAG systems, LLM evaluation, and backend workflows."
-        description="Here are the technologies I use to build reliable pipelines, analytics-ready datasets, production RAG systems, and AI agent evaluation workflows."
+        title="A modern Data Science and AI-ML stack across modeling, analytics, MLOps, and cloud platforms."
+        description="Here are the technologies I use to build predictive models, statistical analyses, production ML services, and decision-ready analytics workflows."
         align="center"
       />
 

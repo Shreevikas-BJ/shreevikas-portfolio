@@ -23,15 +23,15 @@ export function Projects() {
     <section id="projects" className="section-shell">
       <SectionHeading
         eyebrow="Projects"
-        title="Projects that show my AI infrastructure, RAG, and cloud data engineering work end to end."
-        description="Selected projects from my latest resume, including AgentShield, AI/ML Knowledge RAG Assistant, and a Databricks Medallion pipeline."
+        title="Projects that show my machine learning, forecasting, generative AI, and decision intelligence work."
+        description="Selected projects from my latest resume, focused on demand forecasting, manufacturing quality intelligence, and enterprise knowledge retrieval."
       />
 
       <div className="mb-12 rounded-3xl border border-border/70 bg-card/30 p-4 backdrop-blur-xl sm:p-5">
         <div className="mb-5 flex items-center justify-between gap-4">
           <h3 className="text-2xl font-black">Featured Projects</h3>
           <span className="hidden text-sm text-muted-foreground sm:block">
-            AI infrastructure, RAG, and data platform highlights
+            Predictive modeling, decision intelligence, and semantic retrieval
           </span>
         </div>
         <div className="grid gap-5 lg:grid-cols-3">

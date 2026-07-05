@@ -85,9 +85,11 @@ export function ProjectModal({
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <ButtonLink href={project.repoUrl} external>
-            View GitHub Repo
-          </ButtonLink>
+          {project.repoUrl ? (
+            <ButtonLink href={project.repoUrl} external>
+              View GitHub Repo
+            </ButtonLink>
+          ) : null}
           {project.liveUrl ? (
             <ButtonLink href={project.liveUrl} variant="outline" external>
               Live Demo

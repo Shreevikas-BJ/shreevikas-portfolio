@@ -12,8 +12,8 @@ export function Contact() {
         <div className="relative z-10">
         <SectionHeading
           eyebrow="Contact"
-          title="Open to Data Engineering, Analytics Engineering, and AI Data Engineering roles."
-          description="Recruiters and hiring teams can reach me through email, phone, LinkedIn, or GitHub. I am based in Chicago, IL and open to relocation."
+          title="Open to Data Scientist, AI-ML, Predictive Modeling, and Decision Intelligence roles."
+          description="Recruiters and hiring teams can reach me through email, phone, LinkedIn, or GitHub. I am based in the United States."
         />
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">

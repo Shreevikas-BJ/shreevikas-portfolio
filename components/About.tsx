@@ -6,23 +6,24 @@ export function About() {
     <section id="about" className="section-shell">
       <SectionHeading
         eyebrow="About"
-        title="AI data engineer with a builder's view of cloud platforms, RAG systems, and agentic workflows."
-        description="I combine production data engineering experience with applied AI infrastructure work: ingestion, transformation, retrieval, evaluation, observability, and launch readiness."
+        title="Data Scientist focused on predictive modeling, statistical learning, and production AI-ML systems."
+        description="I translate business problems into scalable analytical solutions with machine learning, experimentation, cloud-based data platforms, and deployment-ready model workflows."
       />
 
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="data-panel p-6 sm:p-8">
           <div className="relative z-10">
-          <p className="text-lg leading-8 text-muted-foreground">
-            I am {siteConfig.name}, an AI Data Engineer and AWS Certified Data Engineer
-            with 2+ years of experience building production RAG systems, real-time data
-            pipelines, cloud migrations, and analytics-ready datasets for business users.
-          </p>
-          <p className="mt-5 text-lg leading-8 text-muted-foreground">
-            My work spans LangChain, LangGraph, LLM evaluation, data modeling, AWS,
-            Databricks, Snowflake, Kafka, PySpark, Airflow, dbt Core, and agent guardrails
-            for AI-ready data infrastructure.
-          </p>
+            <p className="text-lg leading-8 text-muted-foreground">
+              I am {siteConfig.name}, a Data Scientist with 4 years of experience
+              translating complex business challenges into scalable analytical solutions
+              using machine learning, statistical modeling, and cloud-based data platforms.
+            </p>
+            <p className="mt-5 text-lg leading-8 text-muted-foreground">
+              I develop production-ready predictive systems, optimize large-scale data
+              workflows, and deliver operational improvements through robust model
+              deployment, experimentation, and cross-functional collaboration across
+              enterprise technology environments.
+            </p>
           </div>
         </div>
 
