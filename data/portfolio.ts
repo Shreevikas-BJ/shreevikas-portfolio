@@ -17,11 +17,11 @@ import {
 export const siteConfig = {
   name: "Shreevikas Jagadish",
   shortName: "Shreevikas",
-  title: "Shreevikas Jagadish | Data Scientist & AI-ML Engineer Portfolio",
+  title: "Shreevikas Jagadish | AI Engineer, Data Scientist & Data Engineer",
   description:
-    "Portfolio of Shreevikas Jagadish, Data Scientist and AI-ML professional building machine learning systems, forecasting pipelines, data engineering platforms, RAG applications, and cloud analytics solutions.",
+    "Portfolio of Shreevikas Jagadish, an AWS Certified Data Engineer and AI/Data professional building production machine learning models, RAG systems, agentic AI workflows, MLOps platforms, and scalable cloud data pipelines using Python, AWS, Snowflake, Databricks, PySpark, and modern AI frameworks.",
   location: "United States",
-  availability: "Open to Data Scientist and AI-ML roles",
+  availability: "Open to AI Engineer, Data Scientist, Data Engineer, AI/ML Engineer, and Agent Engineer roles",
   email: "shreevikasjagadish7@gmail.com",
   emailHref:
     "https://mail.google.com/mail/?view=cm&fs=1&to=shreevikasjagadish7%40gmail.com&su=Portfolio%20Inquiry",
@@ -32,48 +32,58 @@ export const siteConfig = {
   linkedin: "https://www.linkedin.com/in/shreevikasbj/",
   portfolio: "https://shreevikas-portfolio.vercel.app/",
   profileImage: "/images/profile-picture.jpg",
-  requestResumeMessage:
-    "Thank you for your interest. For my latest resume, please reach out to me directly at shreevikasjagadish7@gmail.com.",
+  resumePath: "/Shreevikas_Jagadish_Resume.pdf",
+  resumeFileName: "Shreevikas_Jagadish_Resume.pdf",
   roles: [
+    "AI Engineer",
     "Data Scientist",
-    "AI-ML Professional",
-    "Predictive Modeling",
-    "Forecasting",
-    "Data Engineering",
-    "Cloud Data Platforms",
-    "PySpark / Snowflake / Databricks",
-    "Statistical Learning",
-    "Decision Intelligence",
-    "RAG Applications",
-    "MLOps"
+    "Data Engineer",
+    "Machine Learning",
+    "Agentic AI",
+    "RAG Systems",
+    "Cloud Data Pipelines",
+    "MLOps",
+    "Decision Intelligence"
   ]
 };
 
 export const heroStats = [
-  { label: "Experience", value: "4 yrs" },
-  { label: "Forecast accuracy", value: "+24%" },
-  { label: "Experiment cycles", value: "-40%" },
-  { label: "Reporting effort", value: "-60%" }
+  { label: "Experience", value: "3+ yrs" },
+  { label: "RAG corpus", value: "10K+ docs" },
+  { label: "Daily queries", value: "500+" },
+  { label: "ELT pipelines", value: "12" }
 ];
 
 export const aboutHighlights = [
   {
+    icon: Bot,
+    title: "AI and agentic systems",
+    description:
+      "I build agentic AI workflows with OpenAI Agents SDK, tool use, report drafting, evaluation loops, and safety-oriented QA patterns."
+  },
+  {
     icon: BrainCircuit,
-    title: "Machine learning systems",
+    title: "RAG and LLM applications",
     description:
-      "I build production-ready ML systems for forecasting, classification, regression, clustering, anomaly detection, and recommendation workflows."
+      "I design RAG pipelines with LangChain, vector search, similarity thresholds, citations, fallback handling, response caching, and low-confidence logging."
   },
   {
-    icon: LineChart,
-    title: "Decision intelligence",
+    icon: Sparkles,
+    title: "Machine learning and MLOps",
     description:
-      "I connect predictive outputs with dashboards, statistical analysis, A/B testing, and operational metrics so teams can act on model results with confidence."
+      "I deploy ML models for quality prediction and operational analytics using Python, Scikit-Learn, PySpark, SageMaker, CloudWatch, FastAPI, and model monitoring."
   },
   {
-    icon: ShieldCheck,
-    title: "MLOps, RAG, and deployment",
+    icon: Workflow,
+    title: "Data engineering",
     description:
-      "I use MLflow, Docker, FastAPI, model monitoring, RAG, vector search, CI/CD, and cloud services to move analytical systems from experiments into production."
+      "I build reliable data workflows across AWS, Snowflake, Airflow, dbt, Databricks, PySpark, Spark SQL, Kafka, and ELT pipelines."
+  },
+  {
+    icon: Cloud,
+    title: "Cloud data platforms",
+    description:
+      "I connect intelligent models with production-ready cloud infrastructure, analytics-ready tables, governed lakehouse layers, APIs, and monitoring."
   }
 ];
 
@@ -109,18 +119,33 @@ export const skills = [
       "Transformers",
       "Prompt Engineering",
       "Embedding Models",
-      "LangChain"
+      "LangChain",
+      "OpenAI Agents SDK",
+      "Agentic AI Workflows"
     ]
   },
   {
     category: "Deep Learning",
     icon: Sparkles,
-    items: ["TensorFlow", "PyTorch", "Scikit-learn", "XGBoost", "LightGBM"]
+    items: ["TensorFlow", "PyTorch", "Scikit-Learn", "XGBoost", "LightGBM"]
   },
   {
     category: "Data Engineering",
     icon: Workflow,
-    items: ["Apache Spark", "Pandas", "NumPy", "ETL Pipelines", "Data Processing", "Data Quality"]
+    items: [
+      "Apache Spark",
+      "Pandas",
+      "NumPy",
+      "ETL Pipelines",
+      "ELT Pipelines",
+      "Kafka",
+      "Flink",
+      "Streaming Data Pipelines",
+      "Data Processing",
+      "Data Quality",
+      "Airflow",
+      "dbt"
+    ]
   },
   {
     category: "MLOps & Deployment",
@@ -130,7 +155,20 @@ export const skills = [
   {
     category: "Cloud & Data Platforms",
     icon: Cloud,
-    items: ["AWS S3", "SageMaker", "EC2", "Lambda", "Azure", "Databricks", "Snowflake", "BigQuery"]
+    items: [
+      "AWS S3",
+      "AWS Glue",
+      "AWS SageMaker",
+      "AWS EC2",
+      "AWS Redshift",
+      "AWS CloudWatch",
+      "AWS Lambda",
+      "Azure",
+      "Databricks",
+      "Snowflake",
+      "BigQuery",
+      "Grafana"
+    ]
   },
   {
     category: "Visualization & Analytics",
@@ -168,73 +206,107 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    title: "Data Scientist / AI-ML",
-    company: "Tech Data",
-    location: "United States",
-    dates: "Jan 2026 - Present",
-    tags: ["Python", "SQL", "PySpark", "Apache Spark", "MLflow", "FastAPI", "Docker", "Power BI"],
-    metrics: ["24% accuracy gain", "40% faster experiments", "38% lower latency", "60% less reporting effort"],
+    title: "AI Engineer Intern",
+    company: "NeuralSeek",
+    location: "USA - Remote",
+    dates: "Jul 2025 - Nov 2025",
+    tags: [
+      "Python",
+      "LangChain",
+      "RAG",
+      "OpenAI Agents SDK",
+      "FastAPI",
+      "Pydantic",
+      "pytest",
+      "AWS Lambda",
+      "S3",
+      "DynamoDB",
+      "MCP",
+      "Vector Search"
+    ],
+    metrics: ["10K+ documents", "500+ daily queries", "30% reliability gain", "25% faster UI/API iteration"],
     bullets: [
-      "I designed demand forecasting models using Python, SQL, and PySpark that improved inventory planning accuracy by 24% across multiple product categories while reducing forecast volatility for regional supply operations.",
-      "I built scalable feature engineering and model training pipelines with Apache Spark and MLflow, shortening experimentation cycles by 40% and enabling consistent model version tracking across production releases.",
-      "I integrated predictive services into business applications through FastAPI and Docker, decreasing batch processing latency by 38% while supporting real-time operational decision making.",
-      "I evaluated model performance through statistical validation, drift monitoring, and A/B testing, increasing prediction reliability by 18% without affecting production service availability.",
-      "I partnered with analytics, supply chain, and product teams to translate business requirements into production-ready analytical solutions, accelerating data-driven planning across enterprise operations.",
-      "I developed interactive Power BI dashboards combining forecasting outputs, operational metrics, and exception analysis, reducing manual reporting efforts by 60% for executive stakeholders."
+      "I led a 4-member team building LangChain RAG pipelines for 10K+ real estate documents, supporting 500+ daily queries.",
+      "I improved document upload reliability by 30% using AWS Lambda, S3, DynamoDB, vector refresh, and MCP error alerts.",
+      "I reduced UI/API iteration time by 25% with Codex-assisted FastAPI, Pydantic, pytest, logging, and error handling.",
+      "I improved RAG answer quality through similarity threshold optimization, citation validation, response caching, fallback handling, and low-confidence query logging.",
+      "I built an Agentic AI system using OpenAI Agents SDK to draft and evaluate reports and create Gmail drafts through MCP-based tool use."
     ]
   },
   {
     title: "Data Scientist",
-    company: "Bosch",
+    company: "Whiterock Technologies",
     location: "India",
     dates: "Mar 2021 - Jul 2024",
-    tags: ["Python", "Scikit-learn", "SQL", "Pandas", "ETL", "Statistical Analysis", "Dashboards"],
-    metrics: ["22% defect accuracy gain", "45% faster data prep", "17% precision gain", "55% less manual effort"],
+    tags: [
+      "Python",
+      "SQL",
+      "Scikit-Learn",
+      "PySpark",
+      "AWS",
+      "SageMaker",
+      "CloudWatch",
+      "Snowflake",
+      "Airflow",
+      "dbt",
+      "Pandas",
+      "ETL",
+      "ELT"
+    ],
+    metrics: [
+      "22% defect accuracy gain",
+      "98.8% pipeline uptime",
+      "12 ELT pipelines",
+      "200+ users",
+      "45% lower data prep time",
+      "40% faster reporting"
+    ],
     bullets: [
-      "I engineered machine learning models for manufacturing quality prediction using Python and Scikit-learn, improving defect identification accuracy by 22% across high-volume production environments.",
-      "I consolidated structured manufacturing datasets from multiple operational systems through automated ETL workflows, reducing data preparation time by 45% while strengthening data consistency for analytical workloads.",
+      "I engineered and deployed ML models for manufacturing quality prediction using Python, Scikit-Learn, PySpark, SageMaker, and CloudWatch, improving defect detection accuracy by 22% while maintaining 98.8% pipeline uptime.",
+      "I consolidated manufacturing data from multiple systems by managing 12 AWS-to-Snowflake ELT pipelines using Airflow and dbt, reducing data preparation time by 45% and improving reporting speed by 40% for 200+ users.",
       "I optimized classification and regression models through feature selection and hyperparameter tuning, improving prediction precision across production and maintenance use cases by 17%.",
-      "I constructed statistical analyses and visualization dashboards to measure process stability, enabling engineering teams to identify recurring operational trends and prioritize corrective actions more efficiently.",
-      "I automated recurring analytics workflows with SQL, Pandas, and scheduled data pipelines, decreasing manual processing effort by 55% while improving reporting accuracy for manufacturing leadership."
+      "I constructed statistical analyses and visualization dashboards to measure process stability, helping engineering teams identify recurring operational trends and prioritize corrective actions.",
+      "I automated recurring analytics workflows using SQL, Pandas, and scheduled data pipelines, decreasing manual processing effort by 55%."
     ]
   }
 ];
 
 export type ProjectFilter =
-  | "Featured"
-  | "Data Science / ML"
+  | "All"
+  | "AI Agents"
+  | "RAG & GenAI"
+  | "Data Science & ML"
   | "Data Engineering"
-  | "GenAI / RAG / Agents"
-  | "Analytics / Dashboards";
+  | "MLOps"
+  | "Analytics";
 
 export const projectFilters: ProjectFilter[] = [
-  "Featured",
-  "Data Science / ML",
+  "All",
+  "AI Agents",
+  "RAG & GenAI",
+  "Data Science & ML",
   "Data Engineering",
-  "GenAI / RAG / Agents",
-  "Analytics / Dashboards"
+  "MLOps",
+  "Analytics"
 ];
 
 export type ProjectCategory =
-  | "Predictive Modeling"
-  | "Decision Intelligence"
-  | "Generative AI"
+  | "AI Agents / AI Safety / LLM Evaluation"
+  | "AI / Cloud Analytics / FinOps"
+  | "RAG / Generative AI / Vector Search"
+  | "Data Engineering / Databricks / AWS"
+  | "Data Engineering / Snowflake / dbt"
   | "Data Science / MLOps"
-  | "Data Engineering"
-  | "Data Engineering / Streaming"
   | "Data Science / Customer Analytics"
+  | "Data Engineering / Streaming"
+  | "AI Agents / RAG"
+  | "GenAI / RAG"
+  | "Computer Vision / Deep Learning"
+  | "NLP / Deep Learning"
   | "Data Science / Classification"
   | "Data Science / Time Series"
-  | "Data Science / Regression"
-  | "NLP / Deep Learning"
-  | "Computer Vision / Deep Learning"
-  | "GenAI / Data Engineering / Cloud Cost Optimization"
-  | "GenAI / RAG / LLM Evaluation"
-  | "GenAI / RAG"
-  | "AI Agents / RAG"
-  | "AI Safety / Agent Evaluation"
-  | "SQL / Analytics"
-  | "Business Intelligence / Dashboarding";
+  | "Business Intelligence / Dashboarding"
+  | "SQL / Analytics";
 
 export type Project = {
   title: string;
@@ -247,73 +319,116 @@ export type Project = {
   architecture: string;
   tech: string[];
   bullets: string[];
-  repoUrl?: string;
+  repoUrl: string;
   liveUrl?: string;
 };
 
 export const projects: Project[] = [
   {
-    title: "Intelligent Inventory Demand Forecasting Platform",
-    slug: "intelligent-inventory-demand-forecasting-platform",
-    category: "Predictive Modeling",
-    filters: ["Data Science / ML", "Analytics / Dashboards"],
-    highlightLabel: "Resume Project",
+    title: "AgentShield",
+    slug: "agentshield",
+    category: "AI Agents / AI Safety / LLM Evaluation",
+    filters: ["AI Agents", "RAG & GenAI"],
+    featured: true,
+    highlightLabel: "Featured AI Safety",
     summary:
-      "Enterprise demand forecasting platform for inventory optimization across multi-regional distribution networks.",
+      "Multi-LLM agent QA platform with 6 failure modes and 3 red-team scan levels for pre-launch AI agent testing.",
     architecture:
-      "The platform combines Python and PySpark data preparation, XGBoost forecasting, MLflow experiment tracking, FastAPI model delivery, AWS deployment patterns, and dashboards for operational forecast delivery.",
-    tech: ["Python", "PySpark", "XGBoost", "MLflow", "FastAPI", "AWS"],
+      "AgentShield uses Next.js and TypeScript with Groq, Gemini, Supabase, Prisma, Zod, Vitest, and Playwright to evaluate prompt injection, privacy leakage, unsafe tool use, hallucination, and policy risk before AI agents launch.",
+    tech: ["Next.js", "TypeScript", "Groq", "Gemini", "Supabase", "Prisma", "Zod", "Vitest", "Playwright"],
     bullets: [
-      "I built an enterprise demand forecasting platform for inventory optimization across multi-regional distribution networks.",
-      "I automated model training, deployment, and forecast delivery through scalable production pipelines.",
-      "I connected forecasting outputs to interactive operational dashboards for planning and exception analysis."
-    ]
+      "I automated prompt injection testing and privacy leakage checks.",
+      "I tested unsafe tool use, hallucination, and policy risks.",
+      "I generated regression reports for AI agents."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/agentshield"
   },
   {
-    title: "Manufacturing Process Quality Intelligence System",
-    slug: "manufacturing-process-quality-intelligence-system",
-    category: "Decision Intelligence",
-    filters: ["Data Science / ML", "Analytics / Dashboards"],
-    highlightLabel: "Resume Project",
+    title: "AI FinOps Copilot",
+    slug: "ai-finops-copilot",
+    category: "AI / Cloud Analytics / FinOps",
+    filters: ["AI Agents", "Analytics", "Data Engineering"],
+    featured: true,
+    highlightLabel: "Featured FinOps AI",
     summary:
-      "Predictive quality monitoring solution for manufacturing process performance, defect prevention, and engineering visibility.",
+      "Read-only AI FinOps copilot analyzing 24 cloud resources across 5 teams and surfacing 15 savings findings and cost spikes.",
     architecture:
-      "The system uses Python, Scikit-learn, SQL, Pandas, PostgreSQL, and Tableau to automate statistical analysis, predictive quality monitoring, and production reporting for engineering decision making.",
-    tech: ["Python", "Scikit-learn", "SQL", "Pandas", "PostgreSQL", "Tableau"],
+      "The copilot uses Next.js, TypeScript, Groq, serverless APIs, cloud cost analytics, and Vercel to generate owner-aware savings plans, executive summaries, and ticket-ready recommendations without requiring AWS credentials.",
+    tech: ["Next.js", "TypeScript", "Groq", "Serverless APIs", "Cloud Cost Analytics", "Vercel"],
     bullets: [
-      "I developed a predictive quality monitoring solution for manufacturing process performance and defect prevention.",
-      "I automated statistical analysis and production reporting to improve engineering decision making.",
-      "I improved process visibility by combining model outputs, operational trends, and recurring quality indicators."
-    ]
+      "I created owner-aware savings plans and executive summaries.",
+      "I generated ticket-ready recommendations for cost spikes and savings findings.",
+      "I designed the workflow to avoid requiring AWS credentials."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/ai-finops-copilot"
   },
   {
-    title: "Enterprise Knowledge Search Platform",
-    slug: "enterprise-knowledge-search-platform",
-    category: "Generative AI",
-    filters: ["GenAI / RAG / Agents"],
-    highlightLabel: "Resume Project",
+    title: "AI/ML Knowledge RAG Assistant",
+    slug: "ai-ml-knowledge-rag-assistant",
+    category: "RAG / Generative AI / Vector Search",
+    filters: ["RAG & GenAI", "AI Agents"],
+    featured: true,
+    highlightLabel: "Featured RAG",
     summary:
-      "Intelligent enterprise document search solution using semantic retrieval and vector-based indexing.",
+      "Cloud-native RAG assistant with Top-3 retrieval, 0.6 similarity gating, clickable citations, refusal handling, and cache layers.",
     architecture:
-      "The platform uses Python, LangChain, Hugging Face, vector search, FastAPI, and PostgreSQL to index enterprise documentation and deliver API-driven knowledge retrieval.",
-    tech: ["Python", "LangChain", "Hugging Face", "Vector Search", "FastAPI", "PostgreSQL"],
+      "The assistant uses Next.js, Supabase pgvector, Jina Embeddings, Groq, RAG, and vector search to ground AI/ML knowledge answers with citation-first retrieval, confidence gates, exact cache, semantic cache, and embedding cache.",
+    tech: ["Next.js", "Supabase pgvector", "Jina Embeddings", "Groq", "RAG", "Vector Search"],
     bullets: [
-      "I engineered an intelligent enterprise document search solution using semantic retrieval and vector-based indexing.",
-      "I delivered API-driven knowledge retrieval to improve access to technical documentation and operational resources.",
-      "I used embedding-based retrieval patterns to make enterprise knowledge easier to search and reuse."
-    ]
+      "I implemented Top-3 vector retrieval with a 0.6 similarity threshold.",
+      "I added citation-grounded responses and refusal handling for low-confidence answers.",
+      "I used exact, semantic, and embedding caches for faster repeated queries."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/ml-course-document-rag"
+  },
+  {
+    title: "Databricks Lakeflow Medallion Pipeline",
+    slug: "databricks-lakeflow-medallion-pipeline",
+    category: "Data Engineering / Databricks / AWS",
+    filters: ["Data Engineering"],
+    featured: true,
+    highlightLabel: "Featured Data Engineering",
+    summary:
+      "S3-to-Databricks pipeline processing FMCG data through Bronze, Silver, and Gold layers with full and incremental loads.",
+    architecture:
+      "The project uses AWS S3, Databricks, Lakeflow Jobs, Unity Catalog, PySpark, and Spark SQL to build a governed medallion architecture that supports dashboards, parent-company reporting, and Databricks Genie exploration.",
+    tech: ["AWS S3", "Databricks", "Lakeflow Jobs", "Unity Catalog", "PySpark", "Spark SQL"],
+    bullets: [
+      "I built Bronze, Silver, and Gold medallion architecture with full and incremental data loads.",
+      "I governed data using Unity Catalog and produced analytics-ready Gold tables.",
+      "I designed the pipeline for dashboard support, parent-company reporting, and Databricks Genie exploration."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline"
+  },
+  {
+    title: "Airbnb Snowflake dbt Pipeline",
+    slug: "airbnb-snowflake-dbt-pipeline",
+    category: "Data Engineering / Snowflake / dbt",
+    filters: ["Data Engineering", "Analytics"],
+    featured: true,
+    highlightLabel: "Featured ELT",
+    summary:
+      "End-to-end Airbnb analytics pipeline transforming bookings, hosts, and listings data into BI-ready analytical models.",
+    architecture:
+      "The pipeline uses AWS S3, Snowflake, dbt, SQL, and Jinja to create incremental dbt models, SCD Type 2 snapshots, dbt tests, custom macros, lineage documentation, fact tables, and one-big-table analytical models.",
+    tech: ["AWS S3", "Snowflake", "dbt", "SQL", "Jinja"],
+    bullets: [
+      "I built incremental dbt models, SCD Type 2 snapshots, dbt tests, and custom macros.",
+      "I created lineage documentation, fact tables, and one-big-table analytical models.",
+      "I transformed bookings, hosts, and listings data into BI-ready models."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/airbnb-snowflake-dbt-pipeline"
   },
   {
     title: "Sales Forecasting MLOps Pipeline",
     slug: "sales-forecasting-mlops-pipeline",
     category: "Data Science / MLOps",
-    filters: ["Data Science / ML"],
-    featured: true,
-    highlightLabel: "Featured MLOps",
+    filters: ["Data Science & ML", "MLOps", "Analytics"],
+    highlightLabel: "MLOps",
     summary:
       "Production-style sales forecasting system using PySpark, Snowflake, XGBoost, backtesting, monitoring, and a Streamlit dashboard.",
     architecture:
-      "The pipeline combines scalable PySpark processing, Snowflake data warehousing, XGBoost model training, backtesting, monitoring, and a Streamlit dashboard for business-facing forecast exploration.",
+      "The pipeline combines scalable PySpark processing, Snowflake warehousing, XGBoost model training, backtesting, monitoring, and a Streamlit dashboard for business-facing forecast exploration.",
     tech: ["Python", "PySpark", "Snowflake", "XGBoost", "MLOps", "Streamlit"],
     bullets: [
       "I built an end-to-end forecasting pipeline with model training, backtesting, and monitoring.",
@@ -323,90 +438,13 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Shreevikas-BJ/sales-forecasting-mlops-pipeline"
   },
   {
-    title: "Databricks Lakeflow Medallion Pipeline",
-    slug: "databricks-lakeflow-medallion-pipeline",
-    category: "Data Engineering",
-    filters: ["Data Engineering"],
-    featured: true,
-    highlightLabel: "Featured Data Engineering",
-    summary:
-      "End-to-end Databricks data engineering pipeline using S3, Lakeflow Jobs, Unity Catalog, medallion architecture, and gold-layer analytics.",
-    architecture:
-      "The project follows medallion architecture from raw ingestion through governed processing and analytics-ready gold tables, using Databricks Lakeflow Jobs and Unity Catalog for lakehouse orchestration and governance.",
-    tech: ["Databricks", "AWS S3", "Unity Catalog", "Lakeflow", "Medallion Architecture"],
-    bullets: [
-      "I built a medallion-style data pipeline from raw ingestion to analytics-ready gold tables.",
-      "I used Databricks Lakeflow Jobs and Unity Catalog for governed data processing.",
-      "I designed the pipeline for dashboard and Genie-based analytical serving."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline"
-  },
-  {
-    title: "Airbnb Snowflake dbt Pipeline",
-    slug: "airbnb-snowflake-dbt-pipeline",
-    category: "Data Engineering",
-    filters: ["Data Engineering", "Analytics / Dashboards"],
-    featured: true,
-    highlightLabel: "Featured ELT",
-    summary:
-      "End-to-end Airbnb analytics pipeline using Snowflake, dbt, AWS S3, medallion architecture, incremental models, SCD Type 2 snapshots, and analytics-ready gold tables.",
-    architecture:
-      "The pipeline uses AWS S3 for staged data, Snowflake for warehousing, dbt for transformation, incremental models for efficient processing, SCD Type 2 snapshots for history, and gold tables for reporting and downstream analysis.",
-    tech: ["Snowflake", "dbt", "AWS S3", "Medallion Architecture", "SCD Type 2"],
-    bullets: [
-      "I built a modern ELT pipeline using Snowflake and dbt.",
-      "I implemented incremental models and SCD Type 2 snapshots.",
-      "I created analytics-ready gold layer tables for reporting and downstream analysis."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/airbnb-snowflake-dbt-pipeline"
-  },
-  {
-    title: "AI FinOps Copilot",
-    slug: "ai-finops-copilot",
-    category: "GenAI / Data Engineering / Cloud Cost Optimization",
-    filters: ["GenAI / RAG / Agents", "Data Engineering", "Analytics / Dashboards"],
-    featured: true,
-    highlightLabel: "Featured AI Ops",
-    summary:
-      "AI-powered FinOps copilot for cloud cost analysis, waste detection, savings estimation, and action-ready reporting.",
-    architecture:
-      "The system applies AI workflow design to cloud cost intelligence, identifying waste, cost spikes, savings opportunities, and report-ready findings for engineering and finance stakeholders.",
-    tech: ["TypeScript", "AI Agents", "Cloud Cost Analysis", "FinOps", "Reporting"],
-    bullets: [
-      "I built a cloud cost intelligence system to identify waste, cost spikes, and savings opportunities.",
-      "I generated action-oriented reports for engineering and finance teams.",
-      "I demonstrated practical AI workflow design for operational decision support."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/ai-finops-copilot"
-  },
-  {
-    title: "ML Course Document RAG",
-    slug: "ml-course-document-rag",
-    category: "GenAI / RAG / LLM Evaluation",
-    filters: ["GenAI / RAG / Agents"],
-    featured: true,
-    highlightLabel: "Featured RAG",
-    summary:
-      "Trust-first RAG system for ML course documents with similarity gating, citation-based answers, refusal handling, and multi-LLM judge fallback.",
-    architecture:
-      "The system uses retrieval-augmented generation patterns with vector search, similarity gating, citation grounding, refusal handling, and multi-LLM judge fallback to prioritize answer quality and trust.",
-    tech: ["TypeScript", "RAG", "Vector Search", "LLM Evaluation", "Citation Grounding"],
-    bullets: [
-      "I built a retrieval-augmented generation system focused on grounded, citation-based answers.",
-      "I added similarity gating and refusal handling to reduce hallucinations.",
-      "I included multi-LLM judge fallback for answer quality and trust evaluation."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/ml-course-document-rag"
-  },
-  {
     title: "Subscription Value Brain",
     slug: "subscription-value-brain",
     category: "Data Science / Customer Analytics",
-    filters: ["Data Science / ML", "Analytics / Dashboards"],
-    featured: true,
-    highlightLabel: "Featured Decision Intelligence",
+    filters: ["Data Science & ML", "Analytics"],
+    highlightLabel: "Decision Intelligence",
     summary:
-      "End-to-end customer value engine combining churn prediction, CLV estimation, and uplift modeling to identify which customers should receive retention offers.",
+      "Customer value engine combining churn prediction, CLV estimation, and uplift modeling to identify retention offers.",
     architecture:
       "The project combines churn modeling, customer lifetime value estimation, and uplift modeling into a decision intelligence workflow for customer retention strategy.",
     tech: ["Python", "Churn Prediction", "CLV", "Uplift Modeling", "Customer Analytics"],
@@ -435,112 +473,10 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Shreevikas-BJ/stock-market-kafka-data-pipeline"
   },
   {
-    title: "Customer Churn Prediction ML",
-    slug: "customer-churn-prediction-ml",
-    category: "Data Science / Classification",
-    filters: ["Data Science / ML"],
-    summary:
-      "Machine learning project to predict telecom customer churn using customer behavior, demographics, preprocessing, and classification models.",
-    architecture:
-      "The project follows a supervised machine learning workflow with exploratory analysis, preprocessing, feature engineering, model training, and evaluation for churn classification.",
-    tech: ["Python", "Scikit-learn", "Classification", "Churn Prediction", "EDA"],
-    bullets: [
-      "I built a supervised ML pipeline for churn prediction.",
-      "I used customer behavior and demographic features for classification.",
-      "I demonstrated preprocessing, feature engineering, model training, and evaluation."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/customer-churn-prediction-ml"
-  },
-  {
-    title: "NVIDIA Stock Forecasting",
-    slug: "nvidia-stock-forecasting",
-    category: "Data Science / Time Series",
-    filters: ["Data Science / ML", "Analytics / Dashboards"],
-    summary:
-      "Time-series analysis project for NVIDIA stock using ARIMA, LSTM, and GARCH to forecast trends, returns, and volatility.",
-    architecture:
-      "The project compares statistical and deep learning approaches for financial time-series forecasting, including trend, returns, and volatility modeling.",
-    tech: ["Python", "ARIMA", "LSTM", "GARCH", "Time Series", "Forecasting"],
-    bullets: [
-      "I compared statistical and deep learning approaches for stock forecasting.",
-      "I modeled trends, returns, and volatility.",
-      "I demonstrated time-series analysis and financial ML skills."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/nvidia-stock-forecasting"
-  },
-  {
-    title: "House Price Predictor XGBoost",
-    slug: "house-price-predictor-xgboost",
-    category: "Data Science / Regression",
-    filters: ["Data Science / ML"],
-    summary:
-      "Machine learning regression project that predicts house prices using XGBoost, feature engineering, and RMSE evaluation.",
-    architecture:
-      "The project applies feature engineering, XGBoost regression, and RMSE-based evaluation to predict house prices from structured housing data.",
-    tech: ["Python", "XGBoost", "Regression", "Feature Engineering", "RMSE"],
-    bullets: [
-      "I built a regression model for house price prediction.",
-      "I applied feature engineering and model evaluation.",
-      "I created a practical predictive modeling project for structured data."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/house-price-predictor-xgboost"
-  },
-  {
-    title: "BERT Sentiment Analysis App",
-    slug: "bert-sentiment-analysis-app",
-    category: "NLP / Deep Learning",
-    filters: ["Data Science / ML", "GenAI / RAG / Agents"],
-    summary:
-      "Streamlit app that classifies movie reviews into positive, negative, or neutral sentiment using BERT, PyTorch, and Hugging Face Transformers.",
-    architecture:
-      "The app packages a transformer-based sentiment classifier with Hugging Face, PyTorch, and Streamlit for interactive NLP analysis.",
-    tech: ["Python", "BERT", "PyTorch", "Hugging Face", "Streamlit", "NLP"],
-    bullets: [
-      "I built a transformer-based sentiment classification app.",
-      "I used Hugging Face and PyTorch for NLP modeling.",
-      "I packaged the model into an interactive Streamlit application."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/bert-sentiment-analysis-app"
-  },
-  {
-    title: "Real-Time Pothole Detection",
-    slug: "real-time-pothole-detection",
-    category: "Computer Vision / Deep Learning",
-    filters: ["Data Science / ML"],
-    summary:
-      "Real-time computer vision app for detecting road potholes from video streams using YOLOv8, TensorRT, CUDA, and Flask.",
-    architecture:
-      "The app combines YOLOv8 object detection, GPU acceleration tools, and a Flask serving layer for real-time pothole detection from video streams.",
-    tech: ["Python", "YOLOv8", "TensorRT", "CUDA", "Flask", "Computer Vision"],
-    bullets: [
-      "I built a real-time object detection system for road safety.",
-      "I used YOLOv8 with GPU acceleration tools.",
-      "I demonstrated applied deep learning, computer vision, and deployment skills."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/real-time-pothole-detection"
-  },
-  {
-    title: "Medical RAG Chatbot",
-    slug: "medical-rag-chatbot",
-    category: "GenAI / RAG",
-    filters: ["GenAI / RAG / Agents"],
-    summary:
-      "RAG-based medical chatbot using FAISS and GPT to retrieve health-related answers from trusted medical documents with fallback LLM reasoning.",
-    architecture:
-      "The chatbot uses FAISS vector retrieval as the primary answer source and fallback LLM reasoning for health-related document question answering.",
-    tech: ["Python", "FAISS", "GPT", "RAG", "Vector Search"],
-    bullets: [
-      "I built a document-grounded medical question-answering chatbot.",
-      "I used FAISS for vector retrieval.",
-      "I added fallback reasoning while keeping retrieval as the main answer source."
-    ],
-    repoUrl: "https://github.com/Shreevikas-BJ/medical-rag-chatbot"
-  },
-  {
     title: "IT Helpdesk AI Agent",
     slug: "it-helpdesk-ai-agent",
     category: "AI Agents / RAG",
-    filters: ["GenAI / RAG / Agents"],
+    filters: ["AI Agents", "RAG & GenAI"],
     summary:
       "Agentic IT helpdesk system using LangChain, LangGraph, RAG, ticket classification, safe command planning, and judge-based verification.",
     architecture:
@@ -554,44 +490,95 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Shreevikas-BJ/it-helpdesk-ai-agent"
   },
   {
-    title: "AgentShield",
-    slug: "agentshield",
-    category: "AI Safety / Agent Evaluation",
-    filters: ["GenAI / RAG / Agents"],
+    title: "Medical RAG Chatbot",
+    slug: "medical-rag-chatbot",
+    category: "GenAI / RAG",
+    filters: ["RAG & GenAI"],
     summary:
-      "AI agent QA and safety testing platform for evaluating agent behavior, failure modes, and risk before launch.",
+      "RAG-based medical chatbot using FAISS and GPT to retrieve health-related answers from trusted medical documents with fallback LLM reasoning.",
     architecture:
-      "The platform focuses on agent evaluation, LLM testing, risk discovery, and guardrails so teams can identify unsafe or unreliable agent behavior before launch.",
-    tech: ["TypeScript", "AI Safety", "Agent Evaluation", "LLM Testing", "Guardrails"],
+      "The chatbot uses FAISS vector retrieval as the primary answer source and fallback LLM reasoning for document-grounded health-related question answering.",
+    tech: ["Python", "FAISS", "GPT", "RAG", "Vector Search"],
     bullets: [
-      "I built a testing platform for identifying risky or unreliable agent behavior.",
-      "I demonstrated interest in LLM safety, evaluation, and AI guardrails.",
-      "I showed practical understanding of production AI risks."
+      "I built a document-grounded medical question-answering chatbot.",
+      "I used FAISS for vector retrieval.",
+      "I added fallback reasoning while keeping retrieval as the main answer source."
     ],
-    repoUrl: "https://github.com/Shreevikas-BJ/agentshield"
+    repoUrl: "https://github.com/Shreevikas-BJ/medical-rag-chatbot"
   },
   {
-    title: "COVID-19 Vaccination SQL Analysis",
-    slug: "covid19-vaccination-sql-analysis",
-    category: "SQL / Analytics",
-    filters: ["Analytics / Dashboards"],
+    title: "Real-Time Pothole Detection",
+    slug: "real-time-pothole-detection",
+    category: "Computer Vision / Deep Learning",
+    filters: ["Data Science & ML"],
     summary:
-      "SQL portfolio project analyzing global COVID-19 vaccination and death datasets to uncover trends, vaccination progress, and country-level insights.",
+      "Real-time computer vision app for detecting road potholes from video streams using YOLOv8, TensorRT, CUDA, and Flask.",
     architecture:
-      "The project uses SQL analysis over public-health datasets to extract country-level, trend-based, and vaccination progress insights for reporting.",
-    tech: ["SQL", "Data Analysis", "Public Health Analytics", "Reporting"],
+      "The app combines YOLOv8 object detection, GPU acceleration tools, and a Flask serving layer for real-time pothole detection from video streams.",
+    tech: ["Python", "YOLOv8", "TensorRT", "CUDA", "Flask", "Computer Vision"],
     bullets: [
-      "I used SQL to analyze large public-health datasets.",
-      "I created country-level and trend-based insights.",
-      "I demonstrated strong SQL querying and analytical thinking."
+      "I built a real-time object detection system for road safety.",
+      "I used YOLOv8 with GPU acceleration tools.",
+      "I demonstrated applied deep learning, computer vision, and deployment skills."
     ],
-    repoUrl: "https://github.com/Shreevikas-BJ/covid19-vaccination-sql-analysis"
+    repoUrl: "https://github.com/Shreevikas-BJ/real-time-pothole-detection"
+  },
+  {
+    title: "BERT Sentiment Analysis App",
+    slug: "bert-sentiment-analysis-app",
+    category: "NLP / Deep Learning",
+    filters: ["Data Science & ML", "RAG & GenAI"],
+    summary:
+      "Streamlit app that classifies movie reviews into positive, negative, or neutral sentiment using BERT, PyTorch, and Hugging Face Transformers.",
+    architecture:
+      "The app packages a transformer-based sentiment classifier with Hugging Face, PyTorch, and Streamlit for interactive NLP analysis.",
+    tech: ["Python", "BERT", "PyTorch", "Hugging Face", "Streamlit", "NLP"],
+    bullets: [
+      "I built a transformer-based sentiment classification app.",
+      "I used Hugging Face and PyTorch for NLP modeling.",
+      "I packaged the model into an interactive Streamlit application."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/bert-sentiment-analysis-app"
+  },
+  {
+    title: "Customer Churn Prediction ML",
+    slug: "customer-churn-prediction-ml",
+    category: "Data Science / Classification",
+    filters: ["Data Science & ML", "Analytics"],
+    summary:
+      "Machine learning project to predict telecom customer churn using behavior, demographics, preprocessing, and classification models.",
+    architecture:
+      "The project follows a supervised machine learning workflow with exploratory analysis, preprocessing, feature engineering, model training, and evaluation for churn classification.",
+    tech: ["Python", "Scikit-Learn", "Classification", "Churn Prediction", "EDA"],
+    bullets: [
+      "I built a supervised ML pipeline for churn prediction.",
+      "I used customer behavior and demographic features for classification.",
+      "I demonstrated preprocessing, feature engineering, model training, and evaluation."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/customer-churn-prediction-ml"
+  },
+  {
+    title: "NVIDIA Stock Forecasting",
+    slug: "nvidia-stock-forecasting",
+    category: "Data Science / Time Series",
+    filters: ["Data Science & ML", "Analytics"],
+    summary:
+      "Time-series analysis project for NVIDIA stock using ARIMA, LSTM, and GARCH to forecast trends, returns, and volatility.",
+    architecture:
+      "The project compares statistical and deep learning approaches for financial time-series forecasting, including trend, returns, and volatility modeling.",
+    tech: ["Python", "ARIMA", "LSTM", "GARCH", "Time Series", "Forecasting"],
+    bullets: [
+      "I compared statistical and deep learning approaches for stock forecasting.",
+      "I modeled trends, returns, and volatility.",
+      "I demonstrated time-series analysis and financial ML skills."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/nvidia-stock-forecasting"
   },
   {
     title: "Plant Co Performance Dashboard",
     slug: "plant-co-performance-dashboard",
     category: "Business Intelligence / Dashboarding",
-    filters: ["Analytics / Dashboards"],
+    filters: ["Analytics"],
     summary:
       "Power BI dashboard project analyzing plant company performance using sales, product, and regional metrics from Excel-based business data.",
     architecture:
@@ -603,6 +590,23 @@ export const projects: Project[] = [
       "I demonstrated BI storytelling and dashboard design."
     ],
     repoUrl: "https://github.com/Shreevikas-BJ/plant-co-performance-dashboard"
+  },
+  {
+    title: "COVID-19 Vaccination SQL Analysis",
+    slug: "covid19-vaccination-sql-analysis",
+    category: "SQL / Analytics",
+    filters: ["Analytics"],
+    summary:
+      "SQL portfolio project analyzing global COVID-19 vaccination and death datasets to uncover trends, vaccination progress, and country-level insights.",
+    architecture:
+      "The project uses SQL analysis over public-health datasets to extract country-level, trend-based, and vaccination progress insights for reporting.",
+    tech: ["SQL", "Data Analysis", "Public Health Analytics", "Reporting"],
+    bullets: [
+      "I used SQL to analyze large public-health datasets.",
+      "I created country-level and trend-based insights.",
+      "I demonstrated strong SQL querying and analytical thinking."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/covid19-vaccination-sql-analysis"
   }
 ];
 
@@ -610,20 +614,29 @@ export const education = [
   {
     degree: "Master of Science in Information Technology & Management",
     school: "Illinois Institute of Technology",
-    location: "USA",
-    dates: "Graduation: Dec 2025",
+    location: "United States",
+    dates: "Graduation: May 2026",
     details: [
-      "Graduate study focused on information technology management, data platforms, analytics, and applied technology systems."
+      "Graduate study focused on information technology management, cloud data platforms, applied analytics, and production-ready technology systems."
     ]
   },
   {
-    degree: "Bachelor in Computer Science",
+    degree: "Bachelor of Computer Science",
     school: "Visvesvaraya Technological University",
     location: "India",
     dates: "Graduation: Aug 2023",
     details: [
       "Computer science foundation for software engineering, data systems, machine learning, and applied analytics."
     ]
+  }
+];
+
+export const certifications = [
+  {
+    name: "AWS Certified Data Engineer",
+    issuer: "AWS",
+    details:
+      "Certification supporting my foundation in AWS data engineering, cloud data platforms, and production data workflows."
   }
 ];
 
@@ -665,34 +678,36 @@ export const navItems = [
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
+  { label: "Education", href: "#education" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" }
 ];
 
 export const suggestedQuestions = [
-  "What are Shreevikas's strongest ML projects?",
-  "Tell me about his data engineering projects.",
-  "What RAG and AI agent projects has he built?",
-  "How does his work support business decisions?",
-  "How can I request his resume?"
+  "What AI agent projects has Shreevikas built?",
+  "Tell me about his RAG systems.",
+  "What data engineering experience does he have?",
+  "How does he use AWS and cloud data platforms?",
+  "Can I view his resume?"
 ];
 
 export const achievementCards = [
   {
+    icon: Bot,
+    label: "Agentic AI",
+    value: "OpenAI Agents SDK",
+    text: "I build agent workflows that draft, evaluate, and use tools for production-oriented AI tasks."
+  },
+  {
     icon: BrainCircuit,
-    label: "Modeling",
-    value: "Forecasting + ML",
-    text: "I build predictive systems for inventory planning, quality prediction, and operational decision making."
+    label: "RAG Systems",
+    value: "10K+ documents",
+    text: "I improve retrieval quality with thresholds, citations, caching, fallback handling, and low-confidence logging."
   },
   {
     icon: Workflow,
-    label: "MLOps",
-    value: "MLflow + FastAPI",
-    text: "I move models from experiments into services, dashboards, and monitored production workflows."
-  },
-  {
-    icon: BarChart3,
-    label: "Analytics",
-    value: "Power BI + Tableau",
-    text: "I translate model outputs into decision-ready dashboards for business and engineering teams."
+    label: "Data Platforms",
+    value: "AWS + Snowflake",
+    text: "I connect ML and analytics systems to reliable ELT pipelines, lakehouse layers, and monitored cloud workflows."
   }
 ];

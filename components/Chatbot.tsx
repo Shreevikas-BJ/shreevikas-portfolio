@@ -15,11 +15,11 @@ type Message = {
 const welcomeMessage: Message = {
   role: "assistant",
   content:
-    "Hi, I am Shreevikas's AI Assistant. Share your email to ask about my machine learning work, projects, skills, experience, education, and fit for Data Scientist or AI-ML roles."
+    "Hi, I am Shreevikas's AI Assistant. Share your email to ask about my AI engineering, data science, RAG, agentic AI, data engineering, projects, skills, experience, education, and certifications."
 };
 
 const refusalMessage =
-  "I can only answer questions about my professional background, projects, skills, education, and experience. For anything specific, please contact me directly at shreevikasjagadish7@gmail.com.";
+  "I can only answer questions about my professional background, projects, skills, education, certifications, and experience. For anything specific, please contact me directly at shreevikasjagadish7@gmail.com.";
 
 const CHAT_REQUEST_TIMEOUT_MS = 15000;
 const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";
@@ -29,17 +29,23 @@ function isValidEmail(email: string) {
 }
 
 function renderMessageContent(content: string) {
-  const linkMatch = content.match(/\[([^\]]+)\]\((mailto:[^)]+)\)/);
+  const linkMatch = content.match(/\[([^\]]+)\]\(([^)]+)\)/);
   if (!linkMatch || linkMatch.index === undefined) return content;
 
   const [markdownLink, label, href] = linkMatch;
   const before = content.slice(0, linkMatch.index);
   const after = content.slice(linkMatch.index + markdownLink.length);
+  const external = href.startsWith("http");
 
   return (
     <>
       {before}
-      <a className="font-semibold underline-offset-4 hover:underline" href={href}>
+      <a
+        className="font-semibold underline-offset-4 hover:underline"
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noreferrer" : undefined}
+      >
         {label}
       </a>
       {after}
@@ -85,7 +91,7 @@ export function Chatbot() {
         {
           role: "assistant",
           content:
-            "Thanks. You can now ask questions about my background, projects, skills, education, and experience."
+            "Thanks. You can now ask questions about my AI/data background, projects, skills, education, certifications, and experience."
         }
       ]);
     }
@@ -131,7 +137,7 @@ export function Chatbot() {
       {
         role: "assistant",
         content:
-          "Thanks. You can now ask questions about my background, projects, skills, education, and experience."
+          "Thanks. You can now ask questions about my AI/data background, projects, skills, education, certifications, and experience."
       }
     ]);
   };

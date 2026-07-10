@@ -50,6 +50,9 @@ const relatedTerms = [
   "skills",
   "experience",
   "education",
+  "certification",
+  "certifications",
+  "aws certified data engineer",
   "aws",
   "data",
   "science",
@@ -58,6 +61,13 @@ const relatedTerms = [
   "machine learning",
   "ml",
   "ai",
+  "ai engineer",
+  "agentic ai",
+  "openai agents sdk",
+  "mcp",
+  "neutralseek",
+  "neuralseek",
+  "whiterock",
   "ai ml",
   "predictive",
   "predictive modeling",
@@ -136,6 +146,7 @@ const relatedTerms = [
   "ml course",
   "semantic search",
   "knowledge search",
+  "ai ml knowledge",
   "safety",
   "guardrails",
   "judge",
@@ -154,8 +165,8 @@ const relatedTerms = [
   "unity catalog",
   "athena",
   "glue",
-  "tech data",
-  "bosch",
+  "pipeline uptime",
+  "elt pipelines",
   "iit",
   "illinois",
   "role",
@@ -489,7 +500,7 @@ Rules:
 - Use only the available portfolio context below.
 - Keep answers concise, professional, recruiter-friendly, and usually 3-6 sentences.
 - Do not invent employers, dates, degrees, metrics, credentials, links, or skills.
-- Do not provide a resume download link or direct resume URL.
+- If the user asks for my resume, provide the latest resume link from the context.
 - If the user asks for my resume, reply exactly: "${resumeRequestMessage}"
 - If the user asks outside my professional background, projects, skills, education, or experience, reply exactly: "${refusalMessage}"
 - If information is missing, private, sensitive, or not available, reply exactly: "${contactFallback}"

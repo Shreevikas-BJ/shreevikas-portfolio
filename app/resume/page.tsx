@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, FileText } from "lucide-react";
-import { RequestResumeButton } from "@/components/RequestResumeButton";
+import { ArrowLeft, Download, FileText } from "lucide-react";
+import { ButtonLink } from "@/components/ui/Button";
 import { siteConfig } from "@/data/portfolio";
 
 export const metadata: Metadata = {
-  title: `Request Resume | ${siteConfig.name}`,
-  description: `Request the latest resume for ${siteConfig.name}.`
+  title: `Resume | ${siteConfig.name}`,
+  description: `View or download the latest resume for ${siteConfig.name}.`
 };
 
 export default function ResumeRequestPage() {
@@ -27,20 +27,23 @@ export default function ResumeRequestPage() {
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <FileText className="h-8 w-8" />
             </div>
-            <p className="eyebrow mx-auto mt-6 w-fit">Request Resume</p>
+            <p className="eyebrow mx-auto mt-6 w-fit">Resume</p>
             <h1 className="mt-5 text-3xl font-black text-balance sm:text-4xl">
-              Contact me for my latest resume.
+              View or download my latest resume.
             </h1>
             <p className="mx-auto mt-5 max-w-xl leading-8 text-muted-foreground">
-              I do not publish a direct resume download on this portfolio. Recruiters and
-              hiring teams can request my latest resume through the form below or email me
-              directly.
+              This page points to the latest resume version available on my portfolio:
+              {` ${siteConfig.resumeFileName}`}.
             </p>
-            <div className="mt-8 flex justify-center">
-              <RequestResumeButton>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <ButtonLink href={siteConfig.resumePath} external>
                 <FileText className="h-4 w-4" />
-                Request Resume
-              </RequestResumeButton>
+                View Resume
+              </ButtonLink>
+              <ButtonLink href={siteConfig.resumePath} variant="outline" download>
+                <Download className="h-4 w-4" />
+                Download Resume
+              </ButtonLink>
             </div>
             </div>
           </div>

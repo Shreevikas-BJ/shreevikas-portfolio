@@ -7,8 +7,8 @@ export function ExperienceTimeline() {
     <section id="experience" className="section-shell">
       <SectionHeading
         eyebrow="Experience"
-        title="Experience across predictive modeling, production ML systems, and enterprise analytics."
-        description="A snapshot of my work building forecasting models, quality intelligence systems, scalable ML workflows, and decision-ready dashboards."
+        title="Experience across AI engineering, RAG systems, machine learning, and cloud data platforms."
+        description="A snapshot of my work building agentic AI workflows, LangChain RAG pipelines, production ML models, AWS-to-Snowflake ELT pipelines, and decision-ready analytics."
       />
 
       <div className="relative">
@@ -32,7 +32,7 @@ export function ExperienceTimeline() {
                 </div>
 
                 {experience.metrics?.length ? (
-                  <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                  <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {experience.metrics.map((metric) => (
                       <div key={metric} className="stat-tile py-3">
                         <p className="text-sm font-black text-foreground">{metric}</p>

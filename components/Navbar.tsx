@@ -58,7 +58,7 @@ export function Navbar() {
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#home" className="focus-ring rounded-md">
           <span className="block text-sm font-bold leading-4">{siteConfig.shortName}</span>
-          <span className="block text-xs text-muted-foreground">Data Science + AI-ML</span>
+          <span className="block text-xs text-muted-foreground">AI + Data Systems</span>
         </a>
 
         <div className="hidden items-center gap-1 lg:flex">

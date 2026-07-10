@@ -1,5 +1,6 @@
 import { About } from "@/components/About";
 import { Chatbot } from "@/components/Chatbot";
+import { Certifications } from "@/components/Certifications";
 import { Contact } from "@/components/Contact";
 import { Education } from "@/components/Education";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
@@ -20,6 +21,7 @@ export default function Home() {
         <Projects />
         <Skills />
         <Education />
+        <Certifications />
         <Contact />
       </main>
       <Footer />

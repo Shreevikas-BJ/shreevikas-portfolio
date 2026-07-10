@@ -1,10 +1,10 @@
 # Shreevikas Portfolio
 
-Recruiter-friendly portfolio for Shreevikas Jagadish, focused on Data Science, Machine Learning, Predictive Modeling, Statistical Learning, Decision Intelligence, MLOps, and cloud-based analytics roles.
+Recruiter-friendly portfolio for Shreevikas Jagadish, positioned around AI Engineering, Data Science, Machine Learning, Agentic AI, RAG systems, Data Engineering, MLOps, Cloud Data Platforms, and Decision Intelligence.
 
 ## Overview
 
-This portfolio highlights production-ready machine learning systems, demand forecasting, MLOps, data engineering platforms, RAG applications, AI agent evaluation, statistical validation, cloud analytics, and decision-ready dashboards.
+This portfolio highlights production-ready AI, ML, RAG, agentic AI, cloud data engineering, Snowflake/dbt, Databricks/PySpark, AWS, MLOps, and analytics systems.
 
 ## Tech Stack
 
@@ -20,25 +20,33 @@ This portfolio highlights production-ready machine learning systems, demand fore
 ## Features
 
 - Responsive light and dark theme
-- Recruiter-friendly hero, about, skills, experience, projects, education, and contact sections
-- Rich project filters for Featured, Data Science / ML, Data Engineering, GenAI / RAG / Agents, and Analytics / Dashboards
-- GitHub project cards with recruiter-friendly summaries, tech tags, highlights, and repo links
-- Request Resume flow without public resume PDF exposure
+- Premium recruiter-friendly hero, about, experience, projects, skills, education, certifications, and contact sections
+- Five primary featured projects across AI agents, FinOps AI, RAG, Databricks, and Snowflake/dbt
+- Filtered project cards for AI Agents, RAG & GenAI, Data Science & ML, Data Engineering, MLOps, and Analytics
+- Latest resume view/download using `public/Shreevikas_Jagadish_Resume.pdf`
 - Bottom-right AI assistant gated by visitor email
 - Server-side Groq API integration using `GROQ_API_KEY`
 
 ## Featured Projects
 
-- [Sales Forecasting MLOps Pipeline](https://github.com/Shreevikas-BJ/sales-forecasting-mlops-pipeline): production-style forecasting pipeline using PySpark, Snowflake, XGBoost, monitoring, and Streamlit.
-- [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): governed lakehouse pipeline with AWS S3, Lakeflow, Unity Catalog, and gold-layer analytics.
-- [Airbnb Snowflake dbt Pipeline](https://github.com/Shreevikas-BJ/airbnb-snowflake-dbt-pipeline): Snowflake and dbt ELT pipeline with incremental models and SCD Type 2 snapshots.
-- [AI FinOps Copilot](https://github.com/Shreevikas-BJ/ai-finops-copilot): AI-powered FinOps copilot for cloud cost analysis, waste detection, and reporting.
-- [ML Course Document RAG](https://github.com/Shreevikas-BJ/ml-course-document-rag): trust-first RAG system with citation grounding, similarity gating, refusal handling, and judge fallback.
-- [Subscription Value Brain](https://github.com/Shreevikas-BJ/subscription-value-brain): customer value engine combining churn prediction, CLV, and uplift modeling.
+- [AgentShield](https://github.com/Shreevikas-BJ/agentshield): multi-LLM agent QA platform for prompt injection, privacy leakage, unsafe tool use, hallucination, policy risk, and regression reporting.
+- [AI FinOps Copilot](https://github.com/Shreevikas-BJ/ai-finops-copilot): read-only AI FinOps copilot for cloud cost analysis, savings findings, cost spikes, executive summaries, and ticket-ready recommendations.
+- [AI/ML Knowledge RAG Assistant](https://github.com/Shreevikas-BJ/ml-course-document-rag): cloud-native RAG assistant with Top-3 retrieval, similarity gating, clickable citations, refusal handling, and cache layers.
+- [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): AWS S3 to Databricks pipeline with Lakeflow Jobs, Unity Catalog, PySpark, Spark SQL, and medallion architecture.
+- [Airbnb Snowflake dbt Pipeline](https://github.com/Shreevikas-BJ/airbnb-snowflake-dbt-pipeline): Snowflake/dbt ELT pipeline with incremental models, SCD Type 2 snapshots, tests, macros, lineage docs, fact tables, and BI-ready models.
 
-## Resume Availability
+## Resume
 
-This site does not expose a public resume download. For my latest resume, please contact me at [shreevikasjagadish7@gmail.com](mailto:shreevikasjagadish7@gmail.com).
+The latest resume is available from the portfolio through:
+
+- View Resume
+- Download Resume
+
+The deployed file path is:
+
+```text
+/Shreevikas_Jagadish_Resume.pdf
+```
 
 ## Local Setup
 

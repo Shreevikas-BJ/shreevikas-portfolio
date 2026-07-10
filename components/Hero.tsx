@@ -7,6 +7,7 @@ import {
   FileText,
   Github,
   Layers3,
+  Linkedin,
   Mail,
   MapPin,
   ShieldCheck,
@@ -15,21 +16,20 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { achievementCards, heroStats, siteConfig } from "@/data/portfolio";
-import { RequestResumeButton } from "@/components/RequestResumeButton";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 
 const pipelineNodes = [
-  { icon: Database, label: "Prepare", value: "SQL / PySpark" },
-  { icon: Workflow, label: "Engineer", value: "Spark / Pandas" },
-  { icon: BrainCircuit, label: "Model", value: "XGBoost / Scikit-learn" },
-  { icon: Layers3, label: "Deploy", value: "MLflow / FastAPI" }
+  { icon: Database, label: "Ingest", value: "AWS / Snowflake" },
+  { icon: Workflow, label: "Engineer", value: "PySpark / dbt" },
+  { icon: BrainCircuit, label: "Model", value: "ML / RAG" },
+  { icon: Layers3, label: "Deploy", value: "FastAPI / Agents" }
 ];
 
 const reliabilitySignals = [
-  "Statistical validation",
-  "Drift monitoring and A/B testing",
-  "Production model serving"
+  "Similarity thresholds and citation validation",
+  "Model monitoring and CloudWatch",
+  "Production APIs and tool-using agents"
 ];
 
 export function Hero() {
@@ -48,7 +48,7 @@ export function Hero() {
           <div className="flex flex-wrap items-center gap-3">
             <span className="eyebrow">
               <Sparkles className="mr-2 h-3.5 w-3.5" />
-              Data Science + AI-ML Systems
+              AI Engineering + Data Systems
             </span>
             <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4 text-primary" />
@@ -57,14 +57,15 @@ export function Hero() {
           </div>
 
           <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-normal text-balance sm:text-5xl lg:text-6xl">
-            I build production-ready ML, forecasting, data engineering, RAG, and analytics systems.
+            I build production-ready AI, ML, RAG, agentic AI, and cloud data systems.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            I am {siteConfig.name}, a Data Scientist focused on turning complex
-            business problems into scalable analytical solutions using predictive modeling,
-            PySpark, Snowflake, Databricks, cloud data platforms, RAG applications, MLOps,
-            and decision intelligence.
+            I am {siteConfig.name}, an AWS Certified Data Engineer and AI/Data
+            professional with 3+ years of experience building production ML models,
+            RAG systems, agentic AI workflows, and scalable cloud data pipelines using
+            Python, AWS, Snowflake, Databricks, PySpark, dbt, LangChain, and OpenAI
+            Agents SDK.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -78,17 +79,21 @@ export function Hero() {
               View Projects
               <ArrowRight className="h-4 w-4" />
             </ButtonLink>
-            <ButtonLink href="#contact" variant="outline">
-              <Mail className="h-4 w-4" />
-              Contact Me
-            </ButtonLink>
-            <RequestResumeButton variant="secondary">
+            <ButtonLink href={siteConfig.resumePath} variant="secondary" external>
               <FileText className="h-4 w-4" />
-              Request Resume
-            </RequestResumeButton>
+              View Resume
+            </ButtonLink>
             <ButtonLink href={siteConfig.github} variant="outline" external>
               <Github className="h-4 w-4" />
               GitHub
+            </ButtonLink>
+            <ButtonLink href={siteConfig.linkedin} variant="outline" external>
+              <Linkedin className="h-4 w-4" />
+              LinkedIn
+            </ButtonLink>
+            <ButtonLink href="#contact" variant="outline">
+              <Mail className="h-4 w-4" />
+              Contact Me
             </ButtonLink>
           </div>
 
@@ -124,9 +129,9 @@ export function Hero() {
                   <div className="flex items-center justify-between gap-3">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
-                        ML System Focus
+                        AI/Data System Focus
                       </p>
-                      <h2 className="mt-2 text-xl font-black">Analytics to decisions</h2>
+                      <h2 className="mt-2 text-xl font-black">Models to production</h2>
                     </div>
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                       <ShieldCheck className="h-5 w-5" />

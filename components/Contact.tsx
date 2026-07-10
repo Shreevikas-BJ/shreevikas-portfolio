@@ -1,7 +1,6 @@
 import { FileText, Github, Linkedin, Mail } from "lucide-react";
 import { contactItems, siteConfig } from "@/data/portfolio";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
-import { RequestResumeButton } from "@/components/RequestResumeButton";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 
@@ -12,8 +11,8 @@ export function Contact() {
         <div className="relative z-10">
         <SectionHeading
           eyebrow="Contact"
-          title="Open to Data Scientist, AI-ML, Predictive Modeling, and Decision Intelligence roles."
-          description="Recruiters and hiring teams can reach me through email, phone, LinkedIn, or GitHub. I am based in the United States."
+          title="Open to AI Engineer, Data Scientist, Data Engineer, AI/ML Engineer, and Agent Engineer roles."
+          description="Recruiters and hiring teams can reach me through email, phone, LinkedIn, GitHub, or the latest resume linked below. I am based in the United States."
         />
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
@@ -51,10 +50,14 @@ export function Contact() {
             Email Me
           </ButtonLink>
           <CopyEmailButton email={siteConfig.email} />
-          <RequestResumeButton variant="secondary">
+          <ButtonLink href={siteConfig.resumePath} variant="secondary" external>
             <FileText className="h-4 w-4" />
-            Request Resume
-          </RequestResumeButton>
+            View Resume
+          </ButtonLink>
+          <ButtonLink href={siteConfig.resumePath} variant="outline" download>
+            <FileText className="h-4 w-4" />
+            Download Resume
+          </ButtonLink>
           <ButtonLink href={siteConfig.linkedin} variant="outline" external>
             <Linkedin className="h-4 w-4" />
             Connect on LinkedIn

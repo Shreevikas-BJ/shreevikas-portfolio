@@ -8,37 +8,45 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     "Shreevikas Jagadish",
+    "AI Engineer",
     "Data Scientist",
+    "Data Engineer",
     "AI-ML Engineer",
-    "AI ML Professional",
+    "AI Data Professional",
+    "Applied AI Engineer",
+    "Agent Engineer",
+    "Forward Deployed AI Engineer",
     "Machine Learning",
-    "Predictive Modeling",
+    "Production Machine Learning",
     "Data Engineering",
     "Data Engineering Portfolio",
-    "Statistical Learning",
-    "Decision Intelligence",
-    "MLOps",
-    "Demand Forecasting",
-    "Time Series Forecasting",
-    "Manufacturing Quality Prediction",
-    "Model Monitoring",
-    "MLflow",
-    "FastAPI",
-    "XGBoost",
-    "Scikit-learn",
-    "RAG",
-    "RAG Applications",
+    "Agentic AI",
+    "OpenAI Agents SDK",
     "AI Agents",
     "LLM Evaluation",
-    "Hugging Face",
+    "AI Guardrails",
+    "MLOps",
+    "RAG",
+    "RAG Systems",
     "LangChain",
     "Vector Search",
-    "Cloud Analytics",
-    "Data Platforms",
-    "Snowflake",
-    "Databricks",
+    "Cloud Data Pipelines",
+    "AWS Certified Data Engineer",
     "AWS",
+    "AWS Lambda",
+    "AWS S3",
+    "SageMaker",
+    "CloudWatch",
+    "Snowflake",
+    "dbt",
+    "Databricks",
+    "Unity Catalog",
     "PySpark",
+    "Spark SQL",
+    "FastAPI",
+    "MLflow",
+    "Scikit-Learn",
+    "XGBoost",
     "Power BI",
     "Tableau"
   ],
@@ -71,6 +79,41 @@ export const metadata: Metadata = {
   }
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteConfig.name,
+  url: siteConfig.portfolio,
+  image: `${siteConfig.portfolio}${siteConfig.profileImage.replace(/^\//, "")}`,
+  email: siteConfig.email,
+  telephone: siteConfig.phone,
+  jobTitle: "AI Engineer, Data Scientist, Data Engineer",
+  sameAs: [siteConfig.github, siteConfig.linkedin],
+  knowsAbout: [
+    "AI Engineering",
+    "Machine Learning",
+    "RAG Systems",
+    "Agentic AI",
+    "Data Engineering",
+    "MLOps",
+    "Cloud Data Platforms",
+    "Snowflake",
+    "Databricks",
+    "AWS",
+    "PySpark"
+  ],
+  alumniOf: [
+    {
+      "@type": "CollegeOrUniversity",
+      name: "Illinois Institute of Technology"
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "Visvesvaraya Technological University"
+    }
+  ]
+};
+
 export default function RootLayout({
   children
 }: Readonly<{
@@ -79,6 +122,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData)
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
