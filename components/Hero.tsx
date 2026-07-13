@@ -108,77 +108,73 @@ export function Hero() {
 
         <div className="relative animate-rise-in [animation-delay:120ms]">
           <div className="data-panel mx-auto max-w-xl p-3 shadow-2xl shadow-primary/10">
-            <div className="relative z-10 grid gap-3 lg:grid-cols-[0.92fr_1.08fr]">
-              <div className="relative overflow-hidden rounded-2xl border border-border/70 bg-muted">
+            <div className="relative z-10 grid items-start gap-3 lg:grid-cols-[0.92fr_1.08fr]">
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-sm self-start overflow-hidden rounded-2xl border border-border/70 bg-muted lg:mx-0 lg:aspect-[2/3] lg:max-w-none">
                 <div aria-hidden="true" className="absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-black/30 to-transparent" />
-                <div className="relative aspect-[4/5]">
-                  <Image
-                    src={siteConfig.profileImage}
-                    alt="Professional portrait of Shreevikas Jagadish"
-                    fill
-                    sizes="(max-width: 1024px) 88vw, 260px"
-                    className="object-cover"
-                    priority
-                  />
+                <Image
+                  src={siteConfig.profileImage}
+                  alt="Professional portrait of Shreevikas Jagadish"
+                  fill
+                  sizes="(max-width: 640px) calc(100vw - 3.5rem), (max-width: 1024px) 384px, 260px"
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
+
+              <div className="rounded-2xl border border-border/70 bg-background/50 p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                      Data Science System
+                    </p>
+                    <h2 className="mt-2 text-xl font-black">Data to decisions</h2>
+                  </div>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <ShieldCheck className="h-5 w-5" />
+                  </div>
+                </div>
+                <div className="mt-4 grid gap-2">
+                  {pipelineNodes.map((node, index) => {
+                    const Icon = node.icon;
+                    return (
+                      <div
+                        key={node.label}
+                        className="relative rounded-xl border border-border/60 bg-card/70 p-3"
+                      >
+                        {index < pipelineNodes.length - 1 ? (
+                          <span
+                            aria-hidden="true"
+                            className="absolute left-6 top-full h-2 w-px bg-primary/50"
+                          />
+                        ) : null}
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                            <Icon className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                              {node.label}
+                            </p>
+                            <p className="text-sm font-black">{node.value}</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
-              <div className="grid content-between gap-3">
-                <div className="rounded-2xl border border-border/70 bg-background/50 p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
-                        Data Science System
-                      </p>
-                      <h2 className="mt-2 text-xl font-black">Data to decisions</h2>
+              <div className="rounded-2xl border border-border/70 bg-background/50 p-4 lg:col-span-2">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
+                  Production Signals
+                </p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                  {reliabilitySignals.map((signal) => (
+                    <div key={signal} className="flex items-start gap-2 text-sm leading-6 text-muted-foreground">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      {signal}
                     </div>
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <ShieldCheck className="h-5 w-5" />
-                    </div>
-                  </div>
-                  <div className="mt-4 grid gap-2">
-                    {pipelineNodes.map((node, index) => {
-                      const Icon = node.icon;
-                      return (
-                        <div
-                          key={node.label}
-                          className="relative rounded-xl border border-border/60 bg-card/70 p-3"
-                        >
-                          {index < pipelineNodes.length - 1 ? (
-                            <span
-                              aria-hidden="true"
-                              className="absolute left-6 top-full h-2 w-px bg-primary/50"
-                            />
-                          ) : null}
-                          <div className="flex items-center gap-3">
-                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                              <Icon className="h-4 w-4" />
-                            </div>
-                            <div>
-                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                                {node.label}
-                              </p>
-                              <p className="text-sm font-black">{node.value}</p>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-border/70 bg-background/50 p-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
-                    Production Signals
-                  </p>
-                  <div className="mt-3 grid gap-2">
-                    {reliabilitySignals.map((signal) => (
-                      <div key={signal} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                        {signal}
-                      </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
