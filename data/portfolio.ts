@@ -17,16 +17,16 @@ import {
 export const siteConfig = {
   name: "Shreevikas Jagadish",
   shortName: "Shreevikas",
-  title: "Shreevikas Jagadish | AI Engineer, Data Scientist & Data Engineer",
+  title: "Shreevikas Jagadish | Data Scientist & AI-ML Professional",
   description:
-    "Portfolio of Shreevikas Jagadish, an AWS Certified Data Engineer and AI/Data professional building production machine learning models, RAG systems, agentic AI workflows, MLOps platforms, and scalable cloud data pipelines using Python, AWS, Snowflake, Databricks, PySpark, and modern AI frameworks.",
+    "Portfolio of Shreevikas Jagadish, a Data Scientist and AI-ML professional building production-ready machine learning systems, predictive models, RAG applications, and cloud-based analytical platforms.",
   location: "United States",
-  availability: "Open to AI Engineer, Data Scientist, Data Engineer, AI/ML Engineer, and Agent Engineer roles",
-  email: "shreevikasjagadish7@gmail.com",
+  availability: "Open to Data Scientist, AI-ML, Machine Learning, and Decision Intelligence roles",
+  email: "shreevikas@workapplyjob.com",
   emailHref:
-    "https://mail.google.com/mail/?view=cm&fs=1&to=shreevikasjagadish7%40gmail.com&su=Portfolio%20Inquiry",
-  phone: "+1 (312) 358-3056",
-  phoneHref: "tel:+13123583056",
+    "https://mail.google.com/mail/?view=cm&fs=1&to=shreevikas%40workapplyjob.com&su=Portfolio%20Inquiry",
+  phone: "+1 (210) 201-6775",
+  phoneHref: "tel:+12102016775",
   notificationEmail: "shreevikasj@gmail.com",
   github: "https://github.com/Shreevikas-BJ",
   linkedin: "https://www.linkedin.com/in/shreevikasbj/",
@@ -35,55 +35,54 @@ export const siteConfig = {
   resumePath: "/Shreevikas_Jagadish_Resume.pdf",
   resumeFileName: "Shreevikas_Jagadish_Resume.pdf",
   roles: [
-    "AI Engineer",
     "Data Scientist",
-    "Data Engineer",
+    "AI-ML",
+    "Predictive Modeling",
+    "Statistical Learning",
+    "Decision Intelligence",
     "Machine Learning",
-    "Agentic AI",
-    "RAG Systems",
-    "Cloud Data Pipelines",
     "MLOps",
-    "Decision Intelligence"
+    "Cloud Analytics"
   ]
 };
 
 export const heroStats = [
-  { label: "Experience", value: "3+ yrs" },
-  { label: "RAG corpus", value: "10K+ docs" },
-  { label: "Daily queries", value: "500+" },
-  { label: "ELT pipelines", value: "12" }
+  { label: "Experience", value: "4 yrs" },
+  { label: "Planning accuracy", value: "+24%" },
+  { label: "Model iteration", value: "-40%" },
+  { label: "Defect detection", value: "+22%" }
 ];
 
 export const aboutHighlights = [
   {
-    icon: Bot,
-    title: "AI and agentic systems",
+    icon: LineChart,
+    title: "Predictive modeling",
     description:
-      "I build agentic AI workflows with OpenAI Agents SDK, tool use, report drafting, evaluation loops, and safety-oriented QA patterns."
+      "I build forecasting, classification, regression, recommendation, and anomaly detection systems that translate business needs into measurable decisions."
   },
   {
     icon: BrainCircuit,
-    title: "RAG and LLM applications",
+    title: "Machine learning systems",
     description:
-      "I design RAG pipelines with LangChain, vector search, similarity thresholds, citations, fallback handling, response caching, and low-confidence logging."
+      "I develop reusable feature engineering, model training, validation, monitoring, and experimentation workflows with Spark, MLflow, and modern ML frameworks."
   },
   {
-    icon: Sparkles,
-    title: "Machine learning and MLOps",
+    icon: Bot,
+    title: "Generative AI and RAG",
     description:
-      "I deploy ML models for quality prediction and operational analytics using Python, Scikit-Learn, PySpark, SageMaker, CloudWatch, FastAPI, and model monitoring."
+      "I engineer grounded knowledge search with LangChain, Hugging Face, transformer embeddings, semantic chunking, vector retrieval, and retrieval evaluation."
   },
   {
     icon: Workflow,
-    title: "Data engineering",
+    title: "Production MLOps",
     description:
-      "I build reliable data workflows across AWS, Snowflake, Airflow, dbt, Databricks, PySpark, Spark SQL, Kafka, and ELT pipelines."
+      "I deploy predictive services with FastAPI and Docker while supporting model serving, monitoring, A/B testing, CI/CD, and reliable release workflows."
   },
   {
     icon: Cloud,
-    title: "Cloud data platforms",
+    title: "Cloud analytics platforms",
     description:
-      "I connect intelligent models with production-ready cloud infrastructure, analytics-ready tables, governed lakehouse layers, APIs, and monitoring."
+      "I scale analytical workloads across AWS, Azure, Databricks, Snowflake, and BigQuery using PySpark, Apache Spark, and production data pipelines."
   }
 ];
 
@@ -119,9 +118,7 @@ export const skills = [
       "Transformers",
       "Prompt Engineering",
       "Embedding Models",
-      "LangChain",
-      "OpenAI Agents SDK",
-      "Agentic AI Workflows"
+      "LangChain"
     ]
   },
   {
@@ -137,14 +134,8 @@ export const skills = [
       "Pandas",
       "NumPy",
       "ETL Pipelines",
-      "ELT Pipelines",
-      "Kafka",
-      "Flink",
-      "Streaming Data Pipelines",
       "Data Processing",
-      "Data Quality",
-      "Airflow",
-      "dbt"
+      "Data Quality"
     ]
   },
   {
@@ -157,17 +148,13 @@ export const skills = [
     icon: Cloud,
     items: [
       "AWS S3",
-      "AWS Glue",
       "AWS SageMaker",
       "AWS EC2",
-      "AWS Redshift",
-      "AWS CloudWatch",
       "AWS Lambda",
       "Azure",
       "Databricks",
       "Snowflake",
-      "BigQuery",
-      "Grafana"
+      "BigQuery"
     ]
   },
   {
@@ -206,67 +193,68 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    title: "AI Engineer Intern",
-    company: "NeuralSeek",
-    location: "USA - Remote",
-    dates: "Jul 2025 - Nov 2025",
+    title: "Data Scientist / AI-ML",
+    company: "Cloudera",
+    location: "United States",
+    dates: "Jan 2026 - Present",
     tags: [
       "Python",
-      "LangChain",
-      "RAG",
-      "OpenAI Agents SDK",
+      "SQL",
+      "PySpark",
+      "XGBoost",
+      "Apache Spark",
+      "MLflow",
       "FastAPI",
-      "Pydantic",
-      "pytest",
-      "AWS Lambda",
-      "S3",
-      "DynamoDB",
-      "MCP",
-      "Vector Search"
+      "Docker",
+      "RAG",
+      "Model Monitoring",
+      "A/B Testing",
+      "Power BI"
     ],
-    metrics: ["10K+ documents", "500+ daily queries", "30% reliability gain", "25% faster UI/API iteration"],
+    metrics: [
+      "24% better planning accuracy",
+      "40% faster model iteration",
+      "38% lower processing latency",
+      "18% higher ML/RAG consistency",
+      "60% less manual reporting"
+    ],
     bullets: [
-      "I led a 4-member team building LangChain RAG pipelines for 10K+ real estate documents, supporting 500+ daily queries.",
-      "I improved document upload reliability by 30% using AWS Lambda, S3, DynamoDB, vector refresh, and MCP error alerts.",
-      "I reduced UI/API iteration time by 25% with Codex-assisted FastAPI, Pydantic, pytest, logging, and error handling.",
-      "I improved RAG answer quality through similarity threshold optimization, citation validation, response caching, fallback handling, and low-confidence query logging.",
-      "I built an Agentic AI system using OpenAI Agents SDK to draft and evaluate reports and create Gmail drafts through MCP-based tool use."
+      "I designed regional demand forecasting models with Python, SQL, PySpark, and XGBoost, improving inventory planning accuracy by 24% across distributed supply operations.",
+      "I built a reusable Apache Spark and MLflow experimentation framework that shortened model iteration cycles by 40% and standardized feature processing, experiment comparison, version tracking, and production releases.",
+      "I integrated predictive inference services and LLM-powered workflows through FastAPI and Docker, cutting processing latency by 38% and delivering timely operational recommendations.",
+      "I established statistical validation, retrieval evaluation, drift monitoring, and A/B testing practices that increased ML and RAG performance consistency by 18% across evolving data distributions.",
+      "I partnered with analytics, product, supply chain, and operational stakeholders to translate planning and enterprise knowledge discovery requirements into deployable AI solutions.",
+      "I developed Power BI dashboards for forecast performance, predictions, operational exceptions, and planning trends, eliminating 60% of recurring manual reporting effort."
     ]
   },
   {
     title: "Data Scientist",
-    company: "Whiterock Technologies",
+    company: "Bosch",
     location: "India",
     dates: "Mar 2021 - Jul 2024",
     tags: [
       "Python",
       "SQL",
       "Scikit-Learn",
-      "PySpark",
-      "AWS",
-      "SageMaker",
-      "CloudWatch",
-      "Snowflake",
-      "Airflow",
-      "dbt",
       "Pandas",
       "ETL",
-      "ELT"
+      "NLP",
+      "Deep Learning",
+      "Anomaly Detection",
+      "Statistical Analysis"
     ],
     metrics: [
-      "22% defect accuracy gain",
-      "98.8% pipeline uptime",
-      "12 ELT pipelines",
-      "200+ users",
       "45% lower data prep time",
-      "40% faster reporting"
+      "22% better defect detection",
+      "17% higher prediction precision",
+      "55% less manual processing"
     ],
     bullets: [
-      "I engineered and deployed ML models for manufacturing quality prediction using Python, Scikit-Learn, PySpark, SageMaker, and CloudWatch, improving defect detection accuracy by 22% while maintaining 98.8% pipeline uptime.",
-      "I consolidated manufacturing data from multiple systems by managing 12 AWS-to-Snowflake ELT pipelines using Airflow and dbt, reducing data preparation time by 45% and improving reporting speed by 40% for 200+ users.",
-      "I optimized classification and regression models through feature selection and hyperparameter tuning, improving prediction precision across production and maintenance use cases by 17%.",
-      "I constructed statistical analyses and visualization dashboards to measure process stability, helping engineering teams identify recurring operational trends and prioritize corrective actions.",
-      "I automated recurring analytics workflows using SQL, Pandas, and scheduled data pipelines, decreasing manual processing effort by 55%."
+      "I engineered manufacturing quality prediction models with Python and Scikit-Learn, raising defect detection accuracy by 22% across high-volume production environments.",
+      "I consolidated manufacturing datasets and unstructured maintenance records through automated ETL and NLP preprocessing workflows, cutting preparation time by 45% and improving analytical consistency.",
+      "I improved prediction precision by 17% across quality and predictive maintenance use cases through feature selection, hyperparameter tuning, cross-validation, and optimization of classification and deep learning models.",
+      "I built statistical analysis and anomaly detection dashboards that gave engineering teams earlier visibility into process instability, recurring production patterns, and equipment behavior.",
+      "I automated recurring analytics and operational reporting with SQL, Pandas, and scheduled data pipelines, saving 55% of manual processing effort."
     ]
   }
 ];
@@ -291,6 +279,9 @@ export const projectFilters: ProjectFilter[] = [
 ];
 
 export type ProjectCategory =
+  | "Data Science / Forecasting / MLOps"
+  | "Data Science / Manufacturing Intelligence"
+  | "GenAI / RAG / Enterprise Search"
   | "AI Agents / AI Safety / LLM Evaluation"
   | "AI / Cloud Analytics / FinOps"
   | "RAG / Generative AI / Vector Search"
@@ -319,17 +310,71 @@ export type Project = {
   architecture: string;
   tech: string[];
   bullets: string[];
-  repoUrl: string;
+  repoUrl?: string;
   liveUrl?: string;
 };
 
 export const projects: Project[] = [
   {
+    title: "Intelligent Inventory Demand Forecasting Platform",
+    slug: "intelligent-inventory-demand-forecasting",
+    category: "Data Science / Forecasting / MLOps",
+    filters: ["Data Science & ML", "MLOps", "Analytics"],
+    featured: true,
+    highlightLabel: "Featured Forecasting",
+    summary:
+      "Production demand forecasting platform for multi-regional inventory planning, model tracking, validation, and API-based forecast delivery.",
+    architecture:
+      "The platform uses PySpark and XGBoost for scalable forecasting, MLflow for experiment tracking and validation, FastAPI for model serving, and AWS pipelines for automated training and release workflows.",
+    tech: ["Python", "PySpark", "XGBoost", "MLflow", "FastAPI", "AWS"],
+    bullets: [
+      "I improved forecast accuracy by 21% across multi-regional inventory patterns.",
+      "I supported product-level replenishment planning with scalable forecasting workflows.",
+      "I reduced model release cycles by 35% through automated training, tracking, validation, and deployment."
+    ]
+  },
+  {
+    title: "Manufacturing Process Quality Intelligence System",
+    slug: "manufacturing-process-quality-intelligence",
+    category: "Data Science / Manufacturing Intelligence",
+    filters: ["Data Science & ML", "Analytics"],
+    featured: true,
+    highlightLabel: "Featured Quality ML",
+    summary:
+      "Predictive quality intelligence system for detecting abnormal manufacturing behavior and improving production visibility.",
+    architecture:
+      "The system combines automated data preparation, Scikit-Learn and deep learning models, anomaly detection, statistical validation, PostgreSQL, and Tableau reporting for production quality workflows.",
+    tech: ["Python", "Scikit-Learn", "SQL", "Pandas", "PostgreSQL", "Tableau"],
+    bullets: [
+      "I improved early defect identification by 19% across production quality workflows.",
+      "I combined machine learning, deep learning, anomaly detection, and statistical validation.",
+      "I reduced manual analysis time by 42% while improving visibility into recurring production issues."
+    ]
+  },
+  {
+    title: "Enterprise Knowledge Search Platform",
+    slug: "enterprise-knowledge-search-platform",
+    category: "GenAI / RAG / Enterprise Search",
+    filters: ["RAG & GenAI", "Data Science & ML"],
+    featured: true,
+    highlightLabel: "Featured Enterprise RAG",
+    summary:
+      "RAG-based enterprise knowledge platform for grounded, context-aware access to technical documentation and operational resources.",
+    architecture:
+      "The platform uses transformer embeddings, semantic chunking, vector retrieval, LangChain prompt orchestration, retrieval evaluation, PostgreSQL, and FastAPI inference services.",
+    tech: ["Python", "LangChain", "Hugging Face", "Vector Search", "FastAPI", "PostgreSQL"],
+    bullets: [
+      "I improved relevant document discovery by 31% across internal technical repositories.",
+      "I implemented retrieval evaluation and grounded response generation for reliable enterprise search.",
+      "I reduced information search time by 46% through semantic retrieval and API-driven access."
+    ]
+  },
+  {
     title: "AgentShield",
     slug: "agentshield",
     category: "AI Agents / AI Safety / LLM Evaluation",
     filters: ["AI Agents", "RAG & GenAI"],
-    featured: true,
+    featured: false,
     highlightLabel: "Featured AI Safety",
     summary:
       "Multi-LLM agent QA platform with 6 failure modes and 3 red-team scan levels for pre-launch AI agent testing.",
@@ -348,7 +393,7 @@ export const projects: Project[] = [
     slug: "ai-finops-copilot",
     category: "AI / Cloud Analytics / FinOps",
     filters: ["AI Agents", "Analytics", "Data Engineering"],
-    featured: true,
+    featured: false,
     highlightLabel: "Featured FinOps AI",
     summary:
       "Read-only AI FinOps copilot analyzing 24 cloud resources across 5 teams and surfacing 15 savings findings and cost spikes.",
@@ -367,7 +412,7 @@ export const projects: Project[] = [
     slug: "ai-ml-knowledge-rag-assistant",
     category: "RAG / Generative AI / Vector Search",
     filters: ["RAG & GenAI", "AI Agents"],
-    featured: true,
+    featured: false,
     highlightLabel: "Featured RAG",
     summary:
       "Cloud-native RAG assistant with Top-3 retrieval, 0.6 similarity gating, clickable citations, refusal handling, and cache layers.",
@@ -386,7 +431,7 @@ export const projects: Project[] = [
     slug: "databricks-lakeflow-medallion-pipeline",
     category: "Data Engineering / Databricks / AWS",
     filters: ["Data Engineering"],
-    featured: true,
+    featured: false,
     highlightLabel: "Featured Data Engineering",
     summary:
       "S3-to-Databricks pipeline processing FMCG data through Bronze, Silver, and Gold layers with full and incremental loads.",
@@ -405,7 +450,7 @@ export const projects: Project[] = [
     slug: "airbnb-snowflake-dbt-pipeline",
     category: "Data Engineering / Snowflake / dbt",
     filters: ["Data Engineering", "Analytics"],
-    featured: true,
+    featured: false,
     highlightLabel: "Featured ELT",
     summary:
       "End-to-end Airbnb analytics pipeline transforming bookings, hosts, and listings data into BI-ready analytical models.",
@@ -616,27 +661,14 @@ export const education = [
     school: "Illinois Institute of Technology",
     location: "United States",
     dates: "Graduation: May 2026",
-    details: [
-      "Graduate study focused on information technology management, cloud data platforms, applied analytics, and production-ready technology systems."
-    ]
+    details: ["Master of Science program completed in May 2026."]
   },
   {
     degree: "Bachelor of Computer Science",
     school: "Visvesvaraya Technological University",
     location: "India",
-    dates: "Graduation: Aug 2023",
-    details: [
-      "Computer science foundation for software engineering, data systems, machine learning, and applied analytics."
-    ]
-  }
-];
-
-export const certifications = [
-  {
-    name: "AWS Certified Data Engineer",
-    issuer: "AWS",
-    details:
-      "Certification supporting my foundation in AWS data engineering, cloud data platforms, and production data workflows."
+    dates: "Graduation: August 2023",
+    details: ["Bachelor's foundation in computer science, software systems, and applied computing."]
   }
 ];
 
@@ -679,35 +711,34 @@ export const navItems = [
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Education", href: "#education" },
-  { label: "Certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" }
 ];
 
 export const suggestedQuestions = [
-  "What AI agent projects has Shreevikas built?",
-  "Tell me about his RAG systems.",
-  "What data engineering experience does he have?",
-  "How does he use AWS and cloud data platforms?",
+  "What is Shreevikas's data science experience?",
+  "Tell me about his forecasting work.",
+  "What machine learning systems has he built?",
+  "Tell me about his RAG experience.",
   "Can I view his resume?"
 ];
 
 export const achievementCards = [
   {
-    icon: Bot,
-    label: "Agentic AI",
-    value: "OpenAI Agents SDK",
-    text: "I build agent workflows that draft, evaluate, and use tools for production-oriented AI tasks."
+    icon: LineChart,
+    label: "Forecasting",
+    value: "+24% accuracy",
+    text: "I build demand forecasting systems that improve inventory planning across distributed operations."
   },
   {
     icon: BrainCircuit,
-    label: "RAG Systems",
-    value: "10K+ documents",
-    text: "I improve retrieval quality with thresholds, citations, caching, fallback handling, and low-confidence logging."
+    label: "Machine Learning",
+    value: "+22% detection",
+    text: "I develop quality prediction and anomaly detection models for high-volume manufacturing environments."
   },
   {
     icon: Workflow,
-    label: "Data Platforms",
-    value: "AWS + Snowflake",
-    text: "I connect ML and analytics systems to reliable ELT pipelines, lakehouse layers, and monitored cloud workflows."
+    label: "MLOps",
+    value: "-40% iteration",
+    text: "I standardize feature processing, experiment tracking, validation, versioning, and production releases."
   }
 ];

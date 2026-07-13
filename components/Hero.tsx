@@ -20,16 +20,16 @@ import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 
 const pipelineNodes = [
-  { icon: Database, label: "Ingest", value: "AWS / Snowflake" },
-  { icon: Workflow, label: "Engineer", value: "PySpark / dbt" },
-  { icon: BrainCircuit, label: "Model", value: "ML / RAG" },
-  { icon: Layers3, label: "Deploy", value: "FastAPI / Agents" }
+  { icon: Database, label: "Prepare", value: "SQL / PySpark" },
+  { icon: Workflow, label: "Engineer", value: "Spark / Features" },
+  { icon: BrainCircuit, label: "Model", value: "XGBoost / RAG" },
+  { icon: Layers3, label: "Deploy", value: "MLflow / FastAPI" }
 ];
 
 const reliabilitySignals = [
-  "Similarity thresholds and citation validation",
-  "Model monitoring and CloudWatch",
-  "Production APIs and tool-using agents"
+  "Statistical validation and A/B testing",
+  "Drift monitoring and retrieval evaluation",
+  "Versioned models and production APIs"
 ];
 
 export function Hero() {
@@ -48,7 +48,7 @@ export function Hero() {
           <div className="flex flex-wrap items-center gap-3">
             <span className="eyebrow">
               <Sparkles className="mr-2 h-3.5 w-3.5" />
-              AI Engineering + Data Systems
+              Data Science + AI-ML
             </span>
             <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4 text-primary" />
@@ -57,15 +57,14 @@ export function Hero() {
           </div>
 
           <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-normal text-balance sm:text-5xl lg:text-6xl">
-            I build production-ready AI, ML, RAG, agentic AI, and cloud data systems.
+            I build predictive systems that turn complex business problems into scalable analytical solutions.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            I am {siteConfig.name}, an AWS Certified Data Engineer and AI/Data
-            professional with 3+ years of experience building production ML models,
-            RAG systems, agentic AI workflows, and scalable cloud data pipelines using
-            Python, AWS, Snowflake, Databricks, PySpark, dbt, LangChain, and OpenAI
-            Agents SDK.
+            I am {siteConfig.name}, a Data Scientist with 4 years of experience
+            building production-ready machine learning systems, predictive models,
+            RAG applications, and cloud-based data platforms using Python, SQL,
+            PySpark, XGBoost, MLflow, FastAPI, and AWS.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -129,9 +128,9 @@ export function Hero() {
                   <div className="flex items-center justify-between gap-3">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
-                        AI/Data System Focus
+                        Data Science System
                       </p>
-                      <h2 className="mt-2 text-xl font-black">Models to production</h2>
+                      <h2 className="mt-2 text-xl font-black">Data to decisions</h2>
                     </div>
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                       <ShieldCheck className="h-5 w-5" />

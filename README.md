@@ -1,10 +1,10 @@
 # Shreevikas Portfolio
 
-Recruiter-friendly portfolio for Shreevikas Jagadish, positioned around AI Engineering, Data Science, Machine Learning, Agentic AI, RAG systems, Data Engineering, MLOps, Cloud Data Platforms, and Decision Intelligence.
+Recruiter-friendly portfolio for Shreevikas Jagadish, positioned around Data Science, AI-ML, Predictive Modeling, Statistical Learning, Decision Intelligence, MLOps, RAG, and Cloud Analytics.
 
 ## Overview
 
-This portfolio highlights production-ready AI, ML, RAG, agentic AI, cloud data engineering, Snowflake/dbt, Databricks/PySpark, AWS, MLOps, and analytics systems.
+This portfolio highlights production-ready predictive systems, demand forecasting, machine learning, statistical validation, RAG, MLOps, cloud analytics, and decision intelligence.
 
 ## Tech Stack
 
@@ -20,20 +20,20 @@ This portfolio highlights production-ready AI, ML, RAG, agentic AI, cloud data e
 ## Features
 
 - Responsive light and dark theme
-- Premium recruiter-friendly hero, about, experience, projects, skills, education, certifications, and contact sections
-- Five primary featured projects across AI agents, FinOps AI, RAG, Databricks, and Snowflake/dbt
+- Premium recruiter-friendly hero, about, experience, projects, skills, education, and contact sections
+- Three resume-featured projects across forecasting, manufacturing intelligence, and enterprise RAG
 - Filtered project cards for AI Agents, RAG & GenAI, Data Science & ML, Data Engineering, MLOps, and Analytics
 - Latest resume view/download using `public/Shreevikas_Jagadish_Resume.pdf`
 - Bottom-right AI assistant gated by visitor email
 - Server-side Groq API integration using `GROQ_API_KEY`
 
-## Featured Projects
+## Resume-Featured Projects
 
-- [AgentShield](https://github.com/Shreevikas-BJ/agentshield): multi-LLM agent QA platform for prompt injection, privacy leakage, unsafe tool use, hallucination, policy risk, and regression reporting.
-- [AI FinOps Copilot](https://github.com/Shreevikas-BJ/ai-finops-copilot): read-only AI FinOps copilot for cloud cost analysis, savings findings, cost spikes, executive summaries, and ticket-ready recommendations.
-- [AI/ML Knowledge RAG Assistant](https://github.com/Shreevikas-BJ/ml-course-document-rag): cloud-native RAG assistant with Top-3 retrieval, similarity gating, clickable citations, refusal handling, and cache layers.
-- [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): AWS S3 to Databricks pipeline with Lakeflow Jobs, Unity Catalog, PySpark, Spark SQL, and medallion architecture.
-- [Airbnb Snowflake dbt Pipeline](https://github.com/Shreevikas-BJ/airbnb-snowflake-dbt-pipeline): Snowflake/dbt ELT pipeline with incremental models, SCD Type 2 snapshots, tests, macros, lineage docs, fact tables, and BI-ready models.
+- Intelligent Inventory Demand Forecasting Platform: PySpark and XGBoost forecasting with MLflow tracking, FastAPI deployment, and AWS automation.
+- Manufacturing Process Quality Intelligence System: predictive quality monitoring, anomaly detection, statistical validation, PostgreSQL, and Tableau.
+- Enterprise Knowledge Search Platform: LangChain and Hugging Face RAG with semantic chunking, vector retrieval, evaluation, and FastAPI serving.
+
+Additional GitHub projects remain available in the filterable project gallery.
 
 ## Resume
 
@@ -86,6 +86,6 @@ The Groq API key is only used in `app/api/chat/route.ts` and is never exposed to
 
 Shreevikas Jagadish<br>
 United States<br>
-Email: [shreevikasjagadish7@gmail.com](mailto:shreevikasjagadish7@gmail.com)<br>
+Email: [shreevikas@workapplyjob.com](mailto:shreevikas@workapplyjob.com)<br>
 GitHub: [Shreevikas-BJ](https://github.com/Shreevikas-BJ)<br>
 LinkedIn: [shreevikasbj](https://www.linkedin.com/in/shreevikasbj/)

@@ -6,23 +6,24 @@ export function About() {
     <section id="about" className="section-shell">
       <SectionHeading
         eyebrow="About"
-        title="AI/Data professional building across the full lifecycle from pipelines to intelligent applications."
-        description="I work across data ingestion, transformation, machine learning, RAG systems, AI agents, model deployment, evaluation, monitoring, production APIs, and cloud infrastructure."
+        title="Data Scientist translating complex business challenges into scalable analytical solutions."
+        description="I work across statistical modeling, predictive systems, machine learning, RAG, experimentation, model deployment, monitoring, and cloud-based analytics."
       />
 
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="data-panel p-6 sm:p-8">
           <div className="relative z-10">
             <p className="text-lg leading-8 text-muted-foreground">
-              I am {siteConfig.name}, an AWS Certified Data Engineer and AI/Data
-              professional with 3+ years of experience building production ML models,
-              RAG systems, agentic AI workflows, and scalable cloud data pipelines.
+              I am {siteConfig.name}, a Data Scientist with 4 years of experience
+              translating complex business challenges into scalable analytical
+              solutions using machine learning, statistical modeling, and cloud-based
+              data platforms.
             </p>
             <p className="mt-5 text-lg leading-8 text-muted-foreground">
-              I use Python, AWS, Snowflake, Databricks, PySpark, dbt, LangChain,
-              and OpenAI Agents SDK to connect intelligent models with reliable
-              cloud data infrastructure, measurable model quality, and production-ready
-              APIs.
+              I develop production-ready predictive systems, optimize large-scale
+              data workflows, and deliver measurable operational improvements through
+              robust model deployment, experimentation, and cross-functional
+              collaboration in enterprise technology environments.
             </p>
           </div>
         </div>

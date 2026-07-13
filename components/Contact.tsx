@@ -11,7 +11,7 @@ export function Contact() {
         <div className="relative z-10">
         <SectionHeading
           eyebrow="Contact"
-          title="Open to AI Engineer, Data Scientist, Data Engineer, AI/ML Engineer, and Agent Engineer roles."
+          title="Open to Data Scientist, AI-ML, Machine Learning, and Decision Intelligence roles."
           description="Recruiters and hiring teams can reach me through email, phone, LinkedIn, GitHub, or the latest resume linked below. I am based in the United States."
         />
 

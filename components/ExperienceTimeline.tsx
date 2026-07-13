@@ -7,8 +7,8 @@ export function ExperienceTimeline() {
     <section id="experience" className="section-shell">
       <SectionHeading
         eyebrow="Experience"
-        title="Experience across AI engineering, RAG systems, machine learning, and cloud data platforms."
-        description="A snapshot of my work building agentic AI workflows, LangChain RAG pipelines, production ML models, AWS-to-Snowflake ELT pipelines, and decision-ready analytics."
+        title="Experience delivering predictive systems, production ML, and decision intelligence."
+        description="A snapshot of my work across demand forecasting, ML and RAG reliability, manufacturing quality intelligence, statistical analysis, and cloud-based analytical delivery."
       />
 
       <div className="relative">

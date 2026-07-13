@@ -26,15 +26,15 @@ export function Projects() {
     <section id="projects" className="section-shell">
       <SectionHeading
         eyebrow="Projects"
-        title="AI, ML, RAG, agentic AI, data engineering, and analytics projects."
-        description="A focused project showcase for roles across AI engineering, applied AI, data science, machine learning engineering, data engineering, agent engineering, and forward deployed AI."
+        title="Production ML, forecasting, RAG, data engineering, and analytics projects."
+        description="My featured work reflects the latest resume, with additional GitHub projects across machine learning, AI applications, cloud data platforms, and business intelligence."
       />
 
       <div className="rounded-3xl border border-border/70 bg-card/30 p-4 backdrop-blur-xl sm:p-5">
         <div className="mb-5 flex items-center justify-between gap-4">
           <h3 className="text-2xl font-black">Featured Projects</h3>
           <span className="hidden text-sm text-muted-foreground sm:block">
-            Agent safety, FinOps AI, RAG, Databricks, and Snowflake/dbt
+            Forecasting, manufacturing intelligence, and enterprise RAG
           </span>
         </div>
         <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
@@ -54,7 +54,7 @@ export function Projects() {
           <div>
             <h3 className="text-2xl font-black">More Projects</h3>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-              Additional selected GitHub projects grouped by the areas recruiters often scan first.
+              Additional GitHub projects grouped by the areas recruiters often scan first.
             </p>
           </div>
           <ButtonLink href={`${siteConfig.github}?tab=repositories`} variant="outline" external>
