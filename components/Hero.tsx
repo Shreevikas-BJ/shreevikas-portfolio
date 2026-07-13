@@ -43,7 +43,7 @@ export function Hero() {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-background" />
       </div>
 
-      <div className="section-shell grid min-h-[calc(100svh-5rem)] items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.02fr_0.98fr] lg:py-16">
+      <div className="section-shell grid min-h-[calc(100svh-5rem)] items-center gap-14 py-14 sm:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16 lg:py-20">
         <div className="max-w-3xl animate-rise-in">
           <div className="flex flex-wrap items-center gap-3">
             <span className="eyebrow">
@@ -56,24 +56,24 @@ export function Hero() {
             </span>
           </div>
 
-          <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-normal text-balance sm:text-5xl lg:text-6xl">
+          <h1 className="mt-7 max-w-4xl text-4xl font-black leading-[1.15] text-balance sm:text-5xl sm:leading-[1.12] lg:text-5xl lg:leading-[1.12]">
             I build predictive systems that turn complex business problems into scalable analytical solutions.
           </h1>
 
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
             I am {siteConfig.name}, a Data Scientist with 4 years of experience
             building production-ready machine learning systems, predictive models,
             RAG applications, and cloud-based data platforms using Python, SQL,
             PySpark, XGBoost, MLflow, FastAPI, and AWS.
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-7 flex flex-wrap gap-2.5">
             {siteConfig.roles.map((role) => (
               <Badge key={role}>{role}</Badge>
             ))}
           </div>
 
-          <div className="relative z-10 mt-8 flex flex-wrap gap-3">
+          <div className="relative z-10 mt-9 flex flex-wrap gap-3">
             <ButtonLink href="#projects">
               View Projects
               <ArrowRight className="h-4 w-4" />
@@ -96,11 +96,11 @@ export function Hero() {
             </ButtonLink>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {heroStats.map((stat) => (
               <div key={stat.label} className="stat-tile">
                 <div className="text-2xl font-black text-primary">{stat.value}</div>
-                <div className="mt-1 text-xs font-medium text-muted-foreground">{stat.label}</div>
+                <div className="mt-2 text-sm leading-5 text-muted-foreground">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -108,7 +108,7 @@ export function Hero() {
 
         <div className="relative animate-rise-in [animation-delay:120ms]">
           <div className="data-panel mx-auto max-w-xl p-3 shadow-2xl shadow-primary/10">
-            <div className="relative z-10 grid items-start gap-3 lg:grid-cols-[0.92fr_1.08fr]">
+            <div className="relative z-10 grid items-start gap-4 lg:grid-cols-[0.92fr_1.08fr]">
               <div className="relative mx-auto aspect-[4/5] w-full max-w-sm self-start overflow-hidden rounded-2xl border border-border/70 bg-muted lg:mx-0 lg:aspect-[2/3] lg:max-w-none">
                 <div aria-hidden="true" className="absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-black/30 to-transparent" />
                 <Image
@@ -121,10 +121,10 @@ export function Hero() {
                 />
               </div>
 
-              <div className="rounded-2xl border border-border/70 bg-background/50 p-4">
+              <div className="rounded-2xl border border-border/70 bg-background/50 p-5">
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                    <p className="text-xs font-bold uppercase text-primary">
                       Data Science System
                     </p>
                     <h2 className="mt-2 text-xl font-black">Data to decisions</h2>
@@ -133,13 +133,13 @@ export function Hero() {
                     <ShieldCheck className="h-5 w-5" />
                   </div>
                 </div>
-                <div className="mt-4 grid gap-2">
+                <div className="mt-5 grid gap-3">
                   {pipelineNodes.map((node, index) => {
                     const Icon = node.icon;
                     return (
                       <div
                         key={node.label}
-                        className="relative rounded-xl border border-border/60 bg-card/70 p-3"
+                        className="relative rounded-xl border border-border/60 bg-card/70 p-4"
                       >
                         {index < pipelineNodes.length - 1 ? (
                           <span
@@ -152,10 +152,10 @@ export function Hero() {
                             <Icon className="h-4 w-4" />
                           </div>
                           <div>
-                            <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                            <p className="text-xs font-bold uppercase text-muted-foreground">
                               {node.label}
                             </p>
-                            <p className="text-sm font-black">{node.value}</p>
+                            <p className="mt-0.5 text-base font-black">{node.value}</p>
                           </div>
                         </div>
                       </div>
@@ -164,13 +164,13 @@ export function Hero() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-border/70 bg-background/50 p-4 lg:col-span-2">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
+              <div className="rounded-2xl border border-border/70 bg-background/50 p-5 lg:col-span-2">
+                <p className="text-xs font-bold uppercase text-accent">
                   Production Signals
                 </p>
-                <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
                   {reliabilitySignals.map((signal) => (
-                    <div key={signal} className="flex items-start gap-2 text-sm leading-6 text-muted-foreground">
+                    <div key={signal} className="flex items-start gap-3 text-base leading-7 text-muted-foreground">
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                       {signal}
                     </div>
@@ -180,17 +180,17 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="mt-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+          <div className="mt-5 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
             {achievementCards.map((card) => {
               const Icon = card.icon;
               return (
-                <div key={card.label} className="premium-card rounded-xl p-4">
+                <div key={card.label} className="premium-card rounded-xl p-5">
                   <div className="flex items-center gap-2 text-sm font-semibold">
                     <Icon className="h-4 w-4 text-accent" />
                     {card.label}
                   </div>
                   <div className="mt-2 text-lg font-bold">{card.value}</div>
-                  <p className="mt-1 text-xs leading-5 text-muted-foreground">{card.text}</p>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{card.text}</p>
                 </div>
               );
             })}

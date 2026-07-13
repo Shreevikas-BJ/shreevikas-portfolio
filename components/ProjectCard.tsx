@@ -15,7 +15,7 @@ export function ProjectCard({
   large?: boolean;
 }) {
   return (
-    <article className="premium-card group flex h-full flex-col p-5 sm:p-6">
+    <article className="premium-card group flex h-full flex-col p-6 sm:p-8">
       <div aria-hidden="true" className="trace-line left-6 right-6 top-0" />
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -30,7 +30,7 @@ export function ProjectCard({
           <h3 className={large ? "text-2xl font-black" : "text-xl font-black"}>
             {project.title}
           </h3>
-          <p className="mt-3 leading-7 text-muted-foreground">{project.summary}</p>
+          <p className="mt-4 text-base leading-8 text-muted-foreground">{project.summary}</p>
         </div>
         <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary transition group-hover:scale-105 sm:flex">
           {project.filters.includes("AI Agents") || project.filters.includes("RAG & GenAI") ? (
@@ -41,13 +41,13 @@ export function ProjectCard({
         </div>
       </div>
 
-      <div className="mt-5 flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-wrap gap-2.5">
         {project.tech.slice(0, large ? 8 : 6).map((item) => (
           <Badge key={item}>{item}</Badge>
         ))}
       </div>
 
-      <ul className="mt-5 space-y-2 text-sm leading-6 text-muted-foreground">
+      <ul className="mt-6 space-y-3 text-base leading-7 text-muted-foreground">
         {project.bullets.slice(0, large ? 3 : 2).map((bullet) => (
           <li key={bullet} className="flex gap-3">
             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
@@ -56,12 +56,7 @@ export function ProjectCard({
         ))}
       </ul>
 
-      <p className="mt-5 rounded-xl border border-border/70 bg-background/40 p-4 text-sm leading-6 text-muted-foreground">
-        <span className="font-semibold text-foreground">Architecture: </span>
-        {project.architecture}
-      </p>
-
-      <div className="mt-auto flex flex-wrap gap-3 pt-6">
+      <div className="mt-auto flex flex-wrap gap-3 pt-8">
         {project.repoUrl ? (
           <ButtonLink href={project.repoUrl} variant="primary" external>
             View GitHub Repo

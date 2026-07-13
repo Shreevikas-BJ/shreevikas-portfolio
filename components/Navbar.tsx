@@ -82,7 +82,7 @@ export function Navbar() {
           <ThemeToggle />
           <Button
             variant="outline"
-            className="h-10 w-10 px-0 lg:hidden"
+            className="h-10 w-10 shrink-0 !px-0 lg:hidden"
             onClick={() => setOpen((value) => !value)}
             aria-label={open ? "Close navigation" : "Open navigation"}
             aria-expanded={open}

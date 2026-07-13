@@ -30,14 +30,14 @@ export function Projects() {
         description="My featured work reflects the latest resume, with additional GitHub projects across machine learning, AI applications, cloud data platforms, and business intelligence."
       />
 
-      <div className="rounded-3xl border border-border/70 bg-card/30 p-4 backdrop-blur-xl sm:p-5">
-        <div className="mb-5 flex items-center justify-between gap-4">
+      <div className="rounded-3xl border border-border/70 bg-card/30 p-5 backdrop-blur-xl sm:p-8">
+        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <h3 className="text-2xl font-black">Featured Projects</h3>
           <span className="hidden text-sm text-muted-foreground sm:block">
             Forecasting, manufacturing intelligence, and enterprise RAG
           </span>
         </div>
-        <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-7 lg:grid-cols-2">
           {featuredProjects.map((project) => (
             <ProjectCard
               key={project.slug}
@@ -49,11 +49,11 @@ export function Projects() {
         </div>
       </div>
 
-      <div className="mt-12">
-        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mt-16">
+        <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h3 className="text-2xl font-black">More Projects</h3>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">
               Additional GitHub projects grouped by the areas recruiters often scan first.
             </p>
           </div>
@@ -63,14 +63,14 @@ export function Projects() {
           </ButtonLink>
         </div>
 
-        <div className="mb-8 flex flex-wrap gap-2 rounded-2xl border border-border/70 bg-card/40 p-2 backdrop-blur-xl">
+        <div className="mb-10 flex flex-wrap gap-2.5 rounded-2xl border border-border/70 bg-card/40 p-3 backdrop-blur-xl">
           {projectFilters.map((filter) => (
             <button
               key={filter}
               type="button"
               onClick={() => setActiveFilter(filter)}
               className={cn(
-                "focus-ring rounded-full border px-4 py-2 text-sm font-semibold transition",
+                "focus-ring rounded-full border px-4 py-2.5 text-sm font-semibold transition",
                 activeFilter === filter
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-transparent bg-transparent text-muted-foreground hover:border-primary/30 hover:bg-primary/10 hover:text-foreground"
@@ -81,7 +81,7 @@ export function Projects() {
           ))}
         </div>
 
-        <motion.div layout className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <motion.div layout className="grid gap-7 md:grid-cols-2">
           <AnimatePresence mode="popLayout">
             {visibleProjects.map((project) => (
               <motion.div

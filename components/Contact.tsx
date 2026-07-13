@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 export function Contact() {
   return (
     <section id="contact" className="section-shell">
-      <div className="data-panel p-6 sm:p-8 lg:p-10">
+      <div className="data-panel p-7 sm:p-10 lg:p-12">
         <div className="relative z-10">
         <SectionHeading
           eyebrow="Contact"
@@ -15,16 +15,16 @@ export function Contact() {
           description="Recruiters and hiring teams can reach me through email, phone, LinkedIn, GitHub, or the latest resume linked below. I am based in the United States."
         />
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {contactItems.map((item) => {
             const Icon = item.icon;
             const content = (
-              <div className="h-full rounded-2xl border border-border/70 bg-background/50 p-4 transition hover:border-primary/50 hover:bg-primary/5">
-                <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+              <div className="h-full rounded-2xl border border-border/70 bg-background/50 p-5 transition hover:border-primary/50 hover:bg-primary/5">
+                <div className="flex items-center gap-2 text-base font-semibold text-primary">
                   <Icon className="h-4 w-4" />
                   {item.label}
                 </div>
-                <p className="mt-2 break-words text-sm text-muted-foreground">{item.value}</p>
+                <p className="mt-3 break-words text-base leading-7 text-muted-foreground">{item.value}</p>
               </div>
             );
 
@@ -44,7 +44,7 @@ export function Contact() {
           })}
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-10 flex flex-wrap gap-3">
           <ButtonLink href={siteConfig.emailHref} external>
             <Mail className="h-4 w-4" />
             Email Me

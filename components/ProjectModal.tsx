@@ -37,7 +37,7 @@ export function ProjectModal({
       onMouseDown={onClose}
     >
       <div
-        className="premium-card max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-t-3xl p-6 shadow-2xl sm:rounded-3xl sm:p-8"
+        className="premium-card max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-t-3xl p-7 shadow-2xl sm:rounded-3xl sm:p-10"
         onMouseDown={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
@@ -46,11 +46,11 @@ export function ProjectModal({
             <h3 id="project-modal-title" className="mt-4 text-3xl font-black text-balance">
               {project.title}
             </h3>
-            <p className="mt-4 leading-7 text-muted-foreground">{project.summary}</p>
+            <p className="mt-5 text-lg leading-8 text-muted-foreground">{project.summary}</p>
           </div>
           <Button
             variant="outline"
-            className="h-10 w-10 shrink-0 px-0"
+            className="h-10 w-10 shrink-0 !px-0"
             onClick={onClose}
             aria-label="Close project details"
           >
@@ -58,14 +58,14 @@ export function ProjectModal({
           </Button>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-border/80 bg-background/40 p-5">
-          <h4 className="font-bold">Architecture and impact</h4>
-          <p className="mt-2 leading-7 text-muted-foreground">{project.architecture}</p>
+        <div className="mt-8 rounded-2xl border border-border/80 bg-background/40 p-6">
+          <h4 className="text-lg font-bold">Architecture and impact</h4>
+          <p className="mt-3 leading-8 text-muted-foreground">{project.architecture}</p>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-border/70 bg-card/50 p-5">
-          <h4 className="font-bold">Achievement highlights</h4>
-          <ul className="mt-3 space-y-3 text-sm leading-7 text-muted-foreground">
+        <div className="mt-6 rounded-2xl border border-border/70 bg-card/50 p-6">
+          <h4 className="text-lg font-bold">Achievement highlights</h4>
+          <ul className="mt-4 space-y-4 text-base leading-8 text-muted-foreground">
             {project.bullets.map((bullet) => (
               <li key={bullet} className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
@@ -75,9 +75,9 @@ export function ProjectModal({
           </ul>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-border/70 bg-card/50 p-5">
-          <h4 className="font-bold">Tech stack</h4>
-          <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-6 rounded-2xl border border-border/70 bg-card/50 p-6">
+          <h4 className="text-lg font-bold">Tech stack</h4>
+          <div className="mt-4 flex flex-wrap gap-2.5">
             {project.tech.map((item) => (
               <Badge key={item}>{item}</Badge>
             ))}

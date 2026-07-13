@@ -351,7 +351,7 @@ export function Chatbot() {
                     />
                     <Button
                       type="submit"
-                      className="h-11 w-11 px-0"
+                      className="h-11 w-11 shrink-0 !px-0"
                       disabled={loading || !input.trim()}
                       aria-label="Send message"
                     >
