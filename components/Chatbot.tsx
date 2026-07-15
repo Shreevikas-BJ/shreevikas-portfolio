@@ -19,7 +19,7 @@ const welcomeMessage: Message = {
 };
 
 const refusalMessage =
-  "I can only answer questions about my professional background, projects, skills, education, and experience. For anything specific, please contact me directly at shreevikas@workapplyjob.com.";
+  "I can only answer questions about my professional background, projects, skills, education, and experience. For anything specific, please contact me directly at shreevikasjagadish7@gmail.com.";
 
 const CHAT_REQUEST_TIMEOUT_MS = 15000;
 const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";

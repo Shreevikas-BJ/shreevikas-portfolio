@@ -22,11 +22,11 @@ export const siteConfig = {
     "Portfolio of Shreevikas Jagadish, a Data Scientist and AI-ML professional building production-ready machine learning systems, predictive models, RAG applications, and cloud-based analytical platforms.",
   location: "United States",
   availability: "Open to Data Scientist, AI-ML, Machine Learning, and Decision Intelligence roles",
-  email: "shreevikas@workapplyjob.com",
+  email: "shreevikasjagadish7@gmail.com",
   emailHref:
-    "https://mail.google.com/mail/?view=cm&fs=1&to=shreevikas%40workapplyjob.com&su=Portfolio%20Inquiry",
-  phone: "+1 (210) 201-6775",
-  phoneHref: "tel:+12102016775",
+    "https://mail.google.com/mail/?view=cm&fs=1&to=shreevikasjagadish7%40gmail.com&su=Portfolio%20Inquiry",
+  phone: "+1 (312) 358-3056",
+  phoneHref: "tel:+13123583056",
   notificationEmail: "shreevikasj@gmail.com",
   github: "https://github.com/Shreevikas-BJ",
   linkedin: "https://www.linkedin.com/in/shreevikasbj/",
@@ -225,6 +225,39 @@ export const experiences: Experience[] = [
       "I established statistical validation, retrieval evaluation, drift monitoring, and A/B testing practices that increased ML and RAG performance consistency by 18% across evolving data distributions.",
       "I partnered with analytics, product, supply chain, and operational stakeholders to translate planning and enterprise knowledge discovery requirements into deployable AI solutions.",
       "I developed Power BI dashboards for forecast performance, predictions, operational exceptions, and planning trends, eliminating 60% of recurring manual reporting effort."
+    ]
+  },
+  {
+    title: "AI Engineer Intern",
+    company: "NeuralSeek",
+    location: "United States - Remote",
+    dates: "Jul 2025 - Nov 2025",
+    tags: [
+      "Python",
+      "LangChain",
+      "RAG",
+      "OpenAI Agents SDK",
+      "FastAPI",
+      "Pydantic",
+      "pytest",
+      "AWS Lambda",
+      "S3",
+      "DynamoDB",
+      "MCP",
+      "Vector Search"
+    ],
+    metrics: [
+      "10K+ documents",
+      "500+ daily queries",
+      "30% reliability gain",
+      "25% faster UI/API iteration"
+    ],
+    bullets: [
+      "I led a 4-member team building LangChain RAG pipelines for 10K+ real estate documents, supporting 500+ daily queries.",
+      "I improved document upload reliability by 30% using AWS Lambda, S3, DynamoDB, vector refresh workflows, and MCP error alerts.",
+      "I reduced UI and API iteration time by 25% with FastAPI, Pydantic, pytest, structured logging, and error handling.",
+      "I improved RAG answer quality through similarity threshold optimization, citation validation, response caching, fallback handling, and low-confidence query logging.",
+      "I built an agentic AI workflow with the OpenAI Agents SDK to draft and evaluate reports and create Gmail drafts through MCP-based tool use."
     ]
   },
   {
@@ -664,7 +697,7 @@ export const education = [
     details: ["Master of Science program completed in May 2026."]
   },
   {
-    degree: "Bachelor of Computer Science",
+    degree: "Bachelor in Computer Science",
     school: "Visvesvaraya Technological University",
     location: "India",
     dates: "Graduation: August 2023",
@@ -716,6 +749,7 @@ export const navItems = [
 
 export const suggestedQuestions = [
   "What is Shreevikas's data science experience?",
+  "What did Shreevikas do at NeuralSeek?",
   "Tell me about his forecasting work.",
   "What machine learning systems has he built?",
   "Tell me about his RAG experience.",

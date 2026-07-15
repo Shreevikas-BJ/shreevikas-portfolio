@@ -7,7 +7,7 @@ export function About() {
       <SectionHeading
         eyebrow="About"
         title="Data Scientist translating complex business challenges into scalable analytical solutions."
-        description="I work across statistical modeling, predictive systems, machine learning, RAG, experimentation, model deployment, monitoring, and cloud-based analytics."
+        description="I work across statistical modeling, predictive systems, machine learning, AI engineering, RAG, experimentation, model deployment, monitoring, and cloud-based analytics."
       />
 
       <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">

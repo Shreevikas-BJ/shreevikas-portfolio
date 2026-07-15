@@ -20,6 +20,8 @@ I have 4 years of experience translating complex business challenges into scalab
 Professional experience:
 Data Scientist / AI-ML, Cloudera, United States, January 2026-present. I designed regional demand forecasting models with Python, SQL, PySpark, and XGBoost, improving inventory planning accuracy by 24%. I built a reusable Apache Spark and MLflow experimentation framework that shortened model iteration cycles by 40%. I integrated predictive inference services and LLM-powered workflows through FastAPI and Docker, reducing processing latency by 38%. I established statistical validation, retrieval evaluation, drift monitoring, and A/B testing practices that increased ML and RAG consistency by 18%. I collaborated with analytics, product, supply chain, and operations teams to deliver deployable AI solutions. I created Power BI dashboards that eliminated 60% of recurring manual reporting effort.
 
+AI Engineer Intern, NeuralSeek, United States-remote, July 2025-November 2025. I led a 4-member team building LangChain RAG pipelines for 10K+ real estate documents and 500+ daily queries. I improved document upload reliability by 30% with AWS Lambda, S3, DynamoDB, vector refresh workflows, and MCP error alerts. I reduced UI and API iteration time by 25% with FastAPI, Pydantic, pytest, structured logging, and error handling. I improved RAG quality through similarity threshold tuning, citation validation, caching, fallback handling, and low-confidence query logging. I also built an agentic AI workflow with the OpenAI Agents SDK and MCP-based tool use.
+
 Data Scientist, Bosch, India, March 2021-July 2024. I engineered manufacturing quality prediction models with Python and Scikit-Learn, raising defect detection accuracy by 22%. I consolidated manufacturing datasets and unstructured maintenance records through automated ETL and NLP preprocessing, reducing preparation time by 45%. I improved prediction precision by 17% through feature selection, hyperparameter tuning, cross-validation, and optimization of classification and deep learning models. I developed statistical analysis and anomaly detection dashboards for process stability and automated recurring analytics with SQL, Pandas, and scheduled pipelines, saving 55% of manual processing effort.
 
 Featured resume projects:
@@ -33,7 +35,7 @@ Additional portfolio projects:
 The portfolio also includes GitHub projects across AI safety, FinOps AI, RAG, Databricks, Snowflake, MLOps, streaming data engineering, customer analytics, NLP, computer vision, BI, and SQL analysis. These include AgentShield, AI FinOps Copilot, AI/ML Knowledge RAG Assistant, Databricks Lakeflow Medallion Pipeline, Airbnb Snowflake dbt Pipeline, Sales Forecasting MLOps Pipeline, Subscription Value Brain, Stock Market Kafka Data Pipeline, IT Helpdesk AI Agent, Medical RAG Chatbot, Real-Time Pothole Detection, BERT Sentiment Analysis App, Customer Churn Prediction ML, NVIDIA Stock Forecasting, Plant Co Performance Dashboard, and COVID-19 Vaccination SQL Analysis.
 
 Education:
-Master of Science in Information Technology & Management, Illinois Institute of Technology, United States, May 2026. Bachelor of Computer Science, Visvesvaraya Technological University, India, August 2023.
+Master of Science in Information Technology & Management, Illinois Institute of Technology, United States, May 2026. Bachelor in Computer Science, Visvesvaraya Technological University, India, August 2023.
 
 Skills:
 Programming: Python, SQL, PySpark, R.
@@ -60,7 +62,17 @@ export const cachedChatbotAnswers = [
       "Bosch"
     ],
     answer:
-      "I have 4 years of data science experience across Cloudera and Bosch. At Cloudera, I build demand forecasting, ML experimentation, predictive inference, RAG reliability, drift monitoring, and Power BI solutions. At Bosch, I developed manufacturing quality prediction, NLP preprocessing, anomaly detection, statistical analysis, and automated analytics workflows."
+      "I have 4 years of experience spanning data science and AI engineering. At Cloudera, I build demand forecasting, ML experimentation, predictive inference, RAG reliability, drift monitoring, and Power BI solutions. As an AI Engineer Intern at NeuralSeek, I built production-oriented RAG and agentic AI workflows. At Bosch, I developed manufacturing quality prediction, NLP preprocessing, anomaly detection, statistical analysis, and automated analytics workflows."
+  },
+  {
+    questions: [
+      "What did Shreevikas do at NeuralSeek?",
+      "NeuralSeek experience",
+      "AI Engineer Intern",
+      "AI engineering experience"
+    ],
+    answer:
+      "As an AI Engineer Intern at NeuralSeek, I led a 4-member team building LangChain RAG pipelines for 10K+ real estate documents and 500+ daily queries. I improved upload reliability by 30% with AWS Lambda, S3, DynamoDB, vector refresh workflows, and MCP alerts, and reduced UI/API iteration time by 25% using FastAPI, Pydantic, pytest, and structured logging. I also improved retrieval quality with similarity tuning, citation validation, caching, and fallback handling, and built an agentic AI workflow with the OpenAI Agents SDK."
   },
   {
     questions: [
@@ -82,7 +94,7 @@ export const cachedChatbotAnswers = [
       "modeling experience"
     ],
     answer:
-      "I build forecasting, classification, regression, anomaly detection, and deep learning systems. My work includes demand forecasting at Cloudera, manufacturing quality prediction at Bosch, an inventory forecasting platform, and a manufacturing process quality intelligence system. I use Python, PySpark, Scikit-Learn, XGBoost, MLflow, FastAPI, Docker, statistical validation, drift monitoring, and A/B testing."
+      "I build forecasting, classification, regression, anomaly detection, deep learning, RAG, and agentic AI systems. My work includes demand forecasting at Cloudera, RAG and AI agent workflows at NeuralSeek, manufacturing quality prediction at Bosch, an inventory forecasting platform, and a manufacturing process quality intelligence system. I use Python, PySpark, Scikit-Learn, XGBoost, MLflow, FastAPI, Docker, statistical validation, drift monitoring, and A/B testing."
   },
   {
     questions: [
@@ -93,7 +105,7 @@ export const cachedChatbotAnswers = [
       "vector search"
     ],
     answer:
-      "I build RAG and enterprise knowledge search systems using LangChain, Hugging Face, transformer embeddings, semantic chunking, vector retrieval, retrieval evaluation, grounded generation, FastAPI, and PostgreSQL. My Enterprise Knowledge Search Platform improved relevant document discovery by 31% and reduced information search time by 46%. At Cloudera, I also established retrieval evaluation practices that improved ML and RAG consistency."
+      "I build RAG and enterprise knowledge search systems using LangChain, Hugging Face, transformer embeddings, semantic chunking, vector retrieval, retrieval evaluation, grounded generation, FastAPI, and PostgreSQL. At NeuralSeek, I built RAG pipelines for 10K+ documents and 500+ daily queries while improving upload reliability and retrieval quality. My Enterprise Knowledge Search Platform improved relevant document discovery by 31% and reduced information search time by 46%, and at Cloudera I established retrieval evaluation practices that improved ML and RAG consistency."
   },
   {
     questions: [

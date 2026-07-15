@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     "Shreevikas Jagadish",
     "Data Scientist",
     "AI-ML Engineer",
+    "AI Engineer",
     "Machine Learning",
     "Production Machine Learning",
     "Predictive Modeling",

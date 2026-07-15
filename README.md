@@ -6,6 +6,8 @@ Recruiter-friendly portfolio for Shreevikas Jagadish, positioned around Data Sci
 
 This portfolio highlights production-ready predictive systems, demand forecasting, machine learning, statistical validation, RAG, MLOps, cloud analytics, and decision intelligence.
 
+Professional experience includes Data Scientist / AI-ML work at Cloudera, an AI Engineer internship at NeuralSeek, and Data Scientist work at Bosch.
+
 ## Tech Stack
 
 - Next.js App Router
@@ -86,6 +88,6 @@ The Groq API key is only used in `app/api/chat/route.ts` and is never exposed to
 
 Shreevikas Jagadish<br>
 United States<br>
-Email: [shreevikas@workapplyjob.com](mailto:shreevikas@workapplyjob.com)<br>
+Email: [shreevikasjagadish7@gmail.com](mailto:shreevikasjagadish7@gmail.com)<br>
 GitHub: [Shreevikas-BJ](https://github.com/Shreevikas-BJ)<br>
 LinkedIn: [shreevikasbj](https://www.linkedin.com/in/shreevikasbj/)
