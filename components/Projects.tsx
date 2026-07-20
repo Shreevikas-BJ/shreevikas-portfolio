@@ -1,102 +1,190 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Github } from "lucide-react";
-import { useState } from "react";
+import { Github, Search, SlidersHorizontal } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectModal } from "@/components/ProjectModal";
+import { SectionHeading } from "@/components/SectionHeading";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import type { Project, ProjectFilter } from "@/data/portfolio";
 import { projectFilters, projects, siteConfig } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
-import { SectionHeading } from "@/components/SectionHeading";
-import { ProjectCard } from "@/components/ProjectCard";
-import { ProjectModal } from "@/components/ProjectModal";
-import { ButtonLink } from "@/components/ui/Button";
 
 export function Projects() {
   const [activeFilter, setActiveFilter] = useState<ProjectFilter>("All");
+  const [query, setQuery] = useState("");
+  const [showAll, setShowAll] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const featuredProjects = projects.filter((project) => project.featured);
-  const additionalProjects = projects.filter((project) => !project.featured);
+  const featuredProjects = useMemo(
+    () =>
+      projects
+        .filter((project) => project.featured)
+        .sort((first, second) => (first.featuredOrder || 99) - (second.featuredOrder || 99)),
+    []
+  );
+
+  const additionalProjects = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+    return projects.filter((project) => {
+      if (project.featured) return false;
+      const matchesFilter =
+        activeFilter === "All" || project.filters.includes(activeFilter);
+      const matchesQuery =
+        !normalizedQuery ||
+        [project.title, project.summary, project.category, ...project.tech]
+          .join(" ")
+          .toLowerCase()
+          .includes(normalizedQuery);
+      return matchesFilter && matchesQuery;
+    });
+  }, [activeFilter, query]);
+
   const visibleProjects =
-    activeFilter === "All"
+    showAll || activeFilter !== "All" || query.trim()
       ? additionalProjects
-      : additionalProjects.filter((project) => project.filters.includes(activeFilter));
+      : additionalProjects.slice(0, 3);
+
+  const selectFilter = (filter: ProjectFilter) => {
+    setActiveFilter(filter);
+    setShowAll(false);
+  };
 
   return (
-    <section id="projects" className="section-shell">
-      <SectionHeading
-        eyebrow="Projects"
-        title="Production ML, forecasting, RAG, data engineering, and analytics projects."
-        description="My featured work reflects the latest resume, with additional GitHub projects across machine learning, AI applications, cloud data platforms, and business intelligence."
-      />
+    <section id="projects" className="section-band">
+      <div className="section-shell">
+        <SectionHeading
+          eyebrow="04 / Projects"
+          title="Engineering work across AI safety, RAG, MLOps, and modern data platforms."
+          description="These systems show how I frame problems, design architectures, build reliability into the workflow, and turn technical output into something people can use."
+        />
 
-      <div className="rounded-3xl border border-border/70 bg-card/30 p-5 backdrop-blur-xl sm:p-8">
-        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <h3 className="text-2xl font-black">Featured Projects</h3>
-          <span className="hidden text-sm text-muted-foreground sm:block">
-            Forecasting, manufacturing intelligence, and enterprise RAG
-          </span>
-        </div>
-        <div className="grid gap-7 lg:grid-cols-2">
-          {featuredProjects.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              onDetails={setSelectedProject}
-              large
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-16">
-        <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-8 flex flex-col gap-4 border-y border-border/70 py-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h3 className="text-2xl font-black">More Projects</h3>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">
-              Additional GitHub projects grouped by the areas recruiters often scan first.
+            <p className="mono-label">Flagship systems</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Six focused builds spanning production AI and data infrastructure.
             </p>
           </div>
           <ButtonLink href={`${siteConfig.github}?tab=repositories`} variant="outline" external>
             <Github className="h-4 w-4" />
-            View More on GitHub
+            View all repositories
           </ButtonLink>
         </div>
 
-        <div className="mb-10 flex flex-wrap gap-2.5 rounded-2xl border border-border/70 bg-card/40 p-3 backdrop-blur-xl">
-          {projectFilters.map((filter) => (
-            <button
-              key={filter}
-              type="button"
-              onClick={() => setActiveFilter(filter)}
-              className={cn(
-                "focus-ring rounded-full border px-4 py-2.5 text-sm font-semibold transition",
-                activeFilter === filter
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-transparent bg-transparent text-muted-foreground hover:border-primary/30 hover:bg-primary/10 hover:text-foreground"
-              )}
+        <div className="space-y-8 lg:space-y-10">
+          {featuredProjects.map((project, index) => (
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.12 }}
+              transition={{ duration: 0.55, delay: Math.min(index * 0.035, 0.14) }}
             >
-              {filter}
-            </button>
+              <ProjectCard
+                project={project}
+                onDetails={setSelectedProject}
+                large
+                reverse={index % 2 === 1}
+              />
+            </motion.div>
           ))}
         </div>
 
-        <motion.div layout className="grid gap-7 md:grid-cols-2">
-          <AnimatePresence mode="popLayout">
-            {visibleProjects.map((project) => (
-              <motion.div
-                key={project.slug}
-                layout
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.2 }}
+        <div className="mt-24 border-t border-border pt-12">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="eyebrow">Project explorer</p>
+              <h3 className="mt-4 text-2xl font-semibold sm:text-3xl">More applied systems</h3>
+              <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">
+                Search by project, architecture, or technology, then narrow the collection by domain.
+              </p>
+            </div>
+
+            <label className="relative block w-full max-w-md">
+              <span className="sr-only">Search projects</span>
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <input
+                value={query}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setShowAll(false);
+                }}
+                type="search"
+                placeholder="Search projects or technologies"
+                className="focus-ring h-12 w-full rounded-lg border border-border bg-surface/65 pl-11 pr-4 text-sm placeholder:text-muted-foreground/75"
+              />
+            </label>
+          </div>
+
+          <div className="mt-8 flex items-start gap-3">
+            <SlidersHorizontal className="mt-2.5 hidden h-4 w-4 shrink-0 text-primary sm:block" />
+            <div className="flex flex-wrap gap-2" aria-label="Filter projects">
+              {projectFilters.map((filter) => (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => selectFilter(filter)}
+                  aria-pressed={activeFilter === filter}
+                  className={cn(
+                    "focus-ring rounded-full border px-3.5 py-2 font-mono text-xs font-semibold transition",
+                    activeFilter === filter
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-surface/45 text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                  )}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-5 flex items-center justify-between font-mono text-xs text-muted-foreground">
+            <span>{additionalProjects.length} matching projects</span>
+            {query ? (
+              <button
+                type="button"
+                className="focus-ring rounded-md text-primary hover:underline"
+                onClick={() => setQuery("")}
               >
-                <ProjectCard project={project} onDetails={setSelectedProject} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                Clear search
+              </button>
+            ) : null}
+          </div>
+
+          <motion.div layout className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <AnimatePresence mode="popLayout">
+              {visibleProjects.map((project) => (
+                <motion.div
+                  key={project.slug}
+                  layout
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.22 }}
+                >
+                  <ProjectCard project={project} onDetails={setSelectedProject} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          {!visibleProjects.length ? (
+            <div className="mt-8 rounded-lg border border-dashed border-border py-14 text-center">
+              <p className="font-semibold">No projects match that search.</p>
+              <p className="mt-2 text-sm text-muted-foreground">Try another technology or category.</p>
+            </div>
+          ) : null}
+
+          {!showAll && activeFilter === "All" && !query.trim() && additionalProjects.length > 3 ? (
+            <div className="mt-10 flex justify-center">
+              <Button variant="outline" onClick={() => setShowAll(true)}>
+                Show {additionalProjects.length - 3} more projects
+              </Button>
+            </div>
+          ) : null}
+        </div>
       </div>
 
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />

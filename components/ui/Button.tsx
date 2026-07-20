@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { cloneElement, isValidElement } from "react";
+import { cloneElement, forwardRef, isValidElement } from "react";
 import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "secondary" | "ghost" | "outline";
@@ -16,7 +16,7 @@ const variants: Record<Variant, string> = {
 
 export function buttonClasses(variant: Variant = "primary", className?: string) {
   return cn(
-    "focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-base font-bold transition duration-200 disabled:pointer-events-none disabled:opacity-60",
+    "focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition duration-200 disabled:pointer-events-none disabled:opacity-60",
     variants[variant],
     className
   );
@@ -58,17 +58,22 @@ export function ButtonLink({
   );
 }
 
-export function Button({
-  children,
-  variant = "primary",
-  className,
-  type = "button",
-  asChild,
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant;
   asChild?: boolean;
-}) {
+};
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    children,
+    variant = "primary",
+    className,
+    type = "button",
+    asChild,
+    ...props
+  },
+  ref
+) {
   if (asChild && isValidElement<{ className?: string }>(children)) {
     return cloneElement(children, {
       className: cn(buttonClasses(variant, className), children.props.className)
@@ -76,8 +81,8 @@ export function Button({
   }
 
   return (
-    <button type={type} className={buttonClasses(variant, className)} {...props}>
+    <button ref={ref} type={type} className={buttonClasses(variant, className)} {...props}>
       {children}
     </button>
   );
-}
+});

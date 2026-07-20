@@ -7,20 +7,23 @@ import {
   resumeRequestMessage
 } from "@/data/chatbotContext";
 
-type GroqResponse = {
-  choices?: Array<{ message?: { content?: string } }>;
+type GroqStreamChunk = {
+  choices?: Array<{ delta?: { content?: string } }>;
+};
+
+type RateLimitEntry = {
+  count: number;
+  resetAt: number;
 };
 
 class GroqRequestError extends Error {
   status: number;
-  statusText: string;
   body: string;
 
-  constructor(status: number, statusText: string, body: string) {
+  constructor(status: number, body: string) {
     super(`Groq request failed with status ${status}`);
     this.name = "GroqRequestError";
     this.status = status;
-    this.statusText = statusText;
     this.body = body;
   }
 }
@@ -35,51 +38,42 @@ class GroqTimeoutError extends Error {
 const GROQ_MODEL = "llama-3.1-8b-instant";
 const GROQ_TIMEOUT_MS = 15000;
 const MAX_COMPLETION_TOKENS = 180;
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 10;
+const rateLimitStore = new Map<string, RateLimitEntry>();
 
 const relatedTerms = [
   "shreevikas",
   "resume",
   "cv",
   "project",
-  "projects",
   "github",
-  "repo",
-  "repository",
-  "featured",
   "skill",
-  "skills",
   "experience",
   "education",
+  "certification",
   "aws",
   "data",
-  "science",
-  "scientist",
   "analytics",
   "machine learning",
   "ml",
   "ai",
-  "ai ml",
   "cloudera",
   "neuralseek",
   "bosch",
   "ai engineer",
+  "data scientist",
+  "data engineer",
   "openai agents sdk",
   "mcp",
   "predictive",
-  "predictive modeling",
   "statistical",
-  "statistical learning",
   "decision intelligence",
   "finops",
   "cost optimization",
-  "cloud cost",
   "mlops",
   "model",
-  "models",
-  "modeling",
   "forecast",
-  "forecasting",
-  "demand forecasting",
   "time series",
   "classification",
   "regression",
@@ -88,46 +82,31 @@ const relatedTerms = [
   "recommendation",
   "feature engineering",
   "xgboost",
-  "arima",
-  "lstm",
-  "garch",
-  "bert",
-  "yolo",
-  "yolov8",
-  "scikit",
-  "scikit-learn",
-  "lightgbm",
   "tensorflow",
   "pytorch",
   "mlflow",
   "fastapi",
+  "inference",
+  "latency",
+  "observability",
+  "deployment",
+  "production",
+  "reliability",
+  "evaluation",
+  "pipeline",
   "docker",
   "kubernetes",
   "drift",
   "monitoring",
   "a/b testing",
-  "ab testing",
   "power bi",
   "tableau",
-  "dashboard",
-  "dashboarding",
-  "sql analysis",
-  "covid",
-  "plant",
   "manufacturing",
-  "quality",
   "inventory",
   "supply chain",
   "sales",
   "subscription",
   "churn",
-  "clv",
-  "uplift",
-  "house price",
-  "sentiment",
-  "pothole",
-  "medical",
-  "helpdesk",
   "rag",
   "hugging face",
   "transformers",
@@ -136,18 +115,16 @@ const relatedTerms = [
   "langchain",
   "langgraph",
   "agent",
-  "agents",
   "agentshield",
   "ai finops",
-  "ml course",
   "semantic search",
   "knowledge search",
-  "ai ml knowledge",
   "safety",
   "guardrails",
-  "judge",
+  "llm evaluation",
   "cloud",
   "azure",
+  "gcp",
   "sagemaker",
   "snowflake",
   "databricks",
@@ -156,40 +133,39 @@ const relatedTerms = [
   "pyspark",
   "dbt",
   "kafka",
+  "flink",
+  "airflow",
   "lakeflow",
   "medallion",
   "unity catalog",
-  "athena",
   "glue",
-  "experiment tracking",
-  "inventory planning",
-  "retrieval evaluation",
+  "research",
+  "scientific ai",
+  "scientific machine learning",
+  "physics",
+  "physicsnemo",
+  "fourier neural operator",
+  "cuda",
+  "onnx",
+  "tensorrt",
+  "surrogate model",
   "iit",
   "illinois",
   "role",
-  "roles",
   "hire",
-  "hiring",
-  "available",
   "availability",
   "relocation",
   "contact",
   "email",
-  "github",
   "linkedin",
-  "portfolio",
-  "technology",
-  "technologies"
+  "technology"
 ];
 
 const privateInfoTerms = [
   "visa",
   "work authorization",
   "work authorisation",
-  "authorization status",
-  "authorisation status",
   "sponsorship",
-  "sponsor",
   "h1b",
   "h-1b",
   "opt",
@@ -200,15 +176,9 @@ const privateInfoTerms = [
   "compensation",
   "pay range",
   "hourly rate",
-  "rate expectation",
-  "salary expectation",
   "notice period",
   "start date",
-  "available to start",
-  "personal details",
-  "private details",
   "home address",
-  "current address",
   "date of birth",
   "age",
   "marital",
@@ -225,6 +195,7 @@ const stopWords = new Set([
   "for",
   "has",
   "have",
+  "his",
   "is",
   "me",
   "of",
@@ -238,14 +209,10 @@ const stopWords = new Set([
   "with"
 ]);
 
-function isValidEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
 function normalizeText(value: string) {
   return value
     .toLowerCase()
-    .replace(/[’']/g, "")
+    .replace(/[\u2019']/g, "")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 }
@@ -262,26 +229,13 @@ function isRelatedQuestion(message: string) {
 }
 
 function asksForPrivateOrMissingInfo(message: string) {
-  const normalized = normalizeText(message);
-  const tokens = new Set(normalized.split(/\s+/).filter(Boolean));
-
-  return privateInfoTerms.some((term) => {
-    const normalizedTerm = normalizeText(term);
-    if (normalizedTerm.includes(" ")) {
-      return normalized.includes(normalizedTerm);
-    }
-
-    return tokens.has(normalizedTerm);
-  });
+  const normalized = ` ${normalizeText(message)} `;
+  return privateInfoTerms.some((term) => normalized.includes(` ${normalizeText(term)} `));
 }
 
 function asksForResume(message: string) {
   const normalized = normalizeText(message);
-  return (
-    normalized.includes("resume") ||
-    normalized.includes("cv") ||
-    normalized.includes("curriculum vitae")
-  );
+  return ["resume", "cv", "curriculum vitae"].some((term) => normalized.includes(term));
 }
 
 function getCachedAnswer(message: string) {
@@ -304,19 +258,44 @@ function getCachedAnswer(message: string) {
       const overlap = questionTokens.filter((token) => messageTokens.has(token)).length;
       const score = overlap / Math.max(questionTokens.length, 1);
 
-      if (overlap >= 2 && score >= 0.65) {
-        return cachedAnswer.answer;
-      }
+      if (overlap >= 2 && score >= 0.65) return cachedAnswer.answer;
     }
   }
 
   return null;
 }
 
-function maskEmail(email?: string) {
-  if (!email || !email.includes("@")) return "unknown";
-  const [local, domain] = email.split("@");
-  return `${local.slice(0, 2)}***@${domain}`;
+function getClientKey(request: Request) {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "anonymous"
+  );
+}
+
+function checkRateLimit(clientKey: string) {
+  const now = Date.now();
+  const current = rateLimitStore.get(clientKey);
+
+  if (!current || now >= current.resetAt) {
+    rateLimitStore.set(clientKey, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS - 1, retryAfter: 0 };
+  }
+
+  if (current.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return {
+      allowed: false,
+      remaining: 0,
+      retryAfter: Math.max(1, Math.ceil((current.resetAt - now) / 1000))
+    };
+  }
+
+  current.count += 1;
+  return {
+    allowed: true,
+    remaining: RATE_LIMIT_MAX_REQUESTS - current.count,
+    retryAfter: 0
+  };
 }
 
 function logTiming(
@@ -333,21 +312,16 @@ function logTiming(
   });
 }
 
+function getRetryDelay(error: GroqRequestError) {
+  const retryAfterMatch = error.body.match(/try again in ([\d.]+)s/i);
+  return retryAfterMatch?.[1] ? Math.ceil(Number(retryAfterMatch[1]) * 1000) + 250 : 1500;
+}
+
 async function delay(milliseconds: number) {
   await new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
-function getRetryDelay(error: GroqRequestError) {
-  const retryAfterMatch = error.body.match(/try again in ([\d.]+)s/i);
-
-  if (retryAfterMatch?.[1]) {
-    return Math.ceil(Number(retryAfterMatch[1]) * 1000) + 250;
-  }
-
-  return 1500;
-}
-
-async function fetchGroqCompletion(
+async function startGroqStream(
   apiKey: string,
   messages: Array<{ role: string; content: string }>,
   tokenField: "max_completion_tokens" | "max_tokens" = "max_completion_tokens"
@@ -367,11 +341,13 @@ async function fetchGroqCompletion(
         model: GROQ_MODEL,
         temperature: 0.2,
         [tokenField]: MAX_COMPLETION_TOKENS,
+        stream: true,
         messages
       })
     });
 
     if (!response.ok) {
+      clearTimeout(timeoutId);
       const body = await response.text().catch(() => "");
 
       if (
@@ -379,101 +355,163 @@ async function fetchGroqCompletion(
         response.status === 400 &&
         /max_completion_tokens/i.test(body)
       ) {
-        return fetchGroqCompletion(apiKey, messages, "max_tokens");
+        return startGroqStream(apiKey, messages, "max_tokens");
       }
 
-      console.error("Groq chatbot request failed.", {
-        status: response.status,
-        statusText: response.statusText,
-        body: body.slice(0, 500)
-      });
-      throw new GroqRequestError(response.status, response.statusText, body);
+      throw new GroqRequestError(response.status, body);
     }
 
-    return (await response.json()) as GroqResponse;
+    if (!response.body) {
+      clearTimeout(timeoutId);
+      throw new GroqRequestError(502, "Groq returned an empty stream.");
+    }
+
+    return { response, controller, timeoutId };
   } catch (error) {
+    clearTimeout(timeoutId);
     if (error instanceof DOMException && error.name === "AbortError") {
       throw new GroqTimeoutError();
     }
-
     throw error;
-  } finally {
-    clearTimeout(timeoutId);
   }
 }
 
-async function fetchGroqCompletionWithFastRetry(
+async function startGroqStreamWithRetry(
   apiKey: string,
   messages: Array<{ role: string; content: string }>
 ) {
   try {
-    return await fetchGroqCompletion(apiKey, messages);
+    return await startGroqStream(apiKey, messages);
   } catch (error) {
     const retryDelay =
       error instanceof GroqRequestError && error.status === 429 ? getRetryDelay(error) : null;
 
-    if (!retryDelay || retryDelay > 2500) {
-      throw error;
-    }
-
+    if (!retryDelay || retryDelay > 2500) throw error;
     await delay(retryDelay);
-    return fetchGroqCompletion(apiKey, messages);
+    return startGroqStream(apiKey, messages);
   }
+}
+
+function createResponseStream({
+  response,
+  controller: abortController,
+  timeoutId,
+  requestId,
+  startedAt
+}: {
+  response: Response;
+  controller: AbortController;
+  timeoutId: ReturnType<typeof setTimeout>;
+  requestId: string;
+  startedAt: number;
+}) {
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+
+  return new ReadableStream<Uint8Array>({
+    async start(streamController) {
+      const reader = response.body!.getReader();
+      let buffer = "";
+      let receivedContent = false;
+
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            const trimmedLine = line.trim();
+            if (!trimmedLine.startsWith("data:")) continue;
+
+            const payload = trimmedLine.slice(5).trim();
+            if (!payload || payload === "[DONE]") continue;
+
+            try {
+              const chunk = JSON.parse(payload) as GroqStreamChunk;
+              const content = chunk.choices?.[0]?.delta?.content;
+              if (content) {
+                receivedContent = true;
+                streamController.enqueue(encoder.encode(content));
+              }
+            } catch {
+              // Ignore malformed provider keepalive lines without interrupting the response.
+            }
+          }
+        }
+
+        if (!receivedContent) streamController.enqueue(encoder.encode(contactFallback));
+        logTiming(requestId, "Groq response received", startedAt);
+      } catch (error) {
+        const message =
+          abortController.signal.aborted
+            ? "The assistant is taking longer than expected. Please try again in a moment."
+            : "The assistant could not complete that response. Please try again.";
+        streamController.enqueue(encoder.encode(message));
+        console.error("Chatbot stream failed.", {
+          requestId,
+          error: error instanceof Error ? error.message : String(error)
+        });
+      } finally {
+        clearTimeout(timeoutId);
+        streamController.close();
+        logTiming(requestId, "total latency", startedAt);
+      }
+    },
+    cancel() {
+      clearTimeout(timeoutId);
+      abortController.abort();
+    }
+  });
 }
 
 export async function POST(request: Request) {
   const startedAt = Date.now();
   const requestId = Math.random().toString(36).slice(2, 8);
-  let maskedEmail = "unknown";
+  const rateLimit = checkRateLimit(getClientKey(request));
 
   logTiming(requestId, "request received", startedAt);
 
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: "Too many requests. Please wait a moment and try again." },
+      { status: 429, headers: { "Retry-After": String(rateLimit.retryAfter) } }
+    );
+  }
+
   try {
-    const { email, message } = (await request.json()) as {
-      email?: string;
-      message?: string;
-    };
+    const { message } = (await request.json()) as { message?: string };
 
-    maskedEmail = maskEmail(email);
-
-    if (!email || !isValidEmail(email)) {
-      logTiming(requestId, "validation failed", startedAt, { reason: "invalid email" });
-      return NextResponse.json(
-        { error: "A valid email is required before using the assistant." },
-        { status: 400 }
-      );
-    }
-
-    if (!message || !message.trim()) {
-      logTiming(requestId, "validation failed", startedAt, { email: maskedEmail, reason: "empty message" });
+    if (!message?.trim()) {
       return NextResponse.json({ error: "Message is required." }, { status: 400 });
     }
 
     const trimmedMessage = message.trim().slice(0, 900);
-
     logTiming(requestId, "validation complete", startedAt, {
-      email: maskedEmail,
-      messageLength: trimmedMessage.length
+      messageLength: trimmedMessage.length,
+      remaining: rateLimit.remaining
     });
 
     if (asksForPrivateOrMissingInfo(trimmedMessage)) {
-      logTiming(requestId, "contact fallback", startedAt, { email: maskedEmail });
+      logTiming(requestId, "contact fallback", startedAt);
       return NextResponse.json({ answer: contactFallback });
     }
 
     if (asksForResume(trimmedMessage)) {
-      logTiming(requestId, "resume request", startedAt, { email: maskedEmail });
+      logTiming(requestId, "resume request", startedAt);
       return NextResponse.json({ answer: resumeRequestMessage, cached: true });
     }
 
     const cachedAnswer = getCachedAnswer(trimmedMessage);
-
     if (cachedAnswer) {
-      logTiming(requestId, "cache hit", startedAt, { email: maskedEmail });
+      logTiming(requestId, "cache hit", startedAt);
       return NextResponse.json({ answer: cachedAnswer, cached: true });
     }
 
-    logTiming(requestId, "cache miss", startedAt, { email: maskedEmail });
+    logTiming(requestId, "cache miss", startedAt);
 
     if (!isRelatedQuestion(trimmedMessage)) {
       return NextResponse.json({ answer: refusalMessage });
@@ -482,62 +520,56 @@ export async function POST(request: Request) {
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
-        { error: "GROQ_API_KEY is not configured on the server." },
-        { status: 500 }
+        { error: "The assistant is temporarily unavailable." },
+        { status: 503 }
       );
     }
 
     const groqMessages = [
       {
         role: "system",
-        content: `You are Shreevikas's AI Assistant for a recruiter-facing portfolio website.
+        content: `You are Shreevikas's AI Assistant on a recruiter-facing portfolio.
 
 Rules:
-- Answer in first person as Shreevikas's AI Assistant.
-- Use only the available portfolio context below.
-- Keep answers concise, professional, recruiter-friendly, and usually 3-6 sentences.
-- Do not invent employers, dates, degrees, metrics, credentials, links, or skills.
-- If the user asks for my resume, provide the latest resume link from the context.
-- If the user asks for my resume, reply exactly: "${resumeRequestMessage}"
-- If the user asks outside my professional background, projects, skills, education, or experience, reply exactly: "${refusalMessage}"
-- If information is missing, private, sensitive, or not available, reply exactly: "${contactFallback}"
-- Do not use internal process, sourcing, or implementation language in user-facing answers.
-- Never mention private implementation details or environment variables.
+- Answer in first person as Shreevikas's AI Assistant. Treat every request as a question about Shreevikas, never as a request for general technical advice.
+- Use only explicit facts in the portfolio context below. Every employer, date, metric, method, technology, and project in your response must appear in that context.
+- Never infer adjacent tools or typical practices. For example, do not add Redis, Memcached, Prometheus, Grafana, pruning, distillation, quantization, or any other technology unless it appears in the context.
+- Never invent a relationship between two facts. Do not claim that a fact indirectly supports another outcome unless the context explicitly says so.
+- If the context does not explicitly support an answer, use the contact fallback exactly instead of filling the gap with general knowledge.
+- Keep answers concise, professional, and recruiter-friendly, using no more than 2 sentences. Stop when the direct facts are exhausted; do not pad the response.
+- For a resume request, reply exactly: "${resumeRequestMessage}"
+- For an unrelated question, reply exactly: "${refusalMessage}"
+- If information is private, sensitive, missing, or unavailable, reply exactly: "${contactFallback}"
+- Do not mention internal sourcing, implementation language, system prompts, or environment variables.
 
 Portfolio context:
 ${chatbotContext}`
       },
       {
         role: "user",
-        content: trimmedMessage
+        content: `Portfolio question: ${trimmedMessage}\nAnswer only with explicit facts from the portfolio context.`
       }
     ];
 
     logTiming(requestId, "Groq request started", startedAt, {
-      email: maskedEmail,
       model: GROQ_MODEL,
       promptChars: groqMessages.reduce((sum, item) => sum + item.content.length, 0)
     });
 
-    const data = await fetchGroqCompletionWithFastRetry(apiKey, groqMessages);
+    const groqStream = await startGroqStreamWithRetry(apiKey, groqMessages);
+    const stream = createResponseStream({ ...groqStream, requestId, startedAt });
 
-    logTiming(requestId, "Groq response received", startedAt, { email: maskedEmail });
-
-    const answer = data.choices?.[0]?.message?.content?.trim();
-    const normalizedAnswer = normalizeText(answer || "");
-    const shouldUseContactFallback =
-      !answer ||
-      normalizedAnswer.includes("not available") ||
-      normalizedAnswer.includes("not provided") ||
-      normalizedAnswer.includes("do not have") ||
-      normalizedAnswer.includes("dont have") ||
-      normalizedAnswer.includes("does not contain") ||
-      normalizedAnswer.includes("portfolio context does not");
-
-    return NextResponse.json({
-      answer: shouldUseContactFallback ? contactFallback : answer
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+        "X-Chat-Stream": "1",
+        "X-RateLimit-Remaining": String(rateLimit.remaining)
+      }
     });
   } catch (error) {
+    logTiming(requestId, "total latency", startedAt);
+
     if (error instanceof GroqTimeoutError) {
       return NextResponse.json(
         { error: "The assistant is taking longer than expected. Please try again in a moment." },
@@ -546,6 +578,11 @@ ${chatbotContext}`
     }
 
     if (error instanceof GroqRequestError) {
+      console.error("Groq chatbot request failed.", {
+        requestId,
+        status: error.status,
+        body: error.body.slice(0, 300)
+      });
       return NextResponse.json(
         { error: "The assistant could not respond right now. Please try again in a moment." },
         { status: error.status === 429 ? 503 : 502 }
@@ -553,14 +590,9 @@ ${chatbotContext}`
     }
 
     console.error("Unexpected chatbot route error.", {
+      requestId,
       error: error instanceof Error ? error.message : String(error)
     });
-
-    return NextResponse.json(
-      { error: "Unexpected chatbot error. Please try again." },
-      { status: 500 }
-    );
-  } finally {
-    logTiming(requestId, "total latency", startedAt, { email: maskedEmail });
+    return NextResponse.json({ error: "Unexpected chatbot error. Please try again." }, { status: 500 });
   }
 }

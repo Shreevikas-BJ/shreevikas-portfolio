@@ -2,13 +2,15 @@ import {
   BarChart3,
   Bot,
   BrainCircuit,
-  BriefcaseBusiness,
   Cloud,
-  Database,
+  Cpu,
+  FlaskConical,
+  Gauge,
   LineChart,
   Mail,
   MapPin,
   Phone,
+  ServerCog,
   ShieldCheck,
   Sparkles,
   Workflow
@@ -17,17 +19,17 @@ import {
 export const siteConfig = {
   name: "Shreevikas Jagadish",
   shortName: "Shreevikas",
-  title: "Shreevikas Jagadish | Data Scientist & AI-ML Professional",
+  initials: "SJ",
+  title: "Shreevikas Jagadish | AI/ML Engineer, Data Scientist & Data Engineer",
   description:
-    "Portfolio of Shreevikas Jagadish, a Data Scientist and AI-ML professional building production-ready machine learning systems, predictive models, RAG applications, and cloud-based analytical platforms.",
-  location: "United States",
-  availability: "Open to Data Scientist, AI-ML, Machine Learning, and Decision Intelligence roles",
+    "Portfolio of Shreevikas Jagadish, an AI/ML Engineer, Data Scientist, and Data Engineer building production machine-learning systems, trustworthy RAG applications, scientific AI, MLOps workflows, and cloud data platforms.",
+  location: "Chicago, Illinois",
+  availability: "Open to AI/ML, Data Science, and Data Engineering roles",
+  relocation: "Open to relocation",
   email: "shreevikasjagadish7@gmail.com",
-  emailHref:
-    "https://mail.google.com/mail/?view=cm&fs=1&to=shreevikasjagadish7%40gmail.com&su=Portfolio%20Inquiry",
+  emailHref: "mailto:shreevikasjagadish7@gmail.com?subject=Portfolio%20Inquiry",
   phone: "+1 (312) 358-3056",
   phoneHref: "tel:+13123583056",
-  notificationEmail: "shreevikasj@gmail.com",
   github: "https://github.com/Shreevikas-BJ",
   linkedin: "https://www.linkedin.com/in/shreevikasbj/",
   portfolio: "https://shreevikas-portfolio.vercel.app/",
@@ -35,148 +37,223 @@ export const siteConfig = {
   resumePath: "/Shreevikas_Jagadish_Resume.pdf",
   resumeFileName: "Shreevikas_Jagadish_Resume.pdf",
   roles: [
+    "AI/ML Engineer",
     "Data Scientist",
-    "AI-ML",
-    "Predictive Modeling",
-    "Statistical Learning",
-    "Decision Intelligence",
-    "Machine Learning",
-    "MLOps",
-    "Cloud Analytics"
+    "Data Engineer"
   ]
 };
 
 export const heroStats = [
-  { label: "Experience", value: "4 yrs" },
-  { label: "Planning accuracy", value: "+24%" },
-  { label: "Model iteration", value: "-40%" },
-  { label: "Defect detection", value: "+22%" }
+  {
+    value: 4,
+    suffix: "+",
+    label: "Years of experience",
+    context: "Across production ML, AI engineering, and analytics"
+  },
+  {
+    value: 24,
+    suffix: "%",
+    label: "Planning accuracy gain",
+    context: "Regional demand forecasting"
+  },
+  {
+    value: 40,
+    suffix: "%",
+    label: "Faster model iteration",
+    context: "Reusable Spark and MLflow workflows"
+  },
+  {
+    value: 38,
+    suffix: "%",
+    label: "Lower processing latency",
+    context: "Production inference services"
+  },
+  {
+    value: 22,
+    suffix: "%",
+    label: "Better defect detection",
+    context: "Manufacturing quality intelligence"
+  }
 ];
 
 export const aboutHighlights = [
   {
-    icon: LineChart,
-    title: "Predictive modeling",
-    description:
-      "I build forecasting, classification, regression, recommendation, and anomaly detection systems that translate business needs into measurable decisions."
-  },
-  {
     icon: BrainCircuit,
-    title: "Machine learning systems",
+    title: "Machine Learning",
     description:
-      "I develop reusable feature engineering, model training, validation, monitoring, and experimentation workflows with Spark, MLflow, and modern ML frameworks."
+      "Forecasting, classification, anomaly detection, feature engineering, and model optimization."
   },
   {
     icon: Bot,
-    title: "Generative AI and RAG",
+    title: "Generative AI",
     description:
-      "I engineer grounded knowledge search with LangChain, Hugging Face, transformer embeddings, semantic chunking, vector retrieval, and retrieval evaluation."
+      "Grounded RAG, agentic workflows, embeddings, evaluation, caching, and guardrails."
+  },
+  {
+    icon: Gauge,
+    title: "MLOps",
+    description:
+      "Experiment tracking, model serving, monitoring, validation, CI/CD, and drift detection."
   },
   {
     icon: Workflow,
-    title: "Production MLOps",
+    title: "Data Engineering",
     description:
-      "I deploy predictive services with FastAPI and Docker while supporting model serving, monitoring, A/B testing, CI/CD, and reliable release workflows."
+      "Reliable batch and streaming pipelines, lakehouse patterns, quality, and orchestration."
   },
   {
     icon: Cloud,
-    title: "Cloud analytics platforms",
+    title: "Cloud Platforms",
     description:
-      "I scale analytical workloads across AWS, Azure, Databricks, Snowflake, and BigQuery using PySpark, Apache Spark, and production data pipelines."
+      "AWS, Databricks, Snowflake, Azure, and GCP systems built for governed scale."
+  },
+  {
+    icon: BarChart3,
+    title: "Analytics",
+    description:
+      "Decision intelligence, statistical analysis, experimentation, and executive reporting."
+  },
+  {
+    icon: FlaskConical,
+    title: "Scientific AI",
+    description:
+      "Physics-informed learning, neural operators, surrogate modeling, and GPU inference."
   }
 ];
 
 export const skills = [
   {
-    category: "Programming",
-    icon: BriefcaseBusiness,
-    items: ["Python", "SQL", "PySpark", "R"]
+    category: "AI & Generative AI",
+    icon: Bot,
+    summary: "Grounded systems that can retrieve, reason, evaluate, and refuse safely.",
+    items: [
+      "LLMs",
+      "RAG",
+      "Advanced RAG",
+      "LangChain",
+      "LangGraph",
+      "Hugging Face",
+      "Transformers",
+      "Embeddings",
+      "Reranking",
+      "Prompt Engineering",
+      "Agentic AI",
+      "LLM Evaluation",
+      "Guardrails",
+      "OpenAI Agents SDK",
+      "MCP"
+    ]
   },
   {
     category: "Machine Learning",
     icon: BrainCircuit,
+    summary: "Predictive and statistical learning from experimentation through evaluation.",
     items: [
-      "Supervised Learning",
-      "Unsupervised Learning",
-      "Feature Engineering",
-      "Model Optimization",
+      "Python",
+      "Scikit-Learn",
+      "PyTorch",
+      "TensorFlow",
+      "XGBoost",
+      "LightGBM",
       "Classification",
       "Regression",
       "Clustering",
-      "Time Series Forecasting",
+      "Forecasting",
       "Recommendation Systems",
-      "Anomaly Detection"
+      "Anomaly Detection",
+      "Feature Engineering",
+      "Model Optimization"
     ]
   },
   {
-    category: "Generative AI",
-    icon: Bot,
+    category: "Scientific AI",
+    icon: FlaskConical,
+    summary: "GPU-accelerated surrogate models for scientific and engineering simulation.",
     items: [
-      "Large Language Models",
-      "RAG",
-      "Hugging Face",
-      "Transformers",
-      "Prompt Engineering",
-      "Embedding Models",
-      "LangChain"
+      "NVIDIA PhysicsNeMo",
+      "Fourier Neural Operators",
+      "Physics-Informed ML",
+      "Surrogate Modeling",
+      "CUDA",
+      "ONNX",
+      "TensorRT",
+      "GPU Inference",
+      "Scientific Computing"
     ]
-  },
-  {
-    category: "Deep Learning",
-    icon: Sparkles,
-    items: ["TensorFlow", "PyTorch", "Scikit-Learn", "XGBoost", "LightGBM"]
   },
   {
     category: "Data Engineering",
     icon: Workflow,
+    summary: "Governed data products across batch, streaming, warehouse, and lakehouse systems.",
     items: [
+      "SQL",
+      "PySpark",
       "Apache Spark",
-      "Pandas",
-      "NumPy",
-      "ETL Pipelines",
-      "Data Processing",
-      "Data Quality"
+      "Kafka",
+      "Flink",
+      "Airflow",
+      "dbt",
+      "ETL / ELT",
+      "Batch Processing",
+      "Streaming Pipelines",
+      "Data Quality",
+      "Data Modeling",
+      "Medallion Architecture"
     ]
   },
   {
     category: "MLOps & Deployment",
-    icon: ShieldCheck,
-    items: ["MLflow", "Docker", "Kubernetes", "FastAPI", "Model Serving", "Model Monitoring", "CI/CD"]
+    icon: ServerCog,
+    summary: "Observable, versioned ML services designed for repeatable production releases.",
+    items: [
+      "MLflow",
+      "Docker",
+      "Kubernetes",
+      "FastAPI",
+      "Model Serving",
+      "Model Monitoring",
+      "CI/CD",
+      "GitHub Actions",
+      "Drift Monitoring",
+      "A/B Testing"
+    ]
   },
   {
     category: "Cloud & Data Platforms",
     icon: Cloud,
+    summary: "Cloud-native compute, storage, orchestration, warehousing, and observability.",
     items: [
-      "AWS S3",
-      "AWS SageMaker",
-      "AWS EC2",
-      "AWS Lambda",
-      "Azure",
+      "AWS",
       "Databricks",
       "Snowflake",
-      "BigQuery"
+      "GCP",
+      "Azure",
+      "PostgreSQL",
+      "Supabase",
+      "BigQuery",
+      "S3",
+      "Lambda",
+      "Glue",
+      "SageMaker",
+      "CloudWatch",
+      "Redshift"
     ]
   },
   {
-    category: "Visualization & Analytics",
+    category: "Analytics & Decision Intelligence",
     icon: BarChart3,
-    items: ["Power BI", "Tableau", "Matplotlib", "Plotly", "Statistical Analysis", "A/B Testing"]
-  },
-  {
-    category: "Databases & Tools",
-    icon: Database,
+    summary: "Clear analytical narratives that turn model output into decisions.",
     items: [
-      "PostgreSQL",
-      "SQL Server",
-      "MySQL",
-      "MongoDB",
-      "Git",
-      "Linux",
-      "Jira",
-      "Confluence",
-      "REST APIs",
-      "Agile",
-      "Scrum"
+      "Power BI",
+      "Tableau",
+      "Plotly",
+      "Matplotlib",
+      "Statistical Analysis",
+      "A/B Testing",
+      "Pandas",
+      "NumPy",
+      "R",
+      "REST APIs"
     ]
   }
 ];
@@ -186,6 +263,7 @@ export type Experience = {
   company: string;
   location: string;
   dates: string;
+  summary: string;
   tags: string[];
   metrics?: string[];
   bullets: string[];
@@ -197,6 +275,8 @@ export const experiences: Experience[] = [
     company: "Cloudera",
     location: "United States",
     dates: "Jan 2026 - Present",
+    summary:
+      "I build and operationalize demand forecasting, predictive inference, retrieval evaluation, and decision-intelligence systems across enterprise planning workflows.",
     tags: [
       "Python",
       "SQL",
@@ -232,6 +312,8 @@ export const experiences: Experience[] = [
     company: "NeuralSeek",
     location: "United States - Remote",
     dates: "Jul 2025 - Nov 2025",
+    summary:
+      "I built production-oriented RAG and agentic AI workflows for document intelligence, retrieval quality, and reliable API delivery.",
     tags: [
       "Python",
       "LangChain",
@@ -265,6 +347,8 @@ export const experiences: Experience[] = [
     company: "Bosch",
     location: "India",
     dates: "Mar 2021 - Jul 2024",
+    summary:
+      "I developed manufacturing quality intelligence and predictive-maintenance workflows that improved defect detection, data readiness, and operational visibility.",
     tags: [
       "Python",
       "SQL",
@@ -289,6 +373,52 @@ export const experiences: Experience[] = [
       "I built statistical analysis and anomaly detection dashboards that gave engineering teams earlier visibility into process instability, recurring production patterns, and equipment behavior.",
       "I automated recurring analytics and operational reporting with SQL, Pandas, and scheduled data pipelines, saving 55% of manual processing effort."
     ]
+  }
+];
+
+export const researchExperience = {
+  title: "Physics-Informed AI for Scientific Simulation",
+  role: "Graduate Research Assistant",
+  organization: "Illinois Institute of Technology",
+  location: "Chicago, Illinois",
+  dates: "Nov 2025 - May 2026",
+  summary:
+    "I research scientific machine-learning systems that replace slow simulation loops with fast, physics-informed surrogate models for engineering applications.",
+  highlights: [
+    "I researched and prototyped PyTorch neural networks using NVIDIA PhysicsNeMo, CUDA, and Fourier Neural Operators to build AI-powered surrogate models that replicate slow physics-based simulations with near-instant, physics-informed predictions.",
+    "I optimized scientific simulation models using CUDA, ONNX, and TensorRT to accelerate GPU inference for engineering and industrial applications."
+  ],
+  capabilities: [
+    { icon: FlaskConical, label: "Physics-informed AI" },
+    { icon: BrainCircuit, label: "Neural operators" },
+    { icon: Cpu, label: "GPU acceleration" },
+    { icon: Gauge, label: "Surrogate modeling" }
+  ],
+  pipeline: [
+    "Physics simulation",
+    "Training data",
+    "Neural operator",
+    "GPU optimization",
+    "Fast surrogate inference"
+  ],
+  technologies: [
+    "PyTorch",
+    "NVIDIA PhysicsNeMo",
+    "CUDA",
+    "Fourier Neural Operators",
+    "ONNX",
+    "TensorRT",
+    "Scientific Computing"
+  ]
+};
+
+export const certifications = [
+  {
+    name: "AWS Certified Data Engineer - Associate",
+    issuer: "Amazon Web Services",
+    credentialUrl:
+      "https://www.credly.com/badges/017bc7a0-a378-4cfa-abb0-bc968c20d7da/public_url",
+    icon: ShieldCheck
   }
 ];
 
@@ -338,7 +468,11 @@ export type Project = {
   category: ProjectCategory;
   filters: ProjectFilter[];
   featured?: boolean;
+  featuredOrder?: number;
   highlightLabel?: string;
+  problem?: string;
+  solution?: string;
+  visual?: "forecast" | "shield" | "finops" | "rag" | "medallion" | "lineage";
   summary: string;
   architecture: string;
   tech: string[];
@@ -354,7 +488,13 @@ export const projects: Project[] = [
     category: "Data Science / Forecasting / MLOps",
     filters: ["Data Science & ML", "MLOps", "Analytics"],
     featured: true,
-    highlightLabel: "Featured Forecasting",
+    featuredOrder: 6,
+    highlightLabel: "Production Forecasting",
+    problem:
+      "Regional inventory planning becomes unreliable when demand signals are fragmented and model releases are slow.",
+    solution:
+      "A scalable forecasting platform that combines distributed feature processing, tracked experiments, validation, and API-based delivery.",
+    visual: "forecast",
     summary:
       "Production demand forecasting platform for multi-regional inventory planning, model tracking, validation, and API-based forecast delivery.",
     architecture:
@@ -371,8 +511,8 @@ export const projects: Project[] = [
     slug: "manufacturing-process-quality-intelligence",
     category: "Data Science / Manufacturing Intelligence",
     filters: ["Data Science & ML", "Analytics"],
-    featured: true,
-    highlightLabel: "Featured Quality ML",
+    featured: false,
+    highlightLabel: "Quality Intelligence",
     summary:
       "Predictive quality intelligence system for detecting abnormal manufacturing behavior and improving production visibility.",
     architecture:
@@ -389,8 +529,8 @@ export const projects: Project[] = [
     slug: "enterprise-knowledge-search-platform",
     category: "GenAI / RAG / Enterprise Search",
     filters: ["RAG & GenAI", "Data Science & ML"],
-    featured: true,
-    highlightLabel: "Featured Enterprise RAG",
+    featured: false,
+    highlightLabel: "Enterprise RAG",
     summary:
       "RAG-based enterprise knowledge platform for grounded, context-aware access to technical documentation and operational resources.",
     architecture:
@@ -407,8 +547,14 @@ export const projects: Project[] = [
     slug: "agentshield",
     category: "AI Agents / AI Safety / LLM Evaluation",
     filters: ["AI Agents", "RAG & GenAI"],
-    featured: false,
-    highlightLabel: "Featured AI Safety",
+    featured: true,
+    featuredOrder: 1,
+    highlightLabel: "AI Safety & Evaluation",
+    problem:
+      "AI agents can pass happy-path demos while still leaking data, misusing tools, or failing under adversarial prompts.",
+    solution:
+      "An auditable multi-LLM QA and red-team workbench that evaluates launch risk before an agent reaches production.",
+    visual: "shield",
     summary:
       "Multi-LLM agent QA platform with 6 failure modes and 3 red-team scan levels for pre-launch AI agent testing.",
     architecture:
@@ -426,8 +572,14 @@ export const projects: Project[] = [
     slug: "ai-finops-copilot",
     category: "AI / Cloud Analytics / FinOps",
     filters: ["AI Agents", "Analytics", "Data Engineering"],
-    featured: false,
-    highlightLabel: "Featured FinOps AI",
+    featured: true,
+    featuredOrder: 2,
+    highlightLabel: "AI for FinOps",
+    problem:
+      "Cloud cost signals are fragmented across billing, utilization, inventory, and ownership systems.",
+    solution:
+      "A read-only decision layer that turns deterministic cost findings into prioritized, owner-aware remediation plans.",
+    visual: "finops",
     summary:
       "Read-only AI FinOps copilot analyzing 24 cloud resources across 5 teams and surfacing 15 savings findings and cost spikes.",
     architecture:
@@ -445,8 +597,14 @@ export const projects: Project[] = [
     slug: "ai-ml-knowledge-rag-assistant",
     category: "RAG / Generative AI / Vector Search",
     filters: ["RAG & GenAI", "AI Agents"],
-    featured: false,
-    highlightLabel: "Featured RAG",
+    featured: true,
+    featuredOrder: 3,
+    highlightLabel: "Trustworthy RAG",
+    problem:
+      "Knowledge assistants lose trust when they answer without sufficient evidence or repeatedly pay the same retrieval cost.",
+    solution:
+      "A citation-first RAG system with confidence gating, refusal behavior, retrieval evaluation, and layered caching.",
+    visual: "rag",
     summary:
       "Cloud-native RAG assistant with Top-3 retrieval, 0.6 similarity gating, clickable citations, refusal handling, and cache layers.",
     architecture:
@@ -464,8 +622,14 @@ export const projects: Project[] = [
     slug: "databricks-lakeflow-medallion-pipeline",
     category: "Data Engineering / Databricks / AWS",
     filters: ["Data Engineering"],
-    featured: false,
-    highlightLabel: "Featured Data Engineering",
+    featured: true,
+    featuredOrder: 4,
+    highlightLabel: "Lakehouse Engineering",
+    problem:
+      "Raw operational data from multiple business units needs governed, incremental processing before analytics teams can use it.",
+    solution:
+      "A Databricks lakehouse pipeline that moves S3 data through orchestrated Bronze, Silver, and Gold layers into governed serving tables.",
+    visual: "medallion",
     summary:
       "S3-to-Databricks pipeline processing FMCG data through Bronze, Silver, and Gold layers with full and incremental loads.",
     architecture:
@@ -483,8 +647,14 @@ export const projects: Project[] = [
     slug: "airbnb-snowflake-dbt-pipeline",
     category: "Data Engineering / Snowflake / dbt",
     filters: ["Data Engineering", "Analytics"],
-    featured: false,
-    highlightLabel: "Featured ELT",
+    featured: true,
+    featuredOrder: 5,
+    highlightLabel: "Analytics Engineering",
+    problem:
+      "Bookings, listings, and host data arrive in inconsistent source structures that are not ready for trusted reporting.",
+    solution:
+      "A tested Snowflake and dbt transformation system with incremental models, historical snapshots, lineage, and analytical marts.",
+    visual: "lineage",
     summary:
       "End-to-end Airbnb analytics pipeline transforming bookings, hosts, and listings data into BI-ready analytical models.",
     architecture:
@@ -697,11 +867,11 @@ export const education = [
     details: ["Master of Science program completed in May 2026."]
   },
   {
-    degree: "Bachelor in Computer Science",
+    degree: "Bachelor of Engineering in Computer Science and Engineering",
     school: "Visvesvaraya Technological University",
     location: "India",
     dates: "Graduation: August 2023",
-    details: ["Bachelor's foundation in computer science, software systems, and applied computing."]
+    details: ["Foundation in computer science, software systems, and applied computing."]
   }
 ];
 
@@ -739,8 +909,10 @@ export const contactItems = [
 ];
 
 export const navItems = [
+  { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
+  { label: "Research", href: "#research" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Education", href: "#education" },
@@ -748,12 +920,12 @@ export const navItems = [
 ];
 
 export const suggestedQuestions = [
-  "What is Shreevikas's data science experience?",
-  "What did Shreevikas do at NeuralSeek?",
-  "Tell me about his forecasting work.",
-  "What machine learning systems has he built?",
-  "Tell me about his RAG experience.",
-  "Can I view his resume?"
+  "What AI systems have you built?",
+  "Tell me about AgentShield.",
+  "What is your experience with RAG?",
+  "What research have you done in scientific AI?",
+  "Which data-engineering platforms have you used?",
+  "What MLOps experience do you have?"
 ];
 
 export const achievementCards = [

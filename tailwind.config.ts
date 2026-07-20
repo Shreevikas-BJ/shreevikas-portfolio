@@ -12,6 +12,8 @@ const config: Config = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        surface: "hsl(var(--surface))",
+        "surface-elevated": "hsl(var(--surface-elevated))",
         muted: "hsl(var(--muted))",
         "muted-foreground": "hsl(var(--muted-foreground))",
         border: "hsl(var(--border))",
@@ -20,11 +22,16 @@ const config: Config = {
         primary: "hsl(var(--primary))",
         "primary-foreground": "hsl(var(--primary-foreground))",
         accent: "hsl(var(--accent))",
-        "accent-foreground": "hsl(var(--accent-foreground))"
+        "accent-foreground": "hsl(var(--accent-foreground))",
+        secondary: "hsl(var(--secondary))",
+        glow: "hsl(var(--glow))",
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
+        error: "hsl(var(--error))"
       },
       boxShadow: {
-        glow: "0 24px 80px rgba(34, 211, 238, 0.18)",
-        "gold-glow": "0 18px 52px rgba(245, 158, 11, 0.16)"
+        glow: "0 18px 70px hsl(var(--glow) / 0.16)",
+        elevated: "0 24px 80px rgba(3, 8, 20, 0.18)"
       },
       keyframes: {
         "fade-up": {

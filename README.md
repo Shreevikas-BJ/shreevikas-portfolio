@@ -1,93 +1,78 @@
-# Shreevikas Portfolio
+# Shreevikas Jagadish Portfolio
 
-Recruiter-friendly portfolio for Shreevikas Jagadish, positioned around Data Science, AI-ML, Predictive Modeling, Statistical Learning, Decision Intelligence, MLOps, RAG, and Cloud Analytics.
+A production-grade engineering portfolio for an AI/ML Engineer, Data Scientist, and Data Engineer working across machine learning, RAG, agentic AI, scientific AI, MLOps, and cloud data systems.
 
-## Overview
+**Live site:** [shreevikas-portfolio.vercel.app](https://shreevikas-portfolio.vercel.app/)
 
-This portfolio highlights production-ready predictive systems, demand forecasting, machine learning, statistical validation, RAG, MLOps, cloud analytics, and decision intelligence.
+## Experience
 
-Professional experience includes Data Scientist / AI-ML work at Cloudera, an AI Engineer internship at NeuralSeek, and Data Scientist work at Bosch.
+- Dark-first visual system with a fully designed light theme
+- Animated production AI lifecycle visualization
+- Scroll-aware navigation and progress indicator
+- Quantified experience outcomes and one-time credibility metrics
+- Dedicated scientific machine-learning research story
+- Six flagship project case studies with distinct architecture visuals
+- Searchable and filterable supporting project explorer
+- Interactive capability matrix for AI, ML, data, cloud, and scientific computing
+- Accessible project drawer, mobile navigation, theme controls, and keyboard states
+- Portfolio-grounded AI assistant with streaming, cached answers, timeouts, and rate limiting
+- Responsive layouts for mobile, tablet, desktop, and large screens
+- Next.js metadata, Open Graph, robots, sitemap, and structured data
 
-## Tech Stack
+## Flagship Work
 
-- Next.js App Router
-- TypeScript
-- Tailwind CSS
+- [AgentShield](https://github.com/Shreevikas-BJ/agentshield): AI-agent QA, red-team evaluation, and launch-readiness analysis.
+- [AI FinOps Copilot](https://github.com/Shreevikas-BJ/ai-finops-copilot): action-oriented AWS cost intelligence and remediation planning.
+- [AI/ML Knowledge RAG Assistant](https://github.com/Shreevikas-BJ/ml-course-document-rag): citation-grounded retrieval with gating, caching, refusal handling, and evaluation.
+- [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): governed Bronze, Silver, and Gold data processing.
+- [Airbnb Snowflake dbt Pipeline](https://github.com/Shreevikas-BJ/airbnb-snowflake-dbt-pipeline): incremental ELT, tests, lineage, and SCD Type 2 snapshots.
+- Intelligent Inventory Demand Forecasting Platform: PySpark, XGBoost, MLflow, FastAPI, and AWS forecasting workflow.
+
+## Stack
+
+- Next.js App Router and React Server Components
+- React 19 and TypeScript
+- Tailwind CSS design tokens
 - Framer Motion
-- shadcn/ui-inspired reusable components
-- lucide-react icons
-- Groq-backed chatbot API route
-- Vercel-ready deployment
+- Lucide React
+- Groq chat completions through a server-only API route
+- Vercel deployment
 
-## Features
-
-- Responsive light and dark theme
-- Premium recruiter-friendly hero, about, experience, projects, skills, education, and contact sections
-- Three resume-featured projects across forecasting, manufacturing intelligence, and enterprise RAG
-- Filtered project cards for AI Agents, RAG & GenAI, Data Science & ML, Data Engineering, MLOps, and Analytics
-- Latest resume view/download using `public/Shreevikas_Jagadish_Resume.pdf`
-- Bottom-right AI assistant gated by visitor email
-- Server-side Groq API integration using `GROQ_API_KEY`
-
-## Resume-Featured Projects
-
-- Intelligent Inventory Demand Forecasting Platform: PySpark and XGBoost forecasting with MLflow tracking, FastAPI deployment, and AWS automation.
-- Manufacturing Process Quality Intelligence System: predictive quality monitoring, anomaly detection, statistical validation, PostgreSQL, and Tableau.
-- Enterprise Knowledge Search Platform: LangChain and Hugging Face RAG with semantic chunking, vector retrieval, evaluation, and FastAPI serving.
-
-Additional GitHub projects remain available in the filterable project gallery.
-
-## Resume
-
-The latest resume is available from the portfolio through:
-
-- View Resume
-- Download Resume
-
-The deployed file path is:
-
-```text
-/Shreevikas_Jagadish_Resume.pdf
-```
-
-## Local Setup
+## Local Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Environment Variables
+## Environment
 
-Create `.env.local`:
+Create `.env.local` from `.env.example`:
 
 ```bash
 GROQ_API_KEY=your_groq_api_key_here
-CHATBOT_NOTIFICATION_EMAIL=shreevikasj@gmail.com
-
-# Optional: use Resend for reliable chatbot-access email notifications.
-RESEND_API_KEY=
-RESEND_FROM_EMAIL=Portfolio Assistant <onboarding@resend.dev>
 ```
 
-The Groq API key is only used in `app/api/chat/route.ts` and is never exposed to the frontend. Do not commit `.env.local` or paste actual keys into source code.
+`GROQ_API_KEY` is read only by `app/api/chat/route.ts`. It is never sent to the browser or committed to the repository.
+
+## Quality Checks
+
+```bash
+npm run lint
+npm run build
+```
 
 ## Deploy To Vercel
 
-1. Push this repository to GitHub.
-2. Import or keep the repository connected in Vercel.
-3. Select the Next.js framework preset.
-4. Add `GROQ_API_KEY` in Vercel Project Settings > Environment Variables.
-5. Add `CHATBOT_NOTIFICATION_EMAIL` with the address that should receive chatbot access notifications.
-6. For reliable email delivery, add `RESEND_API_KEY` and `RESEND_FROM_EMAIL`. Without Resend, the app attempts a FormSubmit fallback.
-7. Redeploy after saving environment variables.
+1. Import `Shreevikas-BJ/shreevikas-portfolio` in Vercel.
+2. Keep the Next.js framework preset.
+3. Add `GROQ_API_KEY` under Project Settings > Environment Variables.
+4. Deploy the `main` branch.
 
 ## Author
 
-Shreevikas Jagadish<br>
-United States<br>
-Email: [shreevikasjagadish7@gmail.com](mailto:shreevikasjagadish7@gmail.com)<br>
-GitHub: [Shreevikas-BJ](https://github.com/Shreevikas-BJ)<br>
-LinkedIn: [shreevikasbj](https://www.linkedin.com/in/shreevikasbj/)
+**Shreevikas Jagadish**<br>
+Chicago, Illinois, United States<br>
+[Email](mailto:shreevikasjagadish7@gmail.com) · [GitHub](https://github.com/Shreevikas-BJ) · [LinkedIn](https://www.linkedin.com/in/shreevikasbj/)

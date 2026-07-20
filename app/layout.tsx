@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import { siteConfig } from "@/data/portfolio";
 import "./globals.css";
 
-const roboto = Roboto({
+const geist = Geist({
   subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
   display: "swap",
-  variable: "--font-roboto"
+  variable: "--font-sans"
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display"
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono"
 });
 
 export const metadata: Metadata = {
@@ -19,6 +30,7 @@ export const metadata: Metadata = {
     "Data Scientist",
     "AI-ML Engineer",
     "AI Engineer",
+    "Data Engineer",
     "Machine Learning",
     "Production Machine Learning",
     "Predictive Modeling",
@@ -48,6 +60,12 @@ export const metadata: Metadata = {
     "XGBoost",
     "TensorFlow",
     "PyTorch",
+    "Scientific Machine Learning",
+    "Physics-Informed AI",
+    "NVIDIA PhysicsNeMo",
+    "Fourier Neural Operators",
+    "CUDA",
+    "TensorRT",
     "Power BI",
     "Tableau"
   ],
@@ -88,7 +106,7 @@ const structuredData = {
   image: `${siteConfig.portfolio}${siteConfig.profileImage.replace(/^\//, "")}`,
   email: siteConfig.email,
   telephone: siteConfig.phone,
-  jobTitle: "Data Scientist, AI-ML Professional",
+  jobTitle: "AI/ML Engineer, Data Scientist, Data Engineer",
   sameAs: [siteConfig.github, siteConfig.linkedin],
   knowsAbout: [
     "Data Science",
@@ -99,6 +117,10 @@ const structuredData = {
     "Demand Forecasting",
     "RAG",
     "MLOps",
+    "Agentic AI",
+    "LLM Evaluation",
+    "Scientific Machine Learning",
+    "Physics-Informed AI",
     "Cloud Data Platforms",
     "AWS",
     "PySpark",
@@ -124,7 +146,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${roboto.variable} ${roboto.className} dark scroll-smooth`}
+      className={`${geist.variable} ${manrope.variable} ${geistMono.variable} dark scroll-smooth`}
       suppressHydrationWarning
     >
       <body className="antialiased">

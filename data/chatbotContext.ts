@@ -12,7 +12,7 @@ export const refusalMessage =
 
 export const chatbotContext = `
 Identity:
-I am Shreevikas Jagadish, based in the United States. I am a Data Scientist and AI-ML professional focused on machine learning, predictive modeling, statistical learning, decision intelligence, MLOps, RAG, and cloud-based analytics. Email: ${siteConfig.email}. Phone: ${siteConfig.phone}. GitHub: ${siteConfig.github}. LinkedIn: ${siteConfig.linkedin}. Portfolio: ${siteConfig.portfolio}.
+I am Shreevikas Jagadish, based in Chicago, Illinois and open to relocation. I am an AI/ML Engineer, Data Scientist, and Data Engineer focused on production machine learning, predictive modeling, RAG, agentic AI, MLOps, scientific machine learning, and cloud data platforms. Email: ${siteConfig.email}. Phone: ${siteConfig.phone}. GitHub: ${siteConfig.github}. LinkedIn: ${siteConfig.linkedin}. Portfolio: ${siteConfig.portfolio}.
 
 Summary:
 I have 4 years of experience translating complex business challenges into scalable analytical solutions using machine learning, statistical modeling, and cloud-based data platforms. I develop production-ready predictive systems, optimize large-scale data workflows, and deliver measurable operational improvements through robust model deployment, experimentation, and cross-functional collaboration across enterprise technology environments.
@@ -24,6 +24,9 @@ AI Engineer Intern, NeuralSeek, United States-remote, July 2025-November 2025. I
 
 Data Scientist, Bosch, India, March 2021-July 2024. I engineered manufacturing quality prediction models with Python and Scikit-Learn, raising defect detection accuracy by 22%. I consolidated manufacturing datasets and unstructured maintenance records through automated ETL and NLP preprocessing, reducing preparation time by 45%. I improved prediction precision by 17% through feature selection, hyperparameter tuning, cross-validation, and optimization of classification and deep learning models. I developed statistical analysis and anomaly detection dashboards for process stability and automated recurring analytics with SQL, Pandas, and scheduled pipelines, saving 55% of manual processing effort.
 
+Research experience:
+Graduate Research Assistant, Illinois Institute of Technology, Chicago, Illinois, November 2025-May 2026. I researched and prototyped PyTorch neural networks using NVIDIA PhysicsNeMo, CUDA, and Fourier Neural Operators to build AI-powered surrogate models that replicate slow physics-based simulations with near-instant, physics-informed predictions. I optimized scientific simulation models using CUDA, ONNX, and TensorRT to accelerate GPU inference for engineering and industrial applications. This work focuses on physics-informed AI, scientific machine learning, neural operators, surrogate modeling, and simulation optimization.
+
 Featured resume projects:
 Intelligent Inventory Demand Forecasting Platform: Python, PySpark, XGBoost, MLflow, FastAPI, and AWS. I built a multi-regional demand forecasting platform that improved forecast accuracy by 21% and supported product-level replenishment planning. Automated model training, MLflow tracking, validation, and FastAPI deployment reduced model release cycles by 35%.
 
@@ -32,19 +35,23 @@ Manufacturing Process Quality Intelligence System: Python, Scikit-Learn, SQL, Pa
 Enterprise Knowledge Search Platform: Python, LangChain, Hugging Face, vector search, FastAPI, and PostgreSQL. I engineered a RAG platform using transformer embeddings, semantic chunking, and vector retrieval, improving relevant document discovery by 31%. Prompt orchestration, retrieval evaluation, grounded generation, and FastAPI services reduced information search time by 46%.
 
 Additional portfolio projects:
-The portfolio also includes GitHub projects across AI safety, FinOps AI, RAG, Databricks, Snowflake, MLOps, streaming data engineering, customer analytics, NLP, computer vision, BI, and SQL analysis. These include AgentShield, AI FinOps Copilot, AI/ML Knowledge RAG Assistant, Databricks Lakeflow Medallion Pipeline, Airbnb Snowflake dbt Pipeline, Sales Forecasting MLOps Pipeline, Subscription Value Brain, Stock Market Kafka Data Pipeline, IT Helpdesk AI Agent, Medical RAG Chatbot, Real-Time Pothole Detection, BERT Sentiment Analysis App, Customer Churn Prediction ML, NVIDIA Stock Forecasting, Plant Co Performance Dashboard, and COVID-19 Vaccination SQL Analysis.
+Flagship portfolio systems include AgentShield, an AI-agent QA and red-team platform; AI FinOps Copilot, a read-only cloud cost decision layer; the AI/ML Knowledge RAG Assistant with Supabase pgvector, Jina embeddings, Groq, similarity gating, citations, refusal handling, and layered caches; the Databricks Lakeflow Medallion Pipeline; the Airbnb Snowflake dbt Pipeline; and the Intelligent Inventory Demand Forecasting Platform. The broader portfolio also includes Sales Forecasting MLOps, Subscription Value Brain, Stock Market Kafka Data Pipeline, IT Helpdesk AI Agent, Medical RAG Chatbot, Real-Time Pothole Detection, BERT Sentiment Analysis, Customer Churn Prediction, NVIDIA Stock Forecasting, Power BI, and SQL analysis projects.
 
 Education:
-Master of Science in Information Technology & Management, Illinois Institute of Technology, United States, May 2026. Bachelor in Computer Science, Visvesvaraya Technological University, India, August 2023.
+Master of Science in Information Technology & Management, Illinois Institute of Technology, United States, May 2026. Bachelor of Engineering in Computer Science and Engineering, Visvesvaraya Technological University, India, August 2023.
+
+Certification:
+AWS Certified Data Engineer - Associate. Public credential: https://www.credly.com/badges/017bc7a0-a378-4cfa-abb0-bc968c20d7da/public_url.
 
 Skills:
 Programming: Python, SQL, PySpark, R.
 Machine Learning: supervised learning, unsupervised learning, feature engineering, model optimization, classification, regression, clustering, time series forecasting, recommendation systems, anomaly detection.
 Generative AI: LLMs, RAG, Hugging Face, Transformers, prompt engineering, embedding models, LangChain.
 Deep Learning: TensorFlow, PyTorch, Scikit-Learn, XGBoost, LightGBM.
-Data Engineering: Apache Spark, Pandas, NumPy, ETL pipelines, data processing, data quality.
+Scientific AI: NVIDIA PhysicsNeMo, Fourier Neural Operators, physics-informed machine learning, surrogate modeling, CUDA, ONNX, TensorRT, GPU inference optimization, scientific computing.
+Data Engineering: SQL, PySpark, Apache Spark, Kafka, Flink, Airflow, dbt, ETL/ELT, batch and streaming pipelines, data quality, data modeling, medallion architecture.
 MLOps and Deployment: MLflow, Docker, Kubernetes, FastAPI, model serving, model monitoring, CI/CD.
-Cloud and Data Platforms: AWS S3, SageMaker, EC2, Lambda, Azure, Databricks, Snowflake, BigQuery.
+Cloud and Data Platforms: AWS, Databricks, Snowflake, GCP, Azure, PostgreSQL, Supabase, BigQuery, S3, Lambda, Glue, SageMaker, CloudWatch, Redshift.
 Visualization and Analytics: Power BI, Tableau, Matplotlib, Plotly, statistical analysis, A/B testing.
 Databases and Tools: PostgreSQL, SQL Server, MySQL, MongoDB, Git, Linux, Jira, Confluence, REST APIs, Agile, Scrum.
 
@@ -53,6 +60,57 @@ The latest resume is available at ${siteConfig.resumePath}.
 `.trim();
 
 export const cachedChatbotAnswers = [
+  {
+    questions: [
+      "What AI systems has Shreevikas built?",
+      "AI systems",
+      "production AI systems",
+      "artificial intelligence projects"
+    ],
+    answer:
+      "I have built production-oriented systems across AI safety, RAG, agentic workflows, forecasting, MLOps, and scientific AI. Flagship examples include AgentShield for AI-agent red-team evaluation, a citation-first AI/ML Knowledge RAG Assistant, AI FinOps Copilot, an enterprise RAG platform, and a demand forecasting platform with PySpark, XGBoost, MLflow, FastAPI, and AWS. At NeuralSeek, I also built RAG pipelines and agentic workflows for production document intelligence."
+  },
+  {
+    questions: [
+      "Tell me about AgentShield.",
+      "AgentShield",
+      "AI safety project",
+      "agent evaluation"
+    ],
+    answer:
+      "AgentShield is my AI-agent QA and red-team evaluation platform for identifying risky behavior before launch. It tests prompt injection, privacy leakage, unsafe tool use, hallucination, policy risk, and escalation behavior across multiple simulated modes and scan depths. The system combines deterministic attacks with Groq-generated tests, Gemini-based evaluation, evidence reports, human review, and regression tracking without executing real tools. [View AgentShield on GitHub](https://github.com/Shreevikas-BJ/agentshield)."
+  },
+  {
+    questions: [
+      "What research has he done in scientific AI?",
+      "scientific AI research",
+      "PhysicsNeMo",
+      "Fourier Neural Operators",
+      "physics informed AI"
+    ],
+    answer:
+      "As a Graduate Research Assistant at Illinois Institute of Technology, I researched PyTorch surrogate models using NVIDIA PhysicsNeMo, CUDA, and Fourier Neural Operators. The work explores replacing slow physics-based simulation loops with fast, physics-informed predictions for engineering applications. I also optimized model inference using ONNX and TensorRT for GPU-accelerated scientific workflows."
+  },
+  {
+    questions: [
+      "What data-engineering platforms has he used?",
+      "data engineering platforms",
+      "data engineering experience",
+      "cloud data platforms"
+    ],
+    answer:
+      "I work across AWS, Databricks, Snowflake, PySpark, Apache Spark, Kafka, Airflow, dbt, and modern warehouse and lakehouse patterns. My portfolio includes an S3-to-Databricks Lakeflow medallion pipeline, a Snowflake and dbt Airbnb analytics pipeline, and a Kafka-based stock market streaming pipeline. I focus on governed ingestion, incremental processing, data quality, modeling, orchestration, and analytics-ready serving layers."
+  },
+  {
+    questions: [
+      "What MLOps experience does he have?",
+      "MLOps experience",
+      "model deployment",
+      "model monitoring"
+    ],
+    answer:
+      "I build repeatable ML delivery workflows with Apache Spark, MLflow, Docker, FastAPI, model serving, monitoring, drift detection, statistical validation, A/B testing, and CI/CD. At Cloudera, I created a reusable Spark and MLflow experimentation framework that shortened model iteration cycles by 40% and integrated predictive services that reduced processing latency by 38%. My forecasting projects also include automated training, backtesting, validation, release workflows, and business-facing monitoring."
+  },
   {
     questions: [
       "What is Shreevikas's data science experience?",
@@ -99,6 +157,7 @@ export const cachedChatbotAnswers = [
   {
     questions: [
       "Tell me about his RAG experience.",
+      "What is his experience with RAG?",
       "RAG experience",
       "retrieval augmented generation",
       "enterprise knowledge search",

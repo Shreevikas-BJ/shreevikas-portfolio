@@ -24,7 +24,7 @@ export function ThemeToggle() {
   return (
     <Button
       variant="outline"
-      className="h-10 w-10 shrink-0 !px-0"
+      className="h-10 w-10 shrink-0 rounded-lg !px-0"
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       title={isDark ? "Switch to light theme" : "Switch to dark theme"}
