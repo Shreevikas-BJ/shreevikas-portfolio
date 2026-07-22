@@ -69,17 +69,17 @@ export function Research() {
 
               <div className="relative p-6 sm:p-8">
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,hsl(var(--foreground)/0.04)_1px,transparent_1px),linear-gradient(0deg,hsl(var(--foreground)/0.04)_1px,transparent_1px)] bg-[size:30px_30px]" />
-                <div className="relative grid gap-2 sm:grid-cols-5 sm:items-center">
+                <div className="relative grid gap-3 min-[460px]:grid-cols-2 xl:grid-cols-5 xl:items-center">
                   {researchExperience.pipeline.map((stage, index) => (
                     <div key={stage} className="contents">
-                      <div className="rounded-lg border border-border bg-background/78 p-4 text-center">
+                      <div className="min-w-0 rounded-lg border border-border bg-background/78 p-4 text-center xl:px-3">
                         <span className="font-mono text-[0.62rem] font-semibold text-primary">
                           0{index + 1}
                         </span>
-                        <p className="mt-2 text-sm font-semibold leading-5">{stage}</p>
+                        <p className="box-heading mt-2 text-sm font-semibold leading-5">{stage}</p>
                       </div>
                       {index < researchExperience.pipeline.length - 1 ? (
-                        <ArrowDown className="mx-auto h-4 w-4 text-primary sm:hidden" aria-hidden="true" />
+                        <ArrowDown className="mx-auto h-4 w-4 text-primary min-[460px]:hidden" aria-hidden="true" />
                       ) : null}
                     </div>
                   ))}
@@ -104,7 +104,7 @@ export function Research() {
                 </div>
 
                 <div className="relative mt-6 border-t border-border pt-5">
-                  <div className="flex items-center justify-between font-mono text-[0.68rem] text-muted-foreground">
+                  <div className="flex flex-col gap-2 font-mono text-[0.68rem] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
                     <span>PHYSICS CONSTRAINTS PRESERVED</span>
                     <span className="text-success">INFERENCE PATH OPTIMIZED</span>
                   </div>

@@ -31,7 +31,7 @@ export function Credentials() {
                     <ArrowUpRight className="h-5 w-5 text-muted-foreground transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
                   </div>
                   <p className="mt-8 mono-label">Certification</p>
-                  <h3 className="mt-3 text-xl font-semibold leading-7">{certification.name}</h3>
+                  <h3 className="box-heading mt-3 text-xl font-semibold leading-7">{certification.name}</h3>
                   <p className="mt-3 text-sm text-muted-foreground">{certification.issuer}</p>
                   <span className="mt-auto pt-8 font-mono text-xs font-semibold text-primary">
                     View credential
@@ -48,8 +48,8 @@ export function Credentials() {
                   <GraduationCap className="h-5 w-5" />
                 </div>
                 <p className="mt-8 mono-label">Education</p>
-                <h3 className="mt-3 text-xl font-semibold leading-7">{item.degree}</h3>
-                <p className="mt-3 font-semibold text-primary">{item.school}</p>
+                <h3 className="box-heading mt-3 text-xl font-semibold leading-7">{item.degree}</h3>
+                <p className="box-heading mt-3 font-semibold text-primary">{item.school}</p>
                 <div className="mt-auto space-y-2 pt-8 text-sm text-muted-foreground">
                   <p className="flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-accent" />

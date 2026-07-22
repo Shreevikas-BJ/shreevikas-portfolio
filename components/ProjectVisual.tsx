@@ -14,11 +14,11 @@ import type { Project } from "@/data/portfolio";
 
 function VisualHeader({ label, status = "LIVE" }: { label: string; status?: string }) {
   return (
-    <div className="relative z-10 flex items-center justify-between border-b border-border/80 px-4 py-3">
-      <span className="font-mono text-[0.65rem] font-semibold uppercase text-muted-foreground">
+    <div className="relative z-10 flex min-w-0 items-center justify-between gap-3 border-b border-border/80 px-4 py-3">
+      <span className="box-heading min-w-0 font-mono text-[0.65rem] font-semibold uppercase leading-4 text-muted-foreground">
         {label}
       </span>
-      <span className="inline-flex items-center gap-1.5 font-mono text-[0.62rem] font-semibold text-success">
+      <span className="inline-flex shrink-0 items-center gap-1.5 font-mono text-[0.62rem] font-semibold text-success">
         <span className="h-1.5 w-1.5 rounded-full bg-success" />
         {status}
       </span>
@@ -37,9 +37,9 @@ function AgentShieldVisual() {
   ];
 
   return (
-    <div className="project-visual">
+    <div className="project-visual max-[419px]:min-h-[430px]">
       <VisualHeader label="Agent risk matrix" status="SCAN 06/06" />
-      <div className="relative z-10 grid grid-cols-[0.72fr_1.28fr] gap-4 p-5">
+      <div className="relative z-10 grid min-w-0 gap-3 p-4 min-[420px]:grid-cols-[0.72fr_1.28fr] min-[420px]:gap-4 min-[420px]:p-5">
         <div className="flex flex-col justify-between rounded-lg border border-error/25 bg-error/5 p-4">
           <ShieldAlert className="h-7 w-7 text-error" />
           <div>
@@ -50,9 +50,9 @@ function AgentShieldVisual() {
         </div>
         <div className="grid grid-cols-2 gap-2">
           {risks.map(([label, status]) => (
-            <div key={label} className="rounded-md border border-border bg-background/70 p-3">
+            <div key={label} className="min-w-0 rounded-md border border-border bg-background/70 p-3">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-[0.7rem] font-medium leading-4 text-muted-foreground">{label}</span>
+                <span className="box-heading min-w-0 text-[0.7rem] font-medium leading-4 text-muted-foreground">{label}</span>
                 <span
                   className={`h-2 w-2 shrink-0 rounded-full ${
                     status === "fail"
@@ -95,9 +95,9 @@ function FinOpsVisual() {
           ))}
         </div>
         <div className="mt-4 grid grid-cols-3 gap-2 text-center font-mono text-[0.6rem] text-muted-foreground">
-          <span className="rounded-md border border-border bg-background/70 p-2">SEVERITY</span>
-          <span className="rounded-md border border-border bg-background/70 p-2">OWNER</span>
-          <span className="rounded-md border border-border bg-background/70 p-2">ACTION</span>
+          <span className="box-heading rounded-md border border-border bg-background/70 px-1 py-2">SEVERITY</span>
+          <span className="box-heading rounded-md border border-border bg-background/70 px-1 py-2">OWNER</span>
+          <span className="box-heading rounded-md border border-border bg-background/70 px-1 py-2">ACTION</span>
         </div>
       </div>
     </div>
@@ -110,20 +110,15 @@ function RagVisual() {
     <div className="project-visual">
       <VisualHeader label="Grounded retrieval trace" status="CITED" />
       <div className="relative z-10 p-5">
-        <div className="flex items-center gap-2">
+        <div className="grid grid-cols-2 gap-2 min-[460px]:grid-cols-4">
           {pipeline.map((item, index) => (
-            <div key={item} className="contents">
-              <div className="min-w-0 flex-1 rounded-md border border-border bg-background/72 p-3 text-center">
+              <div key={item} className="min-w-0 rounded-md border border-border bg-background/72 p-3 text-center">
                 {index === 0 ? <Search className="mx-auto h-4 w-4 text-primary" /> : null}
                 {index === 1 ? <Activity className="mx-auto h-4 w-4 text-primary" /> : null}
                 {index === 2 ? <Database className="mx-auto h-4 w-4 text-primary" /> : null}
                 {index === 3 ? <FileCheck2 className="mx-auto h-4 w-4 text-primary" /> : null}
-                <p className="mt-2 truncate font-mono text-[0.6rem] font-semibold">{item}</p>
+                <p className="box-heading mt-2 font-mono text-[0.6rem] font-semibold">{item}</p>
               </div>
-              {index < pipeline.length - 1 ? (
-                <ArrowRight className="h-3.5 w-3.5 shrink-0 text-primary" />
-              ) : null}
-            </div>
           ))}
         </div>
         <div className="mt-5 rounded-md border border-border bg-background/72 p-4">
@@ -154,7 +149,7 @@ function MedallionVisual() {
     <div className="project-visual">
       <VisualHeader label="Lakehouse pipeline" status="GOVERNED" />
       <div className="relative z-10 p-5">
-        <div className="flex items-center gap-3 font-mono text-[0.62rem] text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-3 font-mono text-[0.62rem] text-muted-foreground">
           <Database className="h-4 w-4 text-primary" />
           S3 INGESTION
           <ArrowRight className="h-3 w-3" />
@@ -173,7 +168,7 @@ function MedallionVisual() {
             </div>
           ))}
         </div>
-        <p className="mt-4 text-center font-mono text-[0.62rem] text-muted-foreground">
+        <p className="box-heading mt-4 text-center font-mono text-[0.62rem] text-muted-foreground">
           UNITY CATALOG -&gt; ANALYTICS SERVING
         </p>
       </div>
@@ -185,22 +180,22 @@ function LineageVisual() {
   return (
     <div className="project-visual">
       <VisualHeader label="Transformation lineage" status="TESTS PASSING" />
-      <div className="relative z-10 grid h-[calc(100%-45px)] grid-cols-[0.8fr_1fr_0.9fr] items-center gap-4 p-5">
+      <div className="relative z-10 grid h-[calc(100%-45px)] min-w-0 grid-cols-[0.8fr_1fr_0.9fr] items-center gap-2 p-4 min-[460px]:gap-4 min-[460px]:p-5">
         <div className="space-y-2">
           {["Bookings", "Hosts", "Listings"].map((item) => (
-            <div key={item} className="rounded-md border border-border bg-background/72 p-2 text-center font-mono text-[0.6rem]">
+            <div key={item} className="box-heading min-w-0 rounded-md border border-border bg-background/72 p-2 text-center font-mono text-[0.6rem]">
               {item}
             </div>
           ))}
         </div>
-        <div className="rounded-md border border-primary/35 bg-primary/10 p-4 text-center">
+        <div className="min-w-0 rounded-md border border-primary/35 bg-primary/10 p-2 text-center min-[460px]:p-4">
           <Layers3 className="mx-auto h-5 w-5 text-primary" />
           <p className="mt-2 font-mono text-[0.65rem] font-semibold">dbt</p>
-          <p className="mt-1 text-[0.62rem] text-muted-foreground">Bronze / Silver / Gold</p>
+          <p className="box-heading mt-1 text-[0.62rem] text-muted-foreground">Bronze / Silver / Gold</p>
         </div>
         <div className="space-y-2">
           {["Facts", "SCD2", "Analytics"].map((item) => (
-            <div key={item} className="rounded-md border border-border bg-background/72 p-2 text-center font-mono text-[0.6rem]">
+            <div key={item} className="box-heading min-w-0 rounded-md border border-border bg-background/72 p-2 text-center font-mono text-[0.6rem]">
               {item}
             </div>
           ))}

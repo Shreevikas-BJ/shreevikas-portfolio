@@ -60,7 +60,7 @@ export function Skills() {
                       <Icon className="h-4 w-4" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-semibold sm:text-base">{group.category}</span>
+                      <span className="box-heading block text-sm font-semibold sm:text-base">{group.category}</span>
                       <span className="mt-1 block font-mono text-[0.64rem] text-muted-foreground">
                         {group.items.length} capabilities
                       </span>
@@ -95,7 +95,7 @@ export function Skills() {
                 <div className="flex items-start justify-between gap-5">
                   <div>
                     <p className="mono-label">Active capability cluster</p>
-                    <h3 className="mt-4 text-2xl font-semibold sm:text-3xl">
+                    <h3 className="box-heading mt-4 text-2xl font-semibold sm:text-3xl">
                       {activeGroup.category}
                     </h3>
                   </div>
@@ -108,14 +108,14 @@ export function Skills() {
                   {activeGroup.summary}
                 </p>
 
-                <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                <div className="mt-8 grid grid-cols-1 gap-3 min-[460px]:grid-cols-2 sm:grid-cols-3">
                   {activeGroup.items.map((item, index) => (
                     <motion.div
                       key={item}
                       initial={reduceMotion ? false : { opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.25, delay: Math.min(index * 0.025, 0.22) }}
-                      className="flex min-h-14 items-center rounded-lg border border-border bg-background/68 px-3 py-2 font-mono text-[0.72rem] font-medium leading-5 text-foreground"
+                      className="box-heading flex min-h-14 min-w-0 items-center rounded-lg border border-border bg-background/68 px-3 py-2 font-mono text-[0.72rem] font-medium leading-5 text-foreground"
                     >
                       {item}
                     </motion.div>

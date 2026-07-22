@@ -53,12 +53,12 @@ export function EngineeringFlow() {
 
   return (
     <figure className="engineering-canvas" aria-label="Production AI system lifecycle visualization">
-      <div className="relative z-10 flex items-center justify-between border-b border-border/80 px-5 py-4">
-        <div>
+      <div className="relative z-10 flex items-start justify-between gap-4 border-b border-border/80 px-5 py-4">
+        <div className="min-w-0">
           <p className="mono-label">System architecture</p>
           <p className="mt-1 text-sm font-semibold">Production intelligence flow</p>
         </div>
-        <div className="flex items-center gap-2 font-mono text-[0.68rem] font-semibold text-success">
+        <div className="flex shrink-0 items-center gap-2 font-mono text-[0.68rem] font-semibold text-success">
           <span className="relative flex h-2.5 w-2.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-40" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-success" />
@@ -68,32 +68,25 @@ export function EngineeringFlow() {
       </div>
 
       <div className="relative z-10 p-5 sm:p-6">
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:flex lg:items-center lg:gap-2">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {stages.map((item, index) => {
             const Icon = item.icon;
             return (
               <div key={item.stage} className="contents">
                 <div className="flow-node" data-active={activeStage === index}>
                   <Icon className="h-4 w-4 text-primary" />
-                  <p className="mt-3 font-mono text-[0.62rem] font-semibold uppercase text-muted-foreground">
+                  <p className="box-heading mt-3 font-mono text-[0.62rem] font-semibold uppercase text-muted-foreground">
                     {item.stage}
                   </p>
-                  <p className="mt-1 text-sm font-semibold">{item.title}</p>
-                  <p className="mt-1 font-mono text-[0.65rem] text-muted-foreground">{item.tech}</p>
+                  <p className="box-heading mt-1 text-sm font-semibold">{item.title}</p>
+                  <p className="box-heading mt-1 font-mono text-[0.65rem] text-muted-foreground">{item.tech}</p>
                 </div>
-                {index < stages.length - 1 ? (
-                  <span
-                    className="flow-connector hidden lg:block"
-                    style={{ animationDelay: `${index * 180}ms` }}
-                    aria-hidden="true"
-                  />
-                ) : null}
               </div>
             );
           })}
         </div>
 
-        <div className="mt-7 grid gap-4 sm:grid-cols-[1.15fr_0.85fr]">
+        <div className="mt-7 grid gap-4 sm:grid-cols-[1.15fr_0.85fr] lg:grid-cols-1 xl:grid-cols-[1.15fr_0.85fr]">
           <div className="relative overflow-hidden rounded-lg border border-border/80 bg-background/50 p-5">
             <div className="scan-beam pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
             <div className="relative flex items-center justify-between gap-3">
@@ -151,7 +144,7 @@ export function EngineeringFlow() {
                   <span className="flex h-6 w-6 items-center justify-center rounded-md border border-primary/25 bg-primary/10 font-mono text-[0.62rem] text-primary">
                     0{index + 1}
                   </span>
-                  <span className="text-muted-foreground">{item}</span>
+                  <span className="box-heading min-w-0 text-muted-foreground">{item}</span>
                 </div>
               ))}
             </div>

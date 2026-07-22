@@ -53,7 +53,7 @@ export function About() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-[1fr_0.9fr]">
-            <div className="grid grid-cols-2 gap-3" role="group" aria-label="Engineering capabilities">
+            <div className="grid grid-cols-1 gap-3 min-[440px]:grid-cols-2" role="group" aria-label="Engineering capabilities">
               {aboutHighlights.map((item, index) => {
                 const Icon = item.icon;
                 const active = activeIndex === index;
@@ -78,7 +78,7 @@ export function About() {
                         active ? "text-primary" : "text-muted-foreground group-hover:text-primary"
                       )}
                     />
-                    <span className="mt-6 block text-sm font-semibold leading-5 sm:text-base">
+                    <span className="box-heading mt-6 block text-sm font-semibold leading-5 sm:text-base">
                       {item.title}
                     </span>
                   </button>
@@ -99,7 +99,7 @@ export function About() {
                   className="mt-10"
                 >
                   <ActiveIcon className="h-8 w-8 text-primary" />
-                  <h3 className="mt-5 text-2xl font-semibold">{activeCapability.title}</h3>
+                  <h3 className="box-heading mt-5 text-2xl font-semibold">{activeCapability.title}</h3>
                   <p className="mt-4 text-base leading-8 text-muted-foreground">
                     {activeCapability.description}
                   </p>

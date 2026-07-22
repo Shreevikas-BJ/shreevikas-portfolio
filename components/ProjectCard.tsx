@@ -20,14 +20,14 @@ export function ProjectCard({
 }) {
   if (large) {
     return (
-      <article className="group overflow-hidden rounded-lg border border-border bg-surface/68 shadow-elevated transition duration-300 hover:border-primary/45">
-        <div className="grid items-stretch lg:grid-cols-2">
-          <div className={cn("p-6 sm:p-8 lg:p-10", reverse && "lg:order-2")}>
+      <article className="group w-full min-w-0 overflow-hidden rounded-lg border border-border bg-surface/68 shadow-elevated transition duration-300 hover:border-primary/45">
+        <div className="grid min-w-0 items-stretch lg:grid-cols-2">
+          <div className={cn("min-w-0 p-6 sm:p-8 lg:p-10", reverse && "lg:order-2")}>
             <div className="flex flex-wrap items-center gap-3">
               <span className="eyebrow">{project.highlightLabel}</span>
-              <span className="font-mono text-[0.66rem] text-muted-foreground">{project.category}</span>
+              <span className="box-heading min-w-0 font-mono text-[0.66rem] text-muted-foreground">{project.category}</span>
             </div>
-            <h3 className="mt-6 text-2xl font-semibold leading-tight text-balance sm:text-3xl">
+            <h3 className="box-heading mt-6 text-2xl font-semibold leading-tight text-balance sm:text-3xl">
               {project.title}
             </h3>
 
@@ -50,7 +50,7 @@ export function ProjectCard({
                 {project.bullets.slice(0, 3).map((bullet) => (
                   <li key={bullet} className="flex gap-3">
                     <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                    <span>{bullet}</span>
+                    <span className="min-w-0">{bullet}</span>
                   </li>
                 ))}
               </ul>
@@ -83,7 +83,7 @@ export function ProjectCard({
             </div>
           </div>
 
-          <div className={cn("flex items-center bg-background/35 p-5 sm:p-7 lg:p-8", reverse && "lg:order-1")}>
+          <div className={cn("flex min-w-0 items-center bg-background/35 p-5 sm:p-7 lg:p-8", reverse && "lg:order-1")}>
             <ProjectVisual project={project} />
           </div>
         </div>
@@ -92,11 +92,11 @@ export function ProjectCard({
   }
 
   return (
-    <article className="premium-card group flex h-full flex-col p-6 sm:p-7">
+    <article className="premium-card group flex h-full min-w-0 flex-col p-6 sm:p-7">
       <div className="flex items-start justify-between gap-4">
-        <div>
+        <div className="min-w-0">
           <p className="eyebrow">{project.highlightLabel || project.filters[0]}</p>
-          <h3 className="mt-4 text-xl font-semibold leading-7">{project.title}</h3>
+          <h3 className="box-heading mt-4 text-xl font-semibold leading-7">{project.title}</h3>
         </div>
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
           <Layers3 className="h-4 w-4" />
