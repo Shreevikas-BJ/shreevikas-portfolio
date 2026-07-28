@@ -14,12 +14,12 @@ import {
 import { useEffect, useState } from "react";
 
 const stages = [
-  { stage: "Source", title: "Data", tech: "SQL / S3", icon: Database },
-  { stage: "Process", title: "PySpark", tech: "Features", icon: Workflow },
-  { stage: "Model", title: "ML Systems", tech: "XGBoost / PyTorch", icon: BrainCircuit },
-  { stage: "Evaluate", title: "Trust Layer", tech: "RAG / Agents", icon: Sparkles },
-  { stage: "Deploy", title: "Serving", tech: "MLflow / FastAPI", icon: ServerCog },
-  { stage: "Monitor", title: "Cloud", tech: "Drift / Quality", icon: CloudCog }
+  { stage: "Data", title: "Sources", tech: "SQL / S3", icon: Database },
+  { stage: "Features", title: "Processing", tech: "PySpark / SQL", icon: Workflow },
+  { stage: "Models", title: "ML Systems", tech: "XGBoost / PyTorch", icon: BrainCircuit },
+  { stage: "Evaluation", title: "Trust Layer", tech: "RAG / Agents", icon: Sparkles },
+  { stage: "Deployment", title: "Serving", tech: "MLflow / FastAPI", icon: ServerCog },
+  { stage: "Monitoring", title: "Reliability", tech: "Drift / Quality", icon: CloudCog }
 ];
 
 const focusStates = [
@@ -152,7 +152,7 @@ export function EngineeringFlow() {
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-4 font-mono text-[0.66rem] text-muted-foreground">
-          <span>DATA -&gt; MODEL -&gt; DECISION</span>
+          <span>DATA -&gt; FEATURES -&gt; MODELS -&gt; EVALUATION -&gt; DEPLOYMENT -&gt; MONITORING -&gt; BUSINESS IMPACT</span>
           <span className="text-success">MONITORING ACTIVE</span>
         </div>
       </div>

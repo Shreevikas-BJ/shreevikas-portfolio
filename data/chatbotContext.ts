@@ -15,7 +15,7 @@ Identity:
 I am Shreevikas Jagadish, based in Chicago, Illinois and open to relocation. I am an AI/ML Engineer, Data Scientist, and Data Engineer focused on production machine learning, predictive modeling, RAG, agentic AI, MLOps, scientific machine learning, and cloud data platforms. Email: ${siteConfig.email}. Phone: ${siteConfig.phone}. GitHub: ${siteConfig.github}. LinkedIn: ${siteConfig.linkedin}. Portfolio: ${siteConfig.portfolio}.
 
 Summary:
-I have 4 years of experience translating complex business challenges into scalable analytical solutions using machine learning, statistical modeling, and cloud-based data platforms. I develop production-ready predictive systems, optimize large-scale data workflows, and deliver measurable operational improvements through robust model deployment, experimentation, and cross-functional collaboration across enterprise technology environments.
+I have 4+ years of experience translating complex business challenges into scalable analytical solutions using machine learning, statistical modeling, and cloud-based data platforms. I develop production-ready predictive systems, optimize large-scale data workflows, and deliver measurable operational improvements through robust model deployment, experimentation, and cross-functional collaboration across enterprise technology environments.
 
 Professional experience:
 Data Scientist / AI-ML, Cloudera, United States, January 2026-present. I designed regional demand forecasting models with Python, SQL, PySpark, and XGBoost, improving inventory planning accuracy by 24%. I built a reusable Apache Spark and MLflow experimentation framework that shortened model iteration cycles by 40%. I integrated predictive inference services and LLM-powered workflows through FastAPI and Docker, reducing processing latency by 38%. I established statistical validation, retrieval evaluation, drift monitoring, and A/B testing practices that increased ML and RAG consistency by 18%. I collaborated with analytics, product, supply chain, and operations teams to deliver deployable AI solutions. I created Power BI dashboards that eliminated 60% of recurring manual reporting effort.
@@ -35,7 +35,7 @@ Manufacturing Process Quality Intelligence System: Python, Scikit-Learn, SQL, Pa
 Enterprise Knowledge Search Platform: Python, LangChain, Hugging Face, vector search, FastAPI, and PostgreSQL. I engineered a RAG platform using transformer embeddings, semantic chunking, and vector retrieval, improving relevant document discovery by 31%. Prompt orchestration, retrieval evaluation, grounded generation, and FastAPI services reduced information search time by 46%.
 
 Additional portfolio projects:
-Flagship portfolio systems include AgentShield, an AI-agent QA and red-team platform; AI FinOps Copilot, a read-only cloud cost decision layer; the AI/ML Knowledge RAG Assistant with Supabase pgvector, Jina embeddings, Groq, similarity gating, citations, refusal handling, and layered caches; the Databricks Lakeflow Medallion Pipeline; the Airbnb Snowflake dbt Pipeline; and the Intelligent Inventory Demand Forecasting Platform. The broader portfolio also includes Sales Forecasting MLOps, Subscription Value Brain, Stock Market Kafka Data Pipeline, IT Helpdesk AI Agent, Medical RAG Chatbot, Real-Time Pothole Detection, BERT Sentiment Analysis, Customer Churn Prediction, NVIDIA Stock Forecasting, Power BI, and SQL analysis projects.
+Flagship GitHub systems include AgentShield, an AI-agent QA and red-team platform; AI FinOps Copilot, a read-only cloud cost decision layer; the AI/ML Knowledge RAG Assistant with Supabase pgvector, Jina embeddings, Groq, similarity gating, citations, refusal handling, and layered caches; the Databricks Lakeflow Medallion Pipeline; the Airbnb Snowflake dbt Pipeline; and the Stock Market Kafka Data Pipeline. The portfolio preserves resume-derived case studies for intelligent inventory forecasting, manufacturing quality intelligence, and enterprise knowledge search. It also includes Sales Forecasting MLOps, Subscription Value Brain, IT Helpdesk AI Agent, Medical RAG Chatbot, Real-Time Pothole Detection, BERT Sentiment Analysis, Customer Churn Prediction, NVIDIA Stock Forecasting, Power BI, and SQL analysis projects.
 
 Education:
 Master of Science in Information Technology & Management, Illinois Institute of Technology, United States, May 2026. Bachelor of Engineering in Computer Science and Engineering, Visvesvaraya Technological University, India, August 2023.
@@ -120,7 +120,7 @@ export const cachedChatbotAnswers = [
       "Bosch"
     ],
     answer:
-      "I have 4 years of experience spanning data science and AI engineering. At Cloudera, I build demand forecasting, ML experimentation, predictive inference, RAG reliability, drift monitoring, and Power BI solutions. As an AI Engineer Intern at NeuralSeek, I built production-oriented RAG and agentic AI workflows. At Bosch, I developed manufacturing quality prediction, NLP preprocessing, anomaly detection, statistical analysis, and automated analytics workflows."
+      "I have 4+ years of experience spanning data science and AI engineering. At Cloudera, I build demand forecasting, ML experimentation, predictive inference, RAG reliability, drift monitoring, and Power BI solutions. As an AI Engineer Intern at NeuralSeek, I built production-oriented RAG and agentic AI workflows. At Bosch, I developed manufacturing quality prediction, NLP preprocessing, anomaly detection, statistical analysis, and automated analytics workflows."
   },
   {
     questions: [
@@ -175,7 +175,7 @@ export const cachedChatbotAnswers = [
       "strongest projects"
     ],
     answer:
-      "My three resume-featured projects are the Intelligent Inventory Demand Forecasting Platform, Manufacturing Process Quality Intelligence System, and Enterprise Knowledge Search Platform. Together they demonstrate forecasting and MLOps, predictive manufacturing analytics, and enterprise RAG. The portfolio also includes additional GitHub projects across AI applications, data engineering, machine learning, and analytics."
+      "My six flagship GitHub projects are AgentShield, AI FinOps Copilot, the AI/ML Knowledge RAG Assistant, the Databricks Lakeflow Medallion Pipeline, the Airbnb Snowflake dbt Pipeline, and the Stock Market Kafka Data Pipeline. The portfolio also preserves three resume-derived case studies: Intelligent Inventory Demand Forecasting, Manufacturing Process Quality Intelligence, and Enterprise Knowledge Search, followed by additional AI, ML, data engineering, and analytics projects."
   },
   {
     questions: [
@@ -186,7 +186,7 @@ export const cachedChatbotAnswers = [
       "skills"
     ],
     answer:
-      "I work with Python, SQL, PySpark, R, Scikit-Learn, XGBoost, LightGBM, TensorFlow, PyTorch, Apache Spark, Pandas, NumPy, LangChain, Hugging Face, RAG, MLflow, Docker, Kubernetes, FastAPI, and CI/CD. My cloud and data platforms include AWS S3, SageMaker, EC2, Lambda, Azure, Databricks, Snowflake, BigQuery, PostgreSQL, SQL Server, MySQL, and MongoDB. I also use Power BI, Tableau, Matplotlib, Plotly, statistical analysis, and A/B testing."
+      "I work with Python, SQL, PySpark, R, Scikit-Learn, XGBoost, LightGBM, TensorFlow, PyTorch, Apache Spark, Kafka, Airflow, dbt, Pandas, NumPy, LangChain, LangGraph, Hugging Face, RAG, LLM evaluation, guardrails, MCP, the OpenAI Agents SDK, MLflow, Docker, Kubernetes, FastAPI, and CI/CD. My cloud and data platforms include AWS S3, SageMaker, EC2, Lambda, Glue, Athena, Redshift, CloudWatch, Azure, GCP, Databricks, Snowflake, BigQuery, Supabase, PostgreSQL, SQL Server, MySQL, and MongoDB. I also use Next.js, TypeScript, Pydantic, pytest, Streamlit, Power BI, Tableau, Matplotlib, Plotly, statistical analysis, and A/B testing."
   },
   {
     questions: [

@@ -22,12 +22,12 @@ export const siteConfig = {
   initials: "SJ",
   title: "Shreevikas Jagadish | AI/ML Engineer, Data Scientist & Data Engineer",
   description:
-    "Portfolio of Shreevikas Jagadish, an AI/ML Engineer, Data Scientist, and Data Engineer building production machine-learning systems, trustworthy RAG applications, scientific AI, MLOps workflows, and cloud data platforms.",
+    "AWS-certified AI/ML and Data professional building production machine-learning systems, trustworthy RAG applications, agentic AI workflows, and scalable cloud data platforms.",
   location: "Chicago, Illinois",
-  availability: "Open to AI/ML, Data Science, and Data Engineering roles",
+  availability: "Open to full-time AI, ML, Data Science, and Data Engineering roles",
   relocation: "Open to relocation",
-  email: "shreevikasjagadish7@gmail.com",
-  emailHref: "mailto:shreevikasjagadish7@gmail.com?subject=Portfolio%20Inquiry",
+  email: "bjshreevikas@gmail.com",
+  emailHref: "mailto:bjshreevikas@gmail.com?subject=Portfolio%20Inquiry",
   phone: "+1 (312) 358-3056",
   phoneHref: "tel:+13123583056",
   github: "https://github.com/Shreevikas-BJ",
@@ -42,6 +42,13 @@ export const siteConfig = {
     "Data Engineer"
   ]
 };
+
+export const currentFocus = [
+  "Trustworthy RAG and knowledge-retrieval systems",
+  "LLM evaluation, red teaming, guardrails, and agent reliability",
+  "Production ML, MLOps, monitoring, and cloud deployment",
+  "Batch, streaming, lakehouse, and analytics-ready data platforms"
+];
 
 export const heroStats = [
   {
@@ -472,7 +479,7 @@ export type Project = {
   highlightLabel?: string;
   problem?: string;
   solution?: string;
-  visual?: "forecast" | "shield" | "finops" | "rag" | "medallion" | "lineage";
+  visual?: "forecast" | "shield" | "finops" | "rag" | "medallion" | "lineage" | "streaming";
   summary: string;
   architecture: string;
   tech: string[];
@@ -487,8 +494,7 @@ export const projects: Project[] = [
     slug: "intelligent-inventory-demand-forecasting",
     category: "Data Science / Forecasting / MLOps",
     filters: ["Data Science & ML", "MLOps", "Analytics"],
-    featured: true,
-    featuredOrder: 6,
+    featured: false,
     highlightLabel: "Production Forecasting",
     problem:
       "Regional inventory planning becomes unreliable when demand signals are fragmented and model releases are slow.",
@@ -565,7 +571,8 @@ export const projects: Project[] = [
       "I tested unsafe tool use, hallucination, and policy risks.",
       "I generated regression reports for AI agents."
     ],
-    repoUrl: "https://github.com/Shreevikas-BJ/agentshield"
+    repoUrl: "https://github.com/Shreevikas-BJ/agentshield",
+    liveUrl: "https://agentshield-delta.vercel.app/"
   },
   {
     title: "AI FinOps Copilot",
@@ -590,7 +597,8 @@ export const projects: Project[] = [
       "I generated ticket-ready recommendations for cost spikes and savings findings.",
       "I designed the workflow to avoid requiring AWS credentials."
     ],
-    repoUrl: "https://github.com/Shreevikas-BJ/ai-finops-copilot"
+    repoUrl: "https://github.com/Shreevikas-BJ/ai-finops-copilot",
+    liveUrl: "https://ai-finops-copilot.vercel.app/"
   },
   {
     title: "AI/ML Knowledge RAG Assistant",
@@ -615,7 +623,8 @@ export const projects: Project[] = [
       "I added citation-grounded responses and refusal handling for low-confidence answers.",
       "I used exact, semantic, and embedding caches for faster repeated queries."
     ],
-    repoUrl: "https://github.com/Shreevikas-BJ/ml-course-document-rag"
+    repoUrl: "https://github.com/Shreevikas-BJ/ml-course-document-rag",
+    liveUrl: "https://ml-course-document-rag.vercel.app/"
   },
   {
     title: "Databricks Lakeflow Medallion Pipeline",
@@ -683,7 +692,8 @@ export const projects: Project[] = [
       "I used PySpark and Snowflake for scalable data processing.",
       "I created a dashboard to make forecasting outputs usable for business users."
     ],
-    repoUrl: "https://github.com/Shreevikas-BJ/sales-forecasting-mlops-pipeline"
+    repoUrl: "https://github.com/Shreevikas-BJ/sales-forecasting-mlops-pipeline",
+    liveUrl: "https://sales-forecasting-mlops.streamlit.app/"
   },
   {
     title: "Subscription Value Brain",
@@ -708,15 +718,23 @@ export const projects: Project[] = [
     slug: "stock-market-kafka-data-pipeline",
     category: "Data Engineering / Streaming",
     filters: ["Data Engineering"],
+    featured: true,
+    featuredOrder: 6,
+    highlightLabel: "Streaming Data Engineering",
+    problem:
+      "Batch-only processing cannot provide the near-real-time ingestion path needed for continuous financial and operational events.",
+    solution:
+      "A learning-focused Kafka and AWS architecture that streams simulated stock records into queryable cloud storage.",
+    visual: "streaming",
     summary:
-      "Real-time stock market data engineering pipeline using Kafka, Python, AWS S3, Glue, Athena, and EC2 for streaming analytics.",
+      "Learning-focused stock market streaming pipeline using Kafka, Python, AWS S3, Glue, Athena, and EC2.",
     architecture:
-      "The pipeline uses Kafka for real-time ingestion, Python for processing, and AWS services for storage, cataloging, and querying streaming stock market data.",
+      "The project uses Python and Kafka on EC2 to produce and consume simulated stock records, persists events to AWS S3, catalogs schemas with AWS Glue, and enables SQL analysis through Amazon Athena.",
     tech: ["Kafka", "Python", "AWS S3", "Glue", "Athena", "EC2"],
     bullets: [
-      "I built an end-to-end real-time streaming pipeline for stock market data.",
-      "I used Kafka for ingestion and AWS services for storage, cataloging, and querying.",
-      "I demonstrated practical streaming analytics and cloud data engineering skills."
+      "I built a learning-focused end-to-end streaming architecture for simulated stock market records.",
+      "I used Kafka and Python on EC2 for event production and consumption.",
+      "I connected S3 storage, Glue cataloging, and Athena SQL analytics."
     ],
     repoUrl: "https://github.com/Shreevikas-BJ/stock-market-kafka-data-pipeline"
   },

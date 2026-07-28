@@ -19,13 +19,12 @@ import { ButtonLink } from "@/components/ui/Button";
 import { siteConfig } from "@/data/portfolio";
 
 const focusAreas = [
-  "Production machine learning",
-  "Trustworthy RAG systems",
-  "Agentic AI workflows",
-  "LLM evaluation and guardrails",
-  "Physics-informed neural networks",
-  "Cloud data platforms",
-  "Real-time data engineering"
+  "Building trustworthy AI systems",
+  "Productionizing machine-learning workflows",
+  "Engineering scalable data platforms",
+  "Evaluating and securing LLM applications",
+  "Turning complex data into deployable products",
+  "Advancing physics-informed AI"
 ];
 
 function FocusRotator() {
@@ -82,7 +81,7 @@ export function Hero() {
         >
           <p className="eyebrow">
             <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--glow))]" />
-            AI / ML &middot; Data &middot; Scientific Computing
+            AI/ML Engineering &middot; Data Science &middot; Data Engineering
           </p>
 
           <h1 className="mt-7 text-4xl font-semibold leading-[1.05] text-balance sm:text-5xl lg:text-[3.9rem]">
@@ -93,14 +92,14 @@ export function Hero() {
           </p>
 
           <p className="mt-8 max-w-3xl text-3xl font-semibold leading-[1.16] text-balance sm:text-[2.45rem] lg:text-[2.7rem]">
-            I build production AI systems that turn complex data into reliable decisions.
+            I build production AI systems that move from experimentation to reliable use.
           </p>
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">
-            I bring 4+ years of experience across machine learning, advanced RAG,
-            agentic AI, MLOps, scalable cloud pipelines, and physics-informed AI.
-            My focus is practical engineering: systems that are measurable, observable,
-            and ready to operate.
+            With 4+ years across machine learning, trustworthy RAG, agentic AI,
+            MLOps, and scalable cloud data platforms, I engineer the full lifecycle
+            from data and features through evaluation, deployment, monitoring, and
+            business impact.
           </p>
 
           <FocusRotator />
@@ -134,7 +133,7 @@ export function Hero() {
               <div className="min-w-0">
                 <p className="flex items-center gap-2 text-sm font-semibold">
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
-                  Open to engineering opportunities
+                  {siteConfig.availability}
                 </p>
                 <p className="mt-1 flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
                   <span className="inline-flex items-center gap-1.5">

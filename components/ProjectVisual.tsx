@@ -12,6 +12,13 @@ import {
 } from "lucide-react";
 import type { Project } from "@/data/portfolio";
 
+const streamingNodes = [
+  { label: "Python", detail: "Producer" },
+  { label: "Kafka", detail: "EC2 stream" },
+  { label: "S3", detail: "Event storage" },
+  { label: "Glue + Athena", detail: "Catalog + SQL" }
+];
+
 function VisualHeader({ label, status = "LIVE" }: { label: string; status?: string }) {
   return (
     <div className="relative z-10 flex min-w-0 items-center justify-between gap-3 border-b border-border/80 px-4 py-3">
@@ -231,6 +238,37 @@ function ForecastVisual() {
   );
 }
 
+function StreamingVisual() {
+  return (
+    <div className="project-visual">
+      <VisualHeader label="Streaming data architecture" status="LEARNING BUILD" />
+      <div className="relative z-10 p-5">
+        <div className="grid grid-cols-2 gap-3 min-[460px]:grid-cols-4">
+          {streamingNodes.map((node, index) => (
+            <div key={node.label} className="min-w-0 rounded-md border border-border bg-background/72 p-3 text-center">
+              {index === 0 ? <Activity className="mx-auto h-4 w-4 text-primary" /> : null}
+              {index === 1 ? <Layers3 className="mx-auto h-4 w-4 text-primary" /> : null}
+              {index === 2 ? <Database className="mx-auto h-4 w-4 text-primary" /> : null}
+              {index === 3 ? <Search className="mx-auto h-4 w-4 text-primary" /> : null}
+              <p className="box-heading mt-2 font-mono text-[0.62rem] font-semibold">{node.label}</p>
+              <p className="box-heading mt-1 text-[0.58rem] text-muted-foreground">{node.detail}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-6 rounded-md border border-primary/25 bg-primary/10 p-4">
+          <div className="flex items-center gap-3 font-mono text-[0.62rem] text-muted-foreground">
+            <Activity className="h-4 w-4 shrink-0 text-success" />
+            SIMULATED EVENTS -&gt; OBJECT STORAGE -&gt; CATALOG -&gt; SQL ANALYTICS
+          </div>
+          <div className="mt-3 h-1 overflow-hidden rounded-full bg-muted">
+            <div className="signal-bar h-full w-4/5 rounded-full bg-gradient-to-r from-primary to-secondary" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectVisual({ project }: { project: Project }) {
   switch (project.visual) {
     case "shield":
@@ -245,6 +283,8 @@ export function ProjectVisual({ project }: { project: Project }) {
       return <LineageVisual />;
     case "forecast":
       return <ForecastVisual />;
+    case "streaming":
+      return <StreamingVisual />;
     default:
       return null;
   }

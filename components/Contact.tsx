@@ -19,9 +19,10 @@ export function Contact() {
                 Let&apos;s build an AI or data system that earns trust in production.
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-                I am open to AI/ML Engineer, Data Scientist, and Data Engineer roles,
-                as well as conversations with teams working on RAG, MLOps, scientific AI,
-                or cloud data infrastructure.
+                I enjoy building practical AI and data systems that move from experimentation
+                to reliable production use. I am open to full-time AI/ML Engineer, Data Scientist,
+                and Data Engineer roles, plus conversations about RAG, MLOps, scientific AI,
+                and cloud data infrastructure.
               </p>
 
               <div className="mt-9 flex flex-wrap gap-3">

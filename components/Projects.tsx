@@ -52,19 +52,20 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" className="section-band">
-      <div className="section-shell">
+    <>
+      <section id="projects" className="section-band">
+        <div className="section-shell">
         <SectionHeading
           eyebrow="04 / Projects"
-          title="Engineering work across AI safety, RAG, MLOps, and modern data platforms."
-          description="These systems show how I frame problems, design architectures, build reliability into the workflow, and turn technical output into something people can use."
+          title="Production AI, machine learning, MLOps, and data engineering projects."
+          description="Six verified public builds lead the collection, followed by resume-derived case studies and additional applied systems across AI, data, and analytics."
         />
 
         <div className="mb-8 flex flex-col gap-4 border-y border-border/70 py-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="mono-label">Flagship systems</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Six focused builds spanning production AI and data infrastructure.
+              Six public repositories selected for engineering depth and professional value.
             </p>
           </div>
           <ButtonLink href={`${siteConfig.github}?tab=repositories`} variant="outline" external>
@@ -95,10 +96,11 @@ export function Projects() {
         <div className="mt-24 border-t border-border pt-12">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="eyebrow">Project explorer</p>
+              <p className="eyebrow">Resume case studies + project explorer</p>
               <h3 className="mt-4 text-2xl font-semibold sm:text-3xl">More applied systems</h3>
               <p className="mt-3 max-w-2xl text-base leading-7 text-muted-foreground">
-                Search by project, architecture, or technology, then narrow the collection by domain.
+                The first three cards preserve my resume-derived case studies. Search by project,
+                architecture, or technology, then narrow the full collection by domain.
               </p>
             </div>
 
@@ -184,10 +186,10 @@ export function Projects() {
               </Button>
             </div>
           ) : null}
+          </div>
         </div>
-      </div>
-
+      </section>
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
-    </section>
+    </>
   );
 }

@@ -26,7 +26,9 @@ A production-grade engineering portfolio for an AI/ML Engineer, Data Scientist, 
 - [AI/ML Knowledge RAG Assistant](https://github.com/Shreevikas-BJ/ml-course-document-rag): citation-grounded retrieval with gating, caching, refusal handling, and evaluation.
 - [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): governed Bronze, Silver, and Gold data processing.
 - [Airbnb Snowflake dbt Pipeline](https://github.com/Shreevikas-BJ/airbnb-snowflake-dbt-pipeline): incremental ELT, tests, lineage, and SCD Type 2 snapshots.
-- Intelligent Inventory Demand Forecasting Platform: PySpark, XGBoost, MLflow, FastAPI, and AWS forecasting workflow.
+- [Stock Market Kafka Data Pipeline](https://github.com/Shreevikas-BJ/stock-market-kafka-data-pipeline): learning-focused Kafka-to-AWS streaming architecture with S3, Glue, Athena, and EC2.
+
+The site also preserves the Intelligent Inventory Demand Forecasting, Manufacturing Process Quality Intelligence, and Enterprise Knowledge Search resume case studies, plus every supporting project in the searchable explorer.
 
 ## Stack
 

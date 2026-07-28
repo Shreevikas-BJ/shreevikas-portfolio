@@ -4,10 +4,18 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { aboutHighlights } from "@/data/portfolio";
+import { aboutHighlights, currentFocus } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
-const lifecycle = ["Understand", "Engineer", "Model", "Evaluate", "Deploy", "Monitor"];
+const lifecycle = [
+  "Data",
+  "Features",
+  "Models",
+  "Evaluation",
+  "Deployment",
+  "Monitoring",
+  "Business Impact"
+];
 
 export function About() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -27,14 +35,18 @@ export function About() {
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
             <p className="max-w-xl text-xl leading-9 text-foreground sm:text-2xl sm:leading-10">
-              I am most interested in systems that move beyond a compelling demo and become
-              useful, measurable, and maintainable products.
+              With 4+ years across AI, machine learning, data science, analytics, and
+              data engineering, I build production models and inference workflows,
+              trustworthy RAG systems, agentic applications, and evaluation layers that
+              improve retrieval quality, safety, and reliability.
             </p>
             <p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
-              That means treating data quality, evaluation, latency, observability, and user
-              decisions as part of the model itself. I enjoy moving between predictive modeling,
-              retrieval systems, distributed processing, and GPU-accelerated research when the
-              problem calls for it.
+              My data work spans batch and streaming pipelines, Snowflake, Databricks,
+              Spark, AWS, and modern lakehouse and warehouse patterns. I hold an M.S. in
+              Information Technology and Management from Illinois Institute of Technology
+              and the AWS Certified Data Engineer - Associate credential. I care most about
+              practical business problems and dependable production use, including
+              physics-informed AI when the problem calls for it.
             </p>
 
             <div className="mt-10 border-l border-primary/50 pl-5">
@@ -49,6 +61,20 @@ export function About() {
                   </span>
                 ))}
               </div>
+            </div>
+
+            <div className="mt-10">
+              <p className="mono-label">Current focus</p>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                {currentFocus.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-lg border border-border bg-surface/55 px-4 py-3 text-sm leading-6 text-muted-foreground"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
