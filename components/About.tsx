@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { aboutHighlights } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
-const lifecycle = ["Understand", "Engineer", "Model", "Evaluate", "Deploy", "Monitor"];
+const lifecycle = ["Sense", "Understand", "Retrieve", "Decide", "Deploy", "Observe"];
 
 export function About() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -20,25 +20,24 @@ export function About() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="01 / About"
-          title="I connect machine intelligence with the data systems that make it dependable."
-          description="My work sits where AI, data engineering, and scientific computing meet: understanding the real constraint, designing the right system, and validating it under production conditions."
+          title="I build the full path from perception to production."
+          description="My work connects computer vision, machine learning, retrieval, agents, data platforms, and cloud delivery into AI systems that operate reliably at enterprise scale."
         />
 
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
             <p className="max-w-xl text-xl leading-9 text-foreground sm:text-2xl sm:leading-10">
-              I am most interested in systems that move beyond a compelling demo and become
-              useful, measurable, and maintainable products.
+              I turn complex manufacturing and enterprise workflows into AI products that
+              can perceive, reason, retrieve context, and take dependable action.
             </p>
             <p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
-              That means treating data quality, evaluation, latency, observability, and user
-              decisions as part of the model itself. I enjoy moving between predictive modeling,
-              retrieval systems, distributed processing, and GPU-accelerated research when the
-              problem calls for it.
+              I work across model development and the infrastructure around it: feature pipelines,
+              evaluation, observability, APIs, containerized deployment, and the feedback loops
+              needed to keep production intelligence useful.
             </p>
 
             <div className="mt-10 border-l border-primary/50 pl-5">
-              <p className="mono-label">Engineering lifecycle</p>
+              <p className="mono-label">Production AI lifecycle</p>
               <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-3 font-mono text-xs font-semibold text-foreground">
                 {lifecycle.map((item, index) => (
                   <span key={item} className="inline-flex items-center gap-2">
@@ -88,7 +87,7 @@ export function About() {
 
             <div className="relative min-h-64 overflow-hidden rounded-lg border border-border bg-surface/72 p-6 sm:min-h-full">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-primary via-secondary to-transparent" />
-              <p className="mono-label">Capability map</p>
+              <p className="mono-label">System capability</p>
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={activeCapability.title}

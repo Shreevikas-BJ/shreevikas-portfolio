@@ -20,11 +20,11 @@ export const siteConfig = {
   name: "Shreevikas Jagadish",
   shortName: "Shreevikas",
   initials: "SJ",
-  title: "Shreevikas Jagadish | AI/ML Engineer, Data Scientist & Data Engineer",
+  title: "Shreevikas Jagadish | AI Engineer, ML Engineer, Data Scientist & Data Engineer",
   description:
-    "Portfolio of Shreevikas Jagadish, an AI/ML Engineer, Data Scientist, and Data Engineer building production machine-learning systems, trustworthy RAG applications, scientific AI, MLOps workflows, and cloud data platforms.",
-  location: "Chicago, Illinois",
-  availability: "Open to AI/ML, Data Science, and Data Engineering roles",
+    "Portfolio of Shreevikas Jagadish, an AI Engineer, Machine Learning Engineer, Data Scientist, and Data Engineer building production computer vision, agentic AI, RAG, MLOps, and cloud data systems.",
+  location: "United States",
+  availability: "Open to AI Engineering, Machine Learning, Data Science, and Data Engineering roles",
   relocation: "Open to relocation",
   email: "shreevikasjagadish7@gmail.com",
   emailHref: "mailto:shreevikasjagadish7@gmail.com?subject=Portfolio%20Inquiry",
@@ -37,7 +37,8 @@ export const siteConfig = {
   resumePath: "/Shreevikas_Jagadish_Resume.pdf",
   resumeFileName: "Shreevikas_Jagadish_Resume.pdf",
   roles: [
-    "AI/ML Engineer",
+    "AI Engineer",
+    "Machine Learning Engineer",
     "Data Scientist",
     "Data Engineer"
   ]
@@ -47,32 +48,34 @@ export const heroStats = [
   {
     value: 4,
     suffix: "+",
-    label: "Years of experience",
-    context: "Across production ML, AI engineering, and analytics"
+    label: "Years in AI and ML",
+    context: "Production intelligence and enterprise AI"
   },
   {
-    value: 24,
+    value: 26,
     suffix: "%",
-    label: "Planning accuracy gain",
-    context: "Regional demand forecasting"
+    label: "Fewer product recalls",
+    context: "Computer vision inspection at P&G"
   },
   {
     value: 40,
     suffix: "%",
-    label: "Faster model iteration",
-    context: "Reusable Spark and MLflow workflows"
+    label: "Faster support resolution",
+    context: "Enterprise RAG for HR and IT"
   },
   {
-    value: 38,
-    suffix: "%",
-    label: "Lower processing latency",
-    context: "Production inference services"
+    value: 1.2,
+    prefix: "$",
+    suffix: "M+",
+    decimals: 1,
+    label: "Annual cloud savings",
+    context: "High-concurrency AI inference"
   },
   {
-    value: 22,
-    suffix: "%",
-    label: "Better defect detection",
-    context: "Manufacturing quality intelligence"
+    value: 500,
+    suffix: "+",
+    label: "Frames per second",
+    context: "Industrial quality inspection"
   }
 ];
 
@@ -81,25 +84,25 @@ export const aboutHighlights = [
     icon: BrainCircuit,
     title: "Machine Learning",
     description:
-      "Forecasting, classification, anomaly detection, feature engineering, and model optimization."
+      "Computer vision, forecasting, anomaly detection, feature engineering, and model optimization."
   },
   {
     icon: Bot,
     title: "Generative AI",
     description:
-      "Grounded RAG, agentic workflows, embeddings, evaluation, caching, and guardrails."
+      "Enterprise RAG, agentic workflows, LLM fine-tuning, retrieval evaluation, and guardrails."
   },
   {
     icon: Gauge,
     title: "MLOps",
     description:
-      "Experiment tracking, model serving, monitoring, validation, CI/CD, and drift detection."
+      "GPU training, experiment tracking, model serving, monitoring, CI/CD, and cloud optimization."
   },
   {
     icon: Workflow,
     title: "Data Engineering",
     description:
-      "Reliable batch and streaming pipelines, lakehouse patterns, quality, and orchestration."
+      "Feature stores, batch and streaming pipelines, lakehouse patterns, quality, and orchestration."
   },
   {
     icon: Cloud,
@@ -131,16 +134,23 @@ export const skills = [
       "RAG",
       "Advanced RAG",
       "LangChain",
+      "LlamaIndex",
       "LangGraph",
+      "CrewAI",
       "Hugging Face",
       "Transformers",
+      "GPT-4o",
+      "Gemini API",
       "Embeddings",
       "Reranking",
+      "PEFT / LoRA / QLoRA",
       "Prompt Engineering",
       "Agentic AI",
       "LLM Evaluation",
       "Guardrails",
       "OpenAI Agents SDK",
+      "Function & Tool Calling",
+      "Whisper ASR",
       "MCP"
     ]
   },
@@ -155,6 +165,8 @@ export const skills = [
       "TensorFlow",
       "XGBoost",
       "LightGBM",
+      "Logistic Regression",
+      "Isolation Forest",
       "Classification",
       "Regression",
       "Clustering",
@@ -162,7 +174,25 @@ export const skills = [
       "Recommendation Systems",
       "Anomaly Detection",
       "Feature Engineering",
-      "Model Optimization"
+      "Model Optimization",
+      "AUC-ROC",
+      "F1 Score"
+    ]
+  },
+  {
+    category: "Computer Vision & Document AI",
+    icon: Cpu,
+    summary: "Visual inspection and document understanding for high-throughput enterprise workflows.",
+    items: [
+      "OpenCV",
+      "Convolutional Neural Networks",
+      "PaddleOCR",
+      "PyMuPDF",
+      "Tesseract",
+      "EasyOCR",
+      "PDF Parsing",
+      "Regex Field Extraction",
+      "CUDA Acceleration"
     ]
   },
   {
@@ -193,6 +223,10 @@ export const skills = [
       "Flink",
       "Airflow",
       "dbt",
+      "Databricks",
+      "Snowflake",
+      "Delta Lake",
+      "Feature Stores",
       "ETL / ELT",
       "Batch Processing",
       "Streaming Pipelines",
@@ -215,7 +249,10 @@ export const skills = [
       "CI/CD",
       "GitHub Actions",
       "Drift Monitoring",
-      "A/B Testing"
+      "A/B Testing",
+      "LangSmith",
+      "Azure ML",
+      "Terraform"
     ]
   },
   {
@@ -253,7 +290,13 @@ export const skills = [
       "Pandas",
       "NumPy",
       "R",
-      "REST APIs"
+      "REST APIs",
+      "Seaborn",
+      "Alteryx",
+      "ServiceNow",
+      "Excel",
+      "Jira",
+      "Agile / Scrum"
     ]
   }
 ];
@@ -271,40 +314,43 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    title: "Data Scientist / AI-ML",
-    company: "Cloudera",
+    title: "Artificial Intelligence Engineer",
+    company: "Procter & Gamble",
     location: "United States",
     dates: "Jan 2026 - Present",
     summary:
-      "I build and operationalize demand forecasting, predictive inference, retrieval evaluation, and decision-intelligence systems across enterprise planning workflows.",
+      "I architect production AI systems across computer vision, multi-agent automation, enterprise RAG, LLM fine-tuning, feature platforms, and high-concurrency inference.",
     tags: [
       "Python",
-      "SQL",
-      "PySpark",
-      "XGBoost",
-      "Apache Spark",
-      "MLflow",
+      "OpenCV",
+      "PyTorch",
+      "CUDA",
+      "AWS SageMaker",
+      "LangGraph",
+      "OpenAI SDK",
+      "LangSmith",
+      "LangChain",
+      "LlamaIndex",
+      "FAISS",
+      "QLoRA",
       "FastAPI",
       "Docker",
-      "RAG",
-      "Model Monitoring",
-      "A/B Testing",
-      "Power BI"
+      "Kubernetes"
     ],
     metrics: [
-      "24% better planning accuracy",
-      "40% faster model iteration",
-      "38% lower processing latency",
-      "18% higher ML/RAG consistency",
-      "60% less manual reporting"
+      "26% fewer product recalls",
+      "30% less manual intervention",
+      "40% faster support resolution",
+      "35% less compliance auditing",
+      "$1.2M+ annual cloud savings"
     ],
     bullets: [
-      "I designed regional demand forecasting models with Python, SQL, PySpark, and XGBoost, improving inventory planning accuracy by 24% across distributed supply operations.",
-      "I built a reusable Apache Spark and MLflow experimentation framework that shortened model iteration cycles by 40% and standardized feature processing, experiment comparison, version tracking, and production releases.",
-      "I integrated predictive inference services and LLM-powered workflows through FastAPI and Docker, cutting processing latency by 38% and delivering timely operational recommendations.",
-      "I established statistical validation, retrieval evaluation, drift monitoring, and A/B testing practices that increased ML and RAG performance consistency by 18% across evolving data distributions.",
-      "I partnered with analytics, product, supply chain, and operational stakeholders to translate planning and enterprise knowledge discovery requirements into deployable AI solutions.",
-      "I developed Power BI dashboards for forecast performance, predictions, operational exceptions, and planning trends, eliminating 60% of recurring manual reporting effort."
+      "I architected high-speed computer vision inspection pipelines with Python, OpenCV, and PyTorch on CUDA-accelerated AWS SageMaker clusters, reducing product recall rates by 26%.",
+      "I developed an Agentic AI supply-chain assistant with LangGraph, the OpenAI SDK, and LangSmith, orchestrating multi-agent workflows that reduced manual intervention by 30%.",
+      "I built enterprise RAG systems with LangChain, LlamaIndex, and FAISS, automating policy extraction and reducing internal HR and IT support resolution times by 40%.",
+      "I fine-tuned open-source LLMs with QLoRA, PEFT, and Hugging Face Transformers, cutting manual vendor-contract compliance auditing by 35%.",
+      "I orchestrated feature-store pipelines on Databricks, Delta Lake, and Apache Airflow to accelerate downstream model training across global supply-chain teams.",
+      "I built FastAPI inference microservices with Docker and Kubernetes on AWS, supporting high-concurrency execution and saving more than $1.2M in annual cloud infrastructure overhead."
     ]
   },
   {
@@ -343,35 +389,43 @@ export const experiences: Experience[] = [
     ]
   },
   {
-    title: "Data Scientist",
+    title: "Machine Learning Engineer",
     company: "Bosch",
     location: "India",
     dates: "Mar 2021 - Jul 2024",
     summary:
-      "I developed manufacturing quality intelligence and predictive-maintenance workflows that improved defect detection, data readiness, and operational visibility.",
+      "I delivered forecasting, Document AI, anomaly detection, multilingual NLP, data pipelines, and MLOps systems for manufacturing operations.",
     tags: [
       "Python",
-      "SQL",
+      "XGBoost",
       "Scikit-Learn",
-      "Pandas",
-      "ETL",
-      "NLP",
-      "Deep Learning",
-      "Anomaly Detection",
-      "Statistical Analysis"
+      "AWS S3",
+      "PaddleOCR",
+      "PyMuPDF",
+      "OpenCV",
+      "Isolation Forest",
+      "PyTorch",
+      "MLflow",
+      "Azure ML",
+      "BERT",
+      "Spark",
+      "Snowflake"
     ],
     metrics: [
-      "45% lower data prep time",
-      "22% better defect detection",
-      "17% higher prediction precision",
-      "55% less manual processing"
+      "22% lower inventory costs",
+      "45% faster blueprint review",
+      "3 weeks faster retraining",
+      "30% faster root-cause analysis",
+      "14% higher manufacturing yield"
     ],
     bullets: [
-      "I engineered manufacturing quality prediction models with Python and Scikit-Learn, raising defect detection accuracy by 22% across high-volume production environments.",
-      "I consolidated manufacturing datasets and unstructured maintenance records through automated ETL and NLP preprocessing workflows, cutting preparation time by 45% and improving analytical consistency.",
-      "I improved prediction precision by 17% across quality and predictive maintenance use cases through feature selection, hyperparameter tuning, cross-validation, and optimization of classification and deep learning models.",
-      "I built statistical analysis and anomaly detection dashboards that gave engineering teams earlier visibility into process instability, recurring production patterns, and equipment behavior.",
-      "I automated recurring analytics and operational reporting with SQL, Pandas, and scheduled data pipelines, saving 55% of manual processing effort."
+      "I engineered forecasting models with XGBoost, Scikit-Learn, and AWS S3, reducing inventory holding costs by 22%.",
+      "I built OCR pipelines with PaddleOCR, PyMuPDF, and OpenCV for engineering blueprints, cutting document review cycles by 45%.",
+      "I developed anomaly-detection workflows with Isolation Forest and PyTorch for manufacturing telemetry.",
+      "I implemented CI/CD MLOps with MLflow, Airflow, and Azure ML, reducing model retraining turnaround by three weeks.",
+      "I built multilingual warranty-claim analysis with BERT, Python, and PostgreSQL, improving root-cause analysis speed by 30%.",
+      "I developed SQL, Spark, and Snowflake ETL and feature pipelines for scalable analytical and machine-learning workloads.",
+      "I used A/B testing and statistical hypothesis testing with Python and Tableau to improve manufacturing yield by 14%."
     ]
   }
 ];
@@ -442,6 +496,8 @@ export const projectFilters: ProjectFilter[] = [
 ];
 
 export type ProjectCategory =
+  | "AI / Computer Vision / Quality Intelligence"
+  | "Document AI / Enterprise Search"
   | "Data Science / Forecasting / MLOps"
   | "Data Science / Manufacturing Intelligence"
   | "GenAI / RAG / Enterprise Search"
@@ -472,7 +528,7 @@ export type Project = {
   highlightLabel?: string;
   problem?: string;
   solution?: string;
-  visual?: "forecast" | "shield" | "finops" | "rag" | "medallion" | "lineage";
+  visual?: "forecast" | "shield" | "finops" | "rag" | "medallion" | "lineage" | "vision" | "document";
   summary: string;
   architecture: string;
   tech: string[];
@@ -483,12 +539,35 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "Autonomous Industrial Quality Assurance & Defect Intelligence System",
+    slug: "autonomous-industrial-quality-assurance",
+    category: "AI / Computer Vision / Quality Intelligence",
+    filters: ["Data Science & ML", "MLOps"],
+    featured: true,
+    featuredOrder: 1,
+    highlightLabel: "Industrial Computer Vision",
+    problem:
+      "High-speed manufacturing lines make manual inspection expensive and delay the discovery of packaging defects.",
+    solution:
+      "A CUDA-accelerated computer vision system that performs real-time defect detection and production quality intelligence at industrial throughput.",
+    visual: "vision",
+    summary:
+      "Production computer vision platform for high-throughput packaging inspection, rapid defect detection, and quality decision support.",
+    architecture:
+      "The system uses Python, OpenCV, PyTorch, Docker, and AWS SageMaker to process visual inspection streams at more than 500 frames per second and deliver production-ready defect intelligence.",
+    tech: ["Python", "OpenCV", "PyTorch", "CUDA", "Docker", "AWS SageMaker"],
+    bullets: [
+      "I built a real-time inspection workflow operating at more than 500 frames per second.",
+      "I reduced packaging defect leakage by 32% through automated visual quality checks.",
+      "I delivered $850K in scrap savings through earlier, more reliable defect detection."
+    ]
+  },
+  {
     title: "Intelligent Inventory Demand Forecasting Platform",
     slug: "intelligent-inventory-demand-forecasting",
     category: "Data Science / Forecasting / MLOps",
     filters: ["Data Science & ML", "MLOps", "Analytics"],
-    featured: true,
-    featuredOrder: 6,
+    featured: false,
     highlightLabel: "Production Forecasting",
     problem:
       "Regional inventory planning becomes unreliable when demand signals are fragmented and model releases are slow.",
@@ -509,19 +588,25 @@ export const projects: Project[] = [
   {
     title: "Manufacturing Process Quality Intelligence System",
     slug: "manufacturing-process-quality-intelligence",
-    category: "Data Science / Manufacturing Intelligence",
-    filters: ["Data Science & ML", "Analytics"],
-    featured: false,
-    highlightLabel: "Quality Intelligence",
+    category: "Document AI / Enterprise Search",
+    filters: ["RAG & GenAI", "Data Science & ML", "Analytics"],
+    featured: true,
+    featuredOrder: 6,
+    highlightLabel: "Document Intelligence",
+    problem:
+      "Layout-heavy legal and vendor contracts slow review teams when critical fields must be found and validated manually.",
+    solution:
+      "An OCR and semantic retrieval workflow that extracts document structure, discovers fields, and supports grounded question answering.",
+    visual: "document",
     summary:
-      "Predictive quality intelligence system for detecting abnormal manufacturing behavior and improving production visibility.",
+      "Enterprise Document AI workflow for OCR extraction, semantic question answering, field parsing, and faster contract auditing.",
     architecture:
-      "The system combines automated data preparation, Scikit-Learn and deep learning models, anomaly detection, statistical validation, PostgreSQL, and Tableau reporting for production quality workflows.",
-    tech: ["Python", "Scikit-Learn", "SQL", "Pandas", "PostgreSQL", "Tableau"],
+      "The system combines PaddleOCR and PyMuPDF for document extraction, LangChain for orchestration, and ChromaDB for semantic retrieval and field discovery, supported by Python, SQL, Pandas, PostgreSQL, and Tableau.",
+    tech: ["Python", "PaddleOCR", "PyMuPDF", "LangChain", "ChromaDB", "SQL", "PostgreSQL", "Tableau"],
     bullets: [
-      "I improved early defect identification by 19% across production quality workflows.",
-      "I combined machine learning, deep learning, anomaly detection, and statistical validation.",
-      "I reduced manual analysis time by 42% while improving visibility into recurring production issues."
+      "I automated field-level extraction from complex enterprise documents.",
+      "I enabled semantic document Q&A and field parsing with vector retrieval.",
+      "I accelerated contract auditing workflows by 40%."
     ]
   },
   {
@@ -548,7 +633,7 @@ export const projects: Project[] = [
     category: "AI Agents / AI Safety / LLM Evaluation",
     filters: ["AI Agents", "RAG & GenAI"],
     featured: true,
-    featuredOrder: 1,
+    featuredOrder: 2,
     highlightLabel: "AI Safety & Evaluation",
     problem:
       "AI agents can pass happy-path demos while still leaking data, misusing tools, or failing under adversarial prompts.",
@@ -573,7 +658,7 @@ export const projects: Project[] = [
     category: "AI / Cloud Analytics / FinOps",
     filters: ["AI Agents", "Analytics", "Data Engineering"],
     featured: true,
-    featuredOrder: 2,
+    featuredOrder: 4,
     highlightLabel: "AI for FinOps",
     problem:
       "Cloud cost signals are fragmented across billing, utilization, inventory, and ownership systems.",
@@ -623,7 +708,7 @@ export const projects: Project[] = [
     category: "Data Engineering / Databricks / AWS",
     filters: ["Data Engineering"],
     featured: true,
-    featuredOrder: 4,
+    featuredOrder: 5,
     highlightLabel: "Lakehouse Engineering",
     problem:
       "Raw operational data from multiple business units needs governed, incremental processing before analytics teams can use it.",
@@ -647,8 +732,7 @@ export const projects: Project[] = [
     slug: "airbnb-snowflake-dbt-pipeline",
     category: "Data Engineering / Snowflake / dbt",
     filters: ["Data Engineering", "Analytics"],
-    featured: true,
-    featuredOrder: 5,
+    featured: false,
     highlightLabel: "Analytics Engineering",
     problem:
       "Bookings, listings, and host data arrive in inconsistent source structures that are not ready for trusted reporting.",
@@ -867,7 +951,7 @@ export const education = [
     details: ["Master of Science program completed in May 2026."]
   },
   {
-    degree: "Bachelor of Engineering in Computer Science and Engineering",
+    degree: "Bachelor in Computer Science",
     school: "Visvesvaraya Technological University",
     location: "India",
     dates: "Graduation: August 2023",
@@ -920,31 +1004,31 @@ export const navItems = [
 ];
 
 export const suggestedQuestions = [
-  "What AI systems have you built?",
-  "Tell me about AgentShield.",
-  "What is your experience with RAG?",
-  "What research have you done in scientific AI?",
-  "Which data-engineering platforms have you used?",
-  "What MLOps experience do you have?"
+  "What does Shreevikas build at Procter & Gamble?",
+  "Tell me about his computer vision work.",
+  "What is his experience with RAG?",
+  "What did he build at Bosch?",
+  "What research has he done in scientific AI?",
+  "What data-engineering platforms has he used?"
 ];
 
 export const achievementCards = [
   {
-    icon: LineChart,
-    label: "Forecasting",
-    value: "+24% accuracy",
-    text: "I build demand forecasting systems that improve inventory planning across distributed operations."
+    icon: BrainCircuit,
+    label: "Computer Vision",
+    value: "-26% recalls",
+    text: "I build high-speed visual inspection systems that improve product quality in production."
   },
   {
     icon: BrainCircuit,
     label: "Machine Learning",
-    value: "+22% detection",
-    text: "I develop quality prediction and anomaly detection models for high-volume manufacturing environments."
+    value: "-22% inventory cost",
+    text: "I develop forecasting and anomaly-detection models for high-volume manufacturing environments."
   },
   {
     icon: Workflow,
-    label: "MLOps",
-    value: "-40% iteration",
-    text: "I standardize feature processing, experiment tracking, validation, versioning, and production releases."
+    label: "Enterprise RAG",
+    value: "-40% resolution time",
+    text: "I build grounded retrieval systems that make enterprise knowledge easier to use."
   }
 ];

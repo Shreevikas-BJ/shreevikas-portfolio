@@ -87,7 +87,7 @@ export function Navbar() {
           <span className="hidden sm:block">
             <span className="block text-sm font-semibold leading-4">{siteConfig.name}</span>
             <span className="mt-0.5 block font-mono text-[0.62rem] text-muted-foreground">
-              AI / ML + DATA
+              AI ENGINEERING
             </span>
           </span>
         </a>

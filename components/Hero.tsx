@@ -2,30 +2,36 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
-  ArrowDownRight,
-  Award,
+  ArrowDown,
   CheckCircle2,
   FileText,
   Github,
   Linkedin,
   Mail,
   MapPin,
+  ShieldCheck,
   Sparkles
 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { EngineeringFlow } from "@/components/EngineeringFlow";
 import { ButtonLink } from "@/components/ui/Button";
 import { siteConfig } from "@/data/portfolio";
 
 const focusAreas = [
-  "Production machine learning",
-  "Trustworthy RAG systems",
-  "Agentic AI workflows",
-  "LLM evaluation and guardrails",
-  "Physics-informed neural networks",
-  "Cloud data platforms",
-  "Real-time data engineering"
+  "Industrial computer vision",
+  "Agentic supply-chain automation",
+  "Enterprise RAG",
+  "Open-source LLM fine-tuning",
+  "Document AI",
+  "Production MLOps",
+  "Scientific machine learning",
+  "Cloud data platforms"
+];
+
+const socialLinks = [
+  { href: siteConfig.github, label: "GitHub", icon: Github },
+  { href: siteConfig.linkedin, label: "LinkedIn", icon: Linkedin },
+  { href: siteConfig.emailHref, label: "Email", icon: Mail }
 ];
 
 function FocusRotator() {
@@ -36,24 +42,24 @@ function FocusRotator() {
     if (reduceMotion) return;
     const timer = window.setInterval(
       () => setIndex((current) => (current + 1) % focusAreas.length),
-      2800
+      2600
     );
     return () => window.clearInterval(timer);
   }, [reduceMotion]);
 
   return (
-    <div className="mt-7 flex min-h-8 items-center gap-3" aria-label="Current technical focus">
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-primary/25 bg-primary/10 text-primary">
-        <Sparkles className="h-3.5 w-3.5" />
+    <div className="mt-7 flex min-h-9 items-center gap-3" aria-label="Current technical focus">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <Sparkles className="h-4 w-4" aria-hidden="true" />
       </span>
-      <div className="relative h-7 min-w-0 flex-1 overflow-hidden font-mono text-sm font-semibold text-primary sm:text-base">
+      <div className="relative h-8 min-w-0 flex-1 overflow-hidden text-base font-semibold text-primary sm:text-lg">
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
             key={focusAreas[index]}
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? undefined : { opacity: 0, y: -12 }}
-            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            initial={reduceMotion ? false : { opacity: 0, y: 12, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -12, filter: "blur(4px)" }}
+            transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
             className="absolute inset-0 flex items-center"
           >
             {focusAreas[index]}
@@ -64,51 +70,38 @@ function FocusRotator() {
   );
 }
 
-const socialLinks = [
-  { href: siteConfig.github, label: "GitHub", icon: Github },
-  { href: siteConfig.linkedin, label: "LinkedIn", icon: Linkedin },
-  { href: `mailto:${siteConfig.email}`, label: "Email", icon: Mail }
-];
-
 export function Hero() {
-  return (
-    <section id="home" className="relative isolate overflow-hidden pt-16">
-      <div className="section-shell grid min-h-[calc(100svh-4rem)] items-center gap-14 py-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16 lg:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl"
-        >
-          <p className="eyebrow">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--glow))]" />
-            AI / ML &middot; Data &middot; Scientific Computing
-          </p>
+  const reduceMotion = useReducedMotion();
 
-          <h1 className="mt-7 text-4xl font-semibold leading-[1.05] text-balance sm:text-5xl lg:text-[3.9rem]">
+  return (
+    <section id="home" className="hero-section relative isolate overflow-hidden pt-16">
+      <div className="section-shell grid min-h-[calc(100svh-4rem)] items-center gap-14 py-14 lg:grid-cols-[1.06fr_0.94fr] lg:gap-20 lg:py-20">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 max-w-3xl"
+        >
+          <p className="eyebrow">AI Engineer &middot; ML Engineer &middot; Data Scientist &middot; Data Engineer</p>
+
+          <h1 className="mt-7 text-5xl font-semibold leading-[0.98] text-balance sm:text-6xl lg:text-[4.8rem]">
             {siteConfig.name}
           </h1>
-          <p className="mt-4 font-mono text-sm font-semibold uppercase text-muted-foreground sm:text-base">
-            AI/ML Engineer &middot; Data Scientist &middot; Data Engineer
+          <p className="mt-7 max-w-3xl text-3xl font-semibold leading-[1.12] text-balance sm:text-[2.7rem] lg:text-[3.1rem]">
+            I build AI systems that see, reason, retrieve, and scale.
           </p>
 
-          <p className="mt-8 max-w-3xl text-3xl font-semibold leading-[1.16] text-balance sm:text-[2.45rem] lg:text-[2.7rem]">
-            I build production AI systems that turn complex data into reliable decisions.
-          </p>
-
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">
-            I bring 4+ years of experience across machine learning, advanced RAG,
-            agentic AI, MLOps, scalable cloud pipelines, and physics-informed AI.
-            My focus is practical engineering: systems that are measurable, observable,
-            and ready to operate.
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
+            I bring 4+ years of experience architecting computer vision, machine learning,
+            Generative AI, RAG, and MLOps systems for enterprise manufacturing.
           </p>
 
           <FocusRotator />
 
-          <div className="relative z-10 mt-9 flex flex-wrap gap-3 max-sm:pr-16">
+          <div className="relative z-10 mt-10 flex flex-wrap gap-3 max-sm:pr-14">
             <ButtonLink href="#projects" className="group">
               Explore My Work
-              <ArrowDownRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+              <ArrowDown className="h-4 w-4 transition group-hover:translate-y-0.5" />
             </ButtonLink>
             <ButtonLink href={siteConfig.resumePath} variant="secondary" external>
               <FileText className="h-4 w-4" />
@@ -120,29 +113,19 @@ export function Hero() {
           </div>
 
           <div className="mt-10 flex flex-col gap-5 border-t border-border/70 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex min-w-0 items-center gap-4">
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-border bg-muted">
-                <Image
-                  src={siteConfig.profileImage}
-                  alt="Professional portrait of Shreevikas Jagadish"
-                  fill
-                  sizes="64px"
-                  className="object-cover object-top"
-                  priority
-                />
-              </div>
-              <div className="min-w-0">
-                <p className="flex items-center gap-2 text-sm font-semibold">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
-                  Open to engineering opportunities
+            <div className="min-w-0">
+              <p className="flex items-center gap-2 text-sm font-semibold">
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
+                {siteConfig.availability}
+              </p>
+              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+                <p className="inline-flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-primary" />
+                  {siteConfig.location} &middot; {siteConfig.relocation}
                 </p>
-                <p className="mt-1 flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
-                  <span className="inline-flex items-center gap-1.5">
-                    <MapPin className="h-3.5 w-3.5 text-primary" />
-                    {siteConfig.location}
-                  </span>
-                  <span aria-hidden="true">&middot;</span>
-                  <span>{siteConfig.relocation}</span>
+                <p className="inline-flex items-center gap-2 text-foreground">
+                  <ShieldCheck className="h-4 w-4 text-primary" />
+                  AWS Certified Data Engineer
                 </p>
               </div>
             </div>
@@ -150,15 +133,16 @@ export function Hero() {
             <div className="flex items-center gap-2">
               {socialLinks.map((link) => {
                 const Icon = link.icon;
+                const external = link.href.startsWith("http");
                 return (
                   <a
                     key={link.label}
                     href={link.href}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noreferrer" : undefined}
                     aria-label={link.label}
                     title={link.label}
-                    className="focus-ring flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface/60 text-muted-foreground transition hover:border-primary/50 hover:text-primary"
+                    className="focus-ring flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-surface/55 text-muted-foreground transition hover:border-primary/45 hover:bg-surface hover:text-primary"
                   >
                     <Icon className="h-4 w-4" />
                   </a>
@@ -166,26 +150,43 @@ export function Hero() {
               })}
             </div>
           </div>
-
-          <a
-            href="https://www.credly.com/badges/017bc7a0-a378-4cfa-abb0-bc968c20d7da/public_url"
-            target="_blank"
-            rel="noreferrer"
-            className="focus-ring mt-5 inline-flex items-center gap-2 rounded-md font-mono text-xs font-semibold text-muted-foreground transition hover:text-primary"
-          >
-            <Award className="h-4 w-4 text-accent" />
-            AWS Certified Data Engineer - Associate
-          </a>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 28 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full min-w-0"
+        <motion.figure
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.96, y: 28 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          className="hero-portrait-stage"
         >
-          <EngineeringFlow />
-        </motion.div>
+          <Image
+            src={siteConfig.profileImage}
+            alt="Professional portrait of Shreevikas Jagadish"
+            fill
+            sizes="(max-width: 1024px) 92vw, 42vw"
+            className="object-cover object-top"
+            priority
+          />
+          <div className="hero-portrait-shade" aria-hidden="true" />
+
+          <div className="absolute left-5 top-5 z-10 rounded-lg border border-white/15 bg-black/35 px-4 py-3 text-white backdrop-blur-xl sm:left-7 sm:top-7">
+            <p className="text-xs font-semibold text-white/65">CURRENT FOCUS</p>
+            <p className="mt-1 text-sm font-semibold">Production AI systems</p>
+          </div>
+
+          <div className="absolute inset-x-5 bottom-5 z-10 grid grid-cols-2 gap-2 sm:inset-x-7 sm:bottom-7 sm:grid-cols-4">
+            {["Vision", "Agents", "RAG", "MLOps"].map((label, index) => (
+              <motion.div
+                key={label}
+                initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.55 + index * 0.1, duration: 0.45 }}
+                className="rounded-lg border border-white/15 bg-black/35 px-3 py-3 text-center text-sm font-semibold text-white backdrop-blur-xl"
+              >
+                {label}
+              </motion.div>
+            ))}
+          </div>
+        </motion.figure>
       </div>
     </section>
   );

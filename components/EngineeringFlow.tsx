@@ -23,7 +23,7 @@ const stages = [
 ];
 
 const focusStates = [
-  { label: "Forecasting", value: "prediction pipeline healthy", metric: "24% accuracy gain" },
+  { label: "Vision", value: "inspection pipeline healthy", metric: "26% fewer recalls" },
   { label: "Scientific AI", value: "surrogate inference ready", metric: "PhysicsNeMo + FNO" },
   { label: "RAG evaluation", value: "grounding checks active", metric: "citations + refusal" }
 ];

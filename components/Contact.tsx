@@ -16,12 +16,12 @@ export function Contact() {
                 07 / Contact
               </p>
               <h2 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.14] text-balance sm:text-5xl">
-                Let&apos;s build an AI or data system that earns trust in production.
+                Let&apos;s build intelligence that works beyond the demo.
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-                I am open to AI/ML Engineer, Data Scientist, and Data Engineer roles,
-                as well as conversations with teams working on RAG, MLOps, scientific AI,
-                or cloud data infrastructure.
+                I am open to AI Engineer, Machine Learning Engineer, Data Scientist, and
+                Data Engineer roles with teams building computer vision, agentic AI, RAG,
+                MLOps, scientific AI, or cloud data platforms.
               </p>
 
               <div className="mt-9 flex flex-wrap gap-3">
@@ -85,8 +85,8 @@ export function Contact() {
               <div className="mt-7 border-t border-border pt-5">
                 <p className="flex items-start gap-2 text-sm leading-6 text-muted-foreground">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" />
-                  Best fit: teams building reliable AI products, predictive systems,
-                  or modern data platforms.
+                  Best fit: teams building reliable AI products, intelligent automation,
+                  predictive systems, or modern data platforms.
                 </p>
               </div>
             </div>

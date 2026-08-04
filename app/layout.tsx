@@ -1,25 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import { siteConfig } from "@/data/portfolio";
 import "./globals.css";
-
-const geist = Geist({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-sans"
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-display"
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-mono"
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://shreevikas-portfolio.vercel.app"),
@@ -30,7 +11,19 @@ export const metadata: Metadata = {
     "Data Scientist",
     "AI-ML Engineer",
     "AI Engineer",
+    "Artificial Intelligence Engineer",
+    "Machine Learning Engineer",
     "Data Engineer",
+    "Computer Vision",
+    "Industrial AI",
+    "Agentic AI",
+    "Document AI",
+    "OCR",
+    "LLM Fine-Tuning",
+    "QLoRA",
+    "PEFT",
+    "LlamaIndex",
+    "FAISS",
     "Machine Learning",
     "Production Machine Learning",
     "Predictive Modeling",
@@ -106,11 +99,15 @@ const structuredData = {
   image: `${siteConfig.portfolio}${siteConfig.profileImage.replace(/^\//, "")}`,
   email: siteConfig.email,
   telephone: siteConfig.phone,
-  jobTitle: "AI/ML Engineer, Data Scientist, Data Engineer",
+  jobTitle: "AI Engineer, Machine Learning Engineer, Data Scientist, Data Engineer",
   sameAs: [siteConfig.github, siteConfig.linkedin],
   knowsAbout: [
     "Data Science",
     "Machine Learning",
+    "Computer Vision",
+    "Agentic AI",
+    "Document AI",
+    "LLM Fine-Tuning",
     "Predictive Modeling",
     "Statistical Learning",
     "Decision Intelligence",
@@ -146,7 +143,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${manrope.variable} ${geistMono.variable} dark scroll-smooth`}
+      className="dark scroll-smooth"
       suppressHydrationWarning
     >
       <body className="antialiased">

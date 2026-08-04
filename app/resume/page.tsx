@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/portfolio";
 
 export const metadata: Metadata = {
   title: `Resume | ${siteConfig.name}`,
-  description: `Professional resume for ${siteConfig.name}, AI/ML Engineer, Data Scientist, and Data Engineer.`
+  description: `Professional resume for ${siteConfig.name}, AI Engineer, Machine Learning Engineer, Data Scientist, and Data Engineer.`
 };
 
 export default function ResumePage() {
@@ -29,11 +29,11 @@ export default function ResumePage() {
               <span className="h-px w-8 bg-primary/70" /> Resume
             </p>
             <h1 className="mt-6 text-4xl font-semibold leading-tight text-balance sm:text-5xl">
-              A concise view of my AI, machine-learning, and data engineering experience.
+              A concise view of my production AI, machine-learning, and data engineering experience.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-              Review my latest experience, research, technical capabilities, education,
-              and selected engineering outcomes in one document.
+              Review my latest computer vision, agentic AI, RAG, MLOps, research,
+              data-platform, and enterprise engineering outcomes in one document.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
@@ -59,7 +59,7 @@ export default function ResumePage() {
             <p className="mt-8 mono-label">Candidate profile</p>
             <h2 className="mt-3 text-2xl font-semibold">{siteConfig.name}</h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              AI/ML Engineer &middot; Data Scientist &middot; Data Engineer
+              AI Engineer &middot; Machine Learning Engineer &middot; Data Scientist &middot; Data Engineer
             </p>
             <div className="mt-7 space-y-3 border-t border-border pt-6 font-mono text-xs text-muted-foreground">
               <p>{siteConfig.location}</p>

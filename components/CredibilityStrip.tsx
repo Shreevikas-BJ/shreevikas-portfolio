@@ -4,7 +4,19 @@ import { useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { heroStats } from "@/data/portfolio";
 
-function AnimatedMetric({ value, suffix, start }: { value: number; suffix: string; start: boolean }) {
+function AnimatedMetric({
+  value,
+  prefix = "",
+  suffix,
+  decimals = 0,
+  start
+}: {
+  value: number;
+  prefix?: string;
+  suffix: string;
+  decimals?: number;
+  start: boolean;
+}) {
   const reduceMotion = useReducedMotion();
   const [display, setDisplay] = useState(reduceMotion ? value : 0);
 
@@ -22,17 +34,18 @@ function AnimatedMetric({ value, suffix, start }: { value: number; suffix: strin
     const tick = (now: number) => {
       const progress = Math.min((now - startedAt) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(Math.round(value * eased));
+      setDisplay(Number((value * eased).toFixed(decimals)));
       if (progress < 1) frame = window.requestAnimationFrame(tick);
     };
 
     frame = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(frame);
-  }, [reduceMotion, start, value]);
+  }, [decimals, reduceMotion, start, value]);
 
   return (
-    <span className="font-mono text-3xl font-semibold text-foreground sm:text-[2rem]">
-      {display}
+    <span className="text-4xl font-semibold text-foreground sm:text-[2.75rem]">
+      {prefix}
+      {display.toFixed(decimals)}
       {suffix}
     </span>
   );
@@ -43,13 +56,19 @@ export function CredibilityStrip() {
   const visible = useInView(sectionRef, { once: true, margin: "-80px" });
 
   return (
-    <section aria-label="Selected career outcomes" className="border-y border-border/70 bg-surface/45">
-      <div ref={sectionRef} className="mx-auto grid max-w-[1320px] divide-y divide-border/70 px-5 sm:px-8 md:grid-cols-5 md:divide-x md:divide-y-0 lg:px-12">
+    <section aria-label="Selected career outcomes" className="border-y border-border/70 bg-surface/55">
+      <div ref={sectionRef} className="mx-auto grid max-w-[1320px] grid-cols-2 px-5 py-5 sm:px-8 md:grid-cols-5 lg:px-12">
         {heroStats.map((stat) => (
-          <div key={stat.label} className="py-7 md:px-5 md:py-8 first:md:pl-0 last:md:pr-0">
-            <AnimatedMetric value={stat.value} suffix={stat.suffix} start={visible} />
+          <div key={stat.label} className="border-b border-border/70 px-2 py-7 even:border-l sm:px-4 md:border-b-0 md:border-l md:py-9 first:md:border-l-0">
+            <AnimatedMetric
+              value={stat.value}
+              prefix={"prefix" in stat ? stat.prefix : undefined}
+              suffix={stat.suffix}
+              decimals={"decimals" in stat ? stat.decimals : undefined}
+              start={visible}
+            />
             <p className="mt-2 text-sm font-semibold text-foreground">{stat.label}</p>
-            <p className="mt-1 text-sm leading-6 text-muted-foreground">{stat.context}</p>
+            <p className="mt-1 text-xs leading-5 text-muted-foreground sm:text-sm sm:leading-6">{stat.context}</p>
           </div>
         ))}
       </div>

@@ -56,8 +56,8 @@ export function Projects() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="04 / Projects"
-          title="Engineering work across AI safety, RAG, MLOps, and modern data platforms."
-          description="These systems show how I frame problems, design architectures, build reliability into the workflow, and turn technical output into something people can use."
+          title="Flagship systems across vision, agents, RAG, and data platforms."
+          description="I selected the strongest work from my resume and GitHub portfolio to show how I frame problems, design reliable architectures, and turn technical capability into production impact."
         />
 
         <div className="mb-8 flex flex-col gap-4 border-y border-border/70 py-5 sm:flex-row sm:items-center sm:justify-between">
@@ -73,7 +73,7 @@ export function Projects() {
           </ButtonLink>
         </div>
 
-        <div className="space-y-8 lg:space-y-10">
+        <div className="space-y-12 lg:space-y-16">
           {featuredProjects.map((project, index) => (
             <motion.div
               key={project.slug}

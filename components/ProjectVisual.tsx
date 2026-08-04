@@ -231,8 +231,92 @@ function ForecastVisual() {
   );
 }
 
+function VisionVisual() {
+  return (
+    <div className="project-visual">
+      <VisualHeader label="Industrial vision inference" status="500+ FPS" />
+      <div className="relative z-10 grid h-[calc(100%-45px)] min-w-0 gap-4 p-4 min-[460px]:grid-cols-[1.15fr_0.85fr] min-[460px]:p-5">
+        <div className="relative min-h-40 overflow-hidden rounded-md border border-border bg-background/72">
+          <div className="absolute inset-4 rounded border border-primary/25" />
+          <div className="scan-beam absolute inset-x-3 top-0 h-px bg-primary shadow-[0_0_18px_hsl(var(--primary))]" />
+          <div className="absolute left-[18%] top-[24%] h-[42%] w-[34%] rounded border border-success/70 bg-success/5">
+            <span className="absolute -top-5 left-0 font-mono text-[0.56rem] text-success">PASS 0.98</span>
+          </div>
+          <div className="absolute bottom-[17%] right-[14%] h-[27%] w-[24%] rounded border border-error/70 bg-error/5">
+            <span className="absolute -top-5 right-0 font-mono text-[0.56rem] text-error">DEFECT 0.91</span>
+          </div>
+          <Activity className="absolute bottom-4 left-4 h-4 w-4 text-primary" />
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 min-[460px]:grid-cols-1">
+          {[
+            ["DEFECT LEAKAGE", "-32%", "text-success"],
+            ["SCRAP SAVINGS", "$850K", "text-primary"],
+            ["INFERENCE", "REAL TIME", "text-foreground"]
+          ].map(([label, value, color]) => (
+            <div key={label} className="min-w-0 rounded-md border border-border bg-background/72 p-3">
+              <p className="box-heading font-mono text-[0.56rem] text-muted-foreground">{label}</p>
+              <p className={`box-heading mt-1 text-lg font-semibold ${color}`}>{value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocumentVisual() {
+  const stages = [
+    { label: "PDF", icon: FileCheck2 },
+    { label: "OCR", icon: Search },
+    { label: "Vector", icon: Database },
+    { label: "Answer", icon: Check }
+  ];
+
+  return (
+    <div className="project-visual">
+      <VisualHeader label="Document intelligence flow" status="40% FASTER" />
+      <div className="relative z-10 p-4 min-[460px]:p-5">
+        <div className="grid grid-cols-2 gap-2 min-[460px]:grid-cols-4">
+          {stages.map((stage, index) => {
+            const Icon = stage.icon;
+            return (
+              <div key={stage.label} className="relative min-w-0 rounded-md border border-border bg-background/72 p-3 text-center">
+                <Icon className="mx-auto h-4 w-4 text-primary" />
+                <p className="box-heading mt-2 font-mono text-[0.6rem] font-semibold">{stage.label}</p>
+                {index < stages.length - 1 ? (
+                  <span className="absolute -right-2 top-1/2 z-10 hidden h-px w-2 bg-primary/50 min-[460px]:block" />
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-4 rounded-md border border-border bg-background/72 p-4">
+          <div className="flex min-w-0 items-center justify-between gap-3">
+            <p className="box-heading font-mono text-[0.6rem] text-muted-foreground">SEMANTIC FIELD EXTRACTION</p>
+            <span className="shrink-0 font-mono text-[0.58rem] font-semibold text-success">GROUNDED</span>
+          </div>
+          <div className="mt-3 grid grid-cols-3 gap-2">
+            {["Vendor", "Clause", "Risk"].map((field, index) => (
+              <div key={field} className="min-w-0 rounded border border-primary/20 bg-primary/5 px-2 py-2 text-center">
+                <p className="box-heading text-[0.65rem] font-semibold">{field}</p>
+                <div className="mx-auto mt-2 h-1 rounded-full bg-primary/25" style={{ width: `${82 - index * 12}%` }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectVisual({ project }: { project: Project }) {
   switch (project.visual) {
+    case "vision":
+      return <VisionVisual />;
+    case "document":
+      return <DocumentVisual />;
     case "shield":
       return <AgentShieldVisual />;
     case "finops":

@@ -19,12 +19,12 @@ export function Footer() {
             <span>
               <span className="block text-sm font-semibold text-foreground">{siteConfig.name}</span>
               <span className="mt-0.5 block font-mono text-[0.62rem] text-muted-foreground">
-                AI / ML + DATA SYSTEMS
+                AI ENGINEERING + DATA SYSTEMS
               </span>
             </span>
           </a>
           <p className="mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
-            Designed and engineered as a focused view of my work across production AI,
+            A focused view of my work across production AI, computer vision, agentic systems,
             scientific machine learning, and modern data infrastructure.
           </p>
         </div>

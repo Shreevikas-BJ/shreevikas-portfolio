@@ -17,11 +17,11 @@ const welcomeMessage: Message = {
   id: "welcome",
   role: "assistant",
   content:
-    "Hi, I am Shreevikas's AI Assistant. Ask me about my experience, projects, research, technical skills, education, certifications, or target roles."
+    "Hi, I am Shreevikas's AI Assistant. Ask me about my AI engineering experience, projects, research, technical skills, education, certifications, or contact information."
 };
 
 const fallbackMessage =
-  "I can only answer questions about my professional background, projects, skills, research, and experience. For anything specific, please contact me directly at shreevikasjagadish7@gmail.com.";
+  "I can only answer questions about my professional background, projects, skills, research, education, certifications, and experience. For anything specific, please contact me directly at shreevikasjagadish7@gmail.com.";
 const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";
 const CHAT_REQUEST_TIMEOUT_MS = 15000;
 
