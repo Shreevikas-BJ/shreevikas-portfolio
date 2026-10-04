@@ -10,7 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["-apple-system", "BlinkMacSystemFont", "SF Pro Text", "Helvetica Neue", "Arial", "sans-serif"],
+        sans: ["var(--font-body)", "Arial", "sans-serif"],
+        display: ["var(--font-heading)", "Arial", "sans-serif"],
         mono: ["SFMono-Regular", "SF Mono", "Cascadia Code", "Consolas", "monospace"]
       },
       colors: {

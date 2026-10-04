@@ -4,21 +4,18 @@ A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, a
 
 **Live site:** [shreevikas-portfolio.vercel.app](https://shreevikas-portfolio.vercel.app/)
 
-## Experience
+## Design
 
-- Apple-inspired dark-first visual system with a fully designed light theme
-- Premium opening sequence and restrained motion system
-- Responsive portrait-led hero with no empty image space
-- Scroll-aware navigation and progress indicator
-- Quantified experience outcomes and one-time credibility metrics
-- Dedicated scientific machine-learning research story
-- Six flagship project case studies with distinct architecture visuals
-- Searchable and filterable supporting project explorer
-- Interactive capability matrix for AI, ML, data, cloud, and scientific computing
-- Accessible project drawer, mobile navigation, theme controls, and keyboard states
-- Portfolio-grounded AI assistant with streaming, cached answers, timeouts, and rate limiting
-- Responsive layouts for mobile, tablet, desktop, and large screens
-- Next.js metadata, Open Graph, robots, sitemap, and structured data
+- Dark-only editorial design: near-black, off-white, and one blue accent
+- Inter body typography and Space Grotesk headings, self-hosted through `next/font`
+- Full-width hero with optimized bitmap artwork and generous whitespace
+- Six selected projects presented as open, full-width rows rather than a card grid
+- Statically generated `/projects/[slug]` case studies: Problem, Approach, Outcome, Links
+- Two short, one-time scroll reveals that respect reduced-motion preferences
+- Semantic content, keyboard focus states, and a working skip link
+- Mobile-first layouts with a 1200px maximum content width
+- Project metadata, canonical URLs, Open Graph, robots, and sitemap
+- GitHub, LinkedIn, and email links in a minimal footer
 
 ## Flagship Work
 
@@ -29,11 +26,11 @@ A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, a
 - [AI FinOps Copilot](https://github.com/Shreevikas-BJ/ai-finops-copilot): action-oriented AWS cost intelligence and remediation planning.
 - [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): governed Bronze, Silver, and Gold data processing.
 
-The supporting project explorer retains additional work across forecasting, data engineering, streaming, NLP, computer vision, analytics, and dashboards.
+The complete project catalog, skills, experience, research, education, and certification records remain in `data/portfolio.ts`. The homepage curates six projects instead of displaying every record.
 
 All existing skill entries are retained, with the latest resume's programming, retrieval infrastructure, backend, frontend, and testing skills added. Research highlights focus on Physics-Informed Neural Networks for power-system dynamics. Credentials include AWS Certified Data Engineer - Associate, Anthropic AI Fluency, and Google Data Analytics.
 
-Chatbot grounding is generated from the same structured portfolio data, keeping work history, skills, projects, education, and certifications aligned.
+The existing server-side chatbot route and its grounded context are retained, with the Groq model unchanged. The floating assistant is not rendered in the sparse homepage design.
 
 ## Stack
 
@@ -63,6 +60,7 @@ GROQ_API_KEY=your_groq_api_key_here
 ```
 
 `GROQ_API_KEY` is read only by `app/api/chat/route.ts`. It is never sent to the browser or committed to the repository.
+It is optional for the static portfolio and case-study pages.
 
 ## Quality Checks
 
@@ -70,6 +68,16 @@ GROQ_API_KEY=your_groq_api_key_here
 npm run lint
 npm run build
 ```
+
+Responsive verification covers 320px, 390px, 768px, 1440px, and 1920px layouts, project navigation, keyboard navigation, reduced motion, and navigation without JavaScript. Run Lighthouse against a production build, not the development server; the performance target is 95+.
+
+## Artwork
+
+`public/images/data-flow.webp` is a 90 KB optimized bitmap generated with the built-in image-generation tool. It is an editorial illustration, not a project screenshot or a performance claim.
+
+Generation prompt:
+
+> Use case: stylized-concept. Asset type: ultra-wide editorial background bitmap for a sparse AI/ML engineer portfolio. A precision technical visualization of layered data entering an inference system: a thin, restrained field of silver-white parallel paths and small rectangular data marks on a perfectly near-black #0a0a0a backdrop, with one small section of electric blue #3b82f6 signal paths. Fine structured lines progress from noisy input to ordered output. Elegant scientific-computing publication artwork, flat orthographic composition, not a UI mockup or a screenshot. Primary structure occupies the right third and lower-right corner of a wide landscape frame; left two thirds remain predominantly empty solid near-black for large editorial text. Crisp, subtle, quiet, high contrast where visible. No text, lettering, logos, panels, cards, objects, people, bokeh, orbs, gradients, purple, glass, 3D spheres, or glow clouds. Keep restrained and genuinely sparse. Wide landscape 3:2 or wider image.
 
 ## Deploy To Vercel
 

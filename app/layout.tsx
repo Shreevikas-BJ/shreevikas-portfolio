@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { siteConfig } from "@/data/portfolio";
 import "./globals.css";
 
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-body", weight: ["400", "500", "600"] });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], display: "swap", variable: "--font-heading", weight: ["500", "600"] });
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://shreevikas-portfolio.vercel.app"),
-  title: siteConfig.title,
+  title: { default: siteConfig.title, template: "%s | Shreevikas Jagadish" },
+  alternates: { canonical: "/" },
   description: siteConfig.description,
   keywords: [
     "Shreevikas Jagadish",
@@ -77,10 +82,10 @@ export const metadata: Metadata = {
     siteName: "Shreevikas Portfolio",
     images: [
       {
-        url: siteConfig.profileImage,
-        width: 1200,
-        height: 1200,
-        alt: "Professional portrait of Shreevikas Jagadish"
+        url: "/images/data-flow.webp",
+        width: 1536,
+        height: 1024,
+        alt: "Precision data-flow illustration"
       }
     ],
     locale: "en_US",
@@ -90,7 +95,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [siteConfig.profileImage]
+    images: ["/images/data-flow.webp"]
   },
   robots: {
     index: true,
@@ -103,7 +108,6 @@ const structuredData = {
   "@type": "Person",
   name: siteConfig.name,
   url: siteConfig.portfolio,
-  image: `${siteConfig.portfolio}${siteConfig.profileImage.replace(/^\//, "")}`,
   email: siteConfig.email,
   telephone: siteConfig.phone,
   jobTitle: "AI/ML Engineer, Data Scientist, Data Engineer",
@@ -152,25 +156,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="dark scroll-smooth"
-      suppressHydrationWarning
+      className={`dark ${inter.variable} ${spaceGrotesk.variable}`}
     >
       <body className="antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData)
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var theme = localStorage.getItem("theme");
-                if (theme === "light") document.documentElement.classList.remove("dark");
-                if (theme === "dark") document.documentElement.classList.add("dark");
-              } catch (_) {}
-            `
           }}
         />
         {children}
