@@ -382,6 +382,10 @@ a {
   background: hsl(var(--surface) / 0.96);
 }
 
+.project-workflow-visual {
+  aspect-ratio: auto;
+}
+
 .project-visual::before {
   content: "";
   position: absolute;

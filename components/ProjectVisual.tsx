@@ -315,7 +315,7 @@ function ArchitectureVisual() {
   const stages = ["Requirements", "Web research", "JEV routing", "Design alternatives"];
 
   return (
-    <div className="project-visual">
+    <div className="project-visual project-workflow-visual">
       <VisualHeader label="ArchPilot orchestration" status="LOCAL INFERENCE" />
       <div className="relative z-10 p-5">
         <div className="grid grid-cols-2 gap-x-5 gap-y-4">
@@ -346,7 +346,7 @@ function ArchitectureVisual() {
 
 function ProcurementVisual() {
   return (
-    <div className="project-visual">
+    <div className="project-visual project-workflow-visual">
       <VisualHeader label="Accord decision workflow" status="HUMAN REVIEW" />
       <div className="relative z-10 p-5">
         <div className="flex items-start gap-3">
