@@ -4,18 +4,18 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { findSelectedWork, selectedWork } from "@/data/selectedWork";
+import { allWork, findWork } from "@/data/selectedWork";
 import { siteConfig } from "@/data/portfolio";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return selectedWork.map(({ slug }) => ({ slug }));
+  return allWork.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const work = findSelectedWork(slug);
+  const work = findWork(slug);
   if (!work) notFound();
   const url = `${siteConfig.portfolio}projects/${slug}`;
   return {
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const work = findSelectedWork(slug);
+  const work = findWork(slug);
   if (!work) notFound();
   const { project, discipline, description, flow, outcome } = work;
 
@@ -66,29 +66,35 @@ export default async function ProjectPage({ params }: Props) {
           <h2 id="approach-title"><span aria-hidden="true">02</span> Approach</h2>
           <div className="case-section-body">
             <p>{project.architecture}</p>
-            <ol className="architecture-flow" aria-label="Architecture flow">
+            {flow.length ? <ol className="architecture-flow" aria-label="Architecture flow">
               {flow.map((step, index) => (
                 <li key={step}>
                   {index > 0 ? <ArrowRight size={14} aria-hidden="true" /> : null}
                   <span>{step}</span>
                 </li>
               ))}
-            </ol>
-            <ul className="engineering-decisions">
+            </ol> : null}
+            {outcome ? <ul className="engineering-decisions">
               {project.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
-            </ul>
+            </ul> : null}
           </div>
         </section>
         <section className="case-section" aria-labelledby="outcome-title">
           <h2 id="outcome-title"><span aria-hidden="true">03</span> Outcome</h2>
-          <p>{outcome}</p>
+          {outcome ? <p>{outcome}</p> : (
+            <ul className="engineering-decisions">
+              {project.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+            </ul>
+          )}
         </section>
         <section className="case-section case-links-section" aria-labelledby="links-title">
           <h2 id="links-title"><span aria-hidden="true">04</span> Links</h2>
           <div className="case-links">
             {project.repoUrl ? <a className="text-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer">GitHub repository <ArrowUpRight size={17} aria-hidden="true" /></a> : null}
             {project.liveUrl ? <a className="text-link" href={project.liveUrl} target="_blank" rel="noopener noreferrer">Live demo <ArrowUpRight size={17} aria-hidden="true" /></a> : null}
-            {!project.repoUrl && !project.liveUrl ? <p>No public repository or live deployment yet.</p> : null}
+            {!project.repoUrl && !project.liveUrl ? (
+              <a className="text-link" href={`mailto:${siteConfig.email}`}>Contact me about this project <ArrowUpRight size={17} aria-hidden="true" /></a>
+            ) : null}
           </div>
         </section>
       </main>

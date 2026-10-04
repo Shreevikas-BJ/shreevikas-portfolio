@@ -1,11 +1,11 @@
-import { projects, type Project } from "@/data/portfolio";
+import { projects, type Project, type ProjectFilter } from "@/data/portfolio";
 
 type WorkDescription = {
   slug: string;
   discipline: string;
   description: string;
   flow: string[];
-  outcome: string;
+  outcome?: string;
 };
 
 const descriptions: WorkDescription[] = [
@@ -61,6 +61,32 @@ export const selectedWork: SelectedWork[] = descriptions.map((description) => {
   return { ...description, project };
 });
 
-export function findSelectedWork(slug: string) {
-  return selectedWork.find((work) => work.slug === slug);
+export const allWork: SelectedWork[] = projects.map((project) => {
+  const selected = selectedWork.find((work) => work.slug === project.slug);
+  return selected ?? {
+    slug: project.slug,
+    discipline: project.category,
+    description: project.summary,
+    flow: [],
+    project
+  };
+});
+
+const categories: { title: string; filters: ProjectFilter[] }[] = [
+  { title: "Data Science / ML / MLOps", filters: ["Data Science & ML", "MLOps"] },
+  { title: "GenAI / RAG / Agents", filters: ["RAG & GenAI", "AI Agents"] },
+  { title: "Data Engineering", filters: ["Data Engineering"] },
+  { title: "Analytics / Dashboards", filters: ["Analytics"] }
+];
+
+export const supportingWork = categories.map((category) => ({
+  title: category.title,
+  projects: allWork.filter((work) => (
+    !selectedWork.some((selected) => selected.slug === work.slug)
+    && category.filters.includes(work.project.filters[0])
+  ))
+}));
+
+export function findWork(slug: string) {
+  return allWork.find((work) => work.slug === slug);
 }

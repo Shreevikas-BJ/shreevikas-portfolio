@@ -1,45 +1,43 @@
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ProjectRow } from "@/components/ProjectRow";
 import { Reveal } from "@/components/Reveal";
-import { selectedWork } from "@/data/selectedWork";
+import { siteConfig } from "@/data/portfolio";
+import { selectedWork, supportingWork } from "@/data/selectedWork";
 
 export function Projects() {
   return (
     <section id="projects" className="editorial-shell work-section" aria-labelledby="work-title">
       <Reveal className="work-heading">
         <h2 id="work-title">Selected work</h2>
-        <span className="technical-label">01 / 06</span>
+        <span className="technical-label">{String(selectedWork.length).padStart(2, "0")} projects</span>
       </Reveal>
       <Reveal>
         <ol className="work-list">
-          {selectedWork.map(({ project, discipline, description }, index) => (
-            <li key={project.slug} className="work-row">
-              <span className="work-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <div className="work-copy">
-                <p className="technical-label">{discipline}</p>
-                <h3>
-                  <Link href={`/projects/${project.slug}`} className="work-title-link">
-                    {project.title}
-                  </Link>
-                </h3>
-                <p className="work-description">{description}</p>
-                <ul className="technology-list" aria-label={`${project.title} technologies`}>
-                  {project.tech.slice(0, 5).map((technology) => <li key={technology}>{technology}</li>)}
-                </ul>
-                {project.repoUrl ? (
-                  <a href={project.repoUrl} className="repository-link" target="_blank" rel="noopener noreferrer">
-                    GitHub <ArrowUpRight size={14} aria-hidden="true" />
-                    <span className="sr-only">: {project.title} repository</span>
-                  </a>
-                ) : null}
-              </div>
-              <Link href={`/projects/${project.slug}`} className="work-arrow" aria-label={`Read ${project.title} case study`}>
-                <ArrowUpRight size={24} aria-hidden="true" />
-              </Link>
-            </li>
+          {selectedWork.map((work, index) => (
+            <ProjectRow key={work.slug} work={work} number={index + 1} />
           ))}
         </ol>
       </Reveal>
+      <div className="project-catalog" aria-labelledby="catalog-title">
+        <h3 id="catalog-title" className="catalog-heading">More of my work</h3>
+        {supportingWork.map((category) => (
+          <details key={category.title} className="project-category">
+            <summary>
+              <span className="category-title">{category.title}</span>
+              <span className="technical-label category-count">{String(category.projects.length).padStart(2, "0")} projects</span>
+              <span className="category-toggle" aria-hidden="true"><ChevronDown size={20} /></span>
+            </summary>
+            <ol className="work-list">
+              {category.projects.map((work, index) => (
+                <ProjectRow key={work.slug} work={work} number={index + 1} />
+              ))}
+            </ol>
+          </details>
+        ))}
+        <a href={`${siteConfig.github}?tab=repositories`} className="text-link catalog-link" target="_blank" rel="noopener noreferrer">
+          More on GitHub <ArrowUpRight size={16} aria-hidden="true" />
+        </a>
+      </div>
     </section>
   );
 }

@@ -10,6 +10,9 @@ A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, a
 - Inter body typography and Space Grotesk headings, self-hosted through `next/font`
 - Full-width hero with optimized bitmap artwork and generous whitespace
 - Six selected projects presented as open, full-width rows rather than a card grid
+- Sixteen additional projects in keyboard-accessible category disclosures: Data Science / ML / MLOps, GenAI / RAG / Agents, Data Engineering, and Analytics / Dashboards
+- Resume-based work experience, scientific-AI research, and clean certification rows
+- AWS and Google credential links; Anthropic AI Fluency is shown without a link until one is supplied
 - Statically generated `/projects/[slug]` case studies: Problem, Approach, Outcome, Links
 - Two short, one-time scroll reveals that respect reduced-motion preferences
 - Semantic content, keyboard focus states, and a working skip link
@@ -26,7 +29,7 @@ A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, a
 - [AI FinOps Copilot](https://github.com/Shreevikas-BJ/ai-finops-copilot): action-oriented AWS cost intelligence and remediation planning.
 - [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): governed Bronze, Silver, and Gold data processing.
 
-The complete project catalog, skills, experience, research, education, and certification records remain in `data/portfolio.ts`. The homepage curates six projects instead of displaying every record.
+The complete project catalog, skills, experience, research, education, and certification records remain in `data/portfolio.ts`. The homepage highlights six projects and groups the other sixteen by discipline. All twenty-two projects have static detail pages. Work and research experience follow the latest resume; no unsupported role dates or project links are added.
 
 All existing skill entries are retained, with the latest resume's programming, retrieval infrastructure, backend, frontend, and testing skills added. Research highlights focus on Physics-Informed Neural Networks for power-system dynamics. Credentials include AWS Certified Data Engineer - Associate, Anthropic AI Fluency, and Google Data Analytics.
 

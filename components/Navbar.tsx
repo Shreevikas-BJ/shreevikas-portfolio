@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowDown } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
 
 export function Navbar() {
@@ -10,9 +9,12 @@ export function Navbar() {
           {siteConfig.initials}<span aria-hidden="true">.</span>
         </Link>
         <span className="header-discipline">AI / ML / DATA</span>
-        <Link href="/#projects" className="text-link header-work">
-          Selected work <ArrowDown size={14} aria-hidden="true" />
-        </Link>
+        <div className="header-links">
+          <Link href="/#projects" className="text-link">Work</Link>
+          <Link href="/#experience" className="text-link">Experience</Link>
+          <Link href="/#research" className="text-link">Research</Link>
+          <Link href="/#certifications" className="text-link">Credentials</Link>
+        </div>
       </nav>
     </header>
   );

@@ -870,21 +870,21 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Shreevikas-BJ/medical-rag-chatbot"
   },
   {
-    title: "Real-Time Pothole Detection",
-    slug: "real-time-pothole-detection",
+    title: "Real-Time CCTV Anomaly Detection",
+    slug: "real-time-cctv-anomaly-detection",
     category: "Computer Vision / Deep Learning",
     filters: ["Data Science & ML"],
     summary:
-      "Real-time computer vision app for detecting road potholes from video streams using YOLOv8, TensorRT, CUDA, and Flask.",
+      "Unsupervised video-anomaly detection using a PyTorch autoencoder, reconstruction-error thresholds, and live webcam monitoring.",
     architecture:
-      "The app combines YOLOv8 object detection, GPU acceleration tools, and a Flask serving layer for real-time pothole detection from video streams.",
-    tech: ["Python", "YOLOv8", "TensorRT", "CUDA", "Flask", "Computer Vision"],
+      "Normal UCSD Ped2 frames train a convolutional autoencoder. Test or webcam frames are scored by reconstruction error; ten consecutive anomalous frames trigger a timestamped image alert. CUDA is used when available, with CPU fallback.",
+    tech: ["Python", "PyTorch", "OpenCV", "CUDA", "Autoencoders", "Computer Vision"],
     bullets: [
-      "I built a real-time object detection system for road safety.",
-      "I used YOLOv8 with GPU acceleration tools.",
-      "I demonstrated applied deep learning, computer vision, and deployment skills."
+      "I trained a convolutional autoencoder on normal surveillance frames to identify unusual reconstruction errors.",
+      "I added consecutive-frame alert gating and timestamped image capture for continuous anomaly events.",
+      "I supported test-video and webcam inference with GPU acceleration when available. Detection is frame-level, not object localization."
     ],
-    repoUrl: "https://github.com/Shreevikas-BJ/real-time-pothole-detection"
+    repoUrl: "https://github.com/Shreevikas-BJ/real-time-cctv-anomaly-detection"
   },
   {
     title: "BERT Sentiment Analysis App",
