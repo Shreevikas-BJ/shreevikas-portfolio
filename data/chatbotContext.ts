@@ -1,4 +1,6 @@
-import { siteConfig } from "./portfolio";
+import {
+  certifications, education, experiences, projects, researchExperience, siteConfig, skills
+} from "./portfolio";
 
 export const resumeRequestMessage = `You can view my latest resume here: [${siteConfig.resumeFileName}](${siteConfig.resumePath}).`;
 
@@ -10,108 +12,106 @@ Phone: ${siteConfig.phone}`;
 export const refusalMessage =
   `I can only answer questions about my professional background, projects, skills, research, education, and experience. For anything specific, please contact me directly at ${siteConfig.email}.`;
 
+const featuredProjects = projects
+  .filter((project) => project.featured)
+  .sort((first, second) => (first.featuredOrder ?? 99) - (second.featuredOrder ?? 99));
+
+// Keep grounding aligned with the same content rendered by the portfolio.
 export const chatbotContext = `
 Identity:
-I am Shreevikas Jagadish, based in the United States and open to relocation. I am an AI Engineer, Machine Learning Engineer, Data Scientist, and Data Engineer. I build production computer vision, agentic AI, enterprise RAG, predictive ML, MLOps, scientific AI, and cloud data systems. Email: ${siteConfig.email}. Phone: ${siteConfig.phone}. GitHub: ${siteConfig.github}. LinkedIn: ${siteConfig.linkedin}. Portfolio: ${siteConfig.portfolio}.
+I am ${siteConfig.name}, based in ${siteConfig.location} and ${siteConfig.relocation.toLowerCase()}. ${siteConfig.summary}
+Target roles: ${siteConfig.roles.join(", ")}.
+Email: ${siteConfig.email}. Phone: ${siteConfig.phone}. GitHub: ${siteConfig.github}. LinkedIn: ${siteConfig.linkedin}. Portfolio: ${siteConfig.portfolio}.
 
-Professional summary:
-I have more than 4 years of experience architecting scalable machine learning, computer vision, Generative AI, and data systems for enterprise manufacturing. My work spans high-throughput predictive models, grounded retrieval, multi-agent workflows, LLM fine-tuning, feature platforms, cloud deployment, and reliable production operations.
-
-Professional experience:
-Artificial Intelligence Engineer, Procter & Gamble, United States, January 2026-present. I architected computer vision inspection with Python, OpenCV, PyTorch, CUDA, and AWS SageMaker, reducing product recalls by 26%. I built a LangGraph, OpenAI SDK, and LangSmith supply-chain assistant that reduced manual intervention by 30%. I developed enterprise RAG with LangChain, LlamaIndex, and FAISS, reducing HR and IT support resolution time by 40%. I fine-tuned open-source LLMs with QLoRA, PEFT, and Hugging Face, reducing vendor-contract compliance auditing by 35%. I created Databricks, Delta Lake, and Airflow feature-store pipelines. I deployed FastAPI services with Docker and Kubernetes on AWS, saving more than $1.2M annually in cloud infrastructure overhead.
-
-AI Engineer Intern, NeuralSeek, United States-remote, July 2025-November 2025. I led a 4-person team building LangChain RAG pipelines for more than 10K real-estate documents and 500+ daily queries. I improved document upload reliability by 30% with AWS Lambda, S3, DynamoDB, vector refresh, and MCP alerts. I reduced UI and API iteration time by 25% with FastAPI, Pydantic, pytest, structured logging, and error handling. I improved RAG quality through similarity thresholds, citations, caching, fallbacks, and low-confidence logging. I also built an OpenAI Agents SDK workflow with MCP-based tool use.
-
-Machine Learning Engineer, Bosch, India, March 2021-July 2024. I built XGBoost and Scikit-Learn forecasting on AWS S3, reducing inventory holding costs by 22%. I developed PaddleOCR, PyMuPDF, and OpenCV pipelines that shortened blueprint review by 45%. I built Isolation Forest and PyTorch anomaly detection, and MLflow, Airflow, and Azure ML CI/CD that reduced retraining turnaround by three weeks. I created BERT-based multilingual warranty-claim analysis that improved root-cause speed by 30%, developed SQL, Spark, and Snowflake data pipelines, and used A/B testing and statistical analysis to improve manufacturing yield by 14%.
+Professional experience (complete work history in my latest resume):
+${experiences.map((experience) => `${experience.title}, ${experience.company}, ${experience.location}, ${experience.dates}. ${experience.bullets.join(" ")}`).join("\n\n")}
 
 Research experience:
-Graduate Research Assistant, Illinois Institute of Technology, Chicago, Illinois, November 2025-May 2026. I researched PyTorch neural networks with NVIDIA PhysicsNeMo, CUDA, and Fourier Neural Operators for physics-informed surrogate modeling. I optimized scientific simulation inference with CUDA, ONNX, and TensorRT. This work focuses on scientific machine learning, neural operators, GPU acceleration, simulation optimization, and engineering applications.
+${researchExperience.role}, ${researchExperience.organization}. ${researchExperience.highlights.join(" ")}
 
-Flagship projects:
-Autonomous Industrial Quality Assurance & Defect Intelligence System: Python, OpenCV, PyTorch, CUDA, Docker, and AWS SageMaker. It runs at more than 500 frames per second, reduced packaging defect leakage by 32%, and delivered $850K in scrap savings.
+Featured projects:
+${featuredProjects.map((project) => `${project.title}: ${project.summary} ${project.architecture} Technologies: ${project.tech.join(", ")}.${project.repoUrl ? ` Repository: ${project.repoUrl}.` : " No public repository or live deployment link is available."}`).join("\n\n")}
 
-Manufacturing Process Quality Intelligence System: a Document AI workflow using Python, PaddleOCR, PyMuPDF, LangChain, ChromaDB, SQL, PostgreSQL, and Tableau. It supports field extraction, semantic document Q&A, and contract auditing, accelerating audit workflows by 40%.
+Supporting project collection:
+${projects.filter((project) => !project.featured).map((project) => `${project.title}: ${project.summary}${project.repoUrl ? ` Repository: ${project.repoUrl}.` : ""}`).join("\n")}
 
-AgentShield: an AI-agent QA and red-team platform covering prompt injection, privacy leakage, unsafe tool use, hallucination, policy risk, scan depth, evidence reports, and regression tracking. Repository: https://github.com/Shreevikas-BJ/agentshield.
+Education:
+${education.map((item) => `${item.degree}, ${item.school}, ${item.location}, ${item.dates}.`).join("\n")}
 
-AI/ML Knowledge RAG Assistant: citation-first RAG with Supabase pgvector, Jina embeddings, Groq, Top-3 retrieval, 0.6 similarity gating, refusal handling, and exact, semantic, and embedding caches. Repository: https://github.com/Shreevikas-BJ/ml-course-document-rag.
+Certifications:
+${certifications.map((item) => `${item.name}, ${item.issuer}.${item.credentialUrl ? ` Credential: ${item.credentialUrl}.` : ""}`).join("\n")}
 
-AI FinOps Copilot: a read-only cloud cost decision layer with owner-aware savings recommendations and ticket-ready remediation. Repository: https://github.com/Shreevikas-BJ/ai-finops-copilot.
+Skills (retained capabilities; attribute a skill to a job only when that job explicitly lists it):
+${skills.map((group) => `${group.category}: ${group.items.join(", ")}.`).join("\n")}
 
-Databricks Lakeflow Medallion Pipeline: AWS S3, Databricks Lakeflow Jobs, Unity Catalog, PySpark, Spark SQL, incremental processing, and governed Bronze, Silver, and Gold layers. Repository: https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline.
-
-Additional work includes an Airbnb Snowflake dbt pipeline, sales forecasting MLOps, inventory forecasting, Subscription Value Brain, Kafka streaming, IT Helpdesk AI Agent, Medical RAG, real-time pothole detection, BERT sentiment analysis, customer churn, NVIDIA forecasting, Power BI, and SQL analytics projects.
-
-Education and certification:
-Master of Science in Information Technology & Management, Illinois Institute of Technology, May 2026. Bachelor in Computer Science, Visvesvaraya Technological University, August 2023. AWS Certified Data Engineer - Associate.
-
-Core skills:
-Python, Java, SQL, Bash, PowerShell; OpenCV, PyTorch, TensorFlow, Scikit-Learn, XGBoost, computer vision, forecasting, anomaly detection, statistical modeling, A/B testing; LangChain, LlamaIndex, LangGraph, CrewAI, OpenAI SDK, RAG, FAISS, ChromaDB, embeddings, reranking, retrieval evaluation, QLoRA, PEFT, LoRA, Hugging Face, GPT-4o, Gemini API; PaddleOCR, PyMuPDF, Tesseract, EasyOCR; MLflow, FastAPI, Docker, Kubernetes, Airflow, CI/CD, LangSmith, Terraform; AWS, SageMaker, Databricks, Delta Lake, Spark, Snowflake, Kafka, dbt, Azure ML, GCP; PostgreSQL, SQL Server, Oracle, MySQL, MongoDB, Redshift; Tableau, Power BI, Plotly, Seaborn, Matplotlib.
-
-Resume:
-The latest resume is available at ${siteConfig.resumePath}.
+Resume: The latest resume is available at ${siteConfig.resumePath}.
 `.trim();
 
 export const cachedChatbotAnswers = [
   {
-    questions: ["What AI systems has Shreevikas built?", "AI systems", "production AI systems"],
+    questions: ["What did Shreevikas build at NeuralSeek?", "NeuralSeek experience", "AI Engineer Intern"],
     answer:
-      "I have built production systems across computer vision, agentic AI, enterprise RAG, LLM fine-tuning, Document AI, MLOps, and scientific AI. At Procter & Gamble, this includes high-speed visual inspection, a multi-agent supply-chain assistant, policy RAG, and containerized inference. My flagship projects include an industrial defect-intelligence system, AgentShield, a citation-first RAG assistant, and AI FinOps Copilot."
+      "As an AI Engineer Intern at NeuralSeek from July to November 2025, I built enterprise RAG using open-source embeddings, PostgreSQL, pgvector, and metadata-filtered retrieval, reducing IT and HR support resolution time by 40%. I improved concurrent serving with vLLM and tuned retrieval, context windows, and token budgets. Fine-tuning an open-source LLM on AWS with PEFT and QLoRA reduced manual compliance-analysis effort by 35%."
   },
   {
-    questions: ["What does Shreevikas build at Procter & Gamble?", "Procter and Gamble", "P&G experience"],
+    questions: ["What was his role at Whiterock?", "Whiterock experience", "Data Scientist AI ML at Whiterock"],
     answer:
-      "At Procter & Gamble, I build production AI across computer vision, agentic workflows, enterprise RAG, LLM fine-tuning, feature platforms, and cloud inference. My work reduced product recalls by 26%, manual supply-chain intervention by 30%, support resolution time by 40%, and compliance auditing by 35%. FastAPI services on AWS also contributed more than $1.2M in annual cloud infrastructure savings."
+      "I worked as a Data Scientist (AI/ML) at Whiterock in India from February 2022 to July 2024. I improved defect-detection accuracy by 22% while maintaining 98.8% pipeline uptime, built forecasting and predictive-maintenance models, and processed 20K+ reviews with a BERT and spaCy sentiment pipeline at approximately 89% F1. I operated 12 AWS-to-Snowflake ELT pipelines, reducing data-preparation time by 45% and improving reporting performance by 40% for 200+ users."
+  },
+  {
+    questions: ["What is ArchPilot?", "Tell me about ArchPilot", "system architecture copilot"],
+    answer:
+      "ArchPilot is my multi-agent system-design copilot that turns application requirements and current technology research into cost-effective, balanced, and high-performance architectures. It uses Next.js, TypeScript, FastAPI, PydanticAI, JEV System One routing, PostgreSQL persistence, and GPU-accelerated local inference with a 27B quantized LLM through llama.cpp. There is no public live link available yet."
+  },
+  {
+    questions: ["Tell me about Accord Procurement AI.", "Accord", "Procurement AI", "procurement project"],
+    answer:
+      "Accord is my local AI procurement prototype for comparing supplier quotes, reviewing document evidence, identifying price and delivery risks, and recording human decisions. Next.js, FastAPI, PostgreSQL, Redis/RQ, OCR, and optional Ollama inference support document processing; deterministic Python calculations and human approvals govern recommendations. Independent holdouts still show extraction generalization limits, so it is not ready for a buyer pilot. [View Accord on GitHub](https://github.com/Shreevikas-BJ/accord-procurement-ai)."
   },
   {
     questions: ["Tell me about AgentShield.", "AgentShield", "AI safety project", "agent evaluation"],
     answer:
-      "AgentShield is my AI-agent QA and red-team evaluation platform for identifying risky behavior before launch. It tests prompt injection, privacy leakage, unsafe tool use, hallucination, policy risk, and escalation behavior, then produces evidence and regression reports. [View AgentShield on GitHub](https://github.com/Shreevikas-BJ/agentshield)."
-  },
-  {
-    questions: ["Tell me about his computer vision work.", "computer vision", "industrial inspection", "defect detection"],
-    answer:
-      "I build high-throughput computer vision systems with Python, OpenCV, PyTorch, CUDA, Docker, and AWS SageMaker. At Procter & Gamble, visual inspection reduced product recalls by 26%. My industrial quality project processes more than 500 frames per second, reduced packaging defect leakage by 32%, and delivered $850K in scrap savings."
+      "AgentShield is my deployed multi-LLM QA and red-team platform with six failure modes and three scan levels. It tests prompt injection, privacy leakage, unsafe tool use, hallucinations, policy violations, and excessive agency with automated adversarial generation, Gemini judging, PostgreSQL persistence, interactive dashboards, and regression testing. [View AgentShield on GitHub](https://github.com/Shreevikas-BJ/agentshield)."
   },
   {
     questions: ["What is his experience with RAG?", "RAG experience", "enterprise RAG", "vector search"],
     answer:
-      "I build enterprise RAG with LangChain, LlamaIndex, FAISS, ChromaDB, embeddings, reranking, citations, confidence gates, caching, and retrieval evaluation. At Procter & Gamble, policy RAG reduced HR and IT support resolution time by 40%. At NeuralSeek, I built retrieval workflows for 10K+ documents and 500+ daily queries, and my AI/ML Knowledge RAG Assistant adds citation grounding and refusal handling."
+      "At NeuralSeek, I used open-source embeddings, PostgreSQL, pgvector, and metadata-filtered retrieval for enterprise RAG that reduced IT and HR support resolution time by 40%. My AI/ML Knowledge Assistant uses pgvector, Jina embeddings, Groq, clickable citations, similarity-based refusal handling, and exact, semantic, and embedding caches with latency observability."
   },
   {
-    questions: ["What research has he done in scientific AI?", "scientific AI research", "PhysicsNeMo", "Fourier Neural Operators"],
+    questions: ["What research has he done in scientific AI?", "scientific AI research", "PhysicsNeMo", "PINNs research"],
     answer:
-      "As a Graduate Research Assistant at Illinois Institute of Technology, I researched PyTorch surrogate models using NVIDIA PhysicsNeMo, CUDA, and Fourier Neural Operators. The work explores replacing slow physics simulation loops with fast, physics-informed predictions. I also optimized inference with ONNX and TensorRT for GPU-accelerated engineering workflows."
+      "As a Graduate Research Assistant, I researched Physics-Informed Neural Networks for power-system dynamics using PyTorch and NVIDIA PhysicsNeMo. My work used CUDA-accelerated workflows for simulation and time-series modeling."
   },
   {
-    questions: ["What did Shreevikas do at NeuralSeek?", "NeuralSeek experience", "AI Engineer Intern"],
+    questions: ["What experience does Shreevikas have with AWS?", "AWS experience"],
     answer:
-      "As an AI Engineer Intern at NeuralSeek, I led a 4-person team building LangChain RAG pipelines for 10K+ documents and 500+ daily queries. I improved upload reliability by 30% with AWS services and MCP alerts, reduced API iteration time by 25%, strengthened retrieval quality, and built an agentic workflow with the OpenAI Agents SDK."
-  },
-  {
-    questions: ["What did he build at Bosch?", "Bosch experience", "Machine Learning Engineer"],
-    answer:
-      "At Bosch, I built forecasting, OCR, anomaly detection, NLP, data, and MLOps systems. Outcomes included 22% lower inventory holding costs, 45% faster blueprint review, three weeks faster model retraining, 30% faster warranty root-cause analysis, and 14% higher manufacturing yield. I used XGBoost, Scikit-Learn, AWS, PaddleOCR, OpenCV, PyTorch, MLflow, Azure ML, BERT, Spark, and Snowflake."
+      "At Whiterock, I deployed Scikit-Learn and PySpark ML workflows on AWS SageMaker with CloudWatch monitoring and operated 12 AWS-to-Snowflake ELT pipelines. At NeuralSeek, I fine-tuned an open-source LLM on AWS with PEFT and QLoRA for grounded compliance analysis. I also hold the AWS Certified Data Engineer - Associate certification."
   },
   {
     questions: ["What MLOps experience does he have?", "MLOps experience", "model deployment", "model monitoring"],
     answer:
-      "I build repeatable ML delivery with MLflow, Airflow, FastAPI, Docker, Kubernetes, CI/CD, Azure ML, AWS SageMaker, LangSmith, validation, and monitoring. At Bosch, this reduced model retraining turnaround by three weeks. At Procter & Gamble, I deploy high-concurrency inference services on AWS and orchestrate feature pipelines with Databricks and Delta Lake."
+      "At Whiterock, I deployed ML workflows on AWS SageMaker with CloudWatch monitoring and maintained 98.8% pipeline uptime. At NeuralSeek, I optimized vLLM concurrent serving, retrieval thresholds, context windows, and token budgets. My broader toolkit includes MLflow, Docker, Kubernetes, FastAPI, CI/CD, and Terraform."
   },
   {
     questions: ["What data-engineering platforms has he used?", "data engineering platforms", "cloud data platforms"],
     answer:
-      "I work with Databricks, Delta Lake, Apache Spark, Snowflake, Kafka, Airflow, dbt, AWS, Azure, and GCP. I have built feature-store and ETL pipelines for production AI, a governed Databricks Lakeflow medallion platform, a Snowflake and dbt analytics pipeline, and Kafka streaming systems."
+      "At Whiterock, I operated 12 AWS-to-Snowflake ELT pipelines using Airflow and dbt, reducing data-preparation time by 45% and improving reporting performance by 40% for 200+ users. My projects include Databricks Lakeflow with governed medallion layers, a Snowflake and dbt analytics pipeline, and Kafka streaming."
   },
   {
-    questions: ["What are his strongest projects?", "featured projects", "best projects", "strongest projects"],
+    questions: ["What AI systems has Shreevikas built?", "What are his strongest projects?", "featured projects", "best projects", "strongest projects"],
     answer:
-      "My strongest work includes the Autonomous Industrial Quality Assurance system, AgentShield, the AI/ML Knowledge RAG Assistant, AI FinOps Copilot, the Databricks Lakeflow Medallion Pipeline, and my Document AI quality-intelligence system. Together they show computer vision, AI safety, trustworthy RAG, agent workflows, cloud data engineering, and enterprise automation."
+      "My featured work includes ArchPilot for agentic architecture design, AgentShield for multi-LLM red-team testing, the AI/ML Knowledge Assistant for production RAG, Accord for human-reviewed procurement, AI FinOps Copilot, and the Databricks Lakeflow Medallion Pipeline. Together they demonstrate agent orchestration, local inference, LLM evaluation, grounded retrieval, decision support, and cloud data engineering."
   },
   {
     questions: ["What technologies has Shreevikas used?", "technologies", "tech stack", "skills"],
     answer:
-      "I work with Python, SQL, PyTorch, OpenCV, Scikit-Learn, XGBoost, LangChain, LlamaIndex, LangGraph, FAISS, ChromaDB, Hugging Face, MLflow, FastAPI, Docker, Kubernetes, Airflow, Databricks, Delta Lake, Spark, Snowflake, Kafka, AWS, Azure ML, and GCP. I also use OCR tooling, retrieval evaluation, LLM fine-tuning, Tableau, and Power BI."
+      "I work with Python, SQL, TypeScript, PyTorch, Scikit-Learn, LightGBM, PySpark, LangGraph, LangChain, PydanticAI, FastAPI, PostgreSQL, pgvector, vLLM, llama.cpp, AWS, Snowflake, Airflow, and dbt. My broader skills include computer vision, scientific AI, model deployment, cloud platforms, frontend engineering, and automated testing."
+  },
+  {
+    questions: ["What certifications does he hold?", "certifications", "credentials"],
+    answer:
+      "I hold AWS Certified Data Engineer - Associate (DEA-C01), Anthropic AI Fluency: Framework & Foundations, and the Google Data Analytics Professional Certificate."
   },
   {
     questions: ["Can I view his resume?", "Can I download your resume?", "resume", "download resume", "view resume", "cv"],

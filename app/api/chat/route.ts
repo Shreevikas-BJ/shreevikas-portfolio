@@ -58,11 +58,18 @@ const relatedTerms = [
   "machine learning",
   "ml",
   "ai",
-  "procter & gamble",
-  "procter and gamble",
-  "p&g",
   "neuralseek",
-  "bosch",
+  "whiterock",
+  "archpilot",
+  "accord",
+  "procurement",
+  "pydanticai",
+  "jev",
+  "vllm",
+  "llama.cpp",
+  "pgvector",
+  "pca",
+  "spacy",
   "computer vision",
   "opencv",
   "document ai",
@@ -546,6 +553,7 @@ export async function POST(request: Request) {
 Rules:
 - Answer in first person as Shreevikas's AI Assistant. Treat every request as a question about Shreevikas, never as a request for general technical advice.
 - Use only explicit facts in the portfolio context below. Every employer, date, metric, method, technology, and project in your response must appear in that context.
+- NeuralSeek and Whiterock are the complete professional work history in the current resume. Do not invent additional employers or attribute skills and project outcomes to a job without an explicit connection.
 - Never infer adjacent tools or typical practices. For example, do not add Redis, Memcached, Prometheus, Grafana, pruning, distillation, quantization, or any other technology unless it appears in the context.
 - Never invent a relationship between two facts. Do not claim that a fact indirectly supports another outcome unless the context explicitly says so.
 - If the context does not explicitly support an answer, use the contact fallback exactly instead of filling the gap with general knowledge.

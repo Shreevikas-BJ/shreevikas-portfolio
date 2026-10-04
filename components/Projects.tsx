@@ -56,8 +56,8 @@ export function Projects() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="04 / Projects"
-          title="Flagship systems across vision, agents, RAG, and data platforms."
-          description="I selected the strongest work from my resume and GitHub portfolio to show how I frame problems, design reliable architectures, and turn technical capability into production impact."
+          title="AI products from architecture to evaluation and decisions."
+          description="My work spans agentic system design, trustworthy RAG, AI safety, procurement intelligence, and cloud data platforms."
         />
 
         <div className="mb-8 flex flex-col gap-4 border-y border-border/70 py-5 sm:flex-row sm:items-center sm:justify-between">

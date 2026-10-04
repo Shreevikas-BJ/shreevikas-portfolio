@@ -24,7 +24,7 @@ export function Footer() {
             </span>
           </a>
           <p className="mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
-            A focused view of my work across production AI, computer vision, agentic systems,
+            A focused view of my work across production ML, RAG, agentic systems,
             scientific machine learning, and modern data infrastructure.
           </p>
         </div>

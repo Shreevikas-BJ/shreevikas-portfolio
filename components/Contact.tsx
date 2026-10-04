@@ -20,7 +20,7 @@ export function Contact() {
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
                 I am open to AI Engineer, Machine Learning Engineer, Data Scientist, and
-                Data Engineer roles with teams building computer vision, agentic AI, RAG,
+                Data Engineer roles with teams building predictive ML, agentic AI, RAG,
                 MLOps, scientific AI, or cloud data platforms.
               </p>
 

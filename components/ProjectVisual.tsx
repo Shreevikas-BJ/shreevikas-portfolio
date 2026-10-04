@@ -33,7 +33,7 @@ function AgentShieldVisual() {
     ["Unsafe tool use", "pass"],
     ["Hallucination", "review"],
     ["Policy risk", "pass"],
-    ["Escalation", "pass"]
+    ["Excessive agency", "pass"]
   ];
 
   return (
@@ -311,8 +311,73 @@ function DocumentVisual() {
   );
 }
 
+function ArchitectureVisual() {
+  const stages = ["Requirements", "Web research", "JEV routing", "Design alternatives"];
+
+  return (
+    <div className="project-visual">
+      <VisualHeader label="ArchPilot orchestration" status="LOCAL INFERENCE" />
+      <div className="relative z-10 p-5">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-4">
+          {stages.map((stage, index) => (
+            <div key={stage} className="min-w-0 border-l border-primary/40 pl-3">
+              <p className="font-mono text-[0.6rem] text-primary">0{index + 1}</p>
+              <p className="box-heading mt-2 text-sm font-semibold leading-5">{stage}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-6 flex min-w-0 items-start gap-3 border-t border-border pt-5">
+          <Layers3 className="mt-1 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+          <div className="min-w-0">
+            <p className="box-heading text-sm font-semibold">FastAPI + PydanticAI</p>
+            <p className="mt-2 text-xs leading-6 text-muted-foreground">
+              Multi-agent routing &middot; PostgreSQL persistence
+            </p>
+            <p className="mt-3 font-mono text-xs text-primary">27B quantized LLM / llama.cpp</p>
+          </div>
+        </div>
+        <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 border-t border-border pt-4 text-xs text-muted-foreground">
+          <span>Cost-effective</span><span>Balanced</span><span>High-performance</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProcurementVisual() {
+  return (
+    <div className="project-visual">
+      <VisualHeader label="Accord decision workflow" status="HUMAN REVIEW" />
+      <div className="relative z-10 p-5">
+        <div className="flex items-start gap-3">
+          <FileCheck2 className="mt-1 h-6 w-6 shrink-0 text-primary" aria-hidden="true" />
+          <div>
+            <p className="text-lg font-semibold">From quotes to decisions</p>
+            <p className="mt-2 text-xs leading-6 text-muted-foreground">PDF, spreadsheet, CSV, and OCR inputs</p>
+          </div>
+        </div>
+        <ol className="mt-5 grid grid-cols-2 gap-x-5 gap-y-4">
+          {["Extract & validate", "Compare suppliers", "Review source evidence", "Approve & audit"].map((stage, index) => (
+            <li key={stage} className="min-w-0 border-l border-primary/40 pl-3">
+              <p className="font-mono text-[0.6rem] text-primary">0{index + 1}</p>
+              <p className="box-heading mt-1 text-sm font-semibold leading-5">{stage}</p>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-5 border-t border-border pt-4 text-xs leading-6 text-muted-foreground">
+          Deterministic calculations &middot; Human approval &middot; Audit trail
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectVisual({ project }: { project: Project }) {
   switch (project.visual) {
+    case "architecture":
+      return <ArchitectureVisual />;
+    case "procurement":
+      return <ProcurementVisual />;
     case "vision":
       return <VisionVisual />;
     case "document":

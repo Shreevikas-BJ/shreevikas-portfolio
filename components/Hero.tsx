@@ -18,11 +18,11 @@ import { ButtonLink } from "@/components/ui/Button";
 import { siteConfig } from "@/data/portfolio";
 
 const focusAreas = [
-  "Industrial computer vision",
-  "Agentic supply-chain automation",
+  "Production machine learning",
+  "Agentic architecture design",
   "Enterprise RAG",
   "Open-source LLM fine-tuning",
-  "Document AI",
+  "Local LLM inference",
   "Production MLOps",
   "Scientific machine learning",
   "Cloud data platforms"
@@ -88,12 +88,11 @@ export function Hero() {
             {siteConfig.name}
           </h1>
           <p className="mt-7 max-w-3xl text-3xl font-semibold leading-[1.12] text-balance sm:text-[2.7rem] lg:text-[3.1rem]">
-            I build AI systems that see, reason, retrieve, and scale.
+            I build production AI that turns data into reliable decisions.
           </p>
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
-            I bring 4+ years of experience architecting computer vision, machine learning,
-            Generative AI, RAG, and MLOps systems for enterprise manufacturing.
+            {siteConfig.summary}
           </p>
 
           <FocusRotator />

@@ -20,20 +20,20 @@ export function About() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="01 / About"
-          title="I build the full path from perception to production."
-          description="My work connects computer vision, machine learning, retrieval, agents, data platforms, and cloud delivery into AI systems that operate reliably at enterprise scale."
+          title="I take AI products from idea to production."
+          description="My work connects machine learning, grounded retrieval, agentic systems, cloud data platforms, and the feedback that makes a product useful."
         />
 
         <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
             <p className="max-w-xl text-xl leading-9 text-foreground sm:text-2xl sm:leading-10">
-              I turn complex manufacturing and enterprise workflows into AI products that
-              can perceive, reason, retrieve context, and take dependable action.
+              I start with customer and stakeholder needs, then build AI products that
+              retrieve relevant context, make useful predictions, and support real decisions.
             </p>
             <p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
-              I work across model development and the infrastructure around it: feature pipelines,
-              evaluation, observability, APIs, containerized deployment, and the feedback loops
-              needed to keep production intelligence useful.
+              I work across predictive modeling, RAG, agent orchestration, LLM evaluation,
+              data engineering, and deployment. I iterate on features using customer and
+              user feedback, from enterprise support workflows to architecture design tools.
             </p>
 
             <div className="mt-10 border-l border-primary/50 pl-5">

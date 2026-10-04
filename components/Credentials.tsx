@@ -9,34 +9,49 @@ export function Credentials() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="06 / Credentials"
-          title="Formal study and cloud data engineering certification."
-          description="My academic foundation spans information technology management and computer science, supported by an AWS data engineering credential."
+          title="A foundation in AI, analytics, and cloud data systems."
+          description="My education in information technology and computer science is supported by certifications from AWS, Anthropic, and Google."
         />
 
         <div className="grid gap-6 lg:grid-cols-3">
           {certifications.map((certification) => {
             const Icon = certification.icon;
-            return (
-              <Reveal key={certification.name} className="h-full">
-                <a
-                  href={certification.credentialUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="premium-card focus-ring group flex h-full min-h-72 flex-col p-7 sm:p-8"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent/30 bg-accent/10 text-accent">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <ArrowUpRight className="h-5 w-5 text-muted-foreground transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+            const content = (
+              <>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent/30 bg-accent/10 text-accent">
+                    <Icon className="h-5 w-5" />
                   </div>
-                  <p className="mt-8 mono-label">Certification</p>
-                  <h3 className="box-heading mt-3 text-xl font-semibold leading-7">{certification.name}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground">{certification.issuer}</p>
+                  {certification.credentialUrl ? (
+                    <ArrowUpRight className="h-5 w-5 text-muted-foreground transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                  ) : null}
+                </div>
+                <p className="mt-8 mono-label">Certification</p>
+                <h3 className="box-heading mt-3 text-xl font-semibold leading-7">{certification.name}</h3>
+                <p className="mt-3 text-sm text-muted-foreground">{certification.issuer}</p>
+                {certification.credentialUrl ? (
                   <span className="mt-auto pt-8 font-mono text-xs font-semibold text-primary">
                     View credential
                   </span>
-                </a>
+                ) : null}
+              </>
+            );
+            return (
+              <Reveal key={certification.name} className="h-full">
+                {certification.credentialUrl ? (
+                  <a
+                    href={certification.credentialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="premium-card focus-ring group flex h-full min-h-72 flex-col p-7 sm:p-8"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <article className="premium-card flex h-full min-h-72 flex-col p-7 sm:p-8">
+                    {content}
+                  </article>
+                )}
               </Reveal>
             );
           })}

@@ -18,7 +18,7 @@ function AnimatedMetric({
   start: boolean;
 }) {
   const reduceMotion = useReducedMotion();
-  const [display, setDisplay] = useState(reduceMotion ? value : 0);
+  const [display, setDisplay] = useState(0);
 
   useEffect(() => {
     if (!start) return;
@@ -62,9 +62,9 @@ export function CredibilityStrip() {
           <div key={stat.label} className="border-b border-border/70 px-2 py-7 even:border-l sm:px-4 md:border-b-0 md:border-l md:py-9 first:md:border-l-0">
             <AnimatedMetric
               value={stat.value}
-              prefix={"prefix" in stat ? stat.prefix : undefined}
+              prefix={stat.prefix}
               suffix={stat.suffix}
-              decimals={"decimals" in stat ? stat.decimals : undefined}
+              decimals={stat.decimals}
               start={visible}
             />
             <p className="mt-2 text-sm font-semibold text-foreground">{stat.label}</p>

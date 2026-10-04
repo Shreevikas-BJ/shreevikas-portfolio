@@ -10,8 +10,8 @@ export function Research() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="03 / Research"
-          title="Scientific machine learning for faster engineering simulation."
-          description="My research explores physics-informed AI and neural operators as practical surrogate models for computationally expensive simulation workflows."
+          title="Physics-informed AI for power-system dynamics."
+          description="My research combines neural networks, scientific computing, simulation, and time-series modeling."
         />
 
         <div className="grid items-start gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:gap-16">
@@ -21,7 +21,7 @@ export function Research() {
               {researchExperience.organization}
             </h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              {researchExperience.location} &middot; {researchExperience.dates}
+              {researchExperience.location}
             </p>
             <p className="mt-7 text-lg leading-9 text-foreground">
               {researchExperience.summary}
@@ -60,7 +60,7 @@ export function Research() {
               <div className="flex items-center justify-between border-b border-border px-5 py-4">
                 <div>
                   <p className="mono-label">Simulation-to-AI pipeline</p>
-                  <p className="mt-1 text-sm font-semibold">Surrogate model workflow</p>
+                  <p className="mt-1 text-sm font-semibold">Physics-informed modeling workflow</p>
                 </div>
                 <span className="inline-flex items-center gap-2 font-mono text-[0.68rem] font-semibold text-success">
                   <Activity className="h-3.5 w-3.5" /> GPU READY
@@ -94,22 +94,22 @@ export function Research() {
                   <div className="rounded-lg border border-border bg-background/74 p-5">
                     <Zap className="h-5 w-5 text-accent" />
                     <p className="mt-4 mono-label">Runtime</p>
-                    <p className="mt-2 text-sm font-semibold">ONNX + TensorRT</p>
+                    <p className="mt-2 text-sm font-semibold">PyTorch + PhysicsNeMo</p>
                   </div>
                   <div className="rounded-lg border border-border bg-background/74 p-5">
                     <Gauge className="h-5 w-5 text-secondary" />
                     <p className="mt-4 mono-label">Output</p>
-                    <p className="mt-2 text-sm font-semibold">Fast inference</p>
+                    <p className="mt-2 text-sm font-semibold">Time-series modeling</p>
                   </div>
                 </div>
 
                 <div className="relative mt-6 border-t border-border pt-5">
                   <div className="flex flex-col gap-2 font-mono text-[0.68rem] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-                    <span>PHYSICS CONSTRAINTS PRESERVED</span>
-                    <span className="text-success">INFERENCE PATH OPTIMIZED</span>
+                    <span>PHYSICS-INFORMED NEURAL NETWORKS</span>
+                    <span className="text-success">POWER-SYSTEM DYNAMICS</span>
                   </div>
                   <div className="mt-3 h-1 overflow-hidden rounded-full bg-muted">
-                    <div className="signal-bar h-full w-[88%] rounded-full bg-gradient-to-r from-primary via-secondary to-accent" />
+                    <div className="signal-bar h-full w-full rounded-full bg-gradient-to-r from-primary via-secondary to-accent" />
                   </div>
                 </div>
               </div>

@@ -15,7 +15,7 @@ export function ExperienceTimeline() {
         <SectionHeading
           eyebrow="02 / Experience"
           title="AI engineering shaped by production outcomes."
-          description="I have built computer vision, agentic AI, RAG, forecasting, Document AI, MLOps, and data systems across enterprise teams. The details below keep the technology and the business result together."
+          description="My experience spans enterprise RAG, LLM serving and fine-tuning, manufacturing ML, predictive maintenance, NLP, and cloud data pipelines."
         />
 
         <div className="divide-y divide-border/70 border-y border-border/70">

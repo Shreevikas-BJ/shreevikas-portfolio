@@ -29,11 +29,11 @@ export default function ResumePage() {
               <span className="h-px w-8 bg-primary/70" /> Resume
             </p>
             <h1 className="mt-6 text-4xl font-semibold leading-tight text-balance sm:text-5xl">
-              A concise view of my production AI, machine-learning, and data engineering experience.
+              My experience in production ML, RAG, and agentic AI.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-              Review my latest computer vision, agentic AI, RAG, MLOps, research,
-              data-platform, and enterprise engineering outcomes in one document.
+              Explore my work at NeuralSeek and Whiterock, my research in physics-informed AI,
+              and projects including ArchPilot, AgentShield, and my AI/ML Knowledge Assistant.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">

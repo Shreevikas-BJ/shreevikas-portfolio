@@ -20,9 +20,11 @@ export const siteConfig = {
   name: "Shreevikas Jagadish",
   shortName: "Shreevikas",
   initials: "SJ",
-  title: "Shreevikas Jagadish | AI Engineer, ML Engineer, Data Scientist & Data Engineer",
+  title: "Shreevikas Jagadish | AI/ML Engineer & Data Scientist",
   description:
-    "Portfolio of Shreevikas Jagadish, an AI Engineer, Machine Learning Engineer, Data Scientist, and Data Engineer building production computer vision, agentic AI, RAG, MLOps, and cloud data systems.",
+    "Portfolio of Shreevikas Jagadish, an AI/ML Engineer building production ML, agentic AI, RAG, predictive models, and cloud data systems. Explore ArchPilot, AgentShield, and Accord Procurement AI.",
+  summary:
+    "I am an AI/ML Engineer building production ML, agentic AI, RAG, predictive modeling, and data systems. I take AI products from idea to deployment and iterate based on customer and user feedback, working with Python, PyTorch, LangGraph, FastAPI, Spark, AWS, and MLOps.",
   location: "United States",
   availability: "Open to AI Engineering, Machine Learning, Data Science, and Data Engineering roles",
   relocation: "Open to relocation",
@@ -44,38 +46,46 @@ export const siteConfig = {
   ]
 };
 
-export const heroStats = [
-  {
-    value: 4,
-    suffix: "+",
-    label: "Years in AI and ML",
-    context: "Production intelligence and enterprise AI"
-  },
-  {
-    value: 26,
-    suffix: "%",
-    label: "Fewer product recalls",
-    context: "Computer vision inspection at P&G"
-  },
+type HeroStat = {
+  value: number;
+  prefix?: string;
+  suffix: string;
+  decimals?: number;
+  label: string;
+  context: string;
+};
+
+export const heroStats: HeroStat[] = [
   {
     value: 40,
     suffix: "%",
     label: "Faster support resolution",
-    context: "Enterprise RAG for HR and IT"
+    context: "Enterprise RAG at NeuralSeek"
   },
   {
-    value: 1.2,
-    prefix: "$",
-    suffix: "M+",
+    value: 35,
+    suffix: "%",
+    label: "Less compliance effort",
+    context: "LLM fine-tuning at NeuralSeek"
+  },
+  {
+    value: 22,
+    suffix: "%",
+    label: "Better defect detection",
+    context: "Manufacturing ML at Whiterock"
+  },
+  {
+    value: 98.8,
+    suffix: "%",
     decimals: 1,
-    label: "Annual cloud savings",
-    context: "High-concurrency AI inference"
+    label: "Pipeline uptime",
+    context: "AWS ML workflows at Whiterock"
   },
   {
-    value: 500,
-    suffix: "+",
-    label: "Frames per second",
-    context: "Industrial quality inspection"
+    value: 45,
+    suffix: "%",
+    label: "Faster data preparation",
+    context: "12 ELT pipelines at Whiterock"
   }
 ];
 
@@ -84,19 +94,19 @@ export const aboutHighlights = [
     icon: BrainCircuit,
     title: "Machine Learning",
     description:
-      "Computer vision, forecasting, anomaly detection, feature engineering, and model optimization."
+      "Defect detection, forecasting, predictive maintenance, NLP, feature engineering, and model optimization."
   },
   {
     icon: Bot,
     title: "Generative AI",
     description:
-      "Enterprise RAG, agentic workflows, LLM fine-tuning, retrieval evaluation, and guardrails."
+      "Enterprise RAG, multi-agent architecture design, LLM fine-tuning, evaluation, and guardrails."
   },
   {
     icon: Gauge,
     title: "MLOps",
     description:
-      "GPU training, experiment tracking, model serving, monitoring, CI/CD, and cloud optimization."
+      "Concurrent LLM serving, token optimization, local inference, model deployment, monitoring, and CI/CD."
   },
   {
     icon: Workflow,
@@ -120,7 +130,7 @@ export const aboutHighlights = [
     icon: FlaskConical,
     title: "Scientific AI",
     description:
-      "Physics-informed learning, neural operators, surrogate modeling, and GPU inference."
+      "Physics-informed neural networks, power-system dynamics, simulation, and time-series modeling."
   }
 ];
 
@@ -136,6 +146,9 @@ export const skills = [
       "LangChain",
       "LlamaIndex",
       "LangGraph",
+      "PydanticAI",
+      "JEV",
+      "OpenAI SDK",
       "CrewAI",
       "Hugging Face",
       "Transformers",
@@ -144,12 +157,16 @@ export const skills = [
       "Embeddings",
       "Reranking",
       "PEFT / LoRA / QLoRA",
+      "PEFT",
+      "LoRA",
+      "QLoRA",
       "Prompt Engineering",
       "Agentic AI",
       "LLM Evaluation",
       "Guardrails",
       "OpenAI Agents SDK",
       "Function & Tool Calling",
+      "Tool Calling",
       "Whisper ASR",
       "MCP"
     ]
@@ -176,7 +193,12 @@ export const skills = [
       "Feature Engineering",
       "Model Optimization",
       "AUC-ROC",
-      "F1 Score"
+      "F1 Score",
+      "PCA",
+      "Time-Series Forecasting",
+      "Hyperparameter Tuning",
+      "BERT",
+      "spaCy"
     ]
   },
   {
@@ -208,7 +230,10 @@ export const skills = [
       "ONNX",
       "TensorRT",
       "GPU Inference",
-      "Scientific Computing"
+      "Scientific Computing",
+      "Physics-Informed Neural Networks",
+      "Power-System Dynamics",
+      "Time-Series Modeling"
     ]
   },
   {
@@ -232,7 +257,9 @@ export const skills = [
       "Streaming Pipelines",
       "Data Quality",
       "Data Modeling",
-      "Medallion Architecture"
+      "Medallion Architecture",
+      "Pydantic",
+      "Async Python"
     ]
   },
   {
@@ -273,7 +300,12 @@ export const skills = [
       "Glue",
       "SageMaker",
       "CloudWatch",
-      "Redshift"
+      "Redshift",
+      "SQL Server",
+      "Oracle",
+      "MySQL",
+      "MongoDB",
+      "EC2"
     ]
   },
   {
@@ -298,6 +330,28 @@ export const skills = [
       "Jira",
       "Agile / Scrum"
     ]
+  },
+  {
+    category: "Retrieval & LLM Infrastructure",
+    icon: ServerCog,
+    summary: "Efficient retrieval and inference with grounded context and controlled token usage.",
+    items: [
+      "PostgreSQL", "pgvector", "Embeddings", "Semantic Search", "Metadata Filtering",
+      "vLLM", "llama.cpp", "Context / Token Optimization", "Local LLM Inference",
+      "FAISS", "ChromaDB", "Jina Embeddings"
+    ]
+  },
+  {
+    category: "Programming",
+    icon: Cpu,
+    summary: "Languages I use to build AI services, data workflows, and product interfaces.",
+    items: ["Python", "SQL", "TypeScript", "JavaScript", "Java", "Bash", "PowerShell"]
+  },
+  {
+    category: "Frontend & Testing",
+    icon: ShieldCheck,
+    summary: "Product interfaces and automated checks across APIs and user workflows.",
+    items: ["React", "Next.js", "Tailwind CSS", "Zod", "Pytest", "Vitest", "Playwright"]
   }
 ];
 
@@ -314,154 +368,78 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    title: "Artificial Intelligence Engineer",
-    company: "Procter & Gamble",
-    location: "United States",
-    dates: "Jan 2026 - Present",
-    summary:
-      "I architect production AI systems across computer vision, multi-agent automation, enterprise RAG, LLM fine-tuning, feature platforms, and high-concurrency inference.",
-    tags: [
-      "Python",
-      "OpenCV",
-      "PyTorch",
-      "CUDA",
-      "AWS SageMaker",
-      "LangGraph",
-      "OpenAI SDK",
-      "LangSmith",
-      "LangChain",
-      "LlamaIndex",
-      "FAISS",
-      "QLoRA",
-      "FastAPI",
-      "Docker",
-      "Kubernetes"
-    ],
-    metrics: [
-      "26% fewer product recalls",
-      "30% less manual intervention",
-      "40% faster support resolution",
-      "35% less compliance auditing",
-      "$1.2M+ annual cloud savings"
-    ],
-    bullets: [
-      "I architected high-speed computer vision inspection pipelines with Python, OpenCV, and PyTorch on CUDA-accelerated AWS SageMaker clusters, reducing product recall rates by 26%.",
-      "I developed an Agentic AI supply-chain assistant with LangGraph, the OpenAI SDK, and LangSmith, orchestrating multi-agent workflows that reduced manual intervention by 30%.",
-      "I built enterprise RAG systems with LangChain, LlamaIndex, and FAISS, automating policy extraction and reducing internal HR and IT support resolution times by 40%.",
-      "I fine-tuned open-source LLMs with QLoRA, PEFT, and Hugging Face Transformers, cutting manual vendor-contract compliance auditing by 35%.",
-      "I orchestrated feature-store pipelines on Databricks, Delta Lake, and Apache Airflow to accelerate downstream model training across global supply-chain teams.",
-      "I built FastAPI inference microservices with Docker and Kubernetes on AWS, supporting high-concurrency execution and saving more than $1.2M in annual cloud infrastructure overhead."
-    ]
-  },
-  {
     title: "AI Engineer Intern",
     company: "NeuralSeek",
-    location: "United States - Remote",
+    location: "United States",
     dates: "Jul 2025 - Nov 2025",
     summary:
-      "I built production-oriented RAG and agentic AI workflows for document intelligence, retrieval quality, and reliable API delivery.",
-    tags: [
-      "Python",
-      "LangChain",
-      "RAG",
-      "OpenAI Agents SDK",
-      "FastAPI",
-      "Pydantic",
-      "pytest",
-      "AWS Lambda",
-      "S3",
-      "DynamoDB",
-      "MCP",
-      "Vector Search"
-    ],
+      "I translated HR and IT stakeholder requirements into enterprise RAG, tuned concurrent LLM serving, and fine-tuned open-source models for grounded compliance analysis.",
+    tags: ["RAG", "Open-Source Embeddings", "PostgreSQL", "pgvector", "Metadata Filtering", "vLLM", "AWS", "PEFT", "QLoRA"],
     metrics: [
-      "10K+ documents",
-      "500+ daily queries",
-      "30% reliability gain",
-      "25% faster UI/API iteration"
+      "40% faster support resolution",
+      "35% less compliance-analysis effort"
     ],
     bullets: [
-      "I led a 4-member team building LangChain RAG pipelines for 10K+ real estate documents, supporting 500+ daily queries.",
-      "I improved document upload reliability by 30% using AWS Lambda, S3, DynamoDB, vector refresh workflows, and MCP error alerts.",
-      "I reduced UI and API iteration time by 25% with FastAPI, Pydantic, pytest, structured logging, and error handling.",
-      "I improved RAG answer quality through similarity threshold optimization, citation validation, response caching, fallback handling, and low-confidence query logging.",
-      "I built an agentic AI workflow with the OpenAI Agents SDK to draft and evaluate reports and create Gmail drafts through MCP-based tool use."
+      "I reduced IT and HR support resolution time by 40% by interviewing non-technical stakeholders and building enterprise RAG with open-source embeddings, PostgreSQL, pgvector, and metadata-filtered retrieval.",
+      "I improved concurrent LLM serving with vLLM, tuning retrieval thresholds, context windows, token budgets, and generation parameters to increase throughput and reduce unnecessary token usage.",
+      "I reduced manual compliance-analysis effort by 35% by fine-tuning an open-source LLM on AWS with PEFT and QLoRA for structured, grounded responses with retrieval context, citations, and validation."
     ]
   },
   {
-    title: "Machine Learning Engineer",
-    company: "Bosch",
+    title: "Data Scientist (AI/ML)",
+    company: "Whiterock",
     location: "India",
-    dates: "Mar 2021 - Jul 2024",
+    dates: "Feb 2022 - Jul 2024",
     summary:
-      "I delivered forecasting, Document AI, anomaly detection, multilingual NLP, data pipelines, and MLOps systems for manufacturing operations.",
-    tags: [
-      "Python",
-      "XGBoost",
-      "Scikit-Learn",
-      "AWS S3",
-      "PaddleOCR",
-      "PyMuPDF",
-      "OpenCV",
-      "Isolation Forest",
-      "PyTorch",
-      "MLflow",
-      "Azure ML",
-      "BERT",
-      "Spark",
-      "Snowflake"
-    ],
+      "I built manufacturing ML, forecasting, predictive maintenance, NLP, and reliable cloud data pipelines in partnership with operations stakeholders.",
+    tags: ["Scikit-Learn", "PySpark", "AWS SageMaker", "CloudWatch", "LightGBM", "PCA", "Anomaly Detection", "BERT", "spaCy", "Snowflake", "Airflow", "dbt"],
     metrics: [
-      "22% lower inventory costs",
-      "45% faster blueprint review",
-      "3 weeks faster retraining",
-      "30% faster root-cause analysis",
-      "14% higher manufacturing yield"
+      "22% better defect-detection accuracy",
+      "98.8% pipeline uptime",
+      "20K+ reviews / ~89% F1",
+      "45% faster data preparation",
+      "40% better reporting performance"
     ],
     bullets: [
-      "I engineered forecasting models with XGBoost, Scikit-Learn, and AWS S3, reducing inventory holding costs by 22%.",
-      "I built OCR pipelines with PaddleOCR, PyMuPDF, and OpenCV for engineering blueprints, cutting document review cycles by 45%.",
-      "I developed anomaly-detection workflows with Isolation Forest and PyTorch for manufacturing telemetry.",
-      "I implemented CI/CD MLOps with MLflow, Airflow, and Azure ML, reducing model retraining turnaround by three weeks.",
-      "I built multilingual warranty-claim analysis with BERT, Python, and PostgreSQL, improving root-cause analysis speed by 30%.",
-      "I developed SQL, Spark, and Snowflake ETL and feature pipelines for scalable analytical and machine-learning workloads.",
-      "I used A/B testing and statistical hypothesis testing with Python and Tableau to improve manufacturing yield by 14%."
+      "I improved manufacturing defect-detection accuracy by 22% while maintaining 98.8% pipeline uptime by deploying Scikit-Learn and PySpark ML workflows on AWS SageMaker with CloudWatch monitoring.",
+      "I gathered requirements with manufacturing and operations teams, then developed time-series forecasting and predictive-maintenance models using LightGBM, PCA, and anomaly detection for demand and equipment telemetry.",
+      "I built a BERT and spaCy sentiment pipeline processing 20K+ customer reviews, achieving approximately 89% F1 across positive, neutral, and negative classes and extracting recurring product themes.",
+      "I reduced data-preparation time by 45% and improved reporting performance by 40% for 200+ users by operating 12 AWS-to-Snowflake ELT pipelines with Airflow and dbt."
     ]
   }
 ];
 
 export const researchExperience = {
-  title: "Physics-Informed AI for Scientific Simulation",
+  title: "Physics-Informed AI for Power-System Dynamics",
   role: "Graduate Research Assistant",
   organization: "Illinois Institute of Technology",
-  location: "Chicago, Illinois",
-  dates: "Nov 2025 - May 2026",
+  location: "United States",
   summary:
-    "I research scientific machine-learning systems that replace slow simulation loops with fast, physics-informed surrogate models for engineering applications.",
+    "I researched Physics-Informed Neural Networks for power-system dynamics, combining scientific machine learning with simulation and time-series modeling.",
   highlights: [
-    "I researched and prototyped PyTorch neural networks using NVIDIA PhysicsNeMo, CUDA, and Fourier Neural Operators to build AI-powered surrogate models that replicate slow physics-based simulations with near-instant, physics-informed predictions.",
-    "I optimized scientific simulation models using CUDA, ONNX, and TensorRT to accelerate GPU inference for engineering and industrial applications."
+    "I used PyTorch and NVIDIA PhysicsNeMo to research Physics-Informed Neural Networks for power-system dynamics.",
+    "I worked with CUDA-accelerated simulation and time-series workflows."
   ],
   capabilities: [
     { icon: FlaskConical, label: "Physics-informed AI" },
-    { icon: BrainCircuit, label: "Neural operators" },
+    { icon: BrainCircuit, label: "Power-system dynamics" },
     { icon: Cpu, label: "GPU acceleration" },
-    { icon: Gauge, label: "Surrogate modeling" }
+    { icon: Gauge, label: "Time-series modeling" }
   ],
   pipeline: [
     "Physics simulation",
     "Training data",
-    "Neural operator",
-    "GPU optimization",
-    "Fast surrogate inference"
+    "PINN training",
+    "CUDA workflows",
+    "Power-system modeling"
   ],
   technologies: [
     "PyTorch",
     "NVIDIA PhysicsNeMo",
     "CUDA",
-    "Fourier Neural Operators",
-    "ONNX",
-    "TensorRT",
+    "Physics-Informed Neural Networks",
+    "Power-System Dynamics",
+    "Time-Series Modeling",
     "Scientific Computing"
   ]
 };
@@ -473,6 +451,18 @@ export const certifications = [
     credentialUrl:
       "https://www.credly.com/badges/017bc7a0-a378-4cfa-abb0-bc968c20d7da/public_url",
     icon: ShieldCheck
+  },
+  {
+    name: "AI Fluency: Framework & Foundations",
+    issuer: "Anthropic",
+    credentialUrl: undefined,
+    icon: BrainCircuit
+  },
+  {
+    name: "Google Data Analytics Professional Certificate",
+    issuer: "Google",
+    credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/TIT1TAQNFGPT",
+    icon: BarChart3
   }
 ];
 
@@ -496,6 +486,8 @@ export const projectFilters: ProjectFilter[] = [
 ];
 
 export type ProjectCategory =
+  | "Agentic AI / System Architecture"
+  | "Document AI / Procurement / Decision Intelligence"
   | "AI / Computer Vision / Quality Intelligence"
   | "Document AI / Enterprise Search"
   | "Data Science / Forecasting / MLOps"
@@ -528,7 +520,7 @@ export type Project = {
   highlightLabel?: string;
   problem?: string;
   solution?: string;
-  visual?: "forecast" | "shield" | "finops" | "rag" | "medallion" | "lineage" | "vision" | "document";
+  visual?: "forecast" | "shield" | "finops" | "rag" | "medallion" | "lineage" | "vision" | "document" | "architecture" | "procurement";
   summary: string;
   architecture: string;
   tech: string[];
@@ -539,12 +531,52 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "ArchPilot",
+    slug: "archpilot",
+    category: "Agentic AI / System Architecture",
+    filters: ["AI Agents", "RAG & GenAI"],
+    featured: true,
+    featuredOrder: 1,
+    highlightLabel: "Agentic Architecture Copilot",
+    problem: "Application requirements need to be translated into architecture choices with clear cost and performance trade-offs.",
+    solution: "A multi-agent system-design copilot that researches current tools and recommends cost-effective, balanced, and high-performance architectures.",
+    visual: "architecture",
+    summary: "Multi-agent architecture copilot turning application requirements and current technology research into practical system designs.",
+    architecture: "Next.js and TypeScript capture requirements. FastAPI and PydanticAI orchestrate research and agents through the JEV System One decision model, persist results in PostgreSQL, and use GPU-accelerated local inference with a 27B quantized LLM through llama.cpp.",
+    tech: ["Next.js", "TypeScript", "FastAPI", "PydanticAI", "JEV System One", "PostgreSQL", "llama.cpp", "Local LLMs"],
+    bullets: [
+      "I built a multi-agent copilot that converts application requirements into cost-effective, balanced, and high-performance designs.",
+      "I used deep web research on current tools and technologies to inform architecture recommendations.",
+      "I engineered FastAPI and PydanticAI orchestration with JEV routing, PostgreSQL persistence, and a GPU-accelerated 27B quantized local LLM."
+    ]
+  },
+  {
+    title: "Accord Procurement AI",
+    slug: "accord-procurement-ai",
+    category: "Document AI / Procurement / Decision Intelligence",
+    filters: ["AI Agents", "RAG & GenAI", "Analytics"],
+    featured: true,
+    featuredOrder: 4,
+    highlightLabel: "Human-in-the-Loop Procurement",
+    problem: "Supplier quotes arrive in different formats, making price, delivery, and evidence comparisons difficult to audit.",
+    solution: "A local procurement workspace that extracts quotations, compares suppliers with deterministic rules, and records human review and approval.",
+    visual: "procurement",
+    summary: "Local AI procurement prototype for supplier quote comparison, source-evidence review, price and delivery risks, and auditable buyer decisions.",
+    architecture: "A Next.js interface connects to FastAPI, PostgreSQL, and Redis/RQ document workers. PDF, spreadsheet, CSV, and OCR parsers feed Pydantic-validated extraction; optional local Qwen inference uses Ollama. Python Decimal calculations drive comparison and scoring, with human review, tenant isolation, and audit snapshots. Extraction generalization remains under evaluation; the prototype is not ready for a buyer pilot.",
+    tech: ["Next.js", "TypeScript", "FastAPI", "Pydantic", "PostgreSQL", "Redis / RQ", "Ollama", "Tesseract", "Docker"],
+    bullets: [
+      "I built document ingestion, editable quote review with source evidence, supplier comparisons, and price and delivery alerts.",
+      "I kept monetary calculations, eligibility, scoring, and approvals in a deterministic Python engine with human decision controls.",
+      "I added local inference, tenant-scoped access, audit trails, and document-reliability evaluation; independent holdouts still show generalization limits."
+    ],
+    repoUrl: "https://github.com/Shreevikas-BJ/accord-procurement-ai"
+  },
+  {
     title: "Autonomous Industrial Quality Assurance & Defect Intelligence System",
     slug: "autonomous-industrial-quality-assurance",
     category: "AI / Computer Vision / Quality Intelligence",
     filters: ["Data Science & ML", "MLOps"],
-    featured: true,
-    featuredOrder: 1,
+    featured: false,
     highlightLabel: "Industrial Computer Vision",
     problem:
       "High-speed manufacturing lines make manual inspection expensive and delay the discovery of packaging defects.",
@@ -590,8 +622,7 @@ export const projects: Project[] = [
     slug: "manufacturing-process-quality-intelligence",
     category: "Document AI / Enterprise Search",
     filters: ["RAG & GenAI", "Data Science & ML", "Analytics"],
-    featured: true,
-    featuredOrder: 6,
+    featured: false,
     highlightLabel: "Document Intelligence",
     problem:
       "Layout-heavy legal and vendor contracts slow review teams when critical fields must be found and validated manually.",
@@ -646,9 +677,9 @@ export const projects: Project[] = [
       "AgentShield uses Next.js and TypeScript with Groq, Gemini, Supabase, Prisma, Zod, Vitest, and Playwright to evaluate prompt injection, privacy leakage, unsafe tool use, hallucination, and policy risk before AI agents launch.",
     tech: ["Next.js", "TypeScript", "Groq", "Gemini", "Supabase", "Prisma", "Zod", "Vitest", "Playwright"],
     bullets: [
-      "I automated prompt injection testing and privacy leakage checks.",
-      "I tested unsafe tool use, hallucination, and policy risks.",
-      "I generated regression reports for AI agents."
+      "I built a deployed QA platform with six failure modes, three scan levels, PostgreSQL persistence, and interactive evaluation dashboards.",
+      "I tested prompt injection, privacy leakage, unsafe tool use, hallucinations, policy violations, and excessive agency.",
+      "I automated adversarial generation, Gemini-based judging, and regression testing."
     ],
     repoUrl: "https://github.com/Shreevikas-BJ/agentshield"
   },
@@ -658,7 +689,7 @@ export const projects: Project[] = [
     category: "AI / Cloud Analytics / FinOps",
     filters: ["AI Agents", "Analytics", "Data Engineering"],
     featured: true,
-    featuredOrder: 4,
+    featuredOrder: 5,
     highlightLabel: "AI for FinOps",
     problem:
       "Cloud cost signals are fragmented across billing, utilization, inventory, and ownership systems.",
@@ -678,7 +709,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Shreevikas-BJ/ai-finops-copilot"
   },
   {
-    title: "AI/ML Knowledge RAG Assistant",
+    title: "AI/ML Knowledge Assistant",
     slug: "ai-ml-knowledge-rag-assistant",
     category: "RAG / Generative AI / Vector Search",
     filters: ["RAG & GenAI", "AI Agents"],
@@ -694,11 +725,11 @@ export const projects: Project[] = [
       "Cloud-native RAG assistant with Top-3 retrieval, 0.6 similarity gating, clickable citations, refusal handling, and cache layers.",
     architecture:
       "The assistant uses Next.js, Supabase pgvector, Jina Embeddings, Groq, RAG, and vector search to ground AI/ML knowledge answers with citation-first retrieval, confidence gates, exact cache, semantic cache, and embedding cache.",
-    tech: ["Next.js", "Supabase pgvector", "Jina Embeddings", "Groq", "RAG", "Vector Search"],
+    tech: ["Next.js", "TypeScript", "PostgreSQL / pgvector", "Jina Embeddings", "Groq", "Vercel"],
     bullets: [
-      "I implemented Top-3 vector retrieval with a 0.6 similarity threshold.",
-      "I added citation-grounded responses and refusal handling for low-confidence answers.",
-      "I used exact, semantic, and embedding caches for faster repeated queries."
+      "I built cloud-native pgvector retrieval with Jina embeddings, Groq generation, clickable citations, and similarity-based refusal handling.",
+      "I implemented exact, semantic, and embedding caching with latency observability.",
+      "I evolved the system from local FAISS to a lightweight serverless production architecture."
     ],
     repoUrl: "https://github.com/Shreevikas-BJ/ml-course-document-rag"
   },
@@ -708,7 +739,7 @@ export const projects: Project[] = [
     category: "Data Engineering / Databricks / AWS",
     filters: ["Data Engineering"],
     featured: true,
-    featuredOrder: 5,
+    featuredOrder: 6,
     highlightLabel: "Lakehouse Engineering",
     problem:
       "Raw operational data from multiple business units needs governed, incremental processing before analytics teams can use it.",
@@ -944,14 +975,14 @@ export const projects: Project[] = [
 
 export const education = [
   {
-    degree: "Master of Science in Information Technology & Management",
+    degree: "Master of Science in Information Technology",
     school: "Illinois Institute of Technology",
     location: "United States",
     dates: "Graduation: May 2026",
     details: ["Master of Science program completed in May 2026."]
   },
   {
-    degree: "Bachelor in Computer Science",
+    degree: "Bachelor of Computer Science",
     school: "Visvesvaraya Technological University",
     location: "India",
     dates: "Graduation: August 2023",
@@ -1004,26 +1035,26 @@ export const navItems = [
 ];
 
 export const suggestedQuestions = [
-  "What does Shreevikas build at Procter & Gamble?",
-  "Tell me about his computer vision work.",
+  "What did Shreevikas build at NeuralSeek?",
+  "What is ArchPilot?",
+  "Tell me about Accord Procurement AI.",
+  "What was his role at Whiterock?",
   "What is his experience with RAG?",
-  "What did he build at Bosch?",
-  "What research has he done in scientific AI?",
-  "What data-engineering platforms has he used?"
+  "Tell me about AgentShield."
 ];
 
 export const achievementCards = [
   {
     icon: BrainCircuit,
-    label: "Computer Vision",
-    value: "-26% recalls",
-    text: "I build high-speed visual inspection systems that improve product quality in production."
+    label: "Manufacturing ML",
+    value: "+22% accuracy",
+    text: "I deployed defect-detection workflows on AWS SageMaker with 98.8% pipeline uptime at Whiterock."
   },
   {
     icon: BrainCircuit,
     label: "Machine Learning",
-    value: "-22% inventory cost",
-    text: "I develop forecasting and anomaly-detection models for high-volume manufacturing environments."
+    value: "20K+ reviews",
+    text: "I built a BERT and spaCy sentiment pipeline achieving approximately 89% F1 at Whiterock."
   },
   {
     icon: Workflow,

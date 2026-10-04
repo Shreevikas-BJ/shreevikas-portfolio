@@ -1,6 +1,6 @@
 # Shreevikas Jagadish Portfolio
 
-A production-grade engineering portfolio for an AI Engineer, Machine Learning Engineer, Data Scientist, and Data Engineer working across computer vision, RAG, agentic AI, scientific AI, MLOps, and cloud data systems.
+A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, agentic AI, RAG, predictive models, and cloud data systems. Professional experience follows the latest resume: NeuralSeek (AI Engineer Intern, July-November 2025) and Whiterock (Data Scientist AI/ML, February 2022-July 2024).
 
 **Live site:** [shreevikas-portfolio.vercel.app](https://shreevikas-portfolio.vercel.app/)
 
@@ -22,14 +22,18 @@ A production-grade engineering portfolio for an AI Engineer, Machine Learning En
 
 ## Flagship Work
 
-- Autonomous Industrial Quality Assurance & Defect Intelligence System: 500+ FPS computer vision inspection with PyTorch, OpenCV, CUDA, Docker, and AWS SageMaker.
+- ArchPilot: a multi-agent architecture copilot with FastAPI, PydanticAI, JEV System One routing, PostgreSQL, and local 27B quantized inference through llama.cpp. No public repository or live link is available yet.
 - [AgentShield](https://github.com/Shreevikas-BJ/agentshield): AI-agent QA, red-team evaluation, and launch-readiness analysis.
-- [AI/ML Knowledge RAG Assistant](https://github.com/Shreevikas-BJ/ml-course-document-rag): citation-grounded retrieval with gating, caching, refusal handling, and evaluation.
+- [AI/ML Knowledge Assistant](https://github.com/Shreevikas-BJ/ml-course-document-rag): production RAG with pgvector, Jina, Groq, clickable citations, refusal handling, three caching layers, and latency observability.
+- [Accord Procurement AI](https://github.com/Shreevikas-BJ/accord-procurement-ai): a local procurement prototype with document extraction, supplier comparison, deterministic calculations, human approval, and audit trails. Independent extraction holdouts still show generalization limits; the prototype is not ready for a buyer pilot.
 - [AI FinOps Copilot](https://github.com/Shreevikas-BJ/ai-finops-copilot): action-oriented AWS cost intelligence and remediation planning.
 - [Databricks Lakeflow Medallion Pipeline](https://github.com/Shreevikas-BJ/databricks-lakeflow-medallion-pipeline): governed Bronze, Silver, and Gold data processing.
-- Manufacturing Process Quality Intelligence System: OCR, field extraction, semantic document Q&A, and contract intelligence with PaddleOCR, PyMuPDF, LangChain, and ChromaDB.
 
 The supporting project explorer retains additional work across forecasting, data engineering, streaming, NLP, computer vision, analytics, and dashboards.
+
+All existing skill entries are retained, with the latest resume's programming, retrieval infrastructure, backend, frontend, and testing skills added. Research highlights focus on Physics-Informed Neural Networks for power-system dynamics. Credentials include AWS Certified Data Engineer - Associate, Anthropic AI Fluency, and Google Data Analytics.
+
+Chatbot grounding is generated from the same structured portfolio data, keeping work history, skills, projects, education, and certifications aligned.
 
 ## Stack
 
