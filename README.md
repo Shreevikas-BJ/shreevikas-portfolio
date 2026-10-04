@@ -9,7 +9,9 @@ A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, a
 - Dark-only editorial design: near-black, off-white, and one blue accent
 - Inter body typography and Space Grotesk headings, self-hosted through `next/font`
 - Full-width hero with optimized bitmap artwork and generous whitespace
-- Lightweight transformer-inspired background: token signals, a causal attention matrix, feed-forward layers, and output pulses. This is a stylized visualization, not live model inference. Motion can be paused, stops offscreen or in a hidden tab, and is disabled for reduced-motion preferences.
+- Unlabelled transformer flow inside a brain-shaped outline. This is a stylized visualization, not live model inference.
+- A small page-edge robot follows scrolling at fixed walking and running paces (72 and 144 viewport pixels/second). Fast scrolling triggers a catch-up run followed by a breathing pause. Internal shortcuts trigger neuron repair and a cosmetic heading-cleaning sweep; other page clicks trigger a wave. Content is never edited by these effects.
+- A shared pause control stops the brain and robot. Motion respects reduced-motion preferences and hidden tabs; the robot's position loop sleeps when idle.
 - Six selected projects presented as open, full-width rows rather than a card grid
 - Sixteen additional projects in keyboard-accessible category disclosures: Data Science / ML / MLOps, GenAI / RAG / Agents, Data Engineering, and Analytics / Dashboards
 - Resume-based work experience, scientific-AI research, and clean certification rows
@@ -70,6 +72,7 @@ It is optional for the static portfolio and case-study pages.
 
 ```bash
 npm run lint
+npm test
 npm run build
 ```
 
