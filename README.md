@@ -9,6 +9,7 @@ A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, a
 - Dark-only editorial design: near-black, off-white, and one blue accent
 - Inter body typography and Space Grotesk headings, self-hosted through `next/font`
 - Full-width hero with optimized bitmap artwork and generous whitespace
+- Lightweight transformer-inspired background: token signals, a causal attention matrix, feed-forward layers, and output pulses. This is a stylized visualization, not live model inference. Motion can be paused, stops offscreen or in a hidden tab, and is disabled for reduced-motion preferences.
 - Six selected projects presented as open, full-width rows rather than a card grid
 - Sixteen additional projects in keyboard-accessible category disclosures: Data Science / ML / MLOps, GenAI / RAG / Agents, Data Engineering, and Analytics / Dashboards
 - Resume-based work experience, scientific-AI research, and clean certification rows
