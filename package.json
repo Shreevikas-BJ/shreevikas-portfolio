@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm run knowledge:prepare && next dev",
-    "build": "npm run knowledge:prepare && next build",
+    "build": "npm run knowledge:prepare && next build && tsx scripts/check-chat-bundle.ts",
     "knowledge:prepare": "tsx scripts/prepare-knowledge.ts",
     "knowledge:sync": "tsx scripts/sync-knowledge.ts",
     "pretest": "npm run knowledge:prepare",
