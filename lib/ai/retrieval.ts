@@ -24,7 +24,7 @@ async function createIndex(): Promise<RetrievalIndex> {
       endpoint.searchParams.set("select", "id,kind,content,embedding");
       endpoint.searchParams.set("revision", `eq.${snapshot.revision}`);
       endpoint.searchParams.set("embedding_model", `eq.${EMBEDDING_MODEL}`);
-      endpoint.searchParams.set("limit", "200");
+      endpoint.searchParams.set("limit", String(documents.length));
       const response = await fetch(endpoint, { cache: "no-store", signal: AbortSignal.timeout(2000), headers: { apikey: key, ...(!key.startsWith("sb_secret_") ? { Authorization: `Bearer ${key}` } : {}) } });
       if (!response.ok) throw new Error(`Supabase knowledge read failed (${response.status}).`);
       const remote: unknown = await response.json();
@@ -57,12 +57,21 @@ export async function retrieveKnowledge(question: string) {
   const found = loaded.index.search(query, loaded.documents.length);
   const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
   const normalized = ` ${normalize(question)} `;
-  // Proper names can be weakly represented by MiniLM; preserve exact entity matches.
-  const matches = found.labels.map((label, position) => {
+  // Exact tool aliases supplement semantic search; comparison facts require an explicit service match.
+  const ranked = found.labels.map((label, position) => {
     const document = loaded.documents[label];
     const score = found.distances[position];
-    const boost = document.entities?.some((entity) => normalized.includes(` ${normalize(entity)} `)) ? 0.4 : 0;
-    return { ...document, score, rank: score + boost, named: boost > 0 };
-  }).filter((document) => (document.score >= 0.26 || document.named) && (!/\bprojects?\b/.test(normalized) || /project/.test(document.kind))).sort((a, b) => b.rank - a.rank).slice(0, 5);
+    const named = document.entities?.some((entity) => normalized.includes(` ${normalize(entity)} `)) ?? false;
+    const boost = named ? (document.kind === "comparison" ? 1.2 : document.kind === "technology" ? 0.9 : 0.4) : 0;
+    const penalty = document.kind === "technology" && !named ? 0.12 : 0;
+    return { ...document, score, rank: score + boost - penalty, named };
+  }).filter((document) =>
+    (document.score >= 0.26 || document.named) &&
+    (document.kind !== "comparison" || document.named) &&
+    (!/\bprojects?\b/.test(normalized) || /project/.test(document.kind) || document.named)
+  ).sort((a, b) => b.rank - a.rank);
+  const specificTools = ranked.filter((document) => document.named && (document.kind === "technology" || document.kind === "comparison"));
+  // Tool-specific facts already contain connected examples; unrelated high-similarity facts add ambiguity.
+  const matches = (specificTools.length ? specificTools : ranked).slice(0, 5);
   return { source: loaded.source, matches, bestScore: found.distances[0] ?? 0 };
 }

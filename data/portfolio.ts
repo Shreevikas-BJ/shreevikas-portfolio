@@ -182,6 +182,7 @@ export const skills = [
       "TensorFlow",
       "XGBoost",
       "LightGBM",
+      "Random Forest",
       "Logistic Regression",
       "Isolation Forest",
       "Classification",
@@ -812,11 +813,11 @@ export const projects: Project[] = [
     summary:
       "Customer value engine combining churn prediction, CLV estimation, and uplift modeling to identify retention offers.",
     architecture:
-      "The project combines churn modeling, customer lifetime value estimation, and uplift modeling into a decision intelligence workflow for customer retention strategy.",
-    tech: ["Python", "Churn Prediction", "CLV", "Uplift Modeling", "Customer Analytics"],
+      "Logistic Regression and XGBoost model churn; a Random Forest Regressor estimates an RFM-based customer-value proxy, and treatment/control Random Forest Classifiers estimate uplift for retention targeting.",
+    tech: ["Python", "Scikit-Learn", "Random Forest", "XGBoost", "Logistic Regression", "Churn Prediction", "CLV", "Uplift Modeling", "Customer Analytics"],
     bullets: [
       "I built a customer decision intelligence system for retention strategy.",
-      "I combined churn, customer lifetime value, and uplift modeling.",
+      "I used Random Forest regression for customer-value estimation and paired Random Forest classifiers for treatment/control uplift modeling.",
       "I focused on business actionability, not just model accuracy."
     ],
     repoUrl: "https://github.com/Shreevikas-BJ/subscription-value-brain"

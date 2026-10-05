@@ -14,6 +14,7 @@ const retrievalRequests = [];
 const encoder = new TextEncoder();
 let providerStatus = 200;
 let providerStreamFails = false;
+let providerStreamEmpty = false;
 let noMatches = false;
 let modelOverride;
 let unavailableModelId;
@@ -45,7 +46,7 @@ function load(file) {
       if (providerStatus !== 200) return new Response(providerStatus === 404 ? '{"error":{"code":"model_not_found"}}' : "Provider unavailable", { status: providerStatus });
       return new Response(new ReadableStream({ start(controller) {
         if (providerStreamFails) { controller.error(new Error("Provider stream interrupted")); return; }
-        for (const content of ["I built enterprise RAG ", "with PostgreSQL and pgvector."]) {
+        for (const content of providerStreamEmpty ? [] : ["I built enterprise RAG ", "with PostgreSQL and pgvector."]) {
           const bytes = encoder.encode(`data: ${JSON.stringify({ choices: [{ delta: { content } }] })}\n\n`);
           for (let index = 0; index < bytes.length; index += 7) controller.enqueue(bytes.slice(index, index + 7));
         }
@@ -97,14 +98,26 @@ assert.ok(!sent.messages[0].content.includes("ArchPilot:"), "Never send the enti
 assert.ok(sent.messages[0].content.includes("no more than 2 sentences"));
 assert.ok(sent.messages[0].content.includes("50 words total"));
 assert.ok(sent.messages[0].content.includes("Do not provide general advice"));
+assert.ok(sent.messages[0].content.includes("Never treat a listed skill as missing information"));
+assert.ok(sent.messages[0].content.includes("distinguish comparable experience from direct use"));
+assert.ok(sent.messages[0].content.includes("Do not default technical questions to email"));
 
 noMatches = true;
 assert.ok((await (await POST(request({ message: "Unrecognized information" }))).json()).answer.includes("mailto:"));
+assert.equal(providerRequests.length, 5);
+for (const message of ["Have you used Rust?", "What is your experience with an unfamiliar cloud service?", "Have you used Azure Blob Storage?"]) {
+  const { answer } = await (await POST(request({ message }))).json();
+  assert.ok(answer.includes("closest hands-on experience"));
+  assert.ok(!answer.includes("mailto:"), "Missing technical facts should request clarification, not personal contact");
+}
 assert.equal(providerRequests.length, 5);
 noMatches = false;
 providerStreamFails = true;
 await assert.rejects(() => POST(request({ message: "Tell me about RAG" })).then((response) => response.text()), /could not complete/);
 providerStreamFails = false;
+providerStreamEmpty = true;
+await assert.rejects(() => POST(request({ message: "Have you used Random Forest?" })).then((response) => response.text()), /could not complete/);
+providerStreamEmpty = false;
 providerStatus = 500;
 assert.equal((await POST(request({ message: "Tell me about RAG" }))).status, 502);
 providerStatus = 404;
