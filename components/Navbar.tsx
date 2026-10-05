@@ -13,6 +13,7 @@ export function Navbar() {
           <Link href="/#projects" className="text-link">Work</Link>
           <Link href="/#experience" className="text-link">Experience</Link>
           <Link href="/#research" className="text-link">Research</Link>
+          <Link href="/#education" className="text-link">Education</Link>
           <Link href="/#certifications" className="text-link">Credentials</Link>
         </div>
       </nav>

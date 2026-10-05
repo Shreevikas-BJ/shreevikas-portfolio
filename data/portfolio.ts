@@ -980,6 +980,7 @@ export const education = [
   {
     degree: "Master of Science in Information Technology",
     school: "Illinois Institute of Technology",
+    logo: { src: "/images/education/illinois-tech.svg", width: 682, height: 85 },
     location: "United States",
     dates: "Graduation: May 2026",
     details: ["Master of Science program completed in May 2026."]
@@ -987,6 +988,7 @@ export const education = [
   {
     degree: "Bachelor of Computer Science",
     school: "Visvesvaraya Technological University",
+    logo: { src: "/images/education/vtu.webp", width: 153, height: 160 },
     location: "India",
     dates: "Graduation: August 2023",
     details: ["Foundation in computer science, software systems, and applied computing."]

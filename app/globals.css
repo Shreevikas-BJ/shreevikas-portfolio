@@ -197,6 +197,13 @@ a, button { -webkit-tap-highlight-color: transparent; }
 #experience .entry-meta::before { content: ""; position: absolute; top: 6px; left: -4px; width: 7px; height: 7px; border: 1px solid #8bb3e3; border-radius: 50%; background: #0a0a0a; }
 .credential-row { display: flex; align-items: center; gap: 48px; padding-block: 36px; border-top: 1px solid hsl(var(--border)); }
 .credential-copy { min-width: 0; max-width: 780px; }
+.education-row { display: grid; grid-template-columns: 170px minmax(0, 1fr) auto; align-items: center; gap: 32px; padding-block: 40px; border-top: 1px solid hsl(var(--border)); }
+.education-mark { display: flex; align-items: center; justify-content: flex-start; min-height: 84px; }
+.education-mark img { width: auto; height: auto; max-width: 160px; max-height: 80px; object-fit: contain; }
+.education-copy { min-width: 0; }
+.education-copy h3 { margin-block: 12px; font-size: 26px; line-height: 1.4; overflow-wrap: anywhere; }
+.education-location, .education-date { color: hsl(var(--muted-foreground)); font-size: 15px; line-height: 1.6; }
+.education-date { align-self: start; padding-top: 4px; }
 .credential-issuer { display: flex; align-items: center; gap: 16px; min-height: 36px; }
 .credential-issuer-logo { display: block; width: auto; height: 28px; max-width: 80px; object-fit: contain; flex-shrink: 0; }
 .credential-issuer .technical-label { min-width: 0; }
@@ -231,6 +238,9 @@ a, button { -webkit-tap-highlight-color: transparent; }
 
 @media (min-width: 1440px) { .hero-inner h1 { font-size: 84px; } }
 @media (max-width: 1023px) {
+  .education-row { grid-template-columns: 140px minmax(0, 1fr); gap: 24px; }
+  .education-mark img { max-width: 130px; }
+  .education-date { grid-column: 2; margin-top: -12px; }
   .hero-inner h1 { font-size: 64px; }
   .case-heading h1 { font-size: 52px; }
   .case-section { grid-template-columns: 180px minmax(0, 1fr); gap: 40px; }
@@ -239,6 +249,11 @@ a, button { -webkit-tap-highlight-color: transparent; }
   .transformer-visual { width: 48%; bottom: 12px; opacity: 0.55; }
 }
 @media (max-width: 639px) {
+  .education-row { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-block: 32px; }
+  .education-mark { min-height: 64px; }
+  .education-mark img { max-width: 168px; max-height: 64px; }
+  .education-copy h3 { font-size: 22px; }
+  .education-date { grid-column: 1; margin-top: 0; }
   body { font-size: 16px; }
   .header-inner { height: auto; min-height: 108px; flex-wrap: wrap; gap: 0 16px; padding-top: 20px; }
   .header-discipline { font-size: 10px; }

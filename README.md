@@ -16,7 +16,7 @@ A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, a
 - A lazy-loaded 3D processor beside the research displays NVIDIA's unchanged official logo, with restrained scientific wave contours. Rendering stops offscreen and in hidden tabs; reduced-motion and WebGL fallback visitors see a static image.
 - Six selected projects presented as open, full-width rows rather than a card grid
 - Sixteen additional projects in keyboard-accessible category disclosures: Data Science / ML / MLOps, GenAI / RAG / Agents, Data Engineering, and Analytics / Dashboards
-- Resume-based work experience, scientific-AI research, and clean certification rows
+- Resume-based work experience, scientific-AI research, education with official university logos, and clean certification rows
 - AWS and Google credential links; Anthropic AI Fluency is shown without a link until one is supplied
 - Statically generated `/projects/[slug]` case studies: Problem, Approach, Outcome, Links
 - Two short, one-time scroll reveals that respect reduced-motion preferences
@@ -38,7 +38,9 @@ The complete project catalog, skills, experience, research, education, and certi
 
 All existing skill entries are retained, with the latest resume's programming, retrieval infrastructure, backend, frontend, and testing skills added. Research highlights focus on Physics-Informed Neural Networks for power-system dynamics. Credentials include AWS Certified Data Engineer - Associate, Anthropic AI Fluency, and Google Data Analytics.
 
-The "I'm Shreevikas's assistant" tag opens a lazy-loaded, keyboard-accessible chat panel on the homepage and project pages. Visitors can ask basic portfolio questions without sharing an email. Common introductions, identity, location, contact, education, roles, tools, credentials, and individual projects have immediate answers generated from the portfolio data. Exact matches precede approximate matches. Other supported answers use the existing server-side Groq model, compact context, streaming, a 15-second timeout, and per-instance rate limiting. Unknown, private, unrelated, and resume requests point to Shreevikas's email. No emails are sent and conversations stay in page memory only.
+The "I'm Shreevikas's assistant" tag opens a lazy-loaded, keyboard-accessible chat panel on the homepage and project pages. Visitors can ask portfolio questions without sharing an email. Professional questions use semantic retrieval, not fixed FAQ answers: a pinned, quantized MiniLM model generates normalized 384-dimensional embeddings; native FAISS inner-product search retrieves up to five relevant fact chunks; Groq generates a streamed answer of at most two sentences and 180 tokens. Exact employer/project names receive additional weighting. Only greetings, identity, safety refusals, and resume-contact instructions are deterministic. Unknown, private, unrelated, and resume requests point to Shreevikas's email. No emails are sent and conversations stay in page memory only.
+
+Supabase stores portfolio facts and embeddings when configured. The server caches its FAISS index for five minutes and falls back to the current build's local index if Supabase is unavailable or out of date. This is real FAISS retrieval, not pgvector relabeled as FAISS. No chat transcripts or visitor contact details are written to Supabase. Embedding weights and knowledge files are server-only, outside `public/`, and are prepared automatically before development/build.
 
 ## Stack
 
@@ -49,6 +51,7 @@ The "I'm Shreevikas's assistant" tag opens a lazy-loaded, keyboard-accessible ch
 - Framer Motion
 - Lucide React
 - Groq chat completions through a server-only API route
+- Transformers.js MiniLM embeddings, native FAISS, and optional Supabase persistence
 - Vercel deployment
 
 ## Local Development
@@ -66,12 +69,24 @@ Create `.env.local` from `.env.example`:
 
 ```bash
 GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL=llama-3.1-8b-instant
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
 ```
 
 `GROQ_API_KEY` is read only by `app/api/chat/route.ts`. It is never sent to the browser or committed to the repository.
 It is optional for the static portfolio and case-study pages.
 
-The existing model remains `llama-3.1-8b-instant`. Groq retired it for free/developer accounts on August 16, 2026; see [Groq's deprecation notice](https://console.groq.com/docs/deprecations). Cached portfolio questions continue to work without a provider call. If that model is unavailable to the configured account, other questions receive the direct email contact fallback. A model migration requires approval; no alternate provider or model is selected silently.
+The default model remains `llama-3.1-8b-instant` to preserve the existing configuration. The current account returns `model_not_found` for it. Set `GROQ_MODEL` to an approved model available to the account to activate generated answers; no alternate model/provider is silently selected. Provider configuration failures now return an accurate error instead of pretending that a contact fallback is a successful AI answer. Greetings and contact/refusal instructions remain available without Groq.
+
+### Supabase Setup
+
+1. Apply `supabase/migrations/202610040001_portfolio_knowledge.sql` in your Supabase SQL editor. The table enables RLS and grants access only to `service_role`, not anonymous or signed-in browser users.
+2. Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in `.env.local`. A Supabase server secret (`sb_secret_...`) or legacy service-role key is supported. Never use a `NEXT_PUBLIC_` prefix for a secret.
+3. Run `npm run knowledge:prepare`, then `npm run knowledge:sync` to upsert the current portfolio facts and vectors. Repeat synchronization after changing `data/portfolio.ts`.
+4. Add the same server-only variables in Vercel and redeploy. Use an isolated Supabase project for previews if needed.
+
+The first build downloads approximately 23 MB of pinned public ONNX weights. Warm question embeddings run locally on CPU; no embedding API key or per-question model download is required. The local FAISS index also works without Supabase credentials.
 
 ## Quality Checks
 
@@ -82,6 +97,8 @@ npm run build
 ```
 
 Responsive verification covers 320px, 390px, 768px, 1440px, and 1920px layouts, project navigation, keyboard navigation, reduced motion, and navigation without JavaScript. Run Lighthouse against a production build, not the development server; the performance target is 95+.
+
+`npm test` verifies real embedding/FAISS retrieval for paraphrased questions, route grounding, streaming, no fixed professional answer bypass, validation, private/unrelated refusals, model failures, and rate limiting. Rate limiting is bounded per function instance; use Vercel WAF or a shared limiter for stronger distributed abuse protection.
 
 ## Artwork
 
@@ -95,6 +112,8 @@ Certification issuer marks are hosted locally under `public/images/certification
 
 These marks remain trademarks of their respective owners and do not imply endorsement or partnership.
 
+University marks are hosted locally under `public/images/education/`: [Illinois Tech's official header wordmark](https://www.iit.edu/themes/iit/assets/img/illinois-tech-red.svg) and the [official VTU emblem](https://vtu.ac.in/wp-content/uploads/2019/03/vtulogo.png). The VTU asset is resized to WebP without changing its artwork. They identify the institutions attended and do not imply endorsement.
+
 `public/images/data-flow.webp` is a 90 KB optimized bitmap generated with the built-in image-generation tool. It is an editorial illustration, not a project screenshot or a performance claim.
 
 Generation prompt:
@@ -105,7 +124,7 @@ Generation prompt:
 
 1. Import `Shreevikas-BJ/shreevikas-portfolio` in Vercel.
 2. Keep the Next.js framework preset.
-3. Add `GROQ_API_KEY` under Project Settings > Environment Variables.
+3. Add `GROQ_API_KEY`, an approved `GROQ_MODEL`, and optional server-only Supabase variables under Project Settings > Environment Variables.
 4. Deploy the `main` branch.
 
 ## Author

@@ -13,4 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 *.tsbuildinfo
+models/
+data/generated/
 .DS_Store
