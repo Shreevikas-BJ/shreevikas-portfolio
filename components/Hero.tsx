@@ -12,7 +12,7 @@ export function Hero() {
         fill
         priority
         fetchPriority="high"
-        sizes="100vw"
+        sizes="(max-width: 639px) 0px, 100vw"
         quality={80}
         className="hero-art"
       />

@@ -158,6 +158,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`dark ${inter.variable} ${spaceGrotesk.variable}`}
     >
       <body className="antialiased">
