@@ -38,7 +38,8 @@ class GroqTimeoutError extends Error {
   }
 }
 
-const GROQ_MODEL = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
+const DEFAULT_GROQ_MODEL = "openai/gpt-oss-20b";
+const GROQ_MODEL = process.env.GROQ_MODEL?.trim() || DEFAULT_GROQ_MODEL;
 const GROQ_TIMEOUT_MS = 15000;
 const MAX_COMPLETION_TOKENS = 180;
 const RATE_LIMIT_WINDOW_MS = 60_000;
@@ -171,6 +172,7 @@ async function delay(milliseconds: number) {
 async function startGroqStream(
   apiKey: string,
   messages: Array<{ role: string; content: string }>,
+  model: string = GROQ_MODEL,
   tokenField: "max_completion_tokens" | "max_tokens" = "max_completion_tokens"
 ) {
   const controller = new AbortController();
@@ -185,9 +187,10 @@ async function startGroqStream(
       },
       signal: controller.signal,
       body: JSON.stringify({
-        model: GROQ_MODEL,
+        model,
         temperature: 0.2,
         [tokenField]: MAX_COMPLETION_TOKENS,
+        ...(model.startsWith("openai/gpt-oss-") ? { reasoning_effort: "low", include_reasoning: false } : {}),
         stream: true,
         messages
       })
@@ -202,7 +205,7 @@ async function startGroqStream(
         response.status === 400 &&
         /max_completion_tokens/i.test(body)
       ) {
-        return startGroqStream(apiKey, messages, "max_tokens");
+        return startGroqStream(apiKey, messages, model, "max_tokens");
       }
 
       throw new GroqRequestError(response.status, body);
@@ -230,6 +233,17 @@ async function startGroqStreamWithRetry(
   try {
     return await startGroqStream(apiKey, messages);
   } catch (error) {
+    if (
+      error instanceof GroqRequestError &&
+      error.status === 404 && /model_not_found/.test(error.body) &&
+      GROQ_MODEL !== DEFAULT_GROQ_MODEL
+    ) {
+      console.warn("Configured Groq model unavailable; using supported portfolio model.", {
+        configuredModel: GROQ_MODEL,
+        fallbackModel: DEFAULT_GROQ_MODEL
+      });
+      return startGroqStream(apiKey, messages, DEFAULT_GROQ_MODEL);
+    }
     const retryDelay =
       error instanceof GroqRequestError && error.status === 429 ? getRetryDelay(error) : null;
 
@@ -396,7 +410,7 @@ Rules:
 - Never invent a relationship between two facts. Do not claim that a fact indirectly supports another outcome unless the context explicitly says so.
 - If the context does not explicitly support an answer, use the contact fallback exactly instead of filling the gap with general knowledge.
 - Do not provide general advice, coding help, tutorials, weather, sports, politics, or information about other people. These requests are unrelated even if they mention a technology in the context; direct the visitor to Shreevikas's email.
-- Keep answers concise, professional, and recruiter-friendly, using no more than 2 sentences. Stop when the direct facts are exhausted; do not pad the response.
+- Keep answers concise, professional, and recruiter-friendly: no more than 2 sentences and 50 words total. Select up to 4 relevant tools instead of listing the full skill set. Omit dates, locations, and links unless asked. End with a complete sentence; do not pad the response.
 - For a resume request, reply exactly: "${resumeRequestMessage}"
 - For an unrelated question, reply exactly: "${refusalMessage}"
 - If information is private, sensitive, missing, or unavailable, reply exactly: "${contactFallback}"

@@ -69,7 +69,7 @@ Create `.env.local` from `.env.example`:
 
 ```bash
 GROQ_API_KEY=your_groq_api_key_here
-GROQ_MODEL=llama-3.1-8b-instant
+GROQ_MODEL=openai/gpt-oss-20b
 SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
 ```
@@ -77,7 +77,7 @@ SUPABASE_SERVICE_ROLE_KEY=
 `GROQ_API_KEY` is read only by `app/api/chat/route.ts`. It is never sent to the browser or committed to the repository.
 It is optional for the static portfolio and case-study pages.
 
-The default model remains `llama-3.1-8b-instant` to preserve the existing configuration. The current account returns `model_not_found` for it. Set `GROQ_MODEL` to an approved model available to the account to activate generated answers; no alternate model/provider is silently selected. Provider configuration failures now return an accurate error instead of pretending that a contact fallback is a successful AI answer. Greetings and contact/refusal instructions remain available without Groq.
+The default model is Groq-hosted `openai/gpt-oss-20b`, tested with the current account. It uses low reasoning effort and excludes reasoning from the response. An optional `GROQ_MODEL` override is supported; if that model returns `model_not_found`, the route logs the configuration issue and retries once with the supported default. Authentication, timeout, and other provider errors do not trigger a model switch. Provider failures return an error instead of pretending that a contact fallback is a successful AI answer. Greetings and contact/refusal instructions remain available without Groq.
 
 ### Supabase Setup
 

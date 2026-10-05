@@ -15,6 +15,8 @@ const encoder = new TextEncoder();
 let providerStatus = 200;
 let providerStreamFails = false;
 let noMatches = false;
+let modelOverride;
+let unavailableModelId;
 const selectedFact = "AI Engineer Intern at NeuralSeek, July-November 2025: Enterprise RAG used PostgreSQL and pgvector.";
 
 function load(file) {
@@ -33,11 +35,13 @@ function load(file) {
   };
   vm.runInNewContext(compiled.outputText, {
     exports: loadedModule.exports, require: testRequire,
-    process: { env: { GROQ_API_KEY: "mock-key-not-a-real-secret" } },
-    console: { info() {}, error() {} }, Date, Math, Map, Set, TextEncoder, TextDecoder,
+    process: { env: { GROQ_API_KEY: "mock-key-not-a-real-secret", GROQ_MODEL: modelOverride } },
+    console: { info() {}, warn() {}, error() {} }, Date, Math, Map, Set, TextEncoder, TextDecoder,
     Response, ReadableStream, AbortController, DOMException, setTimeout, clearTimeout,
     fetch: async (_url, options) => {
-      providerRequests.push(JSON.parse(options.body));
+      const body = JSON.parse(options.body);
+      providerRequests.push(body);
+      if (body.model === unavailableModelId) return new Response('{"error":{"code":"model_not_found"}}', { status: 404 });
       if (providerStatus !== 200) return new Response(providerStatus === 404 ? '{"error":{"code":"model_not_found"}}' : "Provider unavailable", { status: providerStatus });
       return new Response(new ReadableStream({ start(controller) {
         if (providerStreamFails) { controller.error(new Error("Provider stream interrupted")); return; }
@@ -73,7 +77,7 @@ assert.equal(providerRequests.length, 0);
 assert.equal(retrievalRequests.length, 0);
 
 // Every professional question, including old suggested questions, goes through retrieval and Groq.
-for (const message of ["What are your skills?", "Tell me about your RAG experience.", "Which certifications do you hold?", "Where did you study?", "How did you make support answers more useful?"]) {
+for (const message of ["tell me about data engineering", "Tell me about your RAG experience.", "Which certifications do you hold?", "Where did you study?", "How did you make support answers more useful?"]) {
   const response = await POST(request({ message, history: [{ role: "user", content: "UNTRUSTED_HISTORY" }] }));
   assert.equal(response.headers.get("X-Chat-Stream"), "1");
   assert.equal(await response.text(), "I built enterprise RAG with PostgreSQL and pgvector.");
@@ -81,7 +85,9 @@ for (const message of ["What are your skills?", "Tell me about your RAG experien
 assert.equal(providerRequests.length, 5);
 assert.equal(retrievalRequests.length, 5);
 const sent = providerRequests[0];
-assert.equal(sent.model, "llama-3.1-8b-instant");
+assert.equal(sent.model, "openai/gpt-oss-20b");
+assert.equal(sent.reasoning_effort, "low");
+assert.equal(sent.include_reasoning, false);
 assert.equal(sent.temperature, 0.2);
 assert.equal(sent.max_completion_tokens, 180);
 assert.equal(sent.messages.length, 2);
@@ -89,6 +95,7 @@ assert.ok(sent.messages[0].content.includes(selectedFact));
 assert.ok(!sent.messages[0].content.includes("UNTRUSTED_HISTORY"));
 assert.ok(!sent.messages[0].content.includes("ArchPilot:"), "Never send the entire portfolio on every request");
 assert.ok(sent.messages[0].content.includes("no more than 2 sentences"));
+assert.ok(sent.messages[0].content.includes("50 words total"));
 assert.ok(sent.messages[0].content.includes("Do not provide general advice"));
 
 noMatches = true;
@@ -108,4 +115,26 @@ for (let index = 0; index < 10; index++) assert.equal((await POST(request({ mess
 const limited = await POST(request({ message: "Hi" }, "rate-limit-test"));
 assert.equal(limited.status, 429);
 assert.ok(Number(limited.headers.get("Retry-After")) > 0);
-console.log("Chat route: semantic retrieval, no fixed professional answers, brief streaming, validation, no email gate, unchanged default model, accurate errors and rate limiting PASS");
+providerStatus = 200;
+modelOverride = "llama-3.1-8b-instant";
+unavailableModelId = modelOverride;
+modules.clear();
+const fallbackPOST = load(path.join(root, "app/api/chat/route.ts")).POST;
+let requestsBefore = providerRequests.length;
+const recovered = await fallbackPOST(request({ message: "tell me about data engineering" }));
+assert.equal(await recovered.text(), "I built enterprise RAG with PostgreSQL and pgvector.");
+assert.deepEqual(providerRequests.slice(requestsBefore).map((item) => item.model), [modelOverride, "openai/gpt-oss-20b"]);
+assert.equal(providerRequests.at(-1).include_reasoning, false);
+assert.equal(providerRequests.at(-2).reasoning_effort, undefined);
+
+// Never retry authentication/provider errors as a model configuration failure.
+for (const status of [401, 500, 404]) {
+  unavailableModelId = undefined;
+  providerStatus = status;
+  if (status === 404) unavailableModelId = "openai/gpt-oss-20b";
+  requestsBefore = providerRequests.length;
+  const failed = await fallbackPOST(request({ message: "Tell me about RAG" }));
+  assert.equal(failed.status, status === 404 ? 503 : 502);
+  assert.equal(providerRequests.length - requestsBefore, status === 404 ? 2 : 1);
+}
+console.log("Chat route: supported Groq model, unavailable override recovery, no authentication retries, semantic retrieval, brief streaming, validation and rate limiting PASS");
