@@ -11,7 +11,9 @@ A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, a
 - Full-width hero with optimized bitmap artwork and generous whitespace
 - A full-bleed 3D brain with folded hemispheres, attention cells, and travelling signals, built with React Three Fiber. This unlabelled, stylized visualization is not live model inference.
 - A stationary bottom-right robot holds the clickable "I'm Shreevikas's assistant" board. It never follows scrolling or covers the page with moving effects.
-- The scene is lazy-loaded, uses instanced geometry, and runs at a capped 30 frames/second only while visible. Restrained bloom is enabled on desktop. A pause control, reduced-motion support, and a static fallback keep the experience usable without WebGL.
+- The scene is lazy-loaded, uses smooth cortical contours and instanced signals, and runs at a capped 30 frames/second on desktop or 20 on phones, only while visible. Phones, touch devices, and data-saving connections start with the lightweight animated SVG and upgrade to WebGL after interaction. Antialiased desktop rendering, reduced-motion support, and a static fallback keep the experience usable without WebGL. There is no pause button beside the assistant.
+- Distinct project schematics illustrate orchestration, evaluation, retrieval, procurement, cost intelligence, and medallion processing without fabricated metrics or screenshots.
+- A lazy-loaded 3D processor beside the research displays NVIDIA's unchanged official logo, with restrained scientific wave contours. Rendering stops offscreen and in hidden tabs; reduced-motion and WebGL fallback visitors see a static image.
 - Six selected projects presented as open, full-width rows rather than a card grid
 - Sixteen additional projects in keyboard-accessible category disclosures: Data Science / ML / MLOps, GenAI / RAG / Agents, Data Engineering, and Analytics / Dashboards
 - Resume-based work experience, scientific-AI research, and clean certification rows
@@ -36,7 +38,7 @@ The complete project catalog, skills, experience, research, education, and certi
 
 All existing skill entries are retained, with the latest resume's programming, retrieval infrastructure, backend, frontend, and testing skills added. Research highlights focus on Physics-Informed Neural Networks for power-system dynamics. Credentials include AWS Certified Data Engineer - Associate, Anthropic AI Fluency, and Google Data Analytics.
 
-The "I'm Shreevikas's assistant" tag opens a lazy-loaded, keyboard-accessible chat panel on the homepage and project pages. Visitors can ask basic portfolio questions without sharing an email. Answers use the existing server-side Groq model, compact portfolio context, common-question cache, streaming, a 15-second timeout, and per-instance rate limiting. Unknown, private, unrelated, and resume requests point to Shreevikas's email. No emails are sent and conversations stay in page memory only.
+The "I'm Shreevikas's assistant" tag opens a lazy-loaded, keyboard-accessible chat panel on the homepage and project pages. Visitors can ask basic portfolio questions without sharing an email. Common introductions, identity, location, contact, education, roles, tools, credentials, and individual projects have immediate answers generated from the portfolio data. Exact matches precede approximate matches. Other supported answers use the existing server-side Groq model, compact context, streaming, a 15-second timeout, and per-instance rate limiting. Unknown, private, unrelated, and resume requests point to Shreevikas's email. No emails are sent and conversations stay in page memory only.
 
 ## Stack
 
@@ -82,6 +84,8 @@ npm run build
 Responsive verification covers 320px, 390px, 768px, 1440px, and 1920px layouts, project navigation, keyboard navigation, reduced motion, and navigation without JavaScript. Run Lighthouse against a production build, not the development server; the performance target is 95+.
 
 ## Artwork
+
+`public/images/nvidia-logo.svg` is the unchanged full NVIDIA logo from [NVIDIA's official logo and brand-usage page](https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage/). It identifies the NVIDIA PhysicsNeMo technology used in research, not a partnership or endorsement. NVIDIA and its logo are trademarks of NVIDIA Corporation.
 
 `public/images/data-flow.webp` is a 90 KB optimized bitmap generated with the built-in image-generation tool. It is an editorial illustration, not a project screenshot or a performance claim.
 

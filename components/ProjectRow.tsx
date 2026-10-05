@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { SelectedWork } from "@/data/selectedWork";
+import { ProjectMotif } from "@/components/ProjectMotif";
 
 export function ProjectRow({ work, number }: { work: SelectedWork; number: number }) {
   const { project, discipline, description } = work;
 
   return (
-    <li className="work-row">
+    <li className="work-row" data-featured={project.featured || undefined}>
       <span className="work-number" aria-hidden="true">{String(number).padStart(2, "0")}</span>
       <div className="work-copy">
         <p className="technical-label">{discipline}</p>
@@ -26,9 +27,12 @@ export function ProjectRow({ work, number }: { work: SelectedWork; number: numbe
           </a>
         ) : null}
       </div>
-      <Link href={`/projects/${project.slug}`} className="work-arrow" aria-label={`Read ${project.title} case study`}>
-        <ArrowUpRight size={24} aria-hidden="true" />
-      </Link>
+      <div className="work-side">
+        {project.featured ? <ProjectMotif visual={project.visual} /> : null}
+        <Link href={`/projects/${project.slug}`} className="work-arrow" aria-label={`Read ${project.title} case study`}>
+          <ArrowUpRight size={24} aria-hidden="true" />
+        </Link>
+      </div>
     </li>
   );
 }

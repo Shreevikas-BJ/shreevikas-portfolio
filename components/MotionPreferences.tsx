@@ -4,15 +4,12 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 
 type MotionPreferences = {
   enabled: boolean;
-  paused: boolean;
   reducedMotion: boolean;
-  togglePaused: () => void;
 };
 
 const MotionContext = createContext<MotionPreferences | null>(null);
 
 export function MotionPreferencesProvider({ children }: { children: ReactNode }) {
-  const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(true);
 
   useEffect(() => {
@@ -24,11 +21,9 @@ export function MotionPreferencesProvider({ children }: { children: ReactNode })
   }, []);
 
   const value = useMemo(() => ({
-    enabled: !paused && !reducedMotion,
-    paused,
-    reducedMotion,
-    togglePaused: () => setPaused((previous) => !previous)
-  }), [paused, reducedMotion]);
+    enabled: !reducedMotion,
+    reducedMotion
+  }), [reducedMotion]);
 
   return (
     <MotionContext.Provider value={value}>

@@ -62,6 +62,61 @@ for (const message of ["What are Shreevikas's core skills?", "What did he build 
   assert.ok(payload.answer.length > 30);
 }
 assert.equal(providerRequests.length, 0, "Starter questions must be instant cached answers");
+const commonQuestions = [
+  ["What's your name?", "My name is Shreevikas Jagadish."],
+  ["What\u2019s your name?", "My name is Shreevikas Jagadish."],
+  ["whats ur name", "My name is Shreevikas Jagadish."],
+  ["Hi, what's your name?", "My name is Shreevikas Jagadish."],
+  ["Who is Shreevikas Jagadish?", "My name is Shreevikas Jagadish."],
+  ["Please tell me your name", "My name is Shreevikas Jagadish."],
+  ["What is your full name?", "My name is Shreevikas Jagadish."],
+  ["Who are you?", "AI portfolio assistant"],
+  ["Are you an AI?", "AI portfolio assistant"],
+  ["Hi", "portfolio assistant"],
+  ["Hello, how are you?", "portfolio assistant"],
+  ["Tell me about yourself", "AI/ML"],
+  ["What do you build?", "AI/ML"],
+  ["Where are you based?", "United States"],
+  ["Are you open to relocation?", "relocation"],
+  ["What is your email?", "mailto:shreevikasjagadish7@gmail.com"],
+  ["How can I contact you?", "mailto:shreevikasjagadish7@gmail.com"],
+  ["What is your phone number?", "312"],
+  ["What's your GitHub?", "github.com/Shreevikas-BJ"],
+  ["What's your LinkedIn?", "linkedin.com/in/shreevikasbj/"],
+  ["What is your website?", "shreevikas-portfolio.vercel.app"],
+  ["Where did you study?", "Illinois Institute of Technology"],
+  ["Where did you go to college?", "Visvesvaraya"],
+  ["What are your qualifications?", "Master"],
+  ["Are you open to work?", "roles"],
+  ["Where have you worked?", "NeuralSeek"],
+  ["What companies have you worked for?", "Whiterock"],
+  ["What are your skills?", "Python"],
+  ["What tools do you use?", "pgvector"],
+  ["Do you know Python?", "Python is part of"],
+  ["Have you used SQL?", "SQL is part of"],
+  ["Do you use CUDA?", "CUDA is part of"],
+  ["Which certifications do you hold?", "coursera.org"],
+  ["Tell me about your RAG experience.", "NeuralSeek"],
+  ["Tell me about your research", "NVIDIA PhysicsNeMo"],
+  ["What are your projects?", "ArchPilot"],
+  ["Tell me about AgentShield", "six failure modes"],
+  ["What is ArchPilot?", "no public live link"],
+  ["Tell me about Sales Forecasting MLOps Pipeline", "repository"],
+  ["Thanks", "You're welcome"]
+];
+for (const [message, expected] of commonQuestions) {
+  const response = await POST(request({ message }));
+  assert.equal(response.status, 200, message);
+  const payload = await response.json();
+  assert.equal(payload.cached, true, message);
+  assert.ok(payload.answer.includes(expected), `${message}: ${payload.answer}`);
+}
+assert.equal(providerRequests.length, 0, "Common profile questions must not call Groq");
+for (const message of ["What is my name?", "How old are you?", "What's your home address?", "Who won the football match?", "Write a Python function", "Explain transformer mathematics"]) {
+  const payload = await (await POST(request({ message }))).json();
+  assert.ok(payload.answer.includes("mailto:"), message);
+  assert.ok(!payload.answer.startsWith("My name is"), "Never infer visitor identity");
+}
 for (const message of ["What's the weather in Chicago?", "Write Python code for me", "Explain how SQL indexes work", "Tell me sports and skills", "What's his visa status?", "What salary does he want?", "Can I download your resume?", "Who is the president?"]) {
   const response = await POST(request({ message }));
   assert.equal(response.status, 200);

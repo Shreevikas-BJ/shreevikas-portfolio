@@ -12,12 +12,14 @@ function cortexPoint(theta: number, phi: number, side: number) {
   const x = Math.sin(phi) * Math.cos(theta);
   const y = Math.cos(phi);
   const z = Math.sin(phi) * Math.sin(theta);
-  const fold = 1 + 0.065 * Math.sin(x * 13 + z * 3) * Math.sin(y * 13 + x * 3) + 0.03 * Math.cos(z * 16 + y * 4);
-  return new THREE.Vector3(side * 0.97 + x * fold * 1.13, y * fold * 1.38, z * fold);
+  const fold = 1 + 0.025 * Math.sin(x * 9 + z * 3) * Math.sin(y * 8) + 0.012 * Math.cos(z * 12 + y * 3);
+  // Flatten the medial faces so the two lobes share a narrow central fissure.
+  const across = x < 0 ? (x + 1) * 0.055 : 0.055 + x * 1.66;
+  return new THREE.Vector3(side * (0.07 + across * fold), y * fold * 1.38, z * fold);
 }
 
 function makeCortex(side: number) {
-  const geometry = new THREE.SphereGeometry(1, 40, 26);
+  const geometry = new THREE.SphereGeometry(1, 48, 32);
   const positions = geometry.attributes.position;
   for (let index = 0; index < positions.count; index++) {
     const unit = new THREE.Vector3().fromBufferAttribute(positions, index).normalize();
@@ -41,8 +43,12 @@ const routes = [
   start.clone().lerp(end, 0.4).add(new THREE.Vector3(0, Math.sin(index * 2) * 0.12, 0.25)),
   end
 ]));
-const cortexLines = [-1, 1].flatMap((side) => Array.from({ length: 7 }, (_, row) =>
-  Array.from({ length: 49 }, (_, index) => cortexPoint(index / 48 * Math.PI * 2, (row + 1) / 8 * Math.PI, side))
+const cortexLines = [-1, 1].flatMap((side) => Array.from({ length: 9 }, (_, row) =>
+  Array.from({ length: 97 }, (_, index) => {
+    const theta = index / 96 * Math.PI * 2;
+    const phi = (row + 1) / 10 * Math.PI + Math.sin(theta * 3 + row * 0.7) * 0.032;
+    return cortexPoint(theta, phi, side);
+  })
 ));
 
 function NeuralBrain({ animate, onReady }: SceneProps) {
@@ -62,9 +68,9 @@ function NeuralBrain({ animate, onReady }: SceneProps) {
   useEffect(() => () => { left.dispose(); right.dispose(); }, [left, right]);
   useEffect(() => {
     if (!animate) { invalidate(); return; }
-    const interval = window.setInterval(invalidate, 1000 / 30);
+    const interval = window.setInterval(invalidate, 1000 / (compact ? 20 : 30));
     return () => window.clearInterval(interval);
-  }, [animate, invalidate]);
+  }, [animate, compact, invalidate]);
   useEffect(() => {
     if (!animate || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const move = (event: PointerEvent) => { pointer.current = { x: event.clientX / innerWidth - 0.5, y: event.clientY / innerHeight - 0.5 }; };
@@ -105,14 +111,11 @@ function NeuralBrain({ animate, onReady }: SceneProps) {
   return (
     <group ref={group} position={[compact ? viewport.width * 0.02 : viewport.width * 0.25, -viewport.height * 0.19, 0]} scale={scale} rotation={[0.12, -0.23, 0]}>
       {[left, right].map((geometry, index) => (
-        <group key={index}>
-          <mesh geometry={geometry}><meshStandardMaterial color="#626a73" metalness={0.6} roughness={0.45} transparent opacity={0.23} depthWrite={false} /></mesh>
-          <mesh geometry={geometry}><meshBasicMaterial color="#7a8998" wireframe transparent opacity={0.09} depthWrite={false} /></mesh>
-        </group>
+        <mesh key={index} geometry={geometry}><meshStandardMaterial color="#677685" metalness={0.25} roughness={0.35} transparent opacity={0.12} depthWrite={false} /></mesh>
       ))}
-      {cortexLines.map((points, index) => <Line key={`fold-${index}`} points={points} color="#8a9aaa" lineWidth={0.8} transparent opacity={0.35} />)}
-      {routes.map((curve, index) => <Line key={index} points={curve.getPoints(20)} color="#5782a8" lineWidth={0.6} transparent opacity={0.3} />)}
-      {[...inputs, ...models, ...outputs].map((point, index) => <mesh key={`neuron-${index}`} position={point}><octahedronGeometry args={[0.055]} /><meshBasicMaterial color="#78a5cf" /></mesh>)}
+      {cortexLines.map((points, index) => <Line key={`fold-${index}`} points={points} color="#a7bbc9" lineWidth={0.85} transparent opacity={0.38} />)}
+      {routes.map((curve, index) => <Line key={index} points={curve.getPoints(40)} color="#5782a8" lineWidth={0.7} transparent opacity={0.35} />)}
+      {[...inputs, ...models, ...outputs].map((point, index) => <mesh key={`neuron-${index}`} position={point}><sphereGeometry args={[0.041, 12, 8]} /><meshBasicMaterial color="#96c4e9" /></mesh>)}
       <instancedMesh ref={attention} args={[undefined, undefined, 36]}><boxGeometry args={[0.105, 0.105, 0.055]} /><meshBasicMaterial toneMapped={false} /></instancedMesh>
       <instancedMesh ref={packets} args={[undefined, undefined, routes.length]}><sphereGeometry args={[0.026, 8, 6]} /><meshBasicMaterial color={[0.2, 0.75, 2]} toneMapped={false} /></instancedMesh>
     </group>
@@ -128,6 +131,8 @@ class SceneBoundary extends Component<{ children: ReactNode; onError: () => void
 
 function SceneEffects() {
   const width = useThree((state) => state.size.width);
+  const setDpr = useThree((state) => state.setDpr);
+  useEffect(() => setDpr(Math.min(window.devicePixelRatio, width < 900 ? 1.25 : 1.5)), [width, setDpr]);
   if (width < 900) return null;
   return <Suspense fallback={null}><DesktopEffects /></Suspense>;
 }

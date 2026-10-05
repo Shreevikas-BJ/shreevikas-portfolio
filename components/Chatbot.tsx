@@ -14,10 +14,10 @@ const welcomeMessage: Message = {
   content: "Hi, I'm Shreevikas's assistant. Ask me about his skills, experience, projects, research, tools, education, or certifications."
 };
 const questions = [
-  "What are Shreevikas's core skills?",
-  "What did he build at NeuralSeek?",
-  "Which certifications does he hold?",
-  "Tell me about his RAG work."
+  "What's your name?",
+  "What do you build?",
+  "Tell me about your RAG experience.",
+  "Which certifications do you hold?"
 ];
 const contactMessage = `Please contact Shreevikas directly at [${siteConfig.email}](mailto:${siteConfig.email}) for further information.`;
 const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";

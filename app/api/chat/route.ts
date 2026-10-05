@@ -229,12 +229,25 @@ const stopWords = new Set([
   "to",
   "used",
   "what",
-  "with"
+  "with",
+  "you",
+  "your",
+  "do",
+  "please",
+  "can",
+  "could",
+  "he",
+  "where",
+  "did"
 ]);
 
 function normalizeText(value: string) {
   return value
     .toLowerCase()
+    .replace(/[\u2019]/g, "'")
+    .replace(/\bwhat'?s\b/g, "what is")
+    .replace(/\bur\b/g, "your")
+    .replace(/\bu\b/g, "you")
     .replace(/[\u2019']/g, "")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
@@ -268,27 +281,29 @@ function asksForResume(message: string) {
   return /\b(resume|cv|curriculum vitae)\b/.test(normalized);
 }
 
+const preparedAnswers = cachedChatbotAnswers.flatMap(({ answer, questions }) => questions.map((question) => ({
+  answer,
+  normalized: normalizeText(question),
+  tokens: [...new Set(getTokens(question))]
+})));
+// Exact matches take precedence over approximate matches, regardless of entry order.
+const exactAnswers = new Map([...preparedAnswers].reverse().map(({ normalized, answer }) => [normalized, answer]));
+
 function getCachedAnswer(message: string) {
-  const normalizedMessage = normalizeText(message);
+  const exact = exactAnswers.get(normalizeText(message));
+  if (exact) return exact;
   const messageTokens = new Set(getTokens(message));
+  let best: { answer: string; score: number } | null = null;
 
-  for (const cachedAnswer of cachedChatbotAnswers) {
-    for (const question of cachedAnswer.questions) {
-      const normalizedQuestion = normalizeText(question);
-
-      if (normalizedMessage === normalizedQuestion) {
-        return cachedAnswer.answer;
-      }
-
-      const questionTokens = getTokens(question);
-      const overlap = questionTokens.filter((token) => messageTokens.has(token)).length;
-      const score = overlap / Math.max(questionTokens.length, 1);
-
-      if (overlap >= 2 && score >= 0.65 && overlap / Math.max(messageTokens.size, 1) >= 0.65) return cachedAnswer.answer;
-    }
+  for (const { answer, tokens } of preparedAnswers) {
+    const overlap = tokens.filter((token) => messageTokens.has(token)).length;
+    if (overlap === 1 && tokens.length === 1 && messageTokens.size === 1) return answer;
+    const coverage = overlap / Math.max(tokens.length, 1);
+    const precision = overlap / Math.max(messageTokens.size, 1);
+    const score = coverage + precision;
+    if (overlap >= 2 && coverage >= 0.65 && precision >= 0.65 && (!best || score > best.score)) best = { answer, score };
   }
-
-  return null;
+  return best?.answer ?? null;
 }
 
 function getClientKey(request: Request) {

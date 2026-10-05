@@ -26,18 +26,32 @@ export function TransformerBackground() {
   const [visible, setVisible] = useState(false);
   const [loadScene, setLoadScene] = useState(false);
   const [sceneReady, setSceneReady] = useState(false);
+  const interacted = useRef(false);
   const onSceneReady = useCallback(() => setSceneReady(true), []);
   const onSceneError = useCallback(() => setSceneReady(false), []);
 
   useEffect(() => {
     if (!visible || reducedMotion || !enabled || loadScene) return;
     let idleCallback: number | undefined;
-    const delay = window.setTimeout(() => {
-      if ("requestIdleCallback" in window) idleCallback = window.requestIdleCallback(() => setLoadScene(true), { timeout: 1500 });
-      else setLoadScene(true);
-    }, 1000);
+    let delay: number | undefined;
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    const constrained = matchMedia("(max-width: 699px), (pointer: coarse)").matches || connection?.saveData || /^(slow-)?2g$/.test(connection?.effectiveType ?? "");
+    const events = ["pointerdown", "keydown", "scroll"] as const;
+    const removeListeners = () => events.forEach((event) => window.removeEventListener(event, schedule));
+    const schedule = () => {
+      interacted.current = true;
+      removeListeners();
+      delay = window.setTimeout(() => {
+        if ("requestIdleCallback" in window) idleCallback = window.requestIdleCallback(() => setLoadScene(true), { timeout: 1500 });
+        else setLoadScene(true);
+      }, constrained ? 180 : 1000);
+    };
+    // The animated SVG remains visible while nonessential WebGL waits for interaction.
+    if (constrained && !interacted.current) events.forEach((event) => window.addEventListener(event, schedule, { passive: true }));
+    else schedule();
     return () => {
       window.clearTimeout(delay);
+      removeListeners();
       if (idleCallback !== undefined) window.cancelIdleCallback(idleCallback);
     };
   }, [visible, reducedMotion, enabled, loadScene]);

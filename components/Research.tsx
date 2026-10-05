@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { researchExperience } from "@/data/portfolio";
+import { ResearchVisual } from "@/components/ResearchVisual";
 
 export function Research() {
   return (
@@ -13,6 +14,7 @@ export function Research() {
           <p className="technical-label">{researchExperience.role}</p>
           <h3>{researchExperience.organization}</h3>
           <p className="entry-location">{researchExperience.location}</p>
+          <ResearchVisual />
         </header>
         <div className="entry-content">
           <h3 className="research-focus">{researchExperience.title}</h3>

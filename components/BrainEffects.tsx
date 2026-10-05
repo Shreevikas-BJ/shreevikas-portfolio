@@ -3,5 +3,5 @@
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
 export default function BrainEffects() {
-  return <EffectComposer multisampling={0}><Bloom intensity={0.28} luminanceThreshold={0.8} mipmapBlur /></EffectComposer>;
+  return <EffectComposer multisampling={4}><Bloom intensity={0.18} luminanceThreshold={1} mipmapBlur /></EffectComposer>;
 }
