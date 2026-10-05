@@ -6,7 +6,6 @@ import {
   resumeRequestMessage
 } from "@/data/chatbotContext";
 import { siteConfig } from "@/data/portfolio";
-import { retrieveKnowledge } from "@/lib/ai/retrieval";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -378,6 +377,7 @@ export async function POST(request: Request) {
       );
     }
 
+    const { retrieveKnowledge } = await import("@/lib/ai/retrieval");
     const knowledge = await retrieveKnowledge(trimmedMessage);
     logTiming(requestId, "semantic retrieval complete", startedAt, { source: knowledge.source, matches: knowledge.matches.length, bestScore: Number(knowledge.bestScore.toFixed(3)) });
     if (!knowledge.matches.length) return NextResponse.json({ answer: refusalMessage });
