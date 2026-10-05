@@ -40,7 +40,9 @@ const GROQ_TIMEOUT_MS = 15000;
 const MAX_COMPLETION_TOKENS = 180;
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 10;
+const RATE_LIMIT_MAX_ENTRIES = 4096;
 const rateLimitStore = new Map<string, RateLimitEntry>();
+let lastRateLimitCleanup = 0;
 
 const relatedTerms = [
   "shreevikas",
@@ -178,7 +180,8 @@ const relatedTerms = [
   "contact",
   "email",
   "linkedin",
-  "technology"
+  "technology",
+  "technologies", "tools", "skills", "projects", "certifications", "credentials", "python", "sql", "typescript", "pandas"
 ];
 
 const privateInfoTerms = [
@@ -244,8 +247,15 @@ function getTokens(value: string) {
 }
 
 function isRelatedQuestion(message: string) {
+  const normalized = ` ${normalizeText(message)} `;
+  return relatedTerms.some((term) => normalized.includes(` ${normalizeText(term)} `));
+}
+
+function asksForUnrelatedHelp(message: string) {
   const normalized = normalizeText(message);
-  return relatedTerms.some((term) => normalized.includes(normalizeText(term)));
+  if (/\b(weather|politics|president|election|football|cricket|basketball|soccer|recipe|horoscope|sports)\b/.test(normalized)) return true;
+  return /^(?:(?:please|can you|could you|would you)\s+)*(?:write|debug|fix|generate|implement|solve|translate)\b/.test(normalized) ||
+    (/^(?:please\s+)?(?:explain|teach)\b/.test(normalized) && !/\b(shreevikas|his|your|neuralseek|whiterock|archpilot|agentshield|accord|projects?|experience|skills?)\b/.test(normalized));
 }
 
 function asksForPrivateOrMissingInfo(message: string) {
@@ -255,7 +265,7 @@ function asksForPrivateOrMissingInfo(message: string) {
 
 function asksForResume(message: string) {
   const normalized = normalizeText(message);
-  return ["resume", "cv", "curriculum vitae"].some((term) => normalized.includes(term));
+  return /\b(resume|cv|curriculum vitae)\b/.test(normalized);
 }
 
 function getCachedAnswer(message: string) {
@@ -266,11 +276,7 @@ function getCachedAnswer(message: string) {
     for (const question of cachedAnswer.questions) {
       const normalizedQuestion = normalizeText(question);
 
-      if (
-        normalizedMessage === normalizedQuestion ||
-        normalizedMessage.includes(normalizedQuestion) ||
-        normalizedQuestion.includes(normalizedMessage)
-      ) {
+      if (normalizedMessage === normalizedQuestion) {
         return cachedAnswer.answer;
       }
 
@@ -278,7 +284,7 @@ function getCachedAnswer(message: string) {
       const overlap = questionTokens.filter((token) => messageTokens.has(token)).length;
       const score = overlap / Math.max(questionTokens.length, 1);
 
-      if (overlap >= 2 && score >= 0.65) return cachedAnswer.answer;
+      if (overlap >= 2 && score >= 0.65 && overlap / Math.max(messageTokens.size, 1) >= 0.65) return cachedAnswer.answer;
     }
   }
 
@@ -295,9 +301,17 @@ function getClientKey(request: Request) {
 
 function checkRateLimit(clientKey: string) {
   const now = Date.now();
+  if (now - lastRateLimitCleanup >= RATE_LIMIT_WINDOW_MS || rateLimitStore.size >= RATE_LIMIT_MAX_ENTRIES) {
+    for (const [key, entry] of rateLimitStore) if (now >= entry.resetAt) rateLimitStore.delete(key);
+    lastRateLimitCleanup = now;
+  }
   const current = rateLimitStore.get(clientKey);
 
   if (!current || now >= current.resetAt) {
+    if (rateLimitStore.size >= RATE_LIMIT_MAX_ENTRIES) {
+      const oldest = rateLimitStore.keys().next().value;
+      if (oldest !== undefined) rateLimitStore.delete(oldest);
+    }
     rateLimitStore.set(clientKey, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
     return { allowed: true, remaining: RATE_LIMIT_MAX_REQUESTS - 1, retryAfter: 0 };
   }
@@ -427,63 +441,69 @@ function createResponseStream({
 }) {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
+  let cancelled = false;
+  let reader: ReadableStreamDefaultReader<Uint8Array> | undefined;
 
   return new ReadableStream<Uint8Array>({
     async start(streamController) {
-      const reader = response.body!.getReader();
+      reader = response.body!.getReader();
       let buffer = "";
       let receivedContent = false;
+      let failed = false;
+
+      const parseLine = (line: string) => {
+        if (cancelled) return;
+        const trimmedLine = line.trim();
+        if (!trimmedLine.startsWith("data:")) return;
+        const payload = trimmedLine.slice(5).trim();
+        if (!payload || payload === "[DONE]") return;
+        let chunk: GroqStreamChunk;
+        try { chunk = JSON.parse(payload) as GroqStreamChunk; } catch { return; }
+        const content = chunk.choices?.[0]?.delta?.content;
+        if (content) {
+          receivedContent = true;
+          streamController.enqueue(encoder.encode(content));
+        }
+      };
 
       try {
         while (true) {
           const { done, value } = await reader.read();
-          if (done) break;
+          if (done || cancelled) break;
 
           buffer += decoder.decode(value, { stream: true });
           const lines = buffer.split("\n");
           buffer = lines.pop() || "";
 
-          for (const line of lines) {
-            const trimmedLine = line.trim();
-            if (!trimmedLine.startsWith("data:")) continue;
-
-            const payload = trimmedLine.slice(5).trim();
-            if (!payload || payload === "[DONE]") continue;
-
-            try {
-              const chunk = JSON.parse(payload) as GroqStreamChunk;
-              const content = chunk.choices?.[0]?.delta?.content;
-              if (content) {
-                receivedContent = true;
-                streamController.enqueue(encoder.encode(content));
-              }
-            } catch {
-              // Ignore malformed provider keepalive lines without interrupting the response.
-            }
-          }
+          for (const line of lines) parseLine(line);
         }
 
-        if (!receivedContent) streamController.enqueue(encoder.encode(contactFallback));
+        parseLine(buffer + decoder.decode());
+        if (!receivedContent && !cancelled) streamController.enqueue(encoder.encode(contactFallback));
         logTiming(requestId, "Groq response received", startedAt);
       } catch (error) {
         const message =
           abortController.signal.aborted
             ? "The assistant is taking longer than expected. Please try again in a moment."
             : "The assistant could not complete that response. Please try again.";
-        streamController.enqueue(encoder.encode(message));
+        failed = true;
+        if (!cancelled) streamController.error(new Error(message));
         console.error("Chatbot stream failed.", {
           requestId,
           error: error instanceof Error ? error.message : String(error)
         });
       } finally {
         clearTimeout(timeoutId);
-        streamController.close();
+        if (!cancelled && !failed) streamController.close();
+        reader.releaseLock();
         logTiming(requestId, "total latency", startedAt);
       }
     },
     cancel() {
+      cancelled = true;
       clearTimeout(timeoutId);
       abortController.abort();
+      void reader?.cancel().catch(() => {});
     }
   });
 }
@@ -503,13 +523,17 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { message } = (await request.json()) as { message?: string };
-
-    if (!message?.trim()) {
+    let payload: unknown;
+    try { payload = await request.json(); } catch {
+      return NextResponse.json({ error: "Send a valid JSON request." }, { status: 400 });
+    }
+    const message = payload && typeof payload === "object" && "message" in payload ? payload.message : undefined;
+    if (typeof message !== "string" || !message.trim()) {
       return NextResponse.json({ error: "Message is required." }, { status: 400 });
     }
 
-    const trimmedMessage = message.trim().slice(0, 900);
+    if (message.length > 900) return NextResponse.json({ error: "Please keep your question under 900 characters." }, { status: 400 });
+    const trimmedMessage = message.trim();
     logTiming(requestId, "validation complete", startedAt, {
       messageLength: trimmedMessage.length,
       remaining: rateLimit.remaining
@@ -519,6 +543,8 @@ export async function POST(request: Request) {
       logTiming(requestId, "contact fallback", startedAt);
       return NextResponse.json({ answer: contactFallback });
     }
+
+    if (asksForUnrelatedHelp(trimmedMessage)) return NextResponse.json({ answer: refusalMessage });
 
     if (asksForResume(trimmedMessage)) {
       logTiming(requestId, "resume request", startedAt);
@@ -557,6 +583,7 @@ Rules:
 - Never infer adjacent tools or typical practices. For example, do not add Redis, Memcached, Prometheus, Grafana, pruning, distillation, quantization, or any other technology unless it appears in the context.
 - Never invent a relationship between two facts. Do not claim that a fact indirectly supports another outcome unless the context explicitly says so.
 - If the context does not explicitly support an answer, use the contact fallback exactly instead of filling the gap with general knowledge.
+- Do not provide general advice, coding help, tutorials, weather, sports, politics, or information about other people. These requests are unrelated even if they mention a technology in the context; direct the visitor to Shreevikas's email.
 - Keep answers concise, professional, and recruiter-friendly, using no more than 2 sentences. Stop when the direct facts are exhausted; do not pad the response.
 - For a resume request, reply exactly: "${resumeRequestMessage}"
 - For an unrelated question, reply exactly: "${refusalMessage}"
@@ -604,6 +631,9 @@ ${chatbotContext}`
         status: error.status,
         body: error.body.slice(0, 300)
       });
+      if (error.status === 404 && /model_not_found/.test(error.body)) {
+        return NextResponse.json({ answer: contactFallback, fallback: true });
+      }
       return NextResponse.json(
         { error: "The assistant could not respond right now. Please try again in a moment." },
         { status: error.status === 429 ? 503 : 502 }

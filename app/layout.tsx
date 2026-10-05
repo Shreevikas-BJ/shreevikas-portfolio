@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { siteConfig } from "@/data/portfolio";
 import { MotionPreferencesProvider } from "@/components/MotionPreferences";
-import { RobotCompanion } from "@/components/RobotCompanion";
+import { AssistantDock } from "@/components/AssistantDock";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-body", weight: ["400", "500", "600"] });
@@ -169,7 +169,7 @@ export default function RootLayout({
         />
         <MotionPreferencesProvider>
           {children}
-          <RobotCompanion />
+          <AssistantDock />
         </MotionPreferencesProvider>
       </body>
     </html>

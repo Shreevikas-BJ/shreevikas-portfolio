@@ -9,9 +9,9 @@ A portfolio for Shreevikas Jagadish, an AI/ML Engineer building production ML, a
 - Dark-only editorial design: near-black, off-white, and one blue accent
 - Inter body typography and Space Grotesk headings, self-hosted through `next/font`
 - Full-width hero with optimized bitmap artwork and generous whitespace
-- Unlabelled transformer flow inside a brain-shaped outline. This is a stylized visualization, not live model inference.
-- A small page-edge robot follows scrolling at fixed walking and running paces (72 and 144 viewport pixels/second). Fast scrolling triggers a catch-up run followed by a breathing pause. Internal shortcuts trigger neuron repair and a cosmetic heading-cleaning sweep; other page clicks trigger a wave. Content is never edited by these effects.
-- A shared pause control stops the brain and robot. Motion respects reduced-motion preferences and hidden tabs; the robot's position loop sleeps when idle.
+- A full-bleed 3D brain with folded hemispheres, attention cells, and travelling signals, built with React Three Fiber. This unlabelled, stylized visualization is not live model inference.
+- A stationary bottom-right robot holds the clickable "I'm Shreevikas's assistant" board. It never follows scrolling or covers the page with moving effects.
+- The scene is lazy-loaded, uses instanced geometry, and runs at a capped 30 frames/second only while visible. Restrained bloom is enabled on desktop. A pause control, reduced-motion support, and a static fallback keep the experience usable without WebGL.
 - Six selected projects presented as open, full-width rows rather than a card grid
 - Sixteen additional projects in keyboard-accessible category disclosures: Data Science / ML / MLOps, GenAI / RAG / Agents, Data Engineering, and Analytics / Dashboards
 - Resume-based work experience, scientific-AI research, and clean certification rows
@@ -36,13 +36,14 @@ The complete project catalog, skills, experience, research, education, and certi
 
 All existing skill entries are retained, with the latest resume's programming, retrieval infrastructure, backend, frontend, and testing skills added. Research highlights focus on Physics-Informed Neural Networks for power-system dynamics. Credentials include AWS Certified Data Engineer - Associate, Anthropic AI Fluency, and Google Data Analytics.
 
-The existing server-side chatbot route and its grounded context are retained, with the Groq model unchanged. The floating assistant is not rendered in the sparse homepage design.
+The "I'm Shreevikas's assistant" tag opens a lazy-loaded, keyboard-accessible chat panel on the homepage and project pages. Visitors can ask basic portfolio questions without sharing an email. Answers use the existing server-side Groq model, compact portfolio context, common-question cache, streaming, a 15-second timeout, and per-instance rate limiting. Unknown, private, unrelated, and resume requests point to Shreevikas's email. No emails are sent and conversations stay in page memory only.
 
 ## Stack
 
-- Next.js App Router and React Server Components
+- Next.js 16 App Router, Turbopack, and React Server Components
 - React 19 and TypeScript
-- Tailwind CSS design tokens
+- Tailwind CSS 4 design tokens
+- React Three Fiber 9, Drei 10, Three.js 0.185, and React Three Postprocessing
 - Framer Motion
 - Lucide React
 - Groq chat completions through a server-only API route
@@ -67,6 +68,8 @@ GROQ_API_KEY=your_groq_api_key_here
 
 `GROQ_API_KEY` is read only by `app/api/chat/route.ts`. It is never sent to the browser or committed to the repository.
 It is optional for the static portfolio and case-study pages.
+
+The existing model remains `llama-3.1-8b-instant`. Groq retired it for free/developer accounts on August 16, 2026; see [Groq's deprecation notice](https://console.groq.com/docs/deprecations). Cached portfolio questions continue to work without a provider call. If that model is unavailable to the configured account, other questions receive the direct email contact fallback. A model migration requires approval; no alternate provider or model is selected silently.
 
 ## Quality Checks
 

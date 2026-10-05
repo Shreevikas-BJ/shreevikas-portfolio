@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import dynamic from "next/dynamic";
+import { useCallback, useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import { useMotionPreferences } from "@/components/MotionPreferences";
+const BrainScene = dynamic(() => import("@/components/BrainScene"), { ssr: false });
 
 const brainOutline = "M320 78 C295 40 258 37 233 65 C195 49 161 69 153 102 C112 97 79 128 84 165 C45 189 47 235 73 255 C47 291 65 329 103 337 C98 378 132 404 168 397 C185 432 228 441 256 417 C291 433 320 411 320 372 C320 411 349 433 384 417 C412 441 455 432 472 397 C508 404 542 378 537 337 C575 329 593 291 567 255 C593 235 595 189 556 165 C561 128 528 97 487 102 C479 69 445 49 407 65 C382 37 345 40 320 78 Z";
 
@@ -19,9 +21,26 @@ function signalStyle(index: number): CSSProperties {
 
 export function TransformerBackground() {
   const root = useRef<HTMLDivElement>(null);
-  const { enabled } = useMotionPreferences();
+  const { enabled, reducedMotion } = useMotionPreferences();
   const clipId = `brain-${useId()}`;
   const [visible, setVisible] = useState(false);
+  const [loadScene, setLoadScene] = useState(false);
+  const [sceneReady, setSceneReady] = useState(false);
+  const onSceneReady = useCallback(() => setSceneReady(true), []);
+  const onSceneError = useCallback(() => setSceneReady(false), []);
+
+  useEffect(() => {
+    if (!visible || reducedMotion || !enabled || loadScene) return;
+    let idleCallback: number | undefined;
+    const delay = window.setTimeout(() => {
+      if ("requestIdleCallback" in window) idleCallback = window.requestIdleCallback(() => setLoadScene(true), { timeout: 1500 });
+      else setLoadScene(true);
+    }, 1000);
+    return () => {
+      window.clearTimeout(delay);
+      if (idleCallback !== undefined) window.cancelIdleCallback(idleCallback);
+    };
+  }, [visible, reducedMotion, enabled, loadScene]);
 
   useEffect(() => {
     const element = root.current;
@@ -41,7 +60,8 @@ export function TransformerBackground() {
   }, []);
 
   return (
-    <div ref={root} className="transformer-background" data-running={visible && enabled}>
+    <div ref={root} className="transformer-background" data-running={visible && enabled && !sceneReady} data-scene-ready={sceneReady && !reducedMotion}>
+      {loadScene && !reducedMotion ? <BrainScene animate={visible && enabled} onReady={onSceneReady} onError={onSceneError} /> : null}
       <div className="transformer-visual" aria-hidden="true">
         <svg viewBox="0 0 640 500" fill="none" focusable="false">
           <defs><clipPath id={clipId}><path d={brainOutline} /></clipPath></defs>

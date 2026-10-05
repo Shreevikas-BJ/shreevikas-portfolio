@@ -21,11 +21,7 @@ function AnimatedMetric({
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!start) return;
-    if (reduceMotion) {
-      setDisplay(value);
-      return;
-    }
+    if (!start || reduceMotion) return;
 
     const startedAt = performance.now();
     const duration = 850;
@@ -45,7 +41,7 @@ function AnimatedMetric({
   return (
     <span className="text-4xl font-semibold text-foreground sm:text-[2.75rem]">
       {prefix}
-      {display.toFixed(decimals)}
+      {(reduceMotion ? value : display).toFixed(decimals)}
       {suffix}
     </span>
   );

@@ -2,15 +2,12 @@ import {
   certifications, education, experiences, projects, researchExperience, siteConfig, skills
 } from "./portfolio";
 
-export const resumeRequestMessage = `You can view my latest resume here: [${siteConfig.resumeFileName}](${siteConfig.resumePath}).`;
+export const resumeRequestMessage = `For my latest resume, please contact me directly at [${siteConfig.email}](mailto:${siteConfig.email}).`;
 
-export const contactFallback = `Please contact Shreevikas directly for further information.
-
-Email: ${siteConfig.email}
-Phone: ${siteConfig.phone}`;
+export const contactFallback = `Please contact Shreevikas directly at [${siteConfig.email}](mailto:${siteConfig.email}) for further information.`;
 
 export const refusalMessage =
-  `I can only answer questions about my professional background, projects, skills, research, education, and experience. For anything specific, please contact me directly at ${siteConfig.email}.`;
+  `I can answer questions about Shreevikas's professional background, projects, skills, tools, research, education, and certifications. For anything else, please contact him directly at [${siteConfig.email}](mailto:${siteConfig.email}).`;
 
 const featuredProjects = projects
   .filter((project) => project.featured)
@@ -44,12 +41,12 @@ ${certifications.map((item) => `${item.name}, ${item.issuer}.${item.credentialUr
 Skills (retained capabilities; attribute a skill to a job only when that job explicitly lists it):
 ${skills.map((group) => `${group.category}: ${group.items.join(", ")}.`).join("\n")}
 
-Resume: The latest resume is available at ${siteConfig.resumePath}.
+Resume requests: Ask visitors to contact ${siteConfig.email} directly. Do not provide a resume file or download link.
 `.trim();
 
 export const cachedChatbotAnswers = [
   {
-    questions: ["What did Shreevikas build at NeuralSeek?", "NeuralSeek experience", "AI Engineer Intern"],
+    questions: ["What did Shreevikas build at NeuralSeek?", "What did he build at NeuralSeek?", "NeuralSeek experience", "AI Engineer Intern"],
     answer:
       "As an AI Engineer Intern at NeuralSeek from July to November 2025, I built enterprise RAG using open-source embeddings, PostgreSQL, pgvector, and metadata-filtered retrieval, reducing IT and HR support resolution time by 40%. I improved concurrent serving with vLLM and tuned retrieval, context windows, and token budgets. Fine-tuning an open-source LLM on AWS with PEFT and QLoRA reduced manual compliance-analysis effort by 35%."
   },
@@ -74,7 +71,7 @@ export const cachedChatbotAnswers = [
       "AgentShield is my deployed multi-LLM QA and red-team platform with six failure modes and three scan levels. It tests prompt injection, privacy leakage, unsafe tool use, hallucinations, policy violations, and excessive agency with automated adversarial generation, Gemini judging, PostgreSQL persistence, interactive dashboards, and regression testing. [View AgentShield on GitHub](https://github.com/Shreevikas-BJ/agentshield)."
   },
   {
-    questions: ["What is his experience with RAG?", "RAG experience", "enterprise RAG", "vector search"],
+    questions: ["What is his experience with RAG?", "Tell me about his RAG work.", "RAG experience", "enterprise RAG", "vector search"],
     answer:
       "At NeuralSeek, I used open-source embeddings, PostgreSQL, pgvector, and metadata-filtered retrieval for enterprise RAG that reduced IT and HR support resolution time by 40%. My AI/ML Knowledge Assistant uses pgvector, Jina embeddings, Groq, clickable citations, similarity-based refusal handling, and exact, semantic, and embedding caches with latency observability."
   },
@@ -104,14 +101,14 @@ export const cachedChatbotAnswers = [
       "My featured work includes ArchPilot for agentic architecture design, AgentShield for multi-LLM red-team testing, the AI/ML Knowledge Assistant for production RAG, Accord for human-reviewed procurement, AI FinOps Copilot, and the Databricks Lakeflow Medallion Pipeline. Together they demonstrate agent orchestration, local inference, LLM evaluation, grounded retrieval, decision support, and cloud data engineering."
   },
   {
-    questions: ["What technologies has Shreevikas used?", "technologies", "tech stack", "skills"],
+    questions: ["What technologies has Shreevikas used?", "What are Shreevikas's core skills?", "What tools does he use?", "technologies", "tech stack", "skills", "tools"],
     answer:
       "I work with Python, SQL, TypeScript, PyTorch, Scikit-Learn, LightGBM, PySpark, LangGraph, LangChain, PydanticAI, FastAPI, PostgreSQL, pgvector, vLLM, llama.cpp, AWS, Snowflake, Airflow, and dbt. My broader skills include computer vision, scientific AI, model deployment, cloud platforms, frontend engineering, and automated testing."
   },
   {
-    questions: ["What certifications does he hold?", "certifications", "credentials"],
+    questions: ["What certifications does he hold?", "Which certifications does he hold?", "certifications", "credentials"],
     answer:
-      "I hold AWS Certified Data Engineer - Associate (DEA-C01), Anthropic AI Fluency: Framework & Foundations, and the Google Data Analytics Professional Certificate."
+      `I hold ${certifications.map((item) => item.credentialUrl ? `[${item.name}](${item.credentialUrl})` : item.name).join(", ")}.`
   },
   {
     questions: ["Can I view his resume?", "Can I download your resume?", "resume", "download resume", "view resume", "cv"],

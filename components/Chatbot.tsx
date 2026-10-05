@@ -1,111 +1,85 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Bot, Loader2, Mail, RotateCcw, Send, Sparkles, X } from "lucide-react";
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { suggestedQuestions, siteConfig } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/Button";
+import { Bot, Loader2, Mail, RotateCcw, Send, X } from "lucide-react";
+import { useEffect, useRef, useState, type ComponentProps, type FormEvent } from "react";
+import { MessageResponse } from "@/components/ai-elements/message";
+import { siteConfig } from "@/data/portfolio";
 
-type Message = {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-};
+type Message = { id: string; role: "user" | "assistant"; content: string };
 
 const welcomeMessage: Message = {
   id: "welcome",
   role: "assistant",
-  content:
-    "Hi, I am Shreevikas's AI Assistant. Ask me about my AI engineering experience, projects, research, technical skills, education, certifications, or contact information."
+  content: "Hi, I'm Shreevikas's assistant. Ask me about his skills, experience, projects, research, tools, education, or certifications."
 };
-
-const fallbackMessage =
-  "I can only answer questions about my professional background, projects, skills, research, education, certifications, and experience. For anything specific, please contact me directly at shreevikasjagadish7@gmail.com.";
+const questions = [
+  "What are Shreevikas's core skills?",
+  "What did he build at NeuralSeek?",
+  "Which certifications does he hold?",
+  "Tell me about his RAG work."
+];
+const contactMessage = `Please contact Shreevikas directly at [${siteConfig.email}](mailto:${siteConfig.email}) for further information.`;
 const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";
 const CHAT_REQUEST_TIMEOUT_MS = 15000;
 
-function createMessageId(prefix: string) {
-  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+function PortfolioLink({ href, children }: ComponentProps<"a">) {
+  if (!href || !/^(https?:\/\/|mailto:|\/projects\/)/i.test(href)) return <span>{children}</span>;
+  const external = /^https?:/i.test(href);
+  return <a href={href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined}>{children}</a>;
 }
+const markdownComponents = { a: PortfolioLink };
 
-function renderMessageContent(content: string) {
-  const parts = content.split(/(\[[^\]]+\]\([^)]+\))/g);
-
-  return parts.map((part, index) => {
-    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-    if (!match) return part;
-
-    const [, label, href] = match;
-    const external = href.startsWith("http");
-
-    return (
-      <a
-        key={`${href}-${index}`}
-        className="font-semibold text-primary underline decoration-primary/40 underline-offset-4 hover:decoration-primary"
-        href={href}
-        target={external ? "_blank" : undefined}
-        rel={external ? "noopener noreferrer" : undefined}
-      >
-        {label}
-      </a>
-    );
-  });
-}
-
-export function Chatbot() {
+export function Chatbot({ open, onClose }: { open: boolean; onClose: () => void }) {
   const reduceMotion = useReducedMotion();
-  const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([welcomeMessage]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [streaming, setStreaming] = useState(false);
   const [error, setError] = useState("");
   const [retryMessage, setRetryMessage] = useState("");
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const requestInFlightRef = useRef(false);
+  const transcript = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const requestInFlight = useRef(false);
+  const activeRequest = useRef<AbortController | null>(null);
+  const mounted = useRef(true);
+  const panelOpen = useRef(open);
+  const followOutput = useRef(true);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({
-      behavior: reduceMotion || loading ? "auto" : "smooth"
-    });
-  }, [messages, loading, open, reduceMotion]);
+    mounted.current = true;
+    return () => { mounted.current = false; activeRequest.current?.abort(); };
+  }, []);
 
   useEffect(() => {
+    panelOpen.current = open;
     if (!open) return;
-
-    const focusTimer = window.setTimeout(() => inputRef.current?.focus(), 180);
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-
+    const focusTimer = window.setTimeout(() => inputRef.current?.focus(), reduceMotion ? 0 : 180);
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       window.clearTimeout(focusTimer);
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [open]);
+  }, [open, onClose, reduceMotion]);
 
-  const appendMessage = (message: Message) => {
-    setMessages((previous) => [...previous, message]);
-  };
+  useEffect(() => {
+    if (open && messages.length > 1 && followOutput.current && transcript.current) transcript.current.scrollTop = transcript.current.scrollHeight;
+  }, [messages, loading, open]);
 
-  const sendMessage = async (messageText?: string) => {
+  const sendMessage = async (messageText?: string, retry = false) => {
     const trimmed = (messageText ?? input).trim();
-    if (!trimmed || requestInFlightRef.current) return;
-
-    requestInFlightRef.current = true;
+    if (!trimmed || requestInFlight.current) return;
+    requestInFlight.current = true;
+    followOutput.current = true;
     const controller = new AbortController();
+    activeRequest.current = controller;
     const timeoutId = window.setTimeout(() => controller.abort(), CHAT_REQUEST_TIMEOUT_MS);
-    const userMessage: Message = {
-      id: createMessageId("user"),
-      role: "user",
-      content: trimmed
-    };
-    let streamingMessageId = "";
+    const assistantId = crypto.randomUUID();
+    let answer = "";
+    let streamingStarted = false;
 
-    appendMessage(userMessage);
+    if (!retry) setMessages((previous) => [...previous, { id: crypto.randomUUID(), role: "user", content: trimmed }]);
     setInput("");
     setLoading(true);
     setStreaming(false);
@@ -119,252 +93,131 @@ export function Chatbot() {
         signal: controller.signal,
         body: JSON.stringify({ message: trimmed })
       });
-
       if (!response.ok) {
         const payload = (await response.json().catch(() => ({}))) as { error?: string };
         throw new Error(payload.error || "The assistant could not respond right now.");
       }
-
-      const isStream =
-        response.headers.get("X-Chat-Stream") === "1" ||
-        response.headers.get("content-type")?.includes("text/plain");
-
-      if (isStream && response.body) {
+      if (response.headers.get("X-Chat-Stream") === "1" && response.body) {
+        streamingStarted = true;
         setStreaming(true);
-        streamingMessageId = createMessageId("assistant");
-        appendMessage({ id: streamingMessageId, role: "assistant", content: "" });
-
+        setMessages((previous) => [...previous, { id: assistantId, role: "assistant", content: "" }]);
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
-        let answer = "";
-
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
           answer += decoder.decode(value, { stream: true });
           const currentAnswer = answer;
-          setMessages((previous) =>
-            previous.map((message) =>
-              message.id === streamingMessageId
-                ? { ...message, content: currentAnswer }
-                : message
-            )
-          );
+          setMessages((previous) => previous.map((message) => message.id === assistantId ? { ...message, content: currentAnswer } : message));
         }
-
         answer += decoder.decode();
-        if (!answer.trim()) {
-          setMessages((previous) =>
-            previous.map((message) =>
-              message.id === streamingMessageId
-                ? { ...message, content: fallbackMessage }
-                : message
-            )
-          );
-        }
+        const finalAnswer = answer.trim() || contactMessage;
+        setMessages((previous) => previous.map((message) => message.id === assistantId ? { ...message, content: finalAnswer } : message));
       } else {
         const payload = (await response.json()) as { answer?: string };
-        appendMessage({
-          id: createMessageId("assistant"),
-          role: "assistant",
-          content: payload.answer || fallbackMessage
-        });
+        setMessages((previous) => [...previous, { id: assistantId, role: "assistant", content: payload.answer || contactMessage }]);
       }
     } catch (requestError) {
-      console.error("Chatbot request failed.", requestError);
-      const message =
-        requestError instanceof DOMException && requestError.name === "AbortError"
-          ? timeoutMessage
-          : requestError instanceof Error
-            ? requestError.message
-            : "The assistant could not respond right now.";
-
-      if (streamingMessageId) {
-        setMessages((previous) =>
-          previous.filter(
-            (chatMessage) => chatMessage.id !== streamingMessageId || chatMessage.content.trim()
-          )
-        );
-      }
-      setError(message);
+      if (!mounted.current) return;
+      console.error("Portfolio assistant request failed.", requestError);
+      if (streamingStarted) setMessages((previous) => previous.filter((message) => message.id !== assistantId));
+      setError(controller.signal.aborted ? timeoutMessage : requestError instanceof TypeError ? "The assistant could not complete that response. Please try again." : requestError instanceof Error ? requestError.message : "The assistant could not respond right now.");
       setRetryMessage(trimmed);
     } finally {
       window.clearTimeout(timeoutId);
-      setLoading(false);
-      setStreaming(false);
-      requestInFlightRef.current = false;
-      window.setTimeout(() => inputRef.current?.focus(), 0);
+      activeRequest.current = null;
+      requestInFlight.current = false;
+      if (mounted.current) {
+        setLoading(false);
+        setStreaming(false);
+        if (panelOpen.current) window.setTimeout(() => inputRef.current?.focus(), 0);
+      }
     }
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    void sendMessage();
-  };
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); void sendMessage(); };
 
   return (
-    <>
-      <button
-        type="button"
-        aria-label={open ? "Close Shreevikas AI Assistant" : "Open Shreevikas AI Assistant"}
-        aria-expanded={open}
-        aria-controls="portfolio-assistant"
-        onClick={() => setOpen((value) => !value)}
-        className="focus-ring fixed bottom-4 right-4 z-[70] flex h-12 w-12 items-center justify-center rounded-full border border-primary/50 bg-primary text-primary-foreground shadow-glow transition hover:-translate-y-0.5 hover:brightness-110 sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
-      >
-        {open ? <X className="h-5 w-5" /> : <Bot className="h-5 w-5" />}
-      </button>
-
-      <AnimatePresence>
-        {open ? (
-          <motion.aside
-            id="portfolio-assistant"
-            role="dialog"
-            aria-modal="false"
-            aria-labelledby="assistant-title"
-            initial={reduceMotion ? false : { opacity: 0, y: 18, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.98 }}
-            transition={{ duration: reduceMotion ? 0 : 0.2 }}
-            className="premium-card fixed inset-x-3 bottom-20 z-[70] flex h-[min(600px,calc(100dvh-6.5rem))] flex-col overflow-hidden !bg-background p-0 shadow-2xl sm:inset-x-auto sm:bottom-24 sm:right-5 sm:h-[min(660px,calc(100dvh-7.5rem))] sm:w-[420px]"
+    <AnimatePresence>
+      {open ? (
+        <motion.aside
+          id="portfolio-assistant"
+          className="assistant-panel"
+          data-assistant-ui
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby="assistant-title"
+          aria-describedby="assistant-disclaimer"
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
+          transition={{ duration: reduceMotion ? 0 : 0.18 }}
+        >
+          <header className="assistant-header">
+            <Bot size={22} aria-hidden="true" />
+            <div><h2 id="assistant-title">Shreevikas&apos;s assistant</h2><p>Professional background &amp; projects</p></div>
+            <button type="button" className="assistant-icon-button" onClick={onClose} aria-label="Close assistant" title="Close assistant"><X size={18} aria-hidden="true" /></button>
+          </header>
+          <div
+            ref={transcript}
+            className="assistant-transcript"
+            role="log"
+            aria-label="Conversation"
+            aria-live="polite"
+            aria-relevant="additions text"
+            aria-busy={loading}
+            tabIndex={0}
+            onScroll={() => {
+              const element = transcript.current;
+              if (element) followOutput.current = element.scrollHeight - element.scrollTop - element.clientHeight < 60;
+            }}
           >
-            <header className="border-b border-border/70 bg-elevated px-4 py-3">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex min-w-0 items-center gap-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
-                    <Sparkles className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div className="min-w-0">
-                    <h2 id="assistant-title" className="truncate text-sm font-bold">
-                      Shreevikas&apos;s AI Assistant
-                    </h2>
-                    <p className="truncate text-xs text-muted-foreground">Portfolio-grounded answers</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1">
-                  <a
-                    href={siteConfig.emailHref}
-                    className="focus-ring rounded-md p-2 text-muted-foreground transition hover:bg-muted hover:text-foreground"
-                    aria-label="Contact Shreevikas by email"
-                  >
-                    <Mail className="h-4 w-4" aria-hidden="true" />
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="focus-ring rounded-md p-2 text-muted-foreground transition hover:bg-muted hover:text-foreground"
-                    aria-label="Close assistant"
-                  >
-                    <X className="h-4 w-4" aria-hidden="true" />
-                  </button>
-                </div>
+            {messages.map((message) => (
+              <div key={message.id} className="assistant-message" data-message-role={message.role}>
+                <span className="assistant-message-author">{message.role === "user" ? "You" : "Assistant"}</span>
+                {message.role === "assistant" ? (
+                  message.content ? <MessageResponse components={markdownComponents} isAnimating={loading && streaming && message.id === messages.at(-1)?.id}>{message.content}</MessageResponse> : <span className="assistant-status">Preparing an answer...</span>
+                ) : <p className="assistant-user-text">{message.content}</p>}
               </div>
-            </header>
-
-            <div
-              className="flex-1 space-y-3 overflow-y-auto bg-background/35 p-4"
-              aria-live="polite"
-              aria-busy={loading}
-            >
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  data-message-role={message.role}
-                  className={cn("flex", message.role === "user" ? "justify-end" : "justify-start")}
-                >
-                  <div
-                    className={cn(
-                      "max-w-[88%] whitespace-pre-line rounded-lg px-3.5 py-2.5 text-sm leading-6",
-                      message.role === "user"
-                        ? "bg-primary text-primary-foreground"
-                        : "border border-border/80 bg-elevated/80 text-foreground"
-                    )}
-                  >
-                    {message.content ? renderMessageContent(message.content) : (
-                      <span className="inline-flex items-center gap-2 text-muted-foreground">
-                        <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" />
-                        Generating
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))}
-
-              {loading && !streaming ? (
-                <div className="flex justify-start">
-                  <div className="inline-flex items-center gap-2 rounded-lg border border-border bg-elevated/80 px-3.5 py-2.5 text-sm text-muted-foreground">
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" />
-                    Retrieving portfolio context
-                  </div>
-                </div>
-              ) : null}
-
-              <div ref={scrollRef} />
+            ))}
+            {messages.length === 1 ? (
+              <div className="assistant-suggestions" aria-label="Suggested questions">
+                {questions.map((question) => <button key={question} type="button" onClick={() => void sendMessage(question)} disabled={loading}>{question}</button>)}
+              </div>
+            ) : null}
+            {loading && !streaming ? <p className="assistant-status" role="status"><Loader2 size={16} aria-hidden="true" className="assistant-spinner" />Thinking...</p> : null}
+            {error ? (
+              <div className="assistant-error" role="alert">
+                <p>{error}</p>
+                <button type="button" onClick={() => void sendMessage(retryMessage, true)} disabled={loading || !retryMessage}><RotateCcw size={14} aria-hidden="true" />Retry</button>
+              </div>
+            ) : null}
+          </div>
+          <div className="assistant-composer">
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="assistant-question" className="sr-only">Ask about Shreevikas&apos;s professional background</label>
+              <textarea
+                ref={inputRef}
+                id="assistant-question"
+                rows={2}
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void sendMessage(); }
+                }}
+                placeholder="Ask about skills, experience or tools..."
+                disabled={loading}
+                maxLength={900}
+              />
+              <button type="submit" className="assistant-send" disabled={loading || !input.trim()} aria-label="Send message" title="Send message"><Send size={18} aria-hidden="true" /></button>
+            </form>
+            <div className="assistant-bottom-line">
+              <p id="assistant-disclaimer">AI assistant based on my portfolio information.</p>
+              <a href={siteConfig.emailHref} aria-label="Email Shreevikas directly" title="Email Shreevikas directly"><Mail size={16} aria-hidden="true" /></a>
             </div>
-
-            <footer className="border-t border-border/70 bg-elevated p-3">
-              <div className="mb-2.5 flex gap-2 overflow-x-auto pb-1" aria-label="Suggested questions">
-                {suggestedQuestions.map((question) => (
-                  <button
-                    key={question}
-                    type="button"
-                    onClick={() => void sendMessage(question)}
-                    disabled={loading}
-                    className="focus-ring shrink-0 rounded-full border border-border bg-background/60 px-3 py-1.5 text-xs font-semibold text-muted-foreground transition hover:border-primary/50 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    {question}
-                  </button>
-                ))}
-              </div>
-
-              {error ? (
-                <div className="mb-2 flex items-start justify-between gap-3 rounded-lg border border-error/30 bg-error/5 px-3 py-2 text-xs text-error" role="alert">
-                  <span>{error}</span>
-                  <button
-                    type="button"
-                    onClick={() => void sendMessage(retryMessage)}
-                    disabled={loading || !retryMessage}
-                    className="focus-ring inline-flex shrink-0 items-center gap-1 rounded text-xs font-bold hover:underline disabled:opacity-50"
-                  >
-                    <RotateCcw className="h-3 w-3" aria-hidden="true" />
-                    Retry
-                  </button>
-                </div>
-              ) : null}
-
-              <form onSubmit={handleSubmit} className="flex gap-2">
-                <label htmlFor="assistant-question" className="sr-only">Ask a portfolio question</label>
-                <input
-                  ref={inputRef}
-                  id="assistant-question"
-                  value={input}
-                  onChange={(event) => setInput(event.target.value)}
-                  placeholder="Ask about my work..."
-                  className="focus-ring min-h-11 min-w-0 flex-1 rounded-lg border border-border bg-background/80 px-3 text-sm placeholder:text-muted-foreground"
-                  disabled={loading}
-                  maxLength={900}
-                />
-                <Button
-                  type="submit"
-                  className="h-11 w-11 shrink-0 px-0"
-                  disabled={loading || !input.trim()}
-                  aria-label="Send message"
-                >
-                  {loading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-                  ) : (
-                    <Send className="h-4 w-4" aria-hidden="true" />
-                  )}
-                </Button>
-              </form>
-
-              <p className="mt-2 text-center text-[11px] leading-4 text-muted-foreground">
-                AI-generated answers grounded in portfolio information.
-              </p>
-            </footer>
-          </motion.aside>
-        ) : null}
-      </AnimatePresence>
-    </>
+          </div>
+        </motion.aside>
+      ) : null}
+    </AnimatePresence>
   );
 }
