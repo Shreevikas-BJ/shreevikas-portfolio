@@ -197,6 +197,9 @@ a, button { -webkit-tap-highlight-color: transparent; }
 #experience .entry-meta::before { content: ""; position: absolute; top: 6px; left: -4px; width: 7px; height: 7px; border: 1px solid #8bb3e3; border-radius: 50%; background: #0a0a0a; }
 .credential-row { display: flex; align-items: center; gap: 48px; padding-block: 36px; border-top: 1px solid hsl(var(--border)); }
 .credential-copy { min-width: 0; max-width: 780px; }
+.credential-issuer { display: flex; align-items: center; gap: 16px; min-height: 36px; }
+.credential-issuer-logo { display: block; width: auto; height: 28px; max-width: 80px; object-fit: contain; flex-shrink: 0; }
+.credential-issuer .technical-label { min-width: 0; }
 .credential-copy h3 { margin-top: 14px; font-size: 26px; line-height: 1.35; }
 .credential-link { margin-left: auto; flex-shrink: 0; font-size: 13px; }
 .editorial-footer { border-top: 1px solid hsl(var(--border)); padding-block: 40px 160px; }

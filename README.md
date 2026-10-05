@@ -87,6 +87,14 @@ Responsive verification covers 320px, 390px, 768px, 1440px, and 1920px layouts, 
 
 `public/images/nvidia-logo.svg` is the unchanged full NVIDIA logo from [NVIDIA's official logo and brand-usage page](https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage/). It identifies the NVIDIA PhysicsNeMo technology used in research, not a partnership or endorsement. NVIDIA and its logo are trademarks of NVIDIA Corporation.
 
+Certification issuer marks are hosted locally under `public/images/certifications/`, preserve their original artwork and proportions, and identify credential issuers only:
+
+- AWS: [official white header logo](https://a0.awsstatic.com/libra-css/images/logos/aws_smile-header-desktop-en-white_59x35.png)
+- Anthropic: ivory Anthropic symbol from the [official press kit](https://anthropic.com/press-kit)
+- Google: [official color wordmark](https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg)
+
+These marks remain trademarks of their respective owners and do not imply endorsement or partnership.
+
 `public/images/data-flow.webp` is a 90 KB optimized bitmap generated with the built-in image-generation tool. It is an editorial illustration, not a project screenshot or a performance claim.
 
 Generation prompt:

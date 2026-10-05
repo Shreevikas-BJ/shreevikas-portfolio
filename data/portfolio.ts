@@ -448,6 +448,7 @@ export const certifications = [
   {
     name: "AWS Certified Data Engineer - Associate",
     issuer: "Amazon Web Services",
+    logo: { src: "/images/certifications/aws.png", width: 59, height: 35 },
     credentialUrl:
       "https://www.credly.com/badges/017bc7a0-a378-4cfa-abb0-bc968c20d7da/public_url",
     icon: ShieldCheck
@@ -455,12 +456,14 @@ export const certifications = [
   {
     name: "AI Fluency: Framework & Foundations",
     issuer: "Anthropic",
+    logo: { src: "/images/certifications/anthropic.svg", width: 92, height: 64 },
     credentialUrl: undefined,
     icon: BrainCircuit
   },
   {
     name: "Google Data Analytics Professional Certificate",
     issuer: "Google",
+    logo: { src: "/images/certifications/google.svg", width: 74, height: 24 },
     credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/TIT1TAQNFGPT",
     icon: BarChart3
   }

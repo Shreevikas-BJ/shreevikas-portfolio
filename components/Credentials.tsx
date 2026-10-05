@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import { certifications } from "@/data/portfolio";
 
 export function Credentials() {
@@ -11,7 +12,17 @@ export function Credentials() {
       {certifications.map((certification) => (
         <article key={certification.name} className="credential-row">
           <div className="credential-copy">
-            <p className="technical-label">{certification.issuer}</p>
+            <div className="credential-issuer">
+              <Image
+                src={certification.logo.src}
+                width={certification.logo.width}
+                height={certification.logo.height}
+                alt=""
+                className="credential-issuer-logo"
+                unoptimized
+              />
+              <p className="technical-label">{certification.issuer}</p>
+            </div>
             <h3>{certification.name}</h3>
           </div>
           {certification.credentialUrl ? (
