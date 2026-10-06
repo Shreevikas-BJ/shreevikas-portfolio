@@ -5,7 +5,9 @@ export function normalizeTechnology(value: string) {
 }
 
 const aliases: Record<string, string[]> = {
-  "Random Forest": ["random forests", "randomforest", "randomforestclassifier", "randomforestregressor", "random forest classifier", "random forest regressor", "RF"],
+  "Random Forest": ["random forests", "randomforest", "RF"],
+  "RandomForestClassifier": ["random forest classifier", "random forest uplift", "uplift random forest"],
+  "RandomForestRegressor": ["random forest regressor"],
   "Scikit-Learn": ["scikit learn", "scikitlearn", "sklearn"],
   "PyTorch": ["torch"],
   "TensorFlow": ["tensor flow", "TF"],
@@ -69,7 +71,7 @@ export function mentionsTechnology(text: string, entities: string[]) {
 export const technicalEvidence = [
   {
     technology: "Random Forest",
-    detail: "I used Scikit-Learn RandomForestRegressor for an RFM-based customer-value proxy and paired RandomForestClassifier models for treatment/control uplift in Subscription Value Brain.",
+    detail: "In Subscription Value Brain, I used Scikit-Learn RandomForestRegressor for an RFM-based customer-value proxy. I used two RandomForestClassifier models, one treatment and one control, ONLY for uplift. The regressor is NOT the uplift model. Its churn predictor uses Logistic Regression/XGBoost, NOT Random Forest.",
     sources: [
       "https://github.com/Shreevikas-BJ/subscription-value-brain/blob/main/src/models/train_clv.py",
       "https://github.com/Shreevikas-BJ/subscription-value-brain/blob/main/src/models/train_uplift.py"
@@ -79,6 +81,16 @@ export const technicalEvidence = [
     technology: "Random Forest",
     detail: "My Scikit-Learn Hands-On Guide trains RandomForestClassifier on the Telco Customer Churn dataset and evaluates predictions with accuracy, classification reports, and a confusion matrix.",
     sources: ["https://github.com/Shreevikas-BJ/scikitlearn-handson-guide/blob/main/Random-Forest/RandomForest.ipynb"]
+  },
+  {
+    technology: "RandomForestClassifier",
+    detail: "In Subscription Value Brain, I trained two RandomForestClassifier models separately on treatment and control groups for uplift modeling. Both models are classifiers. That project's churn model is Logistic Regression/XGBoost, not Random Forest. In my Scikit-Learn Hands-On Guide, I trained RandomForestClassifier on Telco Customer Churn and evaluated accuracy, classification reports, and a confusion matrix.",
+    sources: ["https://github.com/Shreevikas-BJ/subscription-value-brain/blob/main/src/models/train_uplift.py", "https://github.com/Shreevikas-BJ/scikitlearn-handson-guide/blob/main/Random-Forest/RandomForest.ipynb"]
+  },
+  {
+    technology: "RandomForestRegressor",
+    detail: "In Subscription Value Brain, I used Scikit-Learn RandomForestRegressor for an RFM-based customer-value proxy. This is the regression model, NOT the project's uplift or churn model.",
+    sources: ["https://github.com/Shreevikas-BJ/subscription-value-brain/blob/main/src/models/train_clv.py"]
   }
 ];
 
@@ -86,7 +98,8 @@ const allTools = [
   ...skills.flatMap((group) => group.items),
   ...projects.flatMap((project) => project.tech),
   ...experiences.flatMap((job) => job.tags),
-  ...researchExperience.technologies
+  ...researchExperience.technologies,
+  ...technicalEvidence.map((item) => item.technology)
 ];
 
 const uniqueTools = new Map(allTools.map((tool) => [normalizeTechnology(canonicalTechnology(tool)), canonicalTechnology(tool)]));
@@ -94,7 +107,7 @@ const uniqueTools = new Map(allTools.map((tool) => [normalizeTechnology(canonica
 export const technologies = [...uniqueTools.values()].map((name) => {
   const matchesTool = (tool: string) => normalizeTechnology(canonicalTechnology(tool)) === normalizeTechnology(name);
   const projectExamples = projects.filter((project) => project.tech.some(matchesTool));
-  const roleExamples = experiences.filter((job) => job.tags.some(matchesTool));
+  const roleExamples = experiences.filter((job) => job.tags.some(matchesTool) || job.bullets.some((bullet) => mentionsTechnology(bullet, technologyEntities(name))));
   const evidence = technicalEvidence.filter((item) => item.technology === name);
   const category = skills.find((group) => group.items.some(matchesTool))?.category ?? "Project technologies";
   const examples = [
@@ -137,12 +150,15 @@ export const comparisonDocuments = capabilityComparisons.flatMap((comparison) =>
   const used = technologies.filter((tool) => comparison.used.includes(tool.name));
   const entities = comparison.alternatives.filter((name) => !technologies.some((tool) => tool.entities.some((entity) => normalizeTechnology(entity) === normalizeTechnology(name))));
   if (!used.length || !entities.length) return [];
-  const examples = [...new Set(used.flatMap((tool) => tool.examples.slice(0, 2)))].slice(0, 3);
+  // Prefer tools with an actual example over mixing skill-only tools into that example.
+  const withExamples = used.filter((tool) => tool.examples.length);
+  const comparableTools = withExamples.length ? withExamples : used;
+  const examples = [...new Set(comparableTools.flatMap((tool) => tool.examples.slice(0, 2)))].slice(0, 3);
   return [{
     id: `comparison-${comparison.id}`,
     kind: "comparison",
     entities,
-    searchText: `${entities.join(", ")}: ${comparison.capability}. Comparable experience: ${used.map((tool) => tool.name).join(", ")}.`,
-    content: `Capability comparison for ${entities.join(", ")}: ${comparison.capability}. The requested services are not established as hands-on experience. My comparable hands-on tools: ${used.map((tool) => tool.name).join(", ")}. ${examples.length ? examples.join(" ") : "No named project or role for these particular tools is specified."} Comparison limit: ${comparison.caveat} Reference: ${comparison.source}.`
+    searchText: `${entities.join(", ")}: ${comparison.capability}. Comparable experience: ${comparableTools.map((tool) => tool.name).join(", ")}.`,
+    content: `Capability comparison for ${entities.join(", ")}: ${comparison.capability}. The requested services are not established as hands-on experience. My comparable hands-on tools: ${comparableTools.map((tool) => tool.name).join(", ")}. ${examples.length ? examples.join(" ") : "No named project or role for these particular tools is specified."} Comparison limit: ${comparison.caveat} Reference: ${comparison.source}.`
   }];
 });

@@ -42,7 +42,9 @@ The "I'm Shreevikas's assistant" tag opens a lazy-loaded, keyboard-accessible ch
 
 `data/technicalExperience.ts` derives hands-on tool facts from every listed skill and the existing project/research records. Added GitHub evidence connects Random Forest to [Subscription Value Brain's customer-value regression](https://github.com/Shreevikas-BJ/subscription-value-brain/blob/main/src/models/train_clv.py), [treatment/control uplift models](https://github.com/Shreevikas-BJ/subscription-value-brain/blob/main/src/models/train_uplift.py), and the [Scikit-Learn Hands-On Guide's classification notebook](https://github.com/Shreevikas-BJ/scikitlearn-handson-guide/blob/main/Random-Forest/RandomForest.ipynb). A skill confirms tool use, not use in every employer or project.
 
-Fourteen capability families cover common cloud-service comparisons, following the [official AWS/Azure/Google Cloud comparison](https://docs.cloud.google.com/docs/get-started/aws-azure-gcp-service-comparison). These facts distinguish comparable experience from direct use of an unlisted service and note provider-specific differences. Comparison chunks are retrieved only when the visitor names a matching service; they never add skills or imply feature parity.
+Fourteen capability families cover common cloud-service comparisons, following the [official AWS/Azure/Google Cloud comparison](https://docs.cloud.google.com/docs/get-started/aws-azure-gcp-service-comparison). These facts distinguish comparable experience from direct use of an unlisted service and note provider-specific differences. Comparison chunks are retrieved only when the visitor names a matching service; they never add skills or imply feature parity. A provider name inside an unlisted service (such as Azure Blob Storage) cannot turn general Azure experience into claimed direct service experience. Comparisons prefer tools with actual project or role examples; skill-only tools remain confirmed without borrowing another tool's example.
+
+Short follow-ups such as "What tools did you use there?" retain the last successful topic question, capped at 300 characters, through consecutive follow-ups. A named new employer, project, or skill switches topics instead of inheriting stale context. The assistant does not send full conversation history or persist transcripts. Project aliases, credential questions, education, and scientific research receive explicit retrieval routing. Independent projects are separated from employment, and unsupported employer or credential premises are corrected rather than invented.
 
 Supabase stores portfolio facts and embeddings when configured. The server caches its FAISS index for five minutes and falls back to the current build's local index if Supabase is unavailable or out of date. This is real FAISS retrieval, not pgvector relabeled as FAISS. No chat transcripts or visitor contact details are written to Supabase. Embedding weights and knowledge files are server-only, outside `public/`, and are prepared automatically before development/build.
 
@@ -102,7 +104,19 @@ npm run build
 
 Responsive verification covers 320px, 390px, 768px, 1440px, and 1920px layouts, project navigation, keyboard navigation, reduced motion, and navigation without JavaScript. Run Lighthouse against a production build, not the development server; the performance target is 95+.
 
-`npm test` verifies real embedding/FAISS retrieval for paraphrased questions, every listed skill, aliases, Random Forest project attribution, direct versus comparable cloud-tool experience, Supabase snapshot validation, route grounding, streaming (including empty/interrupted responses), no fixed professional answer bypass, validation, private/unrelated refusals, model failures, and rate limiting. Rate limiting is bounded per function instance; use Vercel WAF or a shared limiter for stronger distributed abuse protection.
+`npm test` verifies real embedding/FAISS retrieval for paraphrased questions, every listed skill, aliases, Random Forest project attribution, direct versus comparable cloud-tool experience, Supabase snapshot validation, route grounding, streaming (including empty/interrupted responses), no fixed professional answer bypass, validation, private/unrelated refusals, model failures, and rate limiting. It also runs [300 adversarial and recruiter-style regression questions](docs/chatbot-questions.md) across 21 groups. These test inputs are not biographical claims. Rate limiting is bounded per function instance; use Vercel WAF or a shared limiter for stronger distributed abuse protection.
+
+To test generated answers against the actual API route and Groq, explicitly run:
+
+```bash
+npm run test:chatbot:live
+# Reuse unchanged requests, and retry changed or failed cases:
+npm run test:chatbot:live -- --resume
+# Target selected cases:
+npm run test:chatbot:live -- --resume --ids aliases-02,aliases-03
+```
+
+The live suite consumes provider quota, paces requests, and stops for authentication or daily-quota failures. It tests streaming responses, forbidden claims, unsupported links/metrics, contact fallbacks, and follow-ups. Resumed answers are reused only when their API policy, payload, model configuration, and actual model inputs remain unchanged; assertions are rechecked. Results are saved under ignored `data/generated/`; no real visitor emails or transcripts are used. The default offline suite requires no Groq credentials and does not call Groq. See the [evaluation report](docs/chatbot-evaluation.md) for results and scope. Passing tests measure these cases, not a guarantee against every possible LLM error.
 
 ## Artwork
 

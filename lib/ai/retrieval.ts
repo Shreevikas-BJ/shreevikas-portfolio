@@ -57,21 +57,44 @@ export async function retrieveKnowledge(question: string) {
   const found = loaded.index.search(query, loaded.documents.length);
   const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
   const normalized = ` ${normalize(question)} `;
+  const namedProject = loaded.documents.filter((document) => document.kind === "project" && document.entities?.some((entity) => normalized.includes(` ${normalize(entity)} `)));
+  let outsideProjectName = normalized;
+  for (const entity of namedProject.flatMap((document) => document.entities ?? []).sort((a, b) => b.length - a.length)) outsideProjectName = outsideProjectName.replace(` ${normalize(entity)} `, " ");
+  const namedComparisons = loaded.documents.filter((document) => document.kind === "comparison" && document.entities?.some((entity) => normalized.includes(` ${normalize(entity)} `)));
+  const namedForestVariant = loaded.documents.some((document) => /^technology-randomforest(?:classifier|regressor)$/.test(document.id) && document.entities?.some((entity) => normalized.includes(` ${normalize(entity)} `)));
+  let outsideServiceName = normalized;
+  for (const entity of namedComparisons.flatMap((document) => document.entities ?? []).sort((a, b) => b.length - a.length)) outsideServiceName = outsideServiceName.replace(` ${normalize(entity)} `, " ");
+  const intentIds: string[] = [];
+  if (!namedProject.length) {
+    if (/\b(certif\w*|credentials?|coursera|anthropic|verify|verification)\b/.test(normalized)) intentIds.push("certifications");
+    if (/\b(education|educational|stud(?:y|ied)|college|universit\w*|master\w*|bachelor\w*|degree|graduate\w*|doctorate|phd|vtu)\b/.test(normalized)) intentIds.push("education");
+    if (/\b(research|scientific ai|scientific modeling|academic work|physics|pinns?|physicsnemo|iit)\b/.test(normalized)) intentIds.push("research");
+    if (/\b(email|phone|contact|linkedin|based|location|relocation|targeting|target roles|about yourself)\b/.test(normalized)) intentIds.push("profile");
+    if (/\b(employed|employment|employer|work history|career|internship|intern|manufacturing|whiterock|white rock|neuralseek|neural seek)\b/.test(normalized)) intentIds.push("work-history");
+    if (/\b(internship|intern)\b/.test(normalized)) intentIds.push(...loaded.documents.filter((document) => document.kind === "experience" && /\bIntern at\b/.test(document.content)).map((document) => document.id));
+    if (/\bmanufacturing\b/.test(normalized)) intentIds.push(...loaded.documents.filter((document) => document.kind === "experience" && /\bmanufacturing\b/i.test(document.content)).map((document) => document.id));
+  }
   // Exact tool aliases supplement semantic search; comparison facts require an explicit service match.
   const ranked = found.labels.map((label, position) => {
     const document = loaded.documents[label];
     const score = found.distances[position];
     const named = document.entities?.some((entity) => normalized.includes(` ${normalize(entity)} `)) ?? false;
-    const boost = named ? (document.kind === "comparison" ? 1.2 : document.kind === "technology" ? 0.9 : 0.4) : 0;
+    const intent = intentIds.includes(document.id);
+    const boost = intent ? 1.5 : named ? (document.kind === "comparison" ? 1.2 : document.kind === "project" ? 1.1 : document.kind === "technology" ? 0.9 : 0.4) : 0;
     const penalty = document.kind === "technology" && !named ? 0.12 : 0;
-    return { ...document, score, rank: score + boost - penalty, named };
+    return { ...document, score, rank: score + boost - penalty, named, intent };
   }).filter((document) =>
-    (document.score >= 0.26 || document.named) &&
+    (document.score >= 0.26 || document.named || document.intent) &&
     (document.kind !== "comparison" || document.named) &&
-    (!/\bprojects?\b/.test(normalized) || /project/.test(document.kind) || document.named)
+    (!/\bprojects?\b/.test(normalized) || /project/.test(document.kind) || document.named || document.intent)
   ).sort((a, b) => b.rank - a.rank);
-  const specificTools = ranked.filter((document) => document.named && (document.kind === "technology" || document.kind === "comparison"));
+  const credentialOnly = intentIds.includes("certifications") && !/\b(used|using|hands on|experience|tools|projects?)\b/.test(normalized);
+  const specificFacts = ranked.filter((document) => (!namedForestVariant || document.id !== "technology-random-forest") && (document.intent || (document.named &&
+    (!credentialOnly || document.kind !== "technology") &&
+    (!namedComparisons.length || document.kind !== "technology" || document.entities?.some((entity) => outsideServiceName.includes(` ${normalize(entity)} `))) &&
+    (!namedProject.length || document.kind !== "technology" || document.entities?.some((entity) => outsideProjectName.includes(` ${normalize(entity)} `)))
+  )));
   // Tool-specific facts already contain connected examples; unrelated high-similarity facts add ambiguity.
-  const matches = (specificTools.length ? specificTools : ranked).slice(0, 5);
+  const matches = (specificFacts.length ? specificFacts : ranked).slice(0, 5);
   return { source: loaded.source, matches, bestScore: found.distances[0] ?? 0 };
 }

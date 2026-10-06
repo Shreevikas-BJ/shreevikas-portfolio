@@ -5,6 +5,7 @@ import { Bot, Loader2, Mail, RotateCcw, Send, X } from "lucide-react";
 import { useEffect, useRef, useState, type ComponentProps, type FormEvent } from "react";
 import { MessageResponse } from "@/components/ai-elements/message";
 import { siteConfig } from "@/data/portfolio";
+import { rememberQuestion } from "@/data/chatbotContext";
 
 type Message = { id: string; role: "user" | "assistant"; content: string };
 
@@ -19,7 +20,6 @@ const questions = [
   "Tell me about your RAG experience.",
   "Which certifications do you hold?"
 ];
-const contactMessage = `Please contact Shreevikas directly at [${siteConfig.email}](mailto:${siteConfig.email}) for further information.`;
 const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";
 const CHAT_REQUEST_TIMEOUT_MS = 15000;
 
@@ -45,6 +45,7 @@ export function Chatbot({ open, onClose }: { open: boolean; onClose: () => void 
   const mounted = useRef(true);
   const panelOpen = useRef(open);
   const followOutput = useRef(true);
+  const previousQuestion = useRef("");
 
   useEffect(() => {
     mounted.current = true;
@@ -91,7 +92,7 @@ export function Chatbot({ open, onClose }: { open: boolean; onClose: () => void 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         signal: controller.signal,
-        body: JSON.stringify({ message: trimmed })
+        body: JSON.stringify({ message: trimmed, previousQuestion: previousQuestion.current })
       });
       if (!response.ok) {
         const payload = (await response.json().catch(() => ({}))) as { error?: string };
@@ -111,12 +112,16 @@ export function Chatbot({ open, onClose }: { open: boolean; onClose: () => void 
           setMessages((previous) => previous.map((message) => message.id === assistantId ? { ...message, content: currentAnswer } : message));
         }
         answer += decoder.decode();
-        const finalAnswer = answer.trim() || contactMessage;
+        const finalAnswer = answer.trim();
+        if (!finalAnswer) throw new Error("The assistant returned an empty response. Please try again.");
         setMessages((previous) => previous.map((message) => message.id === assistantId ? { ...message, content: finalAnswer } : message));
       } else {
         const payload = (await response.json()) as { answer?: string };
-        setMessages((previous) => [...previous, { id: assistantId, role: "assistant", content: payload.answer || contactMessage }]);
+        const jsonAnswer = payload.answer?.trim();
+        if (!jsonAnswer) throw new Error("The assistant returned an empty response. Please try again.");
+        setMessages((previous) => [...previous, { id: assistantId, role: "assistant", content: jsonAnswer }]);
       }
+      previousQuestion.current = rememberQuestion(trimmed, previousQuestion.current);
     } catch (requestError) {
       if (!mounted.current) return;
       console.error("Portfolio assistant request failed.", requestError);
