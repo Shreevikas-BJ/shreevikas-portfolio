@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ArrowDownRight } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
 import { TransformerBackground } from "@/components/TransformerBackground";
@@ -6,16 +5,6 @@ import { TransformerBackground } from "@/components/TransformerBackground";
 export function Hero() {
   return (
     <section id="home" className="editorial-hero" aria-labelledby="hero-title">
-      <Image
-        src="/images/data-flow.webp"
-        alt=""
-        fill
-        priority
-        fetchPriority="high"
-        sizes="(max-width: 639px) 0px, 100vw"
-        quality={80}
-        className="hero-art"
-      />
       <TransformerBackground />
       <div className="editorial-shell hero-inner">
         <h1 id="hero-title">

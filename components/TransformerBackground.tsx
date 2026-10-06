@@ -64,7 +64,7 @@ export function TransformerBackground() {
     <div ref={root} className="transformer-background" data-running={visible && enabled && sceneReady} data-scene-ready={sceneReady && !reducedMotion}>
       {loadScene && !reducedMotion ? <BrainScene animate={visible && enabled} onReady={onSceneReady} onError={onSceneError} /> : null}
       <div className="transformer-visual" aria-hidden="true">
-        <Image src="/images/brain-circuit-hero.webp" alt="" fill sizes="(max-width: 639px) 100vw, (max-width: 1023px) 54vw, 680px" quality={80} loading="eager" className="brain-poster" />
+        <Image src="/images/brain-circuit-hero.webp" alt="" fill sizes="(max-width: 639px) 100vw, (max-width: 1280px) 64vw, 820px" quality={80} loading="eager" className="brain-poster" />
       </div>
     </div>
   );
