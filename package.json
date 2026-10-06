@@ -11,6 +11,7 @@
     "pretest": "npm run knowledge:prepare",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
+    "test:visuals": "tsx scripts/test-brain-geometry.ts",
     "test": "node scripts/test-chat-route.mjs && node --conditions=react-server --import tsx scripts/test-retrieval.ts && node --conditions=react-server --import tsx scripts/evaluate-chatbot.ts",
     "test:chatbot:live": "npm run knowledge:prepare && node --conditions=react-server --import tsx scripts/evaluate-chatbot-live.ts --confirm-live"
   },

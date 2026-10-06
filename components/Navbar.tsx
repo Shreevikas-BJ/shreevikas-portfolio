@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- Native fragment links re-scroll even when the current hash is already active. */
 import Link from "next/link";
 import { siteConfig } from "@/data/portfolio";
 
@@ -10,11 +11,11 @@ export function Navbar() {
         </Link>
         <span className="header-discipline">AI / ML / DATA</span>
         <div className="header-links">
-          <Link href="/#projects" className="text-link">Work</Link>
-          <Link href="/#experience" className="text-link">Experience</Link>
-          <Link href="/#research" className="text-link">Research</Link>
-          <Link href="/#education" className="text-link">Education</Link>
-          <Link href="/#certifications" className="text-link">Credentials</Link>
+          <a href="/#projects" className="text-link">Work</a>
+          <a href="/#experience" className="text-link">Experience</a>
+          <a href="/#research" className="text-link">Research</a>
+          <a href="/#education" className="text-link">Education</a>
+          <a href="/#certifications" className="text-link">Credentials</a>
         </div>
       </nav>
     </header>

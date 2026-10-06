@@ -359,6 +359,8 @@ export const skills = [
 export type Experience = {
   title: string;
   company: string;
+  companyUrl: string;
+  logo: { src: string; width: number; height: number };
   location: string;
   dates: string;
   summary: string;
@@ -371,6 +373,8 @@ export const experiences: Experience[] = [
   {
     title: "AI Engineer Intern",
     company: "NeuralSeek",
+    companyUrl: "https://www.linkedin.com/company/neuralseek/posts/?feedView=all",
+    logo: { src: "/images/experience/neuralseek.jpg", width: 200, height: 200 },
     location: "United States",
     dates: "Jul 2025 - Nov 2025",
     summary:
@@ -389,6 +393,8 @@ export const experiences: Experience[] = [
   {
     title: "Data Scientist (AI/ML)",
     company: "Whiterock",
+    companyUrl: "https://www.linkedin.com/company/whiterocktechnologies/",
+    logo: { src: "/images/experience/whiterock.jpg", width: 200, height: 200 },
     location: "India",
     dates: "Feb 2022 - Jul 2024",
     summary:

@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { experiences } from "@/data/portfolio";
 
 export function ExperienceTimeline() {
@@ -10,8 +12,12 @@ export function ExperienceTimeline() {
       {experiences.map((experience) => (
         <article key={`${experience.company}-${experience.title}`} className="background-entry">
           <header className="entry-meta">
+            <a className="experience-company-mark" href={experience.companyUrl} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${experience.company} on LinkedIn`}>
+              <Image src={experience.logo.src} width={experience.logo.width} height={experience.logo.height} sizes="64px" alt="" className="experience-company-logo" />
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
             <p className="technical-label">{experience.dates}</p>
-            <h3>{experience.company}</h3>
+            <h3><a href={experience.companyUrl} target="_blank" rel="noopener noreferrer" className="experience-company-name">{experience.company}</a></h3>
             <p className="entry-role">{experience.title}</p>
             <p className="entry-location">{experience.location}</p>
           </header>

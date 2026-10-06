@@ -1,74 +1,45 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Line } from "@react-three/drei/core/Line";
 import { Component, lazy, Suspense, useEffect, useLayoutEffect, useMemo, useRef, type ReactNode } from "react";
 import * as THREE from "three";
+import { createCortex, createNeuralNetwork } from "@/lib/visuals/brain";
 
 type SceneProps = { animate: boolean; onReady: () => void; onError: () => void };
 const DesktopEffects = lazy(() => import("@/components/BrainEffects"));
 
-function cortexPoint(theta: number, phi: number, side: number) {
-  const x = Math.sin(phi) * Math.cos(theta);
-  const y = Math.cos(phi);
-  const z = Math.sin(phi) * Math.sin(theta);
-  const fold = 1 + 0.025 * Math.sin(x * 9 + z * 3) * Math.sin(y * 8) + 0.012 * Math.cos(z * 12 + y * 3);
-  // Flatten the medial faces so the two lobes share a narrow central fissure.
-  const across = x < 0 ? (x + 1) * 0.055 : 0.055 + x * 1.66;
-  return new THREE.Vector3(side * (0.07 + across * fold), y * fold * 1.38, z * fold);
-}
-
-function makeCortex(side: number) {
-  const geometry = new THREE.SphereGeometry(1, 48, 32);
-  const positions = geometry.attributes.position;
-  for (let index = 0; index < positions.count; index++) {
-    const unit = new THREE.Vector3().fromBufferAttribute(positions, index).normalize();
-    const point = cortexPoint(Math.atan2(unit.z, unit.x), Math.acos(Math.max(-1, Math.min(1, unit.y))), side);
-    positions.setXYZ(index, point.x, point.y, point.z);
-  }
-  geometry.computeVertexNormals();
-  return geometry;
-}
-
-const cells = Array.from({ length: 36 }, (_, index) => ({ row: Math.floor(index / 6), column: index % 6 }));
-const inputs = Array.from({ length: 6 }, (_, index) => new THREE.Vector3(-1.75, 0.85 - index * 0.34, 0.35));
-const models = Array.from({ length: 5 }, (_, index) => new THREE.Vector3(0.8, 0.7 - index * 0.35, index % 2 ? 0.35 : -0.1));
-const outputs = Array.from({ length: 4 }, (_, index) => new THREE.Vector3(1.7, 0.54 - index * 0.36, 0.28));
-const routes = [
-  ...inputs.map((point, index) => [point, new THREE.Vector3(-0.68, 0.5 - index * 0.2, 0.25)]),
-  ...models.map((point, index) => [new THREE.Vector3(0.38, 0.42 - index * 0.2, 0.3), point]),
-  ...models.flatMap((point, index) => [0, 1].map((offset) => [point, outputs[(index + offset) % outputs.length]]))
-].map(([start, end], index) => new THREE.CatmullRomCurve3([
-  start,
-  start.clone().lerp(end, 0.4).add(new THREE.Vector3(0, Math.sin(index * 2) * 0.12, 0.25)),
-  end
-]));
-const cortexLines = [-1, 1].flatMap((side) => Array.from({ length: 9 }, (_, row) =>
-  Array.from({ length: 97 }, (_, index) => {
-    const theta = index / 96 * Math.PI * 2;
-    const phi = (row + 1) / 10 * Math.PI + Math.sin(theta * 3 + row * 0.7) * 0.032;
-    return cortexPoint(theta, phi, side);
-  })
-));
-
-function NeuralBrain({ animate, onReady }: SceneProps) {
+function NeuralBrain({ animate, onReady, onError }: SceneProps) {
   const group = useRef<THREE.Group>(null);
   const packets = useRef<THREE.InstancedMesh>(null);
-  const attention = useRef<THREE.InstancedMesh>(null);
+  const nodes = useRef<THREE.InstancedMesh>(null);
   const ready = useRef(false);
+  const contextAvailable = useRef(true);
+  const time = useRef(0);
   const pointer = useRef({ x: 0, y: 0 });
   const transform = useMemo(() => new THREE.Object3D(), []);
   const color = useMemo(() => new THREE.Color(), []);
-  const left = useMemo(() => makeCortex(-1), []);
-  const right = useMemo(() => makeCortex(1), []);
-  const { viewport, size, invalidate } = useThree();
-  const compact = size.width < 700;
-  const scale = compact ? Math.min(viewport.width / 5.4, 0.9) : Math.min(viewport.width / 12, 1.3);
+  const left = useMemo(() => createCortex(-1), []);
+  const right = useMemo(() => createCortex(1), []);
+  const network = useMemo(() => createNeuralNetwork(), []);
+  const { viewport, size, invalidate, gl } = useThree();
+  const compact = size.width < 420;
+  const scale = Math.min(viewport.width / 4.2, viewport.height / 3.5);
 
-  useEffect(() => () => { left.dispose(); right.dispose(); }, [left, right]);
+  useEffect(() => () => { left.dispose(); right.dispose(); network.connectionsGeometry.dispose(); }, [left, right, network]);
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const lost = () => { contextAvailable.current = false; onError(); };
+    const restored = () => { contextAvailable.current = true; ready.current = false; invalidate(); };
+    canvas.addEventListener("webglcontextlost", lost);
+    canvas.addEventListener("webglcontextrestored", restored);
+    return () => {
+      canvas.removeEventListener("webglcontextlost", lost);
+      canvas.removeEventListener("webglcontextrestored", restored);
+    };
+  }, [gl, invalidate, onError]);
   useEffect(() => {
     if (!animate) { invalidate(); return; }
-    const interval = window.setInterval(invalidate, 1000 / (compact ? 20 : 30));
+    const interval = window.setInterval(invalidate, 1000 / (compact ? 18 : 24));
     return () => window.clearInterval(interval);
   }, [animate, compact, invalidate]);
   useEffect(() => {
@@ -79,45 +50,57 @@ function NeuralBrain({ animate, onReady }: SceneProps) {
   }, [animate]);
 
   useLayoutEffect(() => {
-    cells.forEach(({ row, column }, index) => {
-      transform.position.set(-0.65 + column * 0.165, 0.47 - row * 0.165, 0.45);
+    network.neurons.forEach((neuron, index) => {
+      transform.position.copy(neuron.position);
+      transform.scale.setScalar(index % 11 === 0 ? 1.5 : 1);
       transform.updateMatrix();
-      attention.current?.setMatrixAt(index, transform.matrix);
+      nodes.current?.setMatrixAt(index, transform.matrix);
+      color.set(index % 11 === 0 ? "#dceeff" : "#6da5dc");
+      nodes.current?.setColorAt(index, color);
     });
-    if (attention.current) attention.current.instanceMatrix.needsUpdate = true;
-  }, [transform]);
-
-  useFrame(({ clock }) => {
-    const time = clock.elapsedTime;
-    if (group.current && animate) {
-      group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, -0.23 + pointer.current.x * 0.12 + Math.sin(time * 0.16) * 0.05, 0.04);
-      group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, 0.12 + pointer.current.y * 0.08, 0.04);
+    if (nodes.current) {
+      nodes.current.instanceMatrix.needsUpdate = true;
+      if (nodes.current.instanceColor) nodes.current.instanceColor.needsUpdate = true;
     }
-    routes.forEach((curve, index) => {
-      transform.position.copy(curve.getPointAt((time * 0.12 + index * 0.19) % 1));
+    transform.scale.setScalar(1);
+  }, [network, transform, color]);
+
+  useFrame((_, delta) => {
+    if (!contextAvailable.current) return;
+    if (animate) time.current += Math.min(delta, 0.1);
+    const elapsed = time.current;
+    if (group.current) {
+      group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, -0.34 + pointer.current.x * 0.16 + Math.sin(elapsed * 0.14) * 0.08, 0.045);
+      group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, 0.36 + pointer.current.y * 0.08, 0.045);
+    }
+    network.paths.forEach((path, index) => {
+      const position = ((elapsed * path.speed + path.offset) % 1) * (path.points.length - 1);
+      const segment = Math.floor(position);
+      transform.position.copy(path.points[segment]).lerp(path.points[Math.min(segment + 1, path.points.length - 1)], position - segment);
+      transform.scale.setScalar(0.75 + 0.25 * Math.sin(elapsed * 1.5 + index));
       transform.updateMatrix();
       packets.current?.setMatrixAt(index, transform.matrix);
     });
     if (packets.current) packets.current.instanceMatrix.needsUpdate = true;
-    cells.forEach(({ row, column }, index) => {
-      const weight = column <= row ? 0.35 + (Math.sin(time * 0.7 - index * 0.31) + 1) * 0.22 : 0.06;
-      color.setRGB(weight * 0.2, weight * 0.65, weight * 1.3);
-      attention.current?.setColorAt(index, color);
-    });
-    if (attention.current?.instanceColor) attention.current.instanceColor.needsUpdate = true;
     if (!ready.current) { ready.current = true; onReady(); }
   });
 
   return (
-    <group ref={group} position={[compact ? viewport.width * 0.02 : viewport.width * 0.25, -viewport.height * 0.19, 0]} scale={scale} rotation={[0.12, -0.23, 0]}>
+    <group ref={group} scale={scale} rotation={[0.36, -0.34, -0.055]}>
       {[left, right].map((geometry, index) => (
-        <mesh key={index} geometry={geometry}><meshStandardMaterial color="#677685" metalness={0.25} roughness={0.35} transparent opacity={0.12} depthWrite={false} /></mesh>
+        <mesh key={index} geometry={geometry}>
+          <meshStandardMaterial color="#718596" metalness={0.18} roughness={0.6} transparent opacity={0.88} emissive="#102333" emissiveIntensity={0.18} />
+        </mesh>
       ))}
-      {cortexLines.map((points, index) => <Line key={`fold-${index}`} points={points} color="#a7bbc9" lineWidth={0.85} transparent opacity={0.38} />)}
-      {routes.map((curve, index) => <Line key={index} points={curve.getPoints(40)} color="#5782a8" lineWidth={0.7} transparent opacity={0.35} />)}
-      {[...inputs, ...models, ...outputs].map((point, index) => <mesh key={`neuron-${index}`} position={point}><sphereGeometry args={[0.041, 12, 8]} /><meshBasicMaterial color="#96c4e9" /></mesh>)}
-      <instancedMesh ref={attention} args={[undefined, undefined, 36]}><boxGeometry args={[0.105, 0.105, 0.055]} /><meshBasicMaterial toneMapped={false} /></instancedMesh>
-      <instancedMesh ref={packets} args={[undefined, undefined, routes.length]}><sphereGeometry args={[0.026, 8, 6]} /><meshBasicMaterial color={[0.2, 0.75, 2]} toneMapped={false} /></instancedMesh>
+      <lineSegments geometry={network.connectionsGeometry}>
+        <lineBasicMaterial color="#7baedd" transparent opacity={0.24} depthWrite={false} />
+      </lineSegments>
+      <instancedMesh ref={nodes} args={[undefined, undefined, network.neurons.length]}>
+        <sphereGeometry args={[0.017, 10, 8]} /><meshBasicMaterial toneMapped={false} />
+      </instancedMesh>
+      <instancedMesh ref={packets} args={[undefined, undefined, network.paths.length]}>
+        <sphereGeometry args={[0.018, 8, 6]} /><meshBasicMaterial color={[0.65, 1.15, 1.8]} toneMapped={false} />
+      </instancedMesh>
     </group>
   );
 }
@@ -132,8 +115,8 @@ class SceneBoundary extends Component<{ children: ReactNode; onError: () => void
 function SceneEffects() {
   const width = useThree((state) => state.size.width);
   const setDpr = useThree((state) => state.setDpr);
-  useEffect(() => setDpr(Math.min(window.devicePixelRatio, width < 900 ? 1.25 : 1.5)), [width, setDpr]);
-  if (width < 900) return null;
+  useEffect(() => setDpr(Math.min(window.devicePixelRatio, width < 420 ? 1.25 : 1.5)), [width, setDpr]);
+  if (width < 420) return null;
   return <Suspense fallback={null}><DesktopEffects /></Suspense>;
 }
 
@@ -141,10 +124,11 @@ export default function BrainScene(props: SceneProps) {
   return (
     <SceneBoundary onError={props.onError}>
       <div className="brain-scene" aria-hidden="true">
-        <Canvas orthographic camera={{ position: [0, 0, 8], zoom: 105, near: 0.1, far: 50 }} dpr={[1, 1.25]} frameloop="demand" gl={{ alpha: true, antialias: true, powerPreference: "low-power", preserveDrawingBuffer: true }} fallback={null}>
-          <ambientLight intensity={1.7} />
-          <directionalLight position={[2, 4, 5]} intensity={2.5} color="#f5f5f0" />
-          <directionalLight position={[-3, 0, 2]} intensity={0.7} color="#669dce" />
+        <Canvas orthographic camera={{ position: [0, 0, 8], zoom: 105, near: 0.1, far: 50 }} dpr={[1, 1.25]} frameloop="demand" gl={{ alpha: true, antialias: true, powerPreference: "low-power" }} fallback={null}>
+          <ambientLight intensity={0.7} />
+          <directionalLight position={[-3, 5, 5]} intensity={3.5} color="#e7f1ff" />
+          <directionalLight position={[4, 0, -2]} intensity={3} color="#629bd0" />
+          <directionalLight position={[0, -3, 4]} intensity={0.6} color="#c6d2de" />
           <NeuralBrain {...props} />
           <SceneEffects />
         </Canvas>
