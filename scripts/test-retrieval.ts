@@ -54,6 +54,10 @@ for (const tool of ["Azure ML", "BigQuery", "S3", "SageMaker"]) {
 }
 const genericCloud = await retrieveKnowledge("What cloud tools do you use?");
 assert.ok(!genericCloud.matches.some((document) => document.kind === "comparison"), "Do not infer unasked services from semantic similarity");
+for (const question of ["Tell me about AgentShield", "What projects use RAG?", "Which data engineering projects have you built?", "What tools did you use at NeuralSeek?", "What is the portfolio hosting platform?"]) {
+  const result = await retrieveKnowledge(question, { scope: "projects" });
+  assert.ok(result.matches.every((document) => ["project", "projects"].includes(document.kind)), "Project scope must never retrieve role, profile, skill, education, or certification documents");
+}
 console.info(`Hands-on coverage: ${skills.flatMap((group) => group.items).length} listed skills, ${technologies.length} distinct technologies, aliases, Random Forest evidence and ${comparisonDocuments.length} cloud capability families PASS`);
 const snapshot: KnowledgeSnapshot = JSON.parse(await readFile("data/generated/knowledge.json", "utf8"));
 const originalNow = Date.now;

@@ -12,13 +12,13 @@ type Message = { id: string; role: "user" | "assistant"; content: string };
 const welcomeMessage: Message = {
   id: "welcome",
   role: "assistant",
-  content: "Hi, I'm Shreevikas's assistant. Ask me about his skills, experience, projects, research, tools, education, or certifications."
+  content: "Hi, I'm Shreevikas's assistant. Ask me about his projects, their goals, technologies, or results."
 };
 const questions = [
-  "What's your name?",
-  "What do you build?",
-  "Tell me about your RAG experience.",
-  "Which certifications do you hold?"
+  "Tell me about AgentShield.",
+  "What problem does ArchPilot solve?",
+  "Tell me about your RAG projects.",
+  "Which projects involve data engineering?"
 ];
 const timeoutMessage = "The assistant is taking longer than expected. Please try again in a moment.";
 const CHAT_REQUEST_TIMEOUT_MS = 15000;
@@ -160,7 +160,7 @@ export function Chatbot({ open, onClose }: { open: boolean; onClose: () => void 
         >
           <header className="assistant-header">
             <Bot size={22} aria-hidden="true" />
-            <div><h2 id="assistant-title">Shreevikas&apos;s assistant</h2><p>Professional background &amp; projects</p></div>
+            <div><h2 id="assistant-title">Shreevikas&apos;s assistant</h2><p>Projects, technologies &amp; results</p></div>
             <button type="button" className="assistant-icon-button" onClick={onClose} aria-label="Close assistant" title="Close assistant"><X size={18} aria-hidden="true" /></button>
           </header>
           <div
@@ -200,7 +200,7 @@ export function Chatbot({ open, onClose }: { open: boolean; onClose: () => void 
           </div>
           <div className="assistant-composer">
             <form onSubmit={handleSubmit}>
-              <label htmlFor="assistant-question" className="sr-only">Ask about Shreevikas&apos;s professional background</label>
+              <label htmlFor="assistant-question" className="sr-only">Ask about Shreevikas&apos;s projects</label>
               <textarea
                 ref={inputRef}
                 id="assistant-question"
@@ -210,14 +210,14 @@ export function Chatbot({ open, onClose }: { open: boolean; onClose: () => void 
                 onKeyDown={(event) => {
                   if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void sendMessage(); }
                 }}
-                placeholder="Ask about skills, experience or tools..."
+                placeholder="Ask about a project..."
                 disabled={loading}
                 maxLength={900}
               />
               <button type="submit" className="assistant-send" disabled={loading || !input.trim()} aria-label="Send message" title="Send message"><Send size={18} aria-hidden="true" /></button>
             </form>
             <div className="assistant-bottom-line">
-              <p id="assistant-disclaimer">AI assistant based on my portfolio information.</p>
+              <p id="assistant-disclaimer">AI assistant answering about my projects.</p>
               <a href={siteConfig.emailHref} aria-label="Email Shreevikas directly" title="Email Shreevikas directly"><Mail size={16} aria-hidden="true" /></a>
             </div>
           </div>

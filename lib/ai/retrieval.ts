@@ -47,7 +47,7 @@ async function createIndex(): Promise<RetrievalIndex> {
   return { index, documents, source };
 }
 
-export async function retrieveKnowledge(question: string) {
+export async function retrieveKnowledge(question: string, options: { scope?: "projects" } = {}) {
   if (!indexPromise || Date.now() >= refreshAt) {
     refreshAt = Date.now() + 5 * 60_000;
     indexPromise = createIndex().catch((error: unknown) => { indexPromise = undefined; throw error; });
@@ -84,6 +84,7 @@ export async function retrieveKnowledge(question: string) {
     const penalty = document.kind === "technology" && !named ? 0.12 : 0;
     return { ...document, score, rank: score + boost - penalty, named, intent };
   }).filter((document) =>
+    (options.scope !== "projects" || document.kind === "project" || document.kind === "projects") &&
     (document.score >= 0.26 || document.named || document.intent) &&
     (document.kind !== "comparison" || document.named) &&
     (!/\bprojects?\b/.test(normalized) || /project/.test(document.kind) || document.named || document.intent)

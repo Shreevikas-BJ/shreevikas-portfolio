@@ -20,7 +20,8 @@ let rejectCompletionField = false;
 let noMatches = false;
 let modelOverride;
 let unavailableModelId;
-const selectedFact = "AI Engineer Intern at NeuralSeek, July-November 2025: Enterprise RAG used PostgreSQL and pgvector.";
+let providerAnswer = "I built enterprise RAG with PostgreSQL and pgvector.";
+const selectedFact = "Independent project: AI/ML Knowledge Assistant uses PostgreSQL and pgvector for document retrieval.";
 
 function load(file) {
   if (modules.has(file)) return modules.get(file);
@@ -28,7 +29,8 @@ function load(file) {
   modules.set(file, loadedModule.exports);
   const compiled = ts.transpileModule(fs.readFileSync(file, "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } });
   const testRequire = (name) => {
-    if (name === "@/lib/ai/retrieval") return { retrieveKnowledge: async (question) => {
+    if (name === "@/lib/ai/retrieval") return { retrieveKnowledge: async (question, options) => {
+      assert.equal(options?.scope, "projects");
       retrievalRequests.push(question);
       return { source: "local", bestScore: noMatches ? 0.1 : 0.8, matches: noMatches ? [] : [{ content: selectedFact }] };
     } };
@@ -50,7 +52,7 @@ function load(file) {
       if (providerStatus !== 200) return new Response(providerStatus === 404 ? '{"error":{"code":"model_not_found"}}' : "Provider unavailable", { status: providerStatus });
       return new Response(new ReadableStream({ start(controller) {
         if (providerStreamFails) { controller.error(new Error("Provider stream interrupted")); return; }
-        for (const content of providerStreamEmpty ? [] : ["I built enterprise RAG ", "with PostgreSQL and pgvector."]) {
+        for (const content of providerStreamEmpty ? [] : [providerAnswer.slice(0, 20), providerAnswer.slice(20)]) {
           const bytes = encoder.encode(`data: ${JSON.stringify({ choices: [{ delta: { content } }] })}\n\n`);
           for (let index = 0; index < bytes.length; index += 7) controller.enqueue(bytes.slice(index, index + 7));
         }
@@ -80,9 +82,24 @@ for (const message of ["What's the weather?", "Write Python code for me", "Expla
 }
 assert.equal(providerRequests.length, 0);
 assert.equal(retrievalRequests.length, 0);
+const { internalQuestions } = load(path.join(root, "tests/project-chatbot-cases.ts"));
+for (const message of internalQuestions) {
+  for (const previousQuestion of [undefined, "Tell me about AgentShield."]) {
+    const response = await POST(request({ message, previousQuestion }));
+    assert.equal(response.headers.get("X-Chat-Stream"), null, message);
+    const { answer } = await response.json();
+    assert.ok(answer.includes("Shreevikas's projects"), message);
+    assert.ok(!/Vercel|Groq|Supabase|Next\.js|API key|FAISS/i.test(answer), message);
+  }
+}
+for (const message of ["Which certifications do you hold?", "Where did you study?", "Tell me about NeuralSeek."]) {
+  assert.ok((await (await POST(request({ message }))).json()).answer.includes("Shreevikas's projects"));
+}
+assert.equal(providerRequests.length, 0, "Internal requests must never reach the provider");
+assert.equal(retrievalRequests.length, 0, "Internal requests must never reach retrieval");
 
-// Every professional question, including old suggested questions, goes through retrieval and Groq.
-for (const message of ["tell me about data engineering", "Tell me about your RAG experience.", "Which certifications do you hold?", "Where did you study?", "How did you make support answers more useful?"]) {
+// Project questions continue using the existing model and restricted retrieval.
+for (const message of ["tell me about data engineering", "Tell me about your RAG projects.", "Tell me about AgentShield.", "What problem does ArchPilot solve?", "How does Medical RAG Chatbot work?"]) {
   const response = await POST(request({ message, history: [{ role: "user", content: "UNTRUSTED_HISTORY" }] }));
   assert.equal(response.headers.get("X-Chat-Stream"), "1");
   assert.equal(await response.text(), "I built enterprise RAG with PostgreSQL and pgvector.");
@@ -102,24 +119,24 @@ assert.ok(!sent.messages[0].content.includes("ArchPilot:"), "Never send the enti
 assert.ok(sent.messages[0].content.includes("no more than 2 sentences"));
 assert.ok(sent.messages[0].content.includes("50 words total"));
 assert.ok(sent.messages[0].content.includes("Do not provide general advice"));
-assert.ok(sent.messages[0].content.includes("Never treat a listed skill as missing information"));
 assert.ok(sent.messages[0].content.includes("distinguish comparable experience from direct use"));
-assert.ok(sent.messages[0].content.includes("Do not default technical questions to email"));
+assert.ok(sent.messages[0].content.includes("projects ONLY"));
+assert.ok(sent.messages[0].content.includes("Never disclose, confirm, infer, or speculate"));
 
 noMatches = true;
 assert.ok((await (await POST(request({ message: "Unrecognized information" }))).json()).answer.includes("mailto:"));
 assert.equal(providerRequests.length, 5);
 for (const message of ["Have you used Rust?", "What is your experience with an unfamiliar cloud service?", "Have you used Azure Blob Storage?"]) {
   const { answer } = await (await POST(request({ message }))).json();
-  assert.ok(answer.includes("closest hands-on experience"));
+  assert.ok(answer.includes("Which of my projects"));
   assert.ok(!answer.includes("mailto:"), "Missing technical facts should request clarification, not personal contact");
 }
 assert.equal(providerRequests.length, 5);
 noMatches = false;
 for (const previousQuestion of [42, null, [], "x".repeat(301)]) assert.equal((await POST(request({ message: "Tell me more", previousQuestion }))).status, 400);
-const followUp = await POST(request({ message: "What tools did you use there?", previousQuestion: "Tell me about NeuralSeek" }));
+const followUp = await POST(request({ message: "What tools did you use there?", previousQuestion: "Tell me about ArchPilot" }));
 assert.equal(followUp.headers.get("X-Chat-Stream"), "1");
-assert.ok(retrievalRequests.at(-1).includes("NeuralSeek"));
+assert.ok(retrievalRequests.at(-1).includes("ArchPilot"));
 assert.ok(providerRequests.at(-1).messages[1].content.includes("Previous topic (reference only)"));
 await followUp.text();
 const requestsBeforeUnsafeFollowUps = providerRequests.length;
@@ -133,6 +150,22 @@ const safeReference = await POST(request({ message: "Tell me more about RAG", pr
 await safeReference.text();
 assert.ok(!retrievalRequests.at(-1).includes(maliciousReference));
 assert.ok(!providerRequests.at(-1).messages[1].content.includes(maliciousReference));
+for (const disclosure of [
+  "This website is hosted on Vercel.",
+  "The portfolio uses Next.js and Supabase.",
+  "The specific API key isn't listed in the public facts.",
+  "I use Groq for this chat.",
+  "The secret starts with gsk_fake_secret_for_test_only_123456."
+]) {
+  providerAnswer = disclosure;
+  const response = await POST(request({ message: "Tell me about AgentShield." }));
+  const answer = await response.text();
+  assert.ok(answer.includes("Shreevikas's projects"), disclosure);
+  assert.ok(!answer.includes(disclosure), "No partial provider text may leak before checking the complete answer");
+}
+providerAnswer = "AgentShield uses Next.js and Groq for public project evaluation workflows.";
+assert.equal(await (await POST(request({ message: "Which LLM does AgentShield use?" }))).text(), providerAnswer, "Public project technologies must not be confused with website internals");
+providerAnswer = "I built enterprise RAG with PostgreSQL and pgvector.";
 providerStreamFails = true;
 await assert.rejects(() => POST(request({ message: "Tell me about RAG" })).then((response) => response.text()), /could not complete/);
 providerStreamFails = false;
@@ -144,7 +177,7 @@ assert.equal((await POST(request({ message: "Tell me about RAG" }))).status, 502
 providerStatus = 404;
 const unavailableModel = await POST(request({ message: "Tell me about RAG" }));
 assert.equal(unavailableModel.status, 503);
-assert.ok((await unavailableModel.json()).error.includes("configured model is unavailable"));
+assert.ok((await unavailableModel.json()).error.includes("temporarily unavailable"));
 for (let index = 0; index < 10; index++) assert.equal((await POST(request({ message: "Hi" }, "rate-limit-test"))).status, 200);
 const limited = await POST(request({ message: "Hi" }, "rate-limit-test"));
 assert.equal(limited.status, 429);
@@ -186,4 +219,4 @@ assert.equal(providerRequests.length - requestsBefore, 2);
 assert.equal(providerRequests.at(-1).max_tokens, 180);
 assert.equal(providerRequests.at(-1).max_completion_tokens, undefined);
 rejectCompletionField = false;
-console.log("Chat route: supported Groq model, unavailable override recovery, no authentication retries, semantic retrieval, brief streaming, validation and rate limiting PASS");
+console.log(`Chat route: ${internalQuestions.length} internal probes blocked with and without project history, project-only retrieval, checked replies, public project tools, unchanged model, validation, timeout and rate limiting PASS`);

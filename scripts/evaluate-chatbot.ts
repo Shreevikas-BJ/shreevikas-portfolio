@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
-import { chatbotCases, checkAnswer } from "../tests/chatbot-cases";
+import { chatbotCases as historicalCases, checkAnswer } from "../tests/chatbot-cases";
+import { projectChatbotCases as chatbotCases } from "../tests/project-chatbot-cases";
 import { classifyQuestion, isTechnicalExperienceQuestion, normalizeQuestion, resolveQuestion, rememberQuestion } from "../data/chatbotContext";
 import { retrieveKnowledge } from "../lib/ai/retrieval";
 
-const fixture = (id: string) => chatbotCases.find((test) => test.id === id)!;
+const fixture = (id: string) => historicalCases.find((test) => test.id === id)!;
 // Graders must accept truthful denials without accepting the corresponding invented claim.
 assert.deepEqual(checkAnswer(fixture("certifications-08"), "I have not completed a Databricks certification."), []);
 assert.ok(checkAnswer(fixture("certifications-08"), "I have completed a Databricks certification.").length);
@@ -13,20 +14,21 @@ assert.ok(checkAnswer(fixture("certifications-07"), "Verify Anthropic at https:/
 assert.deepEqual(checkAnswer(fixture("aliases-02"), "I used RandomForestClassifier for treatment/control uplift in Subscription Value Brain and for churn in my Scikit-Learn Hands-On Guide."), []);
 assert.ok(checkAnswer(fixture("aliases-02"), "I paired RandomForestClassifier with RandomForestRegressor for uplift modeling.").length);
 assert.ok(checkAnswer(fixture("skills-03"), "I have not used PyTorch.").length);
-const topic = rememberQuestion("Tell me about NeuralSeek.");
+const topic = rememberQuestion("Tell me about ArchPilot.");
 assert.equal(rememberQuestion("What tools did you use there?", topic), topic);
 assert.equal(rememberQuestion("And what was the impact?", topic), topic);
-assert.ok(resolveQuestion("And what was the impact?", topic).includes("NeuralSeek"));
-assert.equal(rememberQuestion("What about Whiterock?", topic), "What about Whiterock?");
+assert.ok(resolveQuestion("And what was the impact?", topic).includes("ArchPilot"));
+assert.equal(rememberQuestion("What about Whiterock?", topic), "");
 assert.equal(rememberQuestion("Tell me about Agent Shield.", topic), "Tell me about Agent Shield.");
 assert.ok(rememberQuestion("x".repeat(400)).length <= 300);
 const rows = [];
 for (const test of chatbotCases) {
   const failures: string[] = [];
-  let decision = test.behavior === "validation" ? "validation" : classifyQuestion(test.question).kind;
+  let decision = test.behavior === "validation" ? "validation" : classifyQuestion(test.question, test.previousQuestion).kind;
   let sources: string[] = [];
   if (decision === "model") {
-    const knowledge = await retrieveKnowledge(resolveQuestion(test.question, test.previousQuestion));
+    const knowledge = await retrieveKnowledge(resolveQuestion(test.question, test.previousQuestion), { scope: "projects" });
+    assert.ok(knowledge.matches.every((document) => ["project", "projects"].includes(document.kind)), "Only project documents can reach generation");
     sources = knowledge.matches.map((document) => document.id);
     if (!sources.length) decision = isTechnicalExperienceQuestion(normalizeQuestion(test.question)) ? "technical" : "refusal";
   }
@@ -44,5 +46,5 @@ const failed = rows.filter((row) => row.failures.length);
 for (const row of failed) console.error(`${row.id}: ${row.question}\n  ${row.failures.join("; ")}\n  ${row.sources.join(", ")}`);
 console.info(`Chatbot question corpus: ${rows.length - failed.length}/${rows.length} policy and real semantic-retrieval checks passed.`);
 assert.ok(chatbotCases.length >= 200);
-assert.equal(new Set(chatbotCases.map((test) => test.question)).size, chatbotCases.length, "Questions must be distinct");
+assert.equal(new Set(chatbotCases.map((test) => JSON.stringify([test.question, test.previousQuestion]))).size, chatbotCases.length, "Question/context pairs must be distinct");
 if (failed.length) process.exitCode = 1;

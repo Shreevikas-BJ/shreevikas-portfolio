@@ -1,7 +1,39 @@
 # Chatbot Evaluation
 
+## Current Project-Only Policy
+
+Run date: October 23, 2026 (America/Phoenix).
+Current question list: [255 regression cases](chatbot-questions.md).
+
+| Check | Result |
+| --- | --- |
+| Policy and real FAISS project retrieval | 255/255 passed |
+| Website-internal probes at the API boundary | 56 probes passed, each with and without prior project context |
+| Focused live API checks | 7/7 passed, including the three reported questions |
+| Actual provider-generated answers in that live sample | 4 |
+| Split-output disclosure checks | Passed; no generated fragment is released before checking the complete reply |
+| Public named-project technology questions | Passed |
+| Lint, production build, and TypeScript | Passed |
+
+Internal-detail requests are rejected before retrieval or provider calls. Public chat retrieval includes only project documents. Complete short replies are checked before display, provider/configuration errors are generic, and refused topics are cleared from frontend follow-up memory. The existing model, temperature, output limit, timeout, input validation, and rate limiter are unchanged.
+
+The broader canonical index and its independent skill/alias/retrieval tests are retained, but employment, profile, education, certification, research-role, and comparison documents are not used by public chat generation. No visitor emails or transcripts were collected. The live sample used the current local index; Supabase adapter/fallback behavior was tested independently.
+
+The full 255-case corpus was tested for routing and retrieval, not for 255 live model generations. Mocked-provider tests cover output split across chunks, empty/interrupted output, model errors, timeouts, invalid input, and rate limits. Passing finite tests does not guarantee correctness for every future prompt. Public repository contents and browser assets are outside the assistant's disclosure policy.
+
+```bash
+npm test
+npm run lint
+npm run build
+npm run test:chatbot:live -- --ids website-privacy-01,website-privacy-02,website-privacy-03,project-scope-08,project-scope-01,public-project-tools-01,project-follow-up-04
+```
+
+## Historical Broader-Background Evaluation
+
+The results below describe the superseded policy, not the current project-only assistant.
+
 Run date: October 5, 2026 (America/Phoenix).
-Question list: [300 regression questions](chatbot-questions.md).
+Original corpus: 300 regression questions.
 
 ## Results
 

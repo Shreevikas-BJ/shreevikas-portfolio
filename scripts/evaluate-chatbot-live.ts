@@ -1,7 +1,8 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import nextEnv from "@next/env";
-import { chatbotCases, checkAnswer, type ChatCase } from "../tests/chatbot-cases";
+import { checkAnswer, type ChatCase } from "../tests/chatbot-cases";
+import { projectChatbotCases as chatbotCases } from "../tests/project-chatbot-cases";
 import { buildChatMessages, classifyQuestion, resolveQuestion, isTechnicalExperienceQuestion, normalizeQuestion, refusalMessage, technicalClarification } from "../data/chatbotContext";
 import { retrieveKnowledge } from "../lib/ai/retrieval";
 
@@ -14,8 +15,8 @@ const revision = JSON.parse(await readFile("data/generated/knowledge.json", "utf
 const routeSource = await readFile("app/api/chat/route.ts", "utf8");
 const fingerprint = createHash("sha256").update(revision + await readFile("data/chatbotContext.ts", "utf8") + routeSource + await readFile("lib/ai/retrieval.ts", "utf8")).digest("hex");
 async function prepare(test: ChatCase) {
-  const decision = classifyQuestion(test.question);
-  const facts = test.behavior !== "validation" && decision.kind === "model" ? await retrieveKnowledge(resolveQuestion(test.question, test.previousQuestion)) : undefined;
+  const decision = classifyQuestion(test.question, test.previousQuestion);
+  const facts = test.behavior !== "validation" && decision.kind === "model" ? await retrieveKnowledge(resolveQuestion(test.question, test.previousQuestion), { scope: "projects" }) : undefined;
   const context = facts?.matches.map((document) => document.content).join("\n\n") ?? "";
   const messages = context ? buildChatMessages(test.question, context, test.previousQuestion) : [];
   const fallback = !context && test.behavior !== "validation" && decision.kind === "model" ? isTechnicalExperienceQuestion(normalizeQuestion(test.question)) ? technicalClarification : refusalMessage : undefined;

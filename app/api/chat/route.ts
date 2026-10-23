@@ -6,7 +6,8 @@ import {
   buildChatMessages,
   refusalMessage,
   technicalClarification,
-  isTechnicalExperienceQuestion
+  isTechnicalExperienceQuestion,
+  protectProjectAnswer
 } from "@/data/chatbotContext";
 
 export const runtime = "nodejs";
@@ -221,7 +222,7 @@ function createResponseStream({
     async start(streamController) {
       reader = response.body!.getReader();
       let buffer = "";
-      let receivedContent = false;
+      let answer = "";
       let failed = false;
 
       const parseLine = (line: string) => {
@@ -234,8 +235,7 @@ function createResponseStream({
         try { chunk = JSON.parse(payload) as GroqStreamChunk; } catch { return; }
         const content = chunk.choices?.[0]?.delta?.content;
         if (content) {
-          receivedContent = true;
-          streamController.enqueue(encoder.encode(content));
+          answer += content;
         }
       };
 
@@ -252,7 +252,9 @@ function createResponseStream({
         }
 
         parseLine(buffer + decoder.decode());
-        if (!receivedContent && !cancelled) throw new Error("Groq returned no answer content.");
+        if (!answer.trim() && !cancelled) throw new Error("Groq returned no answer content.");
+        // Check the complete, short answer before any generated text reaches the visitor.
+        if (!cancelled) streamController.enqueue(encoder.encode(protectProjectAnswer(answer.trim())));
         logTiming(requestId, "Groq response received", startedAt);
       } catch (error) {
         const message =
@@ -314,7 +316,7 @@ export async function POST(request: Request) {
       remaining: rateLimit.remaining
     });
 
-    const decision = classifyQuestion(trimmedMessage);
+    const decision = classifyQuestion(trimmedMessage, previousQuestion);
     if (decision.answer) {
       logTiming(requestId, decision.kind, startedAt);
       return NextResponse.json({ answer: decision.answer });
@@ -329,7 +331,7 @@ export async function POST(request: Request) {
     }
 
     const { retrieveKnowledge } = await import("@/lib/ai/retrieval");
-    const knowledge = await retrieveKnowledge(resolveQuestion(trimmedMessage, previousQuestion));
+    const knowledge = await retrieveKnowledge(resolveQuestion(trimmedMessage, previousQuestion), { scope: "projects" });
     logTiming(requestId, "semantic retrieval complete", startedAt, { source: knowledge.source, matches: knowledge.matches.length, bestScore: Number(knowledge.bestScore.toFixed(3)) });
     if (!knowledge.matches.length) return NextResponse.json({ answer: isTechnicalExperienceQuestion(normalizeQuestion(trimmedMessage)) ? technicalClarification : refusalMessage });
     const context = knowledge.matches.map((document) => document.content).join("\n\n");
@@ -369,7 +371,7 @@ export async function POST(request: Request) {
         body: error.body.slice(0, 300)
       });
       if (error.status === 404 && /model_not_found/.test(error.body)) {
-        return NextResponse.json({ error: "The assistant's configured model is unavailable. Please contact Shreevikas directly while it is updated." }, { status: 503 });
+        return NextResponse.json({ error: "The assistant is temporarily unavailable. Please try again later." }, { status: 503 });
       }
       return NextResponse.json(
         { error: "The assistant could not respond right now. Please try again in a moment." },
